@@ -1,0 +1,102 @@
+﻿@* Generator: Template *@
+
+@using Tangsem.Generator.Metadata
+@using Tangsem.Generator.Settings
+
+@functions {
+
+	/// <summary>
+	/// The table metadata.
+	/// </summary>
+	public TableMetadata TableMetadata { get; set; }
+
+	/// <summary>
+	/// The generator configuration instance.
+	/// </summary>
+	public GeneratorConfiguration Configuration { get; set; }
+
+}
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+
+namespace @(Configuration.EntityNamespace).Fluent.Mappings
+{
+	/// <summary>
+	/// The mapping configuration for @(TableMetadata.EntityName).
+	/// </summary>
+	public class @(TableMetadata.EntityName)Map : ClassMap<@(TableMetadata.EntityName)>
+	{
+		/// <summary>
+		/// The constructor.
+		/// </summary>
+		public @(TableMetadata.EntityName)Map()
+		{
+			// primary key mapping
+			this.MapId();
+			
+			// basic columns mapping
+			this.MapBasicColumns();
+			
+			// outgoing references mapping
+			this.MapOutgoingReferences();
+			
+			// incoming references mapping
+			this.MapIncomingReferences();
+		}
+		
+		/// <summary>
+		/// Map the Primary Key.
+		/// </summary>
+		private void MapId()
+		{
+			this.Id(x => x.@(TableMetadata.PrimaryKeys[0].PropertyName))
+				.GeneratedBy.Native();
+		}
+		
+		/// <summary>
+		/// Map the Basic Columns.
+		/// </summary>
+		private void MapBasicColumns()
+		{
+			@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey && !c.IsPrimaryKey))
+			{<text>
+			this.Map(x => x.@(col.PropertyName))
+				.TheColumnNameIs("@(col.ColumnName)")
+				@(col.Nullable ? "" : ".CanNotBeNull()");
+			</text>}
+
+		}
+		
+		/// <summary>
+		/// Map the Outgoing References.
+		/// </summary>
+		private void MapOutgoingReferences()
+		{
+			@foreach (var reference in this.TableMetadata.OutgoingReferences)
+			{<text>
+			this.References<@(reference.ParentTableMetadata.EntityName)>(x => x.@(reference.ParentPropertyName))
+				.TheColumnNameIs("@(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName)")
+				@(reference.ColumnPairs[0].ChildColumnMetadata.Nullable ? "" : ".CanNotBeNull()");
+			</text>}
+
+		}
+		
+		/// <summary>
+		/// Map the Incoming References.
+		/// </summary>
+		private void MapIncomingReferences()
+		{
+			@foreach (var reference in this.TableMetadata.IncomingReferences)
+			{<text>
+			this.HasMany<@(reference.ChildTableMetadata.EntityName)>(x => x.@(reference.ChildListPropertyName))
+					.IsInverse()
+					.AsBag();
+			</text>}
+
+		}
+	}
+}

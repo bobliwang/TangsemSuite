@@ -1,0 +1,78 @@
+<stylecopresultscache>
+  <version>10</version>
+  <project key="-363116341">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="ColumnPair.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>05/31/2011 23:53:02</timestamp>
+      <milliseconds>323</milliseconds>
+    </settings>
+    <timestamp>06/01/2011 00:03:05</timestamp>
+    <milliseconds>107</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ColumnsContainer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>05/31/2011 23:53:02</timestamp>
+      <milliseconds>323</milliseconds>
+    </settings>
+    <timestamp>06/01/2011 00:04:35</timestamp>
+    <milliseconds>875</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ColumnMetadata.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>05/31/2011 23:53:02</timestamp>
+      <milliseconds>323</milliseconds>
+    </settings>
+    <timestamp>06/01/2011 00:04:19</timestamp>
+    <milliseconds>412</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>05/31/2011 23:53:02</timestamp>
+      <milliseconds>323</milliseconds>
+    </settings>
+    <timestamp>06/01/2011 00:04:56</timestamp>
+    <milliseconds>42</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IndexMetadata.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>05/31/2011 23:53:02</timestamp>
+      <milliseconds>323</milliseconds>
+    </settings>
+    <timestamp>06/01/2011 00:04:58</timestamp>
+    <milliseconds>808</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ReferenceMetadata.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>05/31/2011 23:53:02</timestamp>
+      <milliseconds>323</milliseconds>
+    </settings>
+    <timestamp>05/31/2011 23:56:56</timestamp>
+    <milliseconds>667</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TableMetadata.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>05/31/2011 23:53:02</timestamp>
+      <milliseconds>323</milliseconds>
+    </settings>
+    <timestamp>06/01/2011 00:04:58</timestamp>
+    <milliseconds>797</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DbTypeMapper.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>05/31/2011 23:53:02</timestamp>
+      <milliseconds>323</milliseconds>
+    </settings>
+    <timestamp>06/01/2011 00:04:58</timestamp>
+    <milliseconds>820</milliseconds>
+    <violations />
+  </sourcecode>
+</stylecopresultscache>

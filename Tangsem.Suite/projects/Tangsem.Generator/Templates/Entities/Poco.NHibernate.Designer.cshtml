@@ -1,0 +1,98 @@
+﻿@* Generator: Template *@
+
+@using Tangsem.Generator.Metadata
+@using Tangsem.Generator.Settings
+
+@functions {
+
+	/// <summary>
+	/// The table metadata.
+	/// </summary>
+	public TableMetadata TableMetadata { get; set; }
+
+	/// <summary>
+	/// The generator configuration instance.
+	/// </summary>
+	public GeneratorConfiguration Configuration { get; set; }
+
+}
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+
+namespace @Configuration.EntityNamespace
+{
+	public class @TableMetadata.EntityName
+	{
+		@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey))
+		{<text>
+		/// <summary>
+		/// The property name '@col.PropertyName'. It matches the property to column '@col.ColumnName'.
+		/// </summary>
+		public static readonly string Prop_@(col.PropertyName) = "@col.PropertyName";
+		
+		/// <summary>
+		/// The lamda expression for @col.PropertyName.
+		/// </summary>
+		public static readonly Expression<Func<@TableMetadata.EntityName, object>> Expr_@(col.PropertyName) = x => x.@(col.PropertyName);
+		</text>}
+		
+		
+		@foreach (var reference in this.TableMetadata.OutgoingReferences)
+		{<text>
+		/// <summary>
+		/// The property name '@(reference.ParentPropertyName)'. It is for the reference '@(reference.Name)'.
+		/// </summary>
+		public static readonly string Prop_@(reference.ParentPropertyName)  = "@(reference.ParentPropertyName)";
+
+		/// <summary>
+		/// The lamda expression for @(reference.ParentPropertyName).
+		/// </summary>
+		public static readonly Expression<Func<@(this.TableMetadata.EntityName), object>> Expr_@(reference.ParentPropertyName) = x => x.@(reference.ParentPropertyName);
+		</text>}
+		
+
+		#region "Basic Columns"
+
+		@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey))
+		{<text>
+		/// <summary>
+		/// Property @col.PropertyName mapping to @(TableMetadata.Name).@(col.ColumnName)
+		/// </summary>
+		public virtual @col.CSharpTypeAsString @col.PropertyName { get; set; }
+		</text>}
+		
+		#endregion
+		
+		#region "Outgoing References"
+		
+		@foreach (var reference in @TableMetadata.OutgoingReferences)
+		{<text>
+		/// <summary>
+		/// Gets or sets reference to @(reference.ParentPropertyName). ReferenceName: @(reference.Name).
+		/// </summary>
+		public virtual @(reference.ParentTableMetadata.EntityName) @(reference.ParentPropertyName) { get; set; }
+		</text>}
+		
+		#endregion
+		
+		#region "Incoming References"
+		
+		@foreach (var reference in this.TableMetadata.IncomingReferences)
+		{<text>
+    
+		/// <summary>
+		/// Field for the child list of Ref: @(reference.Name).
+		/// </summary>
+		public virtual IList<@(reference.ChildTableMetadata.EntityName)> @(reference.ChildListPropertyName) { get; set; }
+
+		</text>}
+
+		#endregion
+		
+
+	}
+}
