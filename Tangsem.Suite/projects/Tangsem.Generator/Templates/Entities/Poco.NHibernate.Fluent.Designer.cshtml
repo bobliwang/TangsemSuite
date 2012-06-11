@@ -54,7 +54,8 @@ namespace @(Configuration.EntityNamespace).Fluent.Mappings
 		private void MapId()
 		{
 			this.Id(x => x.@(TableMetadata.PrimaryKeys[0].PropertyName))
-				.GeneratedBy.Native();
+				.GeneratedBy
+				.Native();
 		}
 		
 		/// <summary>
@@ -65,8 +66,7 @@ namespace @(Configuration.EntityNamespace).Fluent.Mappings
 			@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey && !c.IsPrimaryKey))
 			{<text>
 			this.Map(x => x.@(col.PropertyName))
-				.TheColumnNameIs("@(col.ColumnName)")
-				@(col.Nullable ? "" : ".CanNotBeNull()");
+                .TheColumnNameIs("@(col.ColumnName)")@if (col.Nullable) {<text>;</text>}else{<text>.CanNotBeNull();</text>}
 			</text>}
 
 		}
@@ -79,8 +79,7 @@ namespace @(Configuration.EntityNamespace).Fluent.Mappings
 			@foreach (var reference in this.TableMetadata.OutgoingReferences)
 			{<text>
 			this.References<@(reference.ParentTableMetadata.EntityName)>(x => x.@(reference.ParentPropertyName))
-				.TheColumnNameIs("@(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName)")
-				@(reference.ColumnPairs[0].ChildColumnMetadata.Nullable ? "" : ".CanNotBeNull()");
+                .TheColumnNameIs("@(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName)")@if (reference.ColumnPairs[0].ChildColumnMetadata.Nullable){<text>;</text>}else{<text>.CanNotBeNull();</text>}
 			</text>}
 
 		}
@@ -93,8 +92,8 @@ namespace @(Configuration.EntityNamespace).Fluent.Mappings
 			@foreach (var reference in this.TableMetadata.IncomingReferences)
 			{<text>
 			this.HasMany<@(reference.ChildTableMetadata.EntityName)>(x => x.@(reference.ChildListPropertyName))
-					.IsInverse()
-					.AsBag();
+                .IsInverse()
+                .AsBag();
 			</text>}
 
 		}
