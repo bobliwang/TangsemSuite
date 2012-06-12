@@ -23,12 +23,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace @(Configuration.EntityNamespace).Fluent.Mappings
+using FluentNHibernate.Mapping;
+
+namespace @(Configuration.EntityNamespace).Mappings
 {
 	/// <summary>
 	/// The mapping configuration for @(TableMetadata.EntityName).
 	/// </summary>
-	public class @(TableMetadata.EntityName)Map : ClassMap<@(TableMetadata.EntityName)>
+	public partial class @(TableMetadata.EntityName)Map : ClassMap<@(TableMetadata.EntityName)>
 	{
 		/// <summary>
 		/// The constructor.
@@ -54,6 +56,7 @@ namespace @(Configuration.EntityNamespace).Fluent.Mappings
 		private void MapId()
 		{
 			this.Id(x => x.@(TableMetadata.PrimaryKeys[0].PropertyName))
+				.Column("@(TableMetadata.PrimaryKeys[0].ColumnName)")
 				.GeneratedBy
 				.Native();
 		}
@@ -66,7 +69,7 @@ namespace @(Configuration.EntityNamespace).Fluent.Mappings
 			@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey && !c.IsPrimaryKey))
 			{<text>
 			this.Map(x => x.@(col.PropertyName))
-                .TheColumnNameIs("@(col.ColumnName)")@if (col.Nullable) {<text>;</text>}else{<text>.CanNotBeNull();</text>}
+                .Column("@(col.ColumnName)")@if (col.Nullable) {<text>;</text>}else{<text>.Not.Nullable();</text>}
 			</text>}
 
 		}
@@ -79,7 +82,8 @@ namespace @(Configuration.EntityNamespace).Fluent.Mappings
 			@foreach (var reference in this.TableMetadata.OutgoingReferences)
 			{<text>
 			this.References<@(reference.ParentTableMetadata.EntityName)>(x => x.@(reference.ParentPropertyName))
-                .TheColumnNameIs("@(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName)")@if (reference.ColumnPairs[0].ChildColumnMetadata.Nullable){<text>;</text>}else{<text>.CanNotBeNull();</text>}
+                .Fetch.Join()
+                .Column("@(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName)")@if (reference.ColumnPairs[0].ChildColumnMetadata.Nullable){<text>;</text>}else{<text>.Not.Nullable();</text>}
 			</text>}
 
 		}
@@ -92,7 +96,8 @@ namespace @(Configuration.EntityNamespace).Fluent.Mappings
 			@foreach (var reference in this.TableMetadata.IncomingReferences)
 			{<text>
 			this.HasMany<@(reference.ChildTableMetadata.EntityName)>(x => x.@(reference.ChildListPropertyName))
-                .IsInverse()
+                .Inverse()
+                .LazyLoad()
                 .AsBag();
 			</text>}
 

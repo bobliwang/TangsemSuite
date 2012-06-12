@@ -25,7 +25,7 @@ using System.Linq;
 
 namespace @Configuration.EntityNamespace
 {
-	public class @TableMetadata.EntityName
+	public partial class @TableMetadata.EntityName
 	{
 		@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey))
 		{<text>

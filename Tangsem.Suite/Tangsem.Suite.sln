@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C992E35A-AADA-4A93-9C98-0AC03638436A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.Generator.NHibernateTest", "Tangsem.Generator.NHibernateTest\Tangsem.Generator.NHibernateTest.csproj", "{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Tangsem.Suite.vsmdi
@@ -57,6 +59,10 @@ Global
 		{E4635055-63B6-4DFB-93B1-DA6F9482BC3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4635055-63B6-4DFB-93B1-DA6F9482BC3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4635055-63B6-4DFB-93B1-DA6F9482BC3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,5 +74,6 @@ Global
 		{BEE62F90-879F-40A3-A3C4-666373B2BF89} = {E389CD07-467E-4882-A43A-CC82DEF974C0}
 		{6CE102E0-7F36-434A-AEC0-541A20FD2548} = {E389CD07-467E-4882-A43A-CC82DEF974C0}
 		{E4635055-63B6-4DFB-93B1-DA6F9482BC3A} = {C992E35A-AADA-4A93-9C98-0AC03638436A}
+		{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0} = {C992E35A-AADA-4A93-9C98-0AC03638436A}
 	EndGlobalSection
 EndGlobal

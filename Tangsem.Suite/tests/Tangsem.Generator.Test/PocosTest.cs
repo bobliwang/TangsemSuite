@@ -41,21 +41,11 @@ namespace Tangsem.Generator.Test
 		}
 
 		[TestMethod]
-		public void GeneratePocos_Country()
+		public void GeneratePocos()
 		{
 			this.GenerateCodeForEntity("Country");
-		}
 
-		[TestMethod]
-		public void GeneratePocos_State()
-		{
 			this.GenerateCodeForEntity("State");
-		}
-
-		[TestMethod]
-		public void DummyTest()
-		{
-			this.Log("", "DummyTest is finished");
 		}
 
 		private void GenerateCodeForEntity(string entityName)

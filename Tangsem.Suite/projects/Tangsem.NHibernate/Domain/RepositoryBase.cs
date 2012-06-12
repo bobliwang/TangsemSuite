@@ -138,6 +138,8 @@ namespace Tangsem.NHibernate.Domain
     public virtual void Commit()
     {
       Transaction.Commit();
+	  this.Transaction = null;
+
     }
 
     /// <summary>
@@ -146,6 +148,7 @@ namespace Tangsem.NHibernate.Domain
     public virtual void Rollback()
     {
       Transaction.Rollback();
+	  this.Transaction = null;
     }
 
     /// <summary>
@@ -160,5 +163,49 @@ namespace Tangsem.NHibernate.Domain
 
       this.Transaction = this.CurrentSession.BeginTransaction();
     }
+
+	private bool _isDisposed = false;
+
+  	public virtual void Dispose()
+  	{
+		Exception ex = null;
+
+		lock (this)
+		{
+			if (this._isDisposed)
+			{
+				return;
+			}
+
+
+			try
+			{
+				if (this.CurrentSession != null)
+				{
+					if (this.Transaction != null)
+					{
+						try
+						{
+							this.Transaction.Rollback();
+						}
+						finally
+						{
+							this.CurrentSession.Dispose();
+						}
+					}
+				}
+			}catch(Exception e)
+			{
+				ex = e;
+			}
+
+			this._isDisposed = true;
+		}
+
+		if (ex != null)
+		{
+			throw new Exception("Dispose failed!", ex);
+		}
+  	}
   }
 }

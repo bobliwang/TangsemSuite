@@ -8,7 +8,7 @@ namespace Tangsem.Data.Domain
   /// <summary>
   /// The repository interface.
   /// </summary>
-  public interface IRepository
+  public interface IRepository : IDisposable
   {
     /// <summary>
     /// Gets the entity query by entity type.

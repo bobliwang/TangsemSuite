@@ -72,12 +72,12 @@ WriteLiteral("\r\n\r\nusing System;\r\nusing System.Collections;\r\nusing System
             
             #line default
             #line hidden
-WriteLiteral("\r\n{\r\n\tpublic class ");
+WriteLiteral("\r\n{\r\n\tpublic partial class ");
 
 
             
             #line 28 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
-         Write(TableMetadata.EntityName);
+                 Write(TableMetadata.EntityName);
 
             
             #line default
