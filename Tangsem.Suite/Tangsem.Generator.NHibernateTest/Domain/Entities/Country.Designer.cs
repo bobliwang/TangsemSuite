@@ -53,6 +53,17 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities
 
 
 
+		/// <summary>
+		/// The default constructor for Country class.
+		/// </summary>
+		public Country()
+		{
+
+			this.States = new List<State>();
+
+		}
+
+
 		#region "Basic Columns"
 
 
@@ -86,15 +97,26 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities
 		#region "Incoming References"
 
 
-
 		/// <summary>
 		/// Field for the child list of Ref: FK_State_Country.
 		/// </summary>
 		public virtual IList<State> States { get; set; }
 
+		/// <summary>
+		/// Add State entity to States.
+		/// </summary>
+		/// <param name="state">
+		///    The State entity.
+		/// </param>
+		public virtual void AddToStates(State state)
+		{
+			state.Country = this;
+			this.States.Add(state);
+		}
 
 		#endregion
 
 
 	}
+
 }

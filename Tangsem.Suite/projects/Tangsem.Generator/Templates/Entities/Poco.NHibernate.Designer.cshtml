@@ -54,6 +54,19 @@ namespace @Configuration.EntityNamespace
 		public static readonly Expression<Func<@(this.TableMetadata.EntityName), object>> Expr_@(reference.ParentPropertyName) = x => x.@(reference.ParentPropertyName);
 		</text>}
 		
+		
+		/// <summary>
+		/// The default constructor for @(TableMetadata.EntityName) class.
+		/// </summary>
+		public @(TableMetadata.EntityName)()
+		{
+			@foreach (var reference in this.TableMetadata.IncomingReferences)
+			{<text>
+			this.@(reference.ChildListPropertyName) = new List<@(reference.ChildTableMetadata.EntityName)>();
+			</text>}
+
+		}
+
 
 		#region "Basic Columns"
 
@@ -83,12 +96,23 @@ namespace @Configuration.EntityNamespace
 		
 		@foreach (var reference in this.TableMetadata.IncomingReferences)
 		{<text>
-    
+		@{ var childObjParamName = reference.ChildTableMetadata.EntityName.Substring(0, 1).ToLower() + reference.ChildTableMetadata.EntityName.Substring(1); }
 		/// <summary>
 		/// Field for the child list of Ref: @(reference.Name).
 		/// </summary>
 		public virtual IList<@(reference.ChildTableMetadata.EntityName)> @(reference.ChildListPropertyName) { get; set; }
-
+		
+		/// <summary>
+		/// Add @(reference.ChildTableMetadata.EntityName) entity to @(reference.ChildListPropertyName).
+		/// </summary>
+		/// <param name="@(childObjParamName)">
+		///	The @(reference.ChildTableMetadata.EntityName) entity.
+		/// </param>
+		public virtual void AddTo@(reference.ChildListPropertyName)(@(reference.ChildTableMetadata.EntityName) @(childObjParamName))
+		{
+			@(childObjParamName).@(reference.ParentPropertyName) = this;
+			this.@(reference.ChildListPropertyName).Add(@(childObjParamName));
+		}
 		</text>}
 
 		#endregion

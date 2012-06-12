@@ -97,7 +97,7 @@ namespace Tangsem.Generator.NHibernateTest
 				repo.BeginTransaction();
 				var state = new State { Name = "Tasmania"};
 
-				au.AddState(state);
+				au.AddToStates(state);
 
 				Console.WriteLine("Relationship created in memory.");
 

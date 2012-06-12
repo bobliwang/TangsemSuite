@@ -7,10 +7,5 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities
 {
 	public partial class Country
 	{
-		public virtual void AddState(State state)
-		{
-			state.Country = this;
-			this.States.Add(state);
-		}
 	}
 }
