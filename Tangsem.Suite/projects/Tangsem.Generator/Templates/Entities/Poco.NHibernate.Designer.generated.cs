@@ -62,11 +62,12 @@ WriteLiteral("\r\n");
 
 
 WriteLiteral("\r\n\r\nusing System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\n" +
-"using System.Text;\r\nusing System.Linq;\r\n\r\nnamespace ");
+"using System.Text;\r\nusing System.Linq;\r\nusing System.Linq.Expressions;\r\n\r\nnamesp" +
+"ace ");
 
 
             
-            #line 26 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 27 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
      Write(Configuration.EntityNamespace);
 
             
@@ -76,7 +77,7 @@ WriteLiteral("\r\n{\r\n\tpublic partial class ");
 
 
             
-            #line 28 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 29 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                  Write(TableMetadata.EntityName);
 
             
@@ -86,7 +87,7 @@ WriteLiteral("\r\n\t{\r\n");
 
 
             
-            #line 30 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 31 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
  		foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey))
 		{
             
@@ -96,7 +97,7 @@ WriteLiteral("\r\n\t\t/// <summary>\r\n\t\t/// The property name \'");
 
 
             
-            #line 33 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 34 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                     Write(col.PropertyName);
 
             
@@ -106,7 +107,7 @@ WriteLiteral("\'. It matches the property to column \'");
 
 
             
-            #line 33 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 34 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                                            Write(col.ColumnName);
 
             
@@ -116,7 +117,7 @@ WriteLiteral("\'.\r\n\t\t/// </summary>\r\n\t\tpublic static readonly string Pro
 
 
             
-            #line 35 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 36 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                  Write(col.PropertyName);
 
             
@@ -126,7 +127,7 @@ WriteLiteral(" = \"");
 
 
             
-            #line 35 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 36 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                        Write(col.PropertyName);
 
             
@@ -136,7 +137,7 @@ WriteLiteral("\";\r\n\t\t\r\n\t\t/// <summary>\r\n\t\t/// The lamda expression f
 
 
             
-            #line 38 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 39 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                           Write(col.PropertyName);
 
             
@@ -146,7 +147,7 @@ WriteLiteral(".\r\n\t\t/// </summary>\r\n\t\tpublic static readonly Expression<F
 
 
             
-            #line 40 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 41 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                     Write(TableMetadata.EntityName);
 
             
@@ -156,7 +157,7 @@ WriteLiteral(", object>> Expr_");
 
 
             
-            #line 40 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 41 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                                               Write(col.PropertyName);
 
             
@@ -166,7 +167,7 @@ WriteLiteral(" = x => x.");
 
 
             
-            #line 40 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 41 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                                                                            Write(col.PropertyName);
 
             
@@ -176,7 +177,7 @@ WriteLiteral(";\r\n\t\t");
 
 
             
-            #line 41 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 42 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
          }
 
             
@@ -186,7 +187,7 @@ WriteLiteral("\t\t\r\n\t\t\r\n");
 
 
             
-            #line 44 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 45 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
  		foreach (var reference in this.TableMetadata.OutgoingReferences)
 		{
             
@@ -196,7 +197,7 @@ WriteLiteral("\r\n\t\t/// <summary>\r\n\t\t/// The property name \'");
 
 
             
-            #line 47 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 48 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                      Write(reference.ParentPropertyName);
 
             
@@ -206,7 +207,7 @@ WriteLiteral("\'. It is for the reference \'");
 
 
             
-            #line 47 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 48 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                                                 Write(reference.Name);
 
             
@@ -216,7 +217,7 @@ WriteLiteral("\'.\r\n\t\t/// </summary>\r\n\t\tpublic static readonly string Pro
 
 
             
-            #line 49 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 50 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                  Write(reference.ParentPropertyName);
 
             
@@ -226,7 +227,7 @@ WriteLiteral("  = \"");
 
 
             
-            #line 49 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 50 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                                      Write(reference.ParentPropertyName);
 
             
@@ -236,7 +237,7 @@ WriteLiteral("\";\r\n\r\n\t\t/// <summary>\r\n\t\t/// The lamda expression for "
 
 
             
-            #line 52 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 53 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                            Write(reference.ParentPropertyName);
 
             
@@ -246,7 +247,7 @@ WriteLiteral(".\r\n\t\t/// </summary>\r\n\t\tpublic static readonly Expression<F
 
 
             
-            #line 54 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 55 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                      Write(this.TableMetadata.EntityName);
 
             
@@ -256,7 +257,7 @@ WriteLiteral(", object>> Expr_");
 
 
             
-            #line 54 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 55 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                                                      Write(reference.ParentPropertyName);
 
             
@@ -266,7 +267,7 @@ WriteLiteral(" = x => x.");
 
 
             
-            #line 54 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 55 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                                                                                               Write(reference.ParentPropertyName);
 
             
@@ -276,7 +277,7 @@ WriteLiteral(";\r\n\t\t");
 
 
             
-            #line 55 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 56 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
          }
 
             
@@ -286,7 +287,7 @@ WriteLiteral("\t\t\r\n\t\t\r\n\t\t/// <summary>\r\n\t\t/// The default construct
 
 
             
-            #line 59 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 60 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                               Write(TableMetadata.EntityName);
 
             
@@ -296,7 +297,7 @@ WriteLiteral(" class.\r\n\t\t/// </summary>\r\n\t\tpublic ");
 
 
             
-            #line 61 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 62 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
      Write(TableMetadata.EntityName);
 
             
@@ -306,7 +307,7 @@ WriteLiteral("()\r\n\t\t{\r\n");
 
 
             
-            #line 63 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 64 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
  			foreach (var reference in this.TableMetadata.IncomingReferences)
 			{
             
@@ -316,7 +317,7 @@ WriteLiteral("\r\n\t\t\tthis.");
 
 
             
-            #line 65 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 66 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
     Write(reference.ChildListPropertyName);
 
             
@@ -326,7 +327,7 @@ WriteLiteral(" = new List<");
 
 
             
-            #line 65 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 66 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                   Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -336,7 +337,7 @@ WriteLiteral(">();\r\n\t\t\t");
 
 
             
-            #line 66 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 67 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
           }
 
             
@@ -346,7 +347,7 @@ WriteLiteral("\r\n\t\t}\r\n\r\n\r\n\t\t#region \"Basic Columns\"\r\n\r\n");
 
 
             
-            #line 73 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 74 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
  		foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey))
 		{
             
@@ -356,7 +357,7 @@ WriteLiteral("\r\n\t\t/// <summary>\r\n\t\t/// Property ");
 
 
             
-            #line 76 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 77 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
           Write(col.PropertyName);
 
             
@@ -366,7 +367,7 @@ WriteLiteral(" mapping to ");
 
 
             
-            #line 76 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 77 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                         Write(TableMetadata.Name);
 
             
@@ -376,7 +377,7 @@ WriteLiteral(".");
 
 
             
-            #line 76 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 77 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                               Write(col.ColumnName);
 
             
@@ -386,7 +387,7 @@ WriteLiteral("\r\n\t\t/// </summary>\r\n\t\tpublic virtual ");
 
 
             
-            #line 78 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 79 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
             Write(col.CSharpTypeAsString);
 
             
@@ -396,7 +397,7 @@ WriteLiteral(" ");
 
 
             
-            #line 78 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 79 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                     Write(col.PropertyName);
 
             
@@ -406,7 +407,7 @@ WriteLiteral(" { get; set; }\r\n\t\t");
 
 
             
-            #line 79 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 80 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
          }
 
             
@@ -416,7 +417,7 @@ WriteLiteral("\t\t\r\n\t\t#endregion\r\n\t\t\r\n\t\t#region \"Outgoing Reference
 
 
             
-            #line 85 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 86 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
  		foreach (var reference in @TableMetadata.OutgoingReferences)
 		{
             
@@ -426,7 +427,7 @@ WriteLiteral("\r\n\t\t/// <summary>\r\n\t\t/// Gets or sets reference to ");
 
 
             
-            #line 88 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 89 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                             Write(reference.ParentPropertyName);
 
             
@@ -436,7 +437,7 @@ WriteLiteral(". ReferenceName: ");
 
 
             
-            #line 88 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 89 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                                             Write(reference.Name);
 
             
@@ -446,7 +447,7 @@ WriteLiteral(".\r\n\t\t/// </summary>\r\n\t\tpublic virtual ");
 
 
             
-            #line 90 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 91 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
              Write(reference.ParentTableMetadata.EntityName);
 
             
@@ -456,7 +457,7 @@ WriteLiteral(" ");
 
 
             
-            #line 90 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 91 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                          Write(reference.ParentPropertyName);
 
             
@@ -466,7 +467,7 @@ WriteLiteral(" { get; set; }\r\n\t\t");
 
 
             
-            #line 91 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 92 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
          }
 
             
@@ -476,7 +477,7 @@ WriteLiteral("\t\t\r\n\t\t#endregion\r\n\t\t\r\n\t\t#region \"Incoming Reference
 
 
             
-            #line 97 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 98 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
  		foreach (var reference in this.TableMetadata.IncomingReferences)
 		{
             
@@ -486,7 +487,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 99 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 100 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
   		 var childObjParamName = reference.ChildTableMetadata.EntityName.Substring(0, 1).ToLower() + reference.ChildTableMetadata.EntityName.Substring(1); 
 
             
@@ -496,7 +497,7 @@ WriteLiteral("\t\t/// <summary>\r\n\t\t/// Field for the child list of Ref: ");
 
 
             
-            #line 101 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 102 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                    Write(reference.Name);
 
             
@@ -506,7 +507,7 @@ WriteLiteral(".\r\n\t\t/// </summary>\r\n\t\tpublic virtual IList<");
 
 
             
-            #line 103 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 104 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                    Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -516,7 +517,7 @@ WriteLiteral("> ");
 
 
             
-            #line 103 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 104 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                                Write(reference.ChildListPropertyName);
 
             
@@ -526,7 +527,7 @@ WriteLiteral(" { get; set; }\r\n\t\t\r\n\t\t/// <summary>\r\n\t\t/// Add ");
 
 
             
-            #line 106 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 107 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
       Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -536,7 +537,7 @@ WriteLiteral(" entity to ");
 
 
             
-            #line 106 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 107 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                            Write(reference.ChildListPropertyName);
 
             
@@ -546,7 +547,7 @@ WriteLiteral(".\r\n\t\t/// </summary>\r\n\t\t/// <param name=\"");
 
 
             
-            #line 108 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 109 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                Write(childObjParamName);
 
             
@@ -556,7 +557,7 @@ WriteLiteral("\">\r\n\t\t///\tThe ");
 
 
             
-            #line 109 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 110 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
       Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -566,7 +567,7 @@ WriteLiteral(" entity.\r\n\t\t/// </param>\r\n\t\tpublic virtual void AddTo");
 
 
             
-            #line 111 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 112 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                        Write(reference.ChildListPropertyName);
 
             
@@ -576,7 +577,7 @@ WriteLiteral("(");
 
 
             
-            #line 111 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 112 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                           Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -586,7 +587,7 @@ WriteLiteral(" ");
 
 
             
-            #line 111 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 112 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                                                                                      Write(childObjParamName);
 
             
@@ -596,7 +597,7 @@ WriteLiteral(")\r\n\t\t{\r\n\t\t\t");
 
 
             
-            #line 113 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 114 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
 Write(childObjParamName);
 
             
@@ -606,7 +607,7 @@ WriteLiteral(".");
 
 
             
-            #line 113 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 114 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                     Write(reference.ParentPropertyName);
 
             
@@ -616,7 +617,7 @@ WriteLiteral(" = this;\r\n\t\t\tthis.");
 
 
             
-            #line 114 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 115 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
     Write(reference.ChildListPropertyName);
 
             
@@ -626,7 +627,7 @@ WriteLiteral(".Add(");
 
 
             
-            #line 114 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 115 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
                                            Write(childObjParamName);
 
             
@@ -636,7 +637,7 @@ WriteLiteral(");\r\n\t\t}\r\n\t\t");
 
 
             
-            #line 116 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
+            #line 117 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
          }
 
             

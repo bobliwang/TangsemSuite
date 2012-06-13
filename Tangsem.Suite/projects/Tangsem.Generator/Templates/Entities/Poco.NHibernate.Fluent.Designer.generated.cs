@@ -342,12 +342,22 @@ WriteLiteral(">(x => x.");
             
             #line default
             #line hidden
-WriteLiteral(")\r\n                .Inverse()\r\n                .LazyLoad()\r\n                .AsBa" +
-"g();\r\n\t\t\t");
+WriteLiteral(")\r\n\t\t\t\t.KeyColumn(\"");
 
 
             
-            #line 102 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 99 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            Write(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\")\r\n                .Inverse()\r\n                .LazyLoad()\r\n                .AsB" +
+"ag();\r\n\t\t\t");
+
+
+            
+            #line 103 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
           }
 
             

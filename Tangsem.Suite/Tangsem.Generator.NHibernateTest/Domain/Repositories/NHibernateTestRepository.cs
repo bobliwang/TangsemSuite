@@ -9,22 +9,7 @@ using Tangsem.NHibernate.Domain;
 
 namespace Tangsem.Generator.NHibernateTest.Domain.Repositories
 {
-	public class NHibernateTestRepository : RepositoryBase, IRepository
+	public partial class NHibernateTestRepository
 	{
-		public IQueryable<Country> Countries
-		{
-			get
-			{
-				return this.GetEntities<Country>();
-			}
-		}
-
-		public IQueryable<State> States
-		{
-			get
-			{
-				return this.GetEntities<State>();
-			}
-		}
 	}
 }

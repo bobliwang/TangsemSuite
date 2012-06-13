@@ -96,6 +96,7 @@ namespace @(Configuration.EntityNamespace).Mappings
 			@foreach (var reference in this.TableMetadata.IncomingReferences)
 			{<text>
 			this.HasMany<@(reference.ChildTableMetadata.EntityName)>(x => x.@(reference.ChildListPropertyName))
+				.KeyColumn("@(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName)")
                 .Inverse()
                 .LazyLoad()
                 .AsBag();

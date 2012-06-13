@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<GeneratorConfiguration EntityNamespace="Tangsem.Generator.NHibernateTest.Domain.Entities"
-						RepositoryNamespace ="Tangsem.Generator.NHibernateTest.Domain.Repositories"						
-						ServiceNamespace ="Tangsem.Generator.NHibernateTest.Domain.Servicies"
+<GeneratorConfiguration EntityNamespace="Tangsem.Generator.NHibernateTest.Domain.Entities"						
+						RepositoryName ="NHibernateTestRepository"						
 						ConnectionString="Data Source=(local);Initial Catalog=TangsemGeneratorNHibernateTest;Integrated Security=True"
 						MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder">
-	<!-- MetadataBuilder: className[;assemblyName]  -->
+	<!--RepositoryNamespace ="Tangsem.Generator.NHibernateTest.Domain.Repositories" optional -->
+	<!--ServiceNamespace ="Tangsem.Generator.NHibernateTest.Domain.Servicies" optional -->
 	
+	<!-- MetadataBuilder: className[;assemblyName]  -->
+	<IgnoredTable>Sysdiagrams</IgnoredTable>
 </GeneratorConfiguration>

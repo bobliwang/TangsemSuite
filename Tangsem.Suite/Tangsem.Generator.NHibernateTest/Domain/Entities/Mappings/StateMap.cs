@@ -1,8 +1,8 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using System.Collections.Generic;
-using System.Collections;
-using System;
 
 using FluentNHibernate.Mapping;
 
@@ -11,7 +11,7 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 	/// <summary>
 	/// The mapping configuration for State.
 	/// </summary>
-	public class StateMap : ClassMap<State>
+	public partial class StateMap : ClassMap<State>
 	{
 		/// <summary>
 		/// The constructor.
@@ -20,17 +20,17 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 		{
 			// primary key mapping
 			this.MapId();
-
+			
 			// basic columns mapping
 			this.MapBasicColumns();
-
+			
 			// outgoing references mapping
 			this.MapOutgoingReferences();
-
+			
 			// incoming references mapping
 			this.MapIncomingReferences();
 		}
-
+		
 		/// <summary>
 		/// Map the Primary Key.
 		/// </summary>
@@ -41,7 +41,7 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 				.GeneratedBy
 				.Native();
 		}
-
+		
 		/// <summary>
 		/// Map the Basic Columns.
 		/// </summary>
@@ -49,9 +49,9 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 		{
 
 			this.Map(x => x.Name)
-				.Column("Name").Not.Nullable();
+                .Column("Name").Not.Nullable();			
 		}
-
+		
 		/// <summary>
 		/// Map the Outgoing References.
 		/// </summary>
@@ -59,10 +59,10 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 		{
 
 			this.References<Country>(x => x.Country)
-				.Fetch.Join()
-				.Column("CountryId");
+                .Fetch.Join()
+                .Column("CountryId");			
 		}
-
+		
 		/// <summary>
 		/// Map the Incoming References.
 		/// </summary>

@@ -1,0 +1,90 @@
+﻿@* Generator: Template *@
+
+@using Tangsem.Common.Extensions
+@using Tangsem.Generator.Metadata
+@using Tangsem.Generator.Metadata.Builder
+@using Tangsem.Generator.Settings
+
+@functions {
+
+	/// <summary>
+	/// The metadata builder.
+	/// </summary>
+	public MetadataBuilder MetadataBuilder { get; set; }
+
+	/// <summary>
+	/// The generator configuration instance.
+	/// </summary>
+	public GeneratorConfiguration Configuration { get; set; }
+
+	/// <summary>
+	/// The tables that will be used.
+	/// </summary>
+	public List<string> TableNames { get; set; }
+	
+	
+	private void Init()
+	{
+		this.TableNames = this.MetadataBuilder.AllTableNames.Where(x => !this.Configuration.IgnoredTables.Any(y => x.Equals(y, StringComparison.CurrentCultureIgnoreCase))).ToList();	
+	}
+}
+
+@{
+	this.Init();
+}
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
+
+using Tangsem.Data.Domain;
+using Tangsem.NHibernate.Domain;
+
+using @(Configuration.EntityNamespace);
+
+namespace @(Configuration.RepositoryNamespace)
+{
+	/// <summary>
+	/// The @(Configuration.RepositoryName) class.
+	/// </summary>
+	public partial class @(Configuration.RepositoryName) : RepositoryBase, IRepository
+	{
+		@foreach (var tbName in this.TableNames)
+		{
+			var tableMetadata = this.MetadataBuilder.GetTableMetadata(tbName);
+		<text>
+		
+		/// <summary>
+		/// The IQueryable for @(tableMetadata.EntityName.Pluralize()).
+		/// </summary>
+		public virtual IQueryable<@(tableMetadata.EntityName)> @(tableMetadata.EntityName.Pluralize())
+		{
+			get
+			{
+				return this.GetEntities<@(tableMetadata.EntityName)>();
+			}
+		}
+
+		</text>}
+		
+		
+		@foreach (var tbName in this.TableNames)
+		{
+			var tableMetadata = this.MetadataBuilder.GetTableMetadata(tbName);
+		<text>
+		
+		/// <summary>
+		/// Get @(tableMetadata.EntityName) by primary key.
+		/// </summary>
+		public virtual @(tableMetadata.EntityName) Get@(tableMetadata.EntityName)By@(tableMetadata.PrimaryKeys[0].PropertyName)(@(tableMetadata.PrimaryKeys[0].CSharpTypeAsString) @(tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()))
+		{
+			return this.LookupById<@(tableMetadata.EntityName)>(@(tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()));
+		}
+
+		</text>}
+
+	}
+}

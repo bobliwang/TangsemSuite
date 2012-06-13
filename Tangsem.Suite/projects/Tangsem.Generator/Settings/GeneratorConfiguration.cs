@@ -23,12 +23,70 @@ namespace Tangsem.Generator.Settings
 		/// </summary>
 		[XmlAttribute]
 		public string ConnectionString { get; set; }
+
+		/// <summary>
+		/// Gets or sets RepositoryNamespace.
+		/// </summary>
+		[XmlAttribute]
+		public string RepositoryNamespace { get; set; }
+
+		/// <summary>
+		/// Gets or sets RepositoryName.
+		/// </summary>
+		[XmlAttribute]
+		public string RepositoryName { get; set; }
+
+		/// <summary>
+		/// Gets or sets ServiceNamespace.
+		/// </summary>
+		[XmlAttribute]
+		public string ServiceNamespace { get; set; }
 		
 		/// <summary>
 		/// The MeatadataBuilder type name. Format: className[;assemblyName]
 		/// </summary>
 		[XmlAttribute]
 		public string MetadataBuilder { get; set; }
+
+		[XmlElement("IgnoredTable")]
+		public List<string> IgnoredTables { get; set; }
+
+		public void Init()
+		{
+			if (string.IsNullOrWhiteSpace(this.EntityNamespace))
+			{
+				throw new Exception("EntityNamespace is required in configuration.");
+			}
+
+			if (string.IsNullOrWhiteSpace(this.ConnectionString))
+			{
+				throw new Exception("ConnectionString is required in configuration.");
+			}
+
+			var lastDotPosInEntityNamespace = this.EntityNamespace.LastIndexOf('.');
+
+			if (lastDotPosInEntityNamespace < 1)
+			{
+				throw new Exception("EntityNamespace is not valid in configuration.");
+			}
+
+			if (string.IsNullOrEmpty(this.RepositoryNamespace))
+			{
+
+				this.RepositoryNamespace = this.EntityNamespace.Substring(0, lastDotPosInEntityNamespace) + "." + "Repositories";
+			}
+
+			if (string.IsNullOrEmpty(this.ServiceNamespace))
+			{
+				this.ServiceNamespace = this.EntityNamespace.Substring(0, lastDotPosInEntityNamespace) + "." + "Services";
+			}
+
+			if (string.IsNullOrEmpty(this.RepositoryName))
+			{
+				this.RepositoryName = "MyRepository";
+			}
+		}
+
 
 		/// <summary>
 		/// Get the type of 
