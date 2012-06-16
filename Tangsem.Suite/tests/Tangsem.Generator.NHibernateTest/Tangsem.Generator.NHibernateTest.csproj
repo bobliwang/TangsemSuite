@@ -89,19 +89,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\projects\Tangsem.Data\Tangsem.Data.csproj">
+    <ProjectReference Include="..\..\projects\Tangsem.Data\Tangsem.Data.csproj">
       <Project>{62351D99-DF6A-4329-8F50-F75ED133EBA7}</Project>
       <Name>Tangsem.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\projects\Tangsem.Generator.Metadata\Tangsem.Generator.Metadata.csproj">
+    <ProjectReference Include="..\..\projects\Tangsem.Generator.Metadata\Tangsem.Generator.Metadata.csproj">
       <Project>{BEE62F90-879F-40A3-A3C4-666373B2BF89}</Project>
       <Name>Tangsem.Generator.Metadata</Name>
     </ProjectReference>
-    <ProjectReference Include="..\projects\Tangsem.Generator\Tangsem.Generator.csproj">
+    <ProjectReference Include="..\..\projects\Tangsem.Generator\Tangsem.Generator.csproj">
       <Project>{6CE102E0-7F36-434A-AEC0-541A20FD2548}</Project>
       <Name>Tangsem.Generator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\projects\Tangsem.NHibernate\Tangsem.NHibernate.csproj">
+    <ProjectReference Include="..\..\projects\Tangsem.NHibernate\Tangsem.NHibernate.csproj">
       <Project>{804A3FB9-89DF-4C66-B09B-AFAEF76069FD}</Project>
       <Name>Tangsem.NHibernate</Name>
     </ProjectReference>
