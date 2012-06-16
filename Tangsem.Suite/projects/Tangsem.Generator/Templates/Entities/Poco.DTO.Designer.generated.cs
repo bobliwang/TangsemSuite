@@ -16,58 +16,48 @@ namespace Tangsem.Generator.Templates.Entities
     using System.Linq;
     using System.Text;
     
-    #line 3 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+    #line 4 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
     using Tangsem.Generator.Metadata;
     
     #line default
     #line hidden
     
-    #line 4 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+    #line 5 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
     using Tangsem.Generator.Settings;
     
     #line default
     #line hidden
     
+    #line 6 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+    using Tangsem.Generator.Templates;
+    
+    #line default
+    #line hidden
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.3.2.0")]
-    public partial class Poco_DTO_Designer : RazorGenerator.Templating.RazorTemplateBase
+    public partial class Poco_DTO_Designer : SingleTableMetadataTemplate
     {
 #line hidden
-
-        #line 6 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
-
-
-	/// <summary>
-	/// The table metadata.
-	/// </summary>
-	public TableMetadata TableMetadata { get; set; }
-
-	/// <summary>
-	/// The generator configuration instance.
-	/// </summary>
-	public GeneratorConfiguration Configuration { get; set; }
-
-
-        #line default
-        #line hidden
 
         public override void Execute()
         {
 
 
-WriteLiteral("\r\n\r\n");
-
+WriteLiteral("\r\n");
 
 
 WriteLiteral("\r\n");
 
 
-WriteLiteral("\r\n\r\nusing System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\n" +
-"using System.Text;\r\nusing System.Linq;\r\nusing System.Linq.Expressions;\r\n\r\nnamesp" +
-"ace ");
+
+
+WriteLiteral("\r\nusing System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\nus" +
+"ing System.Text;\r\nusing System.Linq;\r\nusing System.Linq.Expressions;\r\n\r\nnamespac" +
+"e ");
 
 
             
-            #line 27 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            #line 15 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
       Write(Configuration.DTONamespace);
 
             
@@ -77,7 +67,7 @@ WriteLiteral("\r\n{\r\n\tpublic partial class ");
 
 
             
-            #line 29 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            #line 17 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
                   Write(TableMetadata.EntityName);
 
             
@@ -87,7 +77,7 @@ WriteLiteral("DTO\r\n\t{\t\r\n\t\t/// <summary>\r\n\t\t/// The default construct
 
 
             
-            #line 32 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            #line 20 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
                               Write(TableMetadata.EntityName);
 
             
@@ -97,7 +87,7 @@ WriteLiteral("DTO class.\r\n\t\t/// </summary>\r\n\t\tpublic ");
 
 
             
-            #line 34 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            #line 22 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
      Write(TableMetadata.EntityName);
 
             
@@ -107,7 +97,7 @@ WriteLiteral("DTO()\r\n\t\t{\r\n\t\t}\r\n\r\n");
 
 
             
-            #line 38 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            #line 26 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
  		foreach (var col in @TableMetadata.Columns)
 		{
             
@@ -117,7 +107,7 @@ WriteLiteral("\r\n\t\t/// <summary>\r\n\t\t/// Property ");
 
 
             
-            #line 41 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            #line 29 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
           Write(col.PropertyName);
 
             
@@ -127,7 +117,7 @@ WriteLiteral(" mapping to ");
 
 
             
-            #line 41 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            #line 29 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
                                         Write(TableMetadata.Name);
 
             
@@ -137,7 +127,7 @@ WriteLiteral(".");
 
 
             
-            #line 41 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            #line 29 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
                                                               Write(col.ColumnName);
 
             
@@ -147,7 +137,7 @@ WriteLiteral("\r\n\t\t/// </summary>\r\n\t\tpublic virtual ");
 
 
             
-            #line 43 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            #line 31 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
             Write(col.CSharpTypeAsString);
 
             
@@ -157,7 +147,7 @@ WriteLiteral(" ");
 
 
             
-            #line 43 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            #line 31 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
                                     Write(col.PropertyName);
 
             
@@ -167,7 +157,7 @@ WriteLiteral(" { get; set; }\r\n\t\t");
 
 
             
-            #line 44 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            #line 32 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
          }
 
             

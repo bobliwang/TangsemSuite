@@ -16,71 +16,41 @@ namespace Tangsem.Generator.Templates.Repositories
     using System.Linq;
     using System.Text;
     
-    #line 3 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+    #line 4 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
     using Tangsem.Common.Extensions;
     
     #line default
     #line hidden
     
-    #line 4 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
-    using Tangsem.Generator.Metadata;
-    
-    #line default
-    #line hidden
-    
     #line 5 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
-    using Tangsem.Generator.Metadata.Builder;
-    
-    #line default
-    #line hidden
-    
-    #line 6 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
-    using Tangsem.Generator.Settings;
+    using Tangsem.Generator.Templates;
     
     #line default
     #line hidden
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.3.2.0")]
-    public partial class IRepository_NHibernate_Designer : RazorGenerator.Templating.RazorTemplateBase
+    public partial class IRepository_NHibernate_Designer : MultipleTableMetadataTemplate
     {
 #line hidden
-
-        #line 8 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
-
-
-	/// <summary>
-	/// The generator configuration instance.
-	/// </summary>
-	public GeneratorConfiguration Configuration { get; set; }
-
-	/// <summary>
-	/// The list of TableMetadatas.
-	/// </summary>
-	public List<TableMetadata> TableMetadatas { get; set; }
-
-        #line default
-        #line hidden
 
         public override void Execute()
         {
 
 
-WriteLiteral("\r\n\r\n");
-
-
-
-
-
 WriteLiteral("\r\n");
 
 
-WriteLiteral("\r\n\r\nusing System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\n" +
-"using System.Text;\r\nusing System.Linq;\r\nusing System.Linq.Expressions;\r\n\r\nusing " +
-"Tangsem.Data.Domain;\r\nusing Tangsem.NHibernate.Domain;\r\n\r\nusing ");
+WriteLiteral("\t\t\t  \r\n");
+
+
+
+WriteLiteral("\r\nusing System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\nus" +
+"ing System.Text;\r\nusing System.Linq;\r\nusing System.Linq.Expressions;\r\n\r\nusing Ta" +
+"ngsem.Data.Domain;\r\nusing Tangsem.NHibernate.Domain;\r\n\r\nusing ");
 
 
             
-            #line 31 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 17 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
   Write(Configuration.EntityNamespace);
 
             
@@ -90,7 +60,7 @@ WriteLiteral(";\r\n\r\nnamespace ");
 
 
             
-            #line 33 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 19 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
       Write(Configuration.RepositoryNamespace);
 
             
@@ -100,7 +70,7 @@ WriteLiteral("\r\n{\r\n\t/// <summary>\r\n\t/// The I");
 
 
             
-            #line 36 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 22 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
       Write(Configuration.RepositoryName);
 
             
@@ -110,7 +80,7 @@ WriteLiteral(" interface.\r\n\t/// </summary>\r\n\tpublic partial interface I");
 
 
             
-            #line 38 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 24 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                        Write(Configuration.RepositoryName);
 
             
@@ -120,7 +90,7 @@ WriteLiteral(" : IRepository\r\n\t{\r\n");
 
 
             
-            #line 40 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 26 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
  		foreach (var tableMetadata in this.TableMetadatas)
 		{
             
@@ -130,7 +100,7 @@ WriteLiteral("\r\n\t\t\r\n\t\t/// <summary>\r\n\t\t/// The IQueryable for ");
 
 
             
-            #line 44 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 30 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                      Write(tableMetadata.EntityName.Pluralize());
 
             
@@ -140,7 +110,7 @@ WriteLiteral(".\r\n\t\t/// </summary>\r\n\t\tIQueryable<");
 
 
             
-            #line 46 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 32 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
          Write(tableMetadata.EntityName);
 
             
@@ -150,7 +120,7 @@ WriteLiteral("> ");
 
 
             
-            #line 46 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 32 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                       Write(tableMetadata.EntityName.Pluralize());
 
             
@@ -160,7 +130,7 @@ WriteLiteral(" { get; }\r\n\r\n\t\t");
 
 
             
-            #line 48 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 34 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
          }
 
             
@@ -170,7 +140,7 @@ WriteLiteral("\t\t\r\n\t\t\r\n");
 
 
             
-            #line 51 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 37 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
  		foreach (var tableMetadata in this.TableMetadatas)
 		{
             
@@ -180,7 +150,7 @@ WriteLiteral("\r\n\t\t\r\n\t\t/// <summary>\r\n\t\t/// Get ");
 
 
             
-            #line 55 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 41 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
       Write(tableMetadata.EntityName);
 
             
@@ -190,7 +160,7 @@ WriteLiteral(" by primary key.\r\n\t\t/// </summary>\r\n\t\t");
 
 
             
-            #line 57 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 43 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
 Write(tableMetadata.EntityName);
 
             
@@ -200,7 +170,7 @@ WriteLiteral(" Lookup");
 
 
             
-            #line 57 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 43 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                 Write(tableMetadata.EntityName);
 
             
@@ -210,7 +180,7 @@ WriteLiteral("By");
 
 
             
-            #line 57 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 43 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                              Write(tableMetadata.PrimaryKeys[0].PropertyName);
 
             
@@ -220,7 +190,7 @@ WriteLiteral("(");
 
 
             
-            #line 57 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 43 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                                                                           Write(tableMetadata.PrimaryKeys[0].CSharpTypeAsString);
 
             
@@ -230,7 +200,7 @@ WriteLiteral(" ");
 
 
             
-            #line 57 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 43 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                                                                                                                              Write(tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst());
 
             
@@ -240,7 +210,7 @@ WriteLiteral(");\r\n\t\t\r\n\t\t/// <summary>\r\n\t\t/// Delete ");
 
 
             
-            #line 60 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 46 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
          Write(tableMetadata.EntityName);
 
             
@@ -250,7 +220,7 @@ WriteLiteral(" by primary key.\r\n\t\t/// </summary>\r\n\t\t");
 
 
             
-            #line 62 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 48 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
 Write(tableMetadata.EntityName);
 
             
@@ -260,7 +230,7 @@ WriteLiteral(" Delete");
 
 
             
-            #line 62 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 48 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                 Write(tableMetadata.EntityName);
 
             
@@ -270,7 +240,7 @@ WriteLiteral("By");
 
 
             
-            #line 62 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 48 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                              Write(tableMetadata.PrimaryKeys[0].PropertyName);
 
             
@@ -280,7 +250,7 @@ WriteLiteral("(");
 
 
             
-            #line 62 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 48 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                                                                           Write(tableMetadata.PrimaryKeys[0].CSharpTypeAsString);
 
             
@@ -290,7 +260,7 @@ WriteLiteral(" ");
 
 
             
-            #line 62 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 48 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                                                                                                                              Write(tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst());
 
             
@@ -300,7 +270,7 @@ WriteLiteral(");\r\n\t\t\r\n\t\t/// <summary>\r\n\t\t/// Save a new ");
 
 
             
-            #line 65 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 51 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
              Write(tableMetadata.EntityName);
 
             
@@ -310,7 +280,7 @@ WriteLiteral(" instance.\r\n\t\t/// </summary>\r\n\t\t");
 
 
             
-            #line 67 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 53 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
 Write(tableMetadata.EntityName);
 
             
@@ -320,7 +290,7 @@ WriteLiteral(" Save");
 
 
             
-            #line 67 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 53 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                               Write(tableMetadata.EntityName);
 
             
@@ -330,7 +300,7 @@ WriteLiteral("(");
 
 
             
-            #line 67 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 53 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                           Write(tableMetadata.EntityName);
 
             
@@ -340,7 +310,7 @@ WriteLiteral(" ");
 
 
             
-            #line 67 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 53 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                                                       Write(tableMetadata.EntityName.LowerFirst());
 
             
@@ -350,7 +320,7 @@ WriteLiteral(");\r\n\t\t\r\n\t\t/// <summary>\r\n\t\t/// Update an existing ");
 
 
             
-            #line 70 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 56 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                      Write(tableMetadata.EntityName);
 
             
@@ -360,7 +330,7 @@ WriteLiteral(" instance.\r\n\t\t/// </summary>\r\n\t\t");
 
 
             
-            #line 72 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 58 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
 Write(tableMetadata.EntityName);
 
             
@@ -370,7 +340,7 @@ WriteLiteral(" Update");
 
 
             
-            #line 72 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 58 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                 Write(tableMetadata.EntityName);
 
             
@@ -380,7 +350,7 @@ WriteLiteral("(");
 
 
             
-            #line 72 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 58 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                             Write(tableMetadata.EntityName);
 
             
@@ -390,7 +360,7 @@ WriteLiteral(" ");
 
 
             
-            #line 72 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 58 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                                                         Write(tableMetadata.EntityName.LowerFirst());
 
             
@@ -400,7 +370,7 @@ WriteLiteral(");\r\n\t\t\r\n\t\t/// <summary>\r\n\t\t/// Save or update an exist
 
 
             
-            #line 75 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 61 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                              Write(tableMetadata.EntityName);
 
             
@@ -410,7 +380,7 @@ WriteLiteral(" instance.\r\n\t\t/// </summary>\r\n\t\t");
 
 
             
-            #line 77 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 63 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
 Write(tableMetadata.EntityName);
 
             
@@ -420,7 +390,7 @@ WriteLiteral(" SaveOrUpdate");
 
 
             
-            #line 77 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 63 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                       Write(tableMetadata.EntityName);
 
             
@@ -430,7 +400,7 @@ WriteLiteral("(");
 
 
             
-            #line 77 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 63 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                                   Write(tableMetadata.EntityName);
 
             
@@ -440,7 +410,7 @@ WriteLiteral(" ");
 
 
             
-            #line 77 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 63 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
                                                                                               Write(tableMetadata.EntityName.LowerFirst());
 
             
@@ -450,7 +420,7 @@ WriteLiteral(");\r\n\r\n\t\t");
 
 
             
-            #line 79 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
+            #line 65 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
          }
 
             

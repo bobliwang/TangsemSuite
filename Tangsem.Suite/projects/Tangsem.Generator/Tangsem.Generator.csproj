@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gen.cs" />
     <Compile Include="Settings\GeneratorConfiguration.cs" />
     <Compile Include="Templates\Entities\Poco.DTO.Designer.generated.cs">
       <AutoGen>True</AutoGen>
@@ -63,6 +64,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Poco.NHibernate.Fluent.Designer.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\MultipleTableMetadataTemplate.cs" />
+    <Compile Include="Templates\SingleTableMetadataTemplate.cs" />
     <Compile Include="Templates\Repositories\IRepository.NHibernate.Designer.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

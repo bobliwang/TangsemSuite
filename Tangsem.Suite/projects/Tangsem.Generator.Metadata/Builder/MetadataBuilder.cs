@@ -59,20 +59,25 @@ namespace Tangsem.Generator.Metadata.Builder
 
     public virtual void Build()
     {
-      using (var conn = this.GetDbConnection())
-      {
-        conn.Open();
-        var db = new Database(conn);
-        var tableNameParam = new Parameter("TableName", DBNull.Value, DbType.String);
+		using (var conn = this.GetDbConnection())
+		{
+			conn.Open();
+			var db = new Database(conn);
+			var tableNameParam = new Parameter("TableName", DBNull.Value, DbType.String);
 
-        this.Cache.Clear();
+			this.Cache.Clear();
 
-        // get column metadata
-        this.Cache.RawColumns.AddRange(db.ExecuteList<RawColumn>(this.ColumnsSql, tableNameParam.AsList()));
-        this.Cache.RawReferences.AddRange(db.ExecuteList<RawReference>(this.ReferencesSql, tableNameParam.AsList()));
-        this.Cache.RawKeys.AddRange(db.ExecuteList<RawKey>(this.KeysSql, tableNameParam.AsList()));
-        this.Cache.RawTables.AddRange(db.ExecuteList<RawTable>(this.TablesSql));
-      }
+			// get column metadata
+			this.Cache.RawColumns.AddRange(db.ExecuteList<RawColumn>(this.ColumnsSql, tableNameParam.AsList()));
+			this.Cache.RawReferences.AddRange(db.ExecuteList<RawReference>(this.ReferencesSql, tableNameParam.AsList()));
+			this.Cache.RawKeys.AddRange(db.ExecuteList<RawKey>(this.KeysSql, tableNameParam.AsList()));
+			this.Cache.RawTables.AddRange(db.ExecuteList<RawTable>(this.TablesSql));
+		}
+
+		foreach(var tn in this.AllTableNames)
+		{
+			this.GetTableMetadata(tn);
+		}
     }
 
     public TableMetadata this[string tableName]

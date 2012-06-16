@@ -1,21 +1,9 @@
 ﻿@* Generator: Template *@
-
+@inherits SingleTableMetadataTemplate
+			  
 @using Tangsem.Generator.Metadata
 @using Tangsem.Generator.Settings
-
-@functions {
-
-	/// <summary>
-	/// The table metadata.
-	/// </summary>
-	public TableMetadata TableMetadata { get; set; }
-
-	/// <summary>
-	/// The generator configuration instance.
-	/// </summary>
-	public GeneratorConfiguration Configuration { get; set; }
-
-}
+@using Tangsem.Generator.Templates;
 
 using System;
 using System.Collections;
