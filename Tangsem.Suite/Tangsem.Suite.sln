@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C992E35A-AADA-4A93-9C98-0AC03638436A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.Generator.NHibernateTest", "Tangsem.Generator.NHibernateTest\Tangsem.Generator.NHibernateTest.csproj", "{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.Generator.NHibernateTest", "tests\Tangsem.Generator.NHibernateTest\Tangsem.Generator.NHibernateTest.csproj", "{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
