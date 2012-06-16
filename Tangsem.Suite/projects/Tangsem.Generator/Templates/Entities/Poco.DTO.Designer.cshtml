@@ -1,0 +1,47 @@
+﻿@* Generator: Template *@
+
+@using Tangsem.Generator.Metadata
+@using Tangsem.Generator.Settings
+
+@functions {
+
+	/// <summary>
+	/// The table metadata.
+	/// </summary>
+	public TableMetadata TableMetadata { get; set; }
+
+	/// <summary>
+	/// The generator configuration instance.
+	/// </summary>
+	public GeneratorConfiguration Configuration { get; set; }
+
+}
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
+
+namespace @(Configuration.DTONamespace)
+{
+	public partial class @(TableMetadata.EntityName)DTO
+	{	
+		/// <summary>
+		/// The default constructor for @(TableMetadata.EntityName)DTO class.
+		/// </summary>
+		public @(TableMetadata.EntityName)DTO()
+		{
+		}
+
+		@foreach (var col in @TableMetadata.Columns)
+		{<text>
+		/// <summary>
+		/// Property @col.PropertyName mapping to @(TableMetadata.Name).@(col.ColumnName)
+		/// </summary>
+		public virtual @col.CSharpTypeAsString @col.PropertyName { get; set; }
+		</text>}
+
+	}
+}

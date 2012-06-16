@@ -59,18 +59,30 @@
     <Compile Include="Domain\Entities\Country.Designer.cs">
       <DependentUpon>Country.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Entities\DTOs\CountryDTO.Designer.cs" />
+    <Compile Include="Domain\Entities\DTOs\StateDTO.Designer.cs" />
     <Compile Include="Domain\Entities\Mappings\CountryMap.cs" />
+    <Compile Include="Domain\Entities\Mappings\CountryMap.Designer.cs">
+      <DependentUpon>CountryMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Entities\Mappings\StateMap.Designer.cs">
+      <DependentUpon>StateMap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Domain\Entities\State.cs" />
     <Compile Include="Domain\Entities\State.Designer.cs">
       <DependentUpon>State.cs</DependentUpon>
     </Compile>
     <Compile Include="Domain\Entities\Mappings\StateMap.cs" />
+    <Compile Include="Domain\Repositories\INHibernateTestRepository.cs" />
+    <Compile Include="Domain\Repositories\INHibernateTestRepository.Designer.cs">
+      <DependentUpon>INHibernateTestRepository.cs</DependentUpon>
+    </Compile>
     <Compile Include="Domain\Repositories\NHibernateTestRepository.cs" />
     <Compile Include="Domain\Repositories\NHibernateTestRepository.Designer.cs">
       <DependentUpon>NHibernateTestRepository.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="PocoOperationsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -9,6 +9,8 @@ using System.Xml.Serialization;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using RazorGenerator.Templating;
+
 using Tangsem.Generator.Metadata.Builder;
 using Tangsem.Generator.Settings;
 using Tangsem.Generator.Templates.Entities;
@@ -19,8 +21,6 @@ namespace Tangsem.Generator.Test
 	[TestClass]
 	public class PocosTest
 	{
-		public static string GeneratedCodesDir = Path.Combine(Path.GetTempPath(), "Tangsem.Generator.NHibernateTest");
-
 		public GeneratorConfiguration GeneratorConfiguration { get; set; }
 
 		public MetadataBuilder MetadataBuilder { get; private set; }
@@ -28,17 +28,7 @@ namespace Tangsem.Generator.Test
 		[TestInitialize]
 		public void SetUp()
 		{
-			var xmlSer = new XmlSerializer(typeof(GeneratorConfiguration));
-
-			using (var stream = File.OpenRead("GeneratorConfiguration.xml"))
-			{
-				this.GeneratorConfiguration = xmlSer.Deserialize(stream) as GeneratorConfiguration;
-
-				this.GeneratorConfiguration.Init();
-			}
-
-			Assert.IsNotNull(this.GeneratorConfiguration, "this.GeneratorConfiguration is null");
-
+			this.GeneratorConfiguration = GeneratorConfiguration.FromFile("GeneratorConfiguration.xml");
 			this.MetadataBuilder = this.GeneratorConfiguration.CreateMetadataBuilder();
 			this.MetadataBuilder.Build();
 
@@ -56,16 +46,31 @@ namespace Tangsem.Generator.Test
 				}
 			}
 
-			var repoTemplate = new Repository_NHibernate_Designer { Configuration = this.GeneratorConfiguration, MetadataBuilder = this.MetadataBuilder };
-			var repoCode = repoTemplate.TransformText().Trim();
+			var code = string.Empty;
+			var path = string.Empty;
+			RazorTemplateBase template = null;
 
-			var repoDir = GeneratedCodesDir + "/Domain/Repositories";
-			this.CreateDirIfNotExists(repoDir);
-			var repoDesignerFilePath = repoDir + "/" + this.GeneratorConfiguration.RepositoryName + ".Designer.cs";
+			var tableMetadatas = this.MetadataBuilder
+									.CachedTableMetadata
+									.Values
+									.Where(x => !this.GeneratorConfiguration.IgnoredTables.Any(y => x.Name.Equals(y, StringComparison.CurrentCultureIgnoreCase)))
+									.ToList();
 
-			File.WriteAllText(repoDesignerFilePath, repoCode);
+			template = new Repository_NHibernate_Designer { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas};
+			code = template.TransformText().Trim();
+			path = this.GeneratorConfiguration.RepositoriesDirPath + "/" + this.GeneratorConfiguration.RepositoryName + ".Designer.cs";
+			File.WriteAllText(path, code);
 
-			Process.Start(GeneratedCodesDir);
+			template = new IRepository_NHibernate_Designer { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas};
+			code = template.TransformText().Trim();
+			path = this.GeneratorConfiguration.RepositoriesDirPath + "/I" + this.GeneratorConfiguration.RepositoryName + ".Designer.cs";
+			File.WriteAllText(path, code);
+
+			if (this.GeneratorConfiguration.OpenOutputDirAfterGeneration)
+			{
+				Log("Openning Directory:" + this.GeneratorConfiguration.ProjectDirPath, "Openning Directory");
+				Process.Start(this.GeneratorConfiguration.ProjectDirPath);	
+			}
 		}
 
 		private void GenerateCodeForEntity(string entityName)
@@ -74,35 +79,24 @@ namespace Tangsem.Generator.Test
 
 			var pocoTemplate = new Poco_NHibernate_Designer { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
 
-			var code = pocoTemplate.TransformText().Trim();
-
-			var entityDir = GeneratedCodesDir + "/Domain/Entities";
-			this.CreateDirIfNotExists(entityDir);
-			var entityDesignerFilePath = entityDir + "/" + tableMetadata.EntityName + ".Designer.cs";
-
-			File.WriteAllText(entityDesignerFilePath, code);
-
+			var entityCode = pocoTemplate.TransformText().Trim();
+			var entityDesignerFilePath = this.GeneratorConfiguration.EntitiesDirPath + "/" + tableMetadata.EntityName + ".Designer.cs";
+			File.WriteAllText(entityDesignerFilePath, entityCode);
 			this.Log("Saved", "Generated Poco for " + entityName + ":");
 
 			var mappingTemplate = new Poco_NHibernate_Fluent_Designer { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
 			var mappingCode = mappingTemplate.TransformText().Trim();
-
-			var mappingDir = entityDir + "/Mappings";
-			this.CreateDirIfNotExists(mappingDir);
-			var entityMappingDesignerFilePath = mappingDir + "/" + tableMetadata.EntityName + "Map.cs";
-
+			var entityMappingDesignerFilePath = this.GeneratorConfiguration.MappingDirPath + "/" + tableMetadata.EntityName + "Map.Designer.cs";
 			File.WriteAllText(entityMappingDesignerFilePath, mappingCode);
 			this.Log("Saved", "Generated Mapping for " + entityName + ":");
-		}
 
-		private void CreateDirIfNotExists(string entityDir)
-		{
-			if (!Directory.Exists(entityDir))
-			{
-				Directory.CreateDirectory(entityDir);
-			}
+			var dtoTemplate = new Poco_DTO_Designer { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
+			var dtoCode = dtoTemplate.TransformText().Trim();
+			var dtoDesignerFilePath = this.GeneratorConfiguration.DTODirPath + "/" + tableMetadata.EntityName + "DTO.Designer.cs";
+			File.WriteAllText(dtoDesignerFilePath, dtoCode);
+			this.Log("Saved", "Generated dto for " + entityName + ":");
 		}
-
+		
 		private void Log(string message, string title)
 		{
 			if (!string.IsNullOrEmpty(title))

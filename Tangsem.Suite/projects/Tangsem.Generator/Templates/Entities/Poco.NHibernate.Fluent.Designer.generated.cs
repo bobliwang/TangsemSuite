@@ -68,12 +68,12 @@ WriteLiteral("\r\n\r\nusing System;\r\nusing System.Collections;\r\nusing System
 
             
             #line 28 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
-      Write(Configuration.EntityNamespace);
+      Write(Configuration.MappingNamespace);
 
             
             #line default
             #line hidden
-WriteLiteral(".Mappings\r\n{\r\n\t/// <summary>\r\n\t/// The mapping configuration for ");
+WriteLiteral("\r\n{\r\n\t/// <summary>\r\n\t/// The mapping configuration for ");
 
 
             

@@ -1,0 +1,82 @@
+﻿@* Generator: Template *@
+
+@using Tangsem.Common.Extensions
+@using Tangsem.Generator.Metadata
+@using Tangsem.Generator.Metadata.Builder
+@using Tangsem.Generator.Settings
+
+@functions {
+
+	/// <summary>
+	/// The generator configuration instance.
+	/// </summary>
+	public GeneratorConfiguration Configuration { get; set; }
+
+	/// <summary>
+	/// The list of TableMetadatas.
+	/// </summary>
+	public List<TableMetadata> TableMetadatas { get; set; }
+}
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
+
+using Tangsem.Data.Domain;
+using Tangsem.NHibernate.Domain;
+
+using @(Configuration.EntityNamespace);
+
+namespace @(Configuration.RepositoryNamespace)
+{
+	/// <summary>
+	/// The I@(Configuration.RepositoryName) interface.
+	/// </summary>
+	public partial interface I@(Configuration.RepositoryName) : IRepository
+	{
+		@foreach (var tableMetadata in this.TableMetadatas)
+		{<text>
+		
+		/// <summary>
+		/// The IQueryable for @(tableMetadata.EntityName.Pluralize()).
+		/// </summary>
+		IQueryable<@(tableMetadata.EntityName)> @(tableMetadata.EntityName.Pluralize()) { get; }
+
+		</text>}
+		
+		
+		@foreach (var tableMetadata in this.TableMetadatas)
+		{<text>
+		
+		/// <summary>
+		/// Get @(tableMetadata.EntityName) by primary key.
+		/// </summary>
+		@(tableMetadata.EntityName) Lookup@(tableMetadata.EntityName)By@(tableMetadata.PrimaryKeys[0].PropertyName)(@(tableMetadata.PrimaryKeys[0].CSharpTypeAsString) @(tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()));
+		
+		/// <summary>
+		/// Delete @(tableMetadata.EntityName) by primary key.
+		/// </summary>
+		@(tableMetadata.EntityName) Delete@(tableMetadata.EntityName)By@(tableMetadata.PrimaryKeys[0].PropertyName)(@(tableMetadata.PrimaryKeys[0].CSharpTypeAsString) @(tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()));
+		
+		/// <summary>
+		/// Save a new @(tableMetadata.EntityName) instance.
+		/// </summary>
+		@(tableMetadata.EntityName) Save@(tableMetadata.EntityName)(@(tableMetadata.EntityName) @(tableMetadata.EntityName.LowerFirst()));
+		
+		/// <summary>
+		/// Update an existing @(tableMetadata.EntityName) instance.
+		/// </summary>
+		@(tableMetadata.EntityName) Update@(tableMetadata.EntityName)(@(tableMetadata.EntityName) @(tableMetadata.EntityName.LowerFirst()));
+		
+		/// <summary>
+		/// Save or update an existing @(tableMetadata.EntityName) instance.
+		/// </summary>
+		@(tableMetadata.EntityName) SaveOrUpdate@(tableMetadata.EntityName)(@(tableMetadata.EntityName) @(tableMetadata.EntityName.LowerFirst()));
+
+		</text>}
+
+	}
+}

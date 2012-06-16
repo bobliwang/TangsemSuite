@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,11 +13,30 @@ namespace Tangsem.Generator.Settings
 	[XmlRoot("GeneratorConfiguration")]
 	public class GeneratorConfiguration
 	{
+		public static GeneratorConfiguration FromFile(string filePath)
+		{
+			var xmlSer = new XmlSerializer(typeof(GeneratorConfiguration));
+
+			using (var stream = File.OpenRead("GeneratorConfiguration.xml"))
+			{	
+				var instance = (GeneratorConfiguration)xmlSer.Deserialize(stream);
+				instance.Init();
+
+				return instance;
+			}
+		}
+
 		/// <summary>
-		/// The namespace for entities.
+		/// Gets or sets ProjectName.
 		/// </summary>
 		[XmlAttribute]
-		public string EntityNamespace { get; set; }
+		public string ProjectName { get; set; }
+
+		/// <summary>
+		/// Gets or sets OutputDir.
+		/// </summary>
+		[XmlAttribute]
+		public string OutputDir { get; set; }
 
 		/// <summary>
 		/// Database connection string.
@@ -25,69 +45,213 @@ namespace Tangsem.Generator.Settings
 		public string ConnectionString { get; set; }
 
 		/// <summary>
-		/// Gets or sets RepositoryNamespace.
-		/// </summary>
-		[XmlAttribute]
-		public string RepositoryNamespace { get; set; }
-
-		/// <summary>
 		/// Gets or sets RepositoryName.
 		/// </summary>
 		[XmlAttribute]
 		public string RepositoryName { get; set; }
 
 		/// <summary>
-		/// Gets or sets ServiceNamespace.
-		/// </summary>
-		[XmlAttribute]
-		public string ServiceNamespace { get; set; }
-		
-		/// <summary>
 		/// The MeatadataBuilder type name. Format: className[;assemblyName]
 		/// </summary>
 		[XmlAttribute]
 		public string MetadataBuilder { get; set; }
 
+		/// <summary>
+		/// Whether to Open OutputDir After Generation or not.
+		/// </summary>
+		[XmlAttribute]
+		public bool OpenOutputDirAfterGeneration { get; set; }
+
+		/// <summary>
+		/// Tables to ignore.
+		/// </summary>
 		[XmlElement("IgnoredTable")]
 		public List<string> IgnoredTables { get; set; }
 
+		/// <summary>
+		/// Project dir path. This property is depending on OutputDir and ProjectName.
+		/// </summary>
+		public string ProjectDirPath
+		{
+			get
+			{
+				return Path.Combine(this.OutputDir, this.ProjectName);
+			}
+		}
+
+		/// <summary>
+		/// Gets EntitiesDirPath.
+		/// </summary>
+		public string DomainDirPath
+		{
+			get
+			{
+				return Path.Combine(this.ProjectDirPath, this.DomainNamespace.Substring(this.ProjectName.Length + 1).Replace(".", @"\"));
+			}
+		}
+
+		/// <summary>
+		/// Gets EntitiesDirPath.
+		/// </summary>
+		public string EntitiesDirPath
+		{
+			get
+			{
+				return Path.Combine(this.DomainDirPath, "Entities");
+			}
+		}
+
+		/// <summary>
+		/// Gets Entity Mappings Dir Path.
+		/// </summary>
+		public string MappingDirPath
+		{
+			get
+			{
+				return Path.Combine(this.EntitiesDirPath, "Mappings");
+			}
+		}
+
+		/// <summary>
+		/// Gets DTODirPath.
+		/// </summary>
+		public string DTODirPath
+		{
+			get
+			{
+				return Path.Combine(this.EntitiesDirPath, "DTOs");
+			}
+		}
+
+		/// <summary>
+		/// Gets RepositoriesDirPath.
+		/// </summary>
+		public string RepositoriesDirPath
+		{
+			get
+			{
+				return Path.Combine(this.DomainDirPath, "Repositories");
+			}
+		}
+
+		/// <summary>
+		/// Gets ServicesDirPath.
+		/// </summary>
+		public string ServicesDirPath
+		{
+			get
+			{
+				return Path.Combine(this.DomainDirPath, "Services");
+			}
+		}
+
+		/// <summary>
+		/// Caculate the domain namespace.
+		/// </summary>
+		public string DomainNamespace
+		{
+			get
+			{
+				return this.ProjectName + ".Domain";
+			}
+		}
+
+		/// <summary>
+		/// Gets the entity namespace.
+		/// </summary>
+		public string EntityNamespace
+		{
+			get
+			{
+				return this.DomainNamespace + ".Entities";
+			}
+		}
+
+		/// <summary>
+		/// Gets the mapping namespace.
+		/// </summary>
+		public string MappingNamespace
+		{
+			get
+			{
+				return this.EntityNamespace + ".Mappings";
+			}
+		}
+
+		/// <summary>
+		/// Gets the DTOs namespace.
+		/// </summary>
+		public string DTONamespace
+		{
+			get
+			{
+				return this.EntityNamespace + ".DTOs";
+			}
+		}
+		
+		/// <summary>
+		/// Gets the Repository Namespace.
+		/// </summary>
+		public string RepositoryNamespace
+		{
+			get
+			{
+				return this.DomainNamespace + ".Repositories";
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets ServiceNamespace.
+		/// </summary>
+		public string ServiceNamespace
+		{
+			get
+			{
+				return this.DomainNamespace + ".Services";
+			}
+		}
+
 		public void Init()
 		{
-			if (string.IsNullOrWhiteSpace(this.EntityNamespace))
-			{
-				throw new Exception("EntityNamespace is required in configuration.");
-			}
-
 			if (string.IsNullOrWhiteSpace(this.ConnectionString))
 			{
 				throw new Exception("ConnectionString is required in configuration.");
 			}
 
-			var lastDotPosInEntityNamespace = this.EntityNamespace.LastIndexOf('.');
-
-			if (lastDotPosInEntityNamespace < 1)
+			if (string.IsNullOrEmpty(this.ProjectName))
 			{
-				throw new Exception("EntityNamespace is not valid in configuration.");
-			}
-
-			if (string.IsNullOrEmpty(this.RepositoryNamespace))
-			{
-
-				this.RepositoryNamespace = this.EntityNamespace.Substring(0, lastDotPosInEntityNamespace) + "." + "Repositories";
-			}
-
-			if (string.IsNullOrEmpty(this.ServiceNamespace))
-			{
-				this.ServiceNamespace = this.EntityNamespace.Substring(0, lastDotPosInEntityNamespace) + "." + "Services";
+				this.ProjectName = "MyProject";
 			}
 
 			if (string.IsNullOrEmpty(this.RepositoryName))
 			{
 				this.RepositoryName = "MyRepository";
 			}
+
+			if (string.IsNullOrEmpty(this.OutputDir))
+			{
+				this.OutputDir = Path.GetTempPath();
+			}
+
+			// convert to absolute path.
+			this.OutputDir = new DirectoryInfo(this.OutputDir).FullName;
+
+			// create project dir if it doesn't exist.
+			this.CreateDirIfNotExists(this.ProjectDirPath);
+			
+			// create entities dir if it doesn't exist.
+			this.CreateDirIfNotExists(this.EntitiesDirPath);
+
+			// create mapping dir if it doesn't exist.
+			this.CreateDirIfNotExists(this.MappingDirPath);
+
+			// create dto dir if it doesn't exist.
+			this.CreateDirIfNotExists(this.DTODirPath);
+
+			// create repositories dir if it doesn't exist.
+			this.CreateDirIfNotExists(this.RepositoriesDirPath);
 		}
-
-
+		
 		/// <summary>
 		/// Get the type of 
 		/// </summary>
@@ -111,6 +275,10 @@ namespace Tangsem.Generator.Settings
 			return type;
 		}
 
+		/// <summary>
+		/// Create a new meta builder.
+		/// </summary>
+		/// <returns></returns>
 		public MetadataBuilder CreateMetadataBuilder()
 		{
 			var type = this.GetMetadataBuilderType();
@@ -125,6 +293,18 @@ namespace Tangsem.Generator.Settings
 			var builder = constructorInfo.Invoke(new[] { this.ConnectionString }) as MetadataBuilder;
 
 			return builder;
+		}
+
+		/// <summary>
+		/// Create the dir if it doesn't exist.
+		/// </summary>
+		/// <param name="entityDir"></param>
+		private void CreateDirIfNotExists(string entityDir)
+		{
+			if (!Directory.Exists(entityDir))
+			{
+				Directory.CreateDirectory(entityDir);
+			}
 		}
 	}
 }

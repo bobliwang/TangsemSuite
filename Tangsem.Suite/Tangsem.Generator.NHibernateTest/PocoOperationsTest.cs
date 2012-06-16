@@ -18,18 +18,18 @@ using Tangsem.Generator.NHibernateTest.Domain.Repositories;
 namespace Tangsem.Generator.NHibernateTest
 {
 	[TestClass]
-	public class UnitTest1
+	public class PocoOperationsTest
 	{
+		/// <summary>
+		/// The SessionFactory.
+		/// </summary>
 		public ISessionFactory SessionFactory { get; private set; }
-
-		public NHibernateTestRepository Repository { get; private set; }
 
 		[TestInitialize]
 		public void Init()
 		{
 			this.SessionFactory = this.CreateSessionFactory();
 		}
-
 
 		[TestMethod]
 		public void Test_ShowStatesUnderCountries()
