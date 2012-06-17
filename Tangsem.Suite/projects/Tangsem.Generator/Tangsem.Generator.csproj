@@ -76,6 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Repository.NHibernate.Designer.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\TemplateBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Templates\Entities\Poco.NHibernate.Designer.cshtml">
@@ -110,8 +111,11 @@
       <Name>Tangsem.Generator.Metadata</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Templates\MVC\" />
+    <Content Include="Templates\MVC\Controllers\PlaceHolder.txt" />
+    <Content Include="Templates\MVC\Models\PlaceHolder.txt" />
+    <Content Include="Templates\MVC\Views\PlaceHolder.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,19 +5,18 @@ using System.Text;
 
 using RazorGenerator.Templating;
 
-using Tangsem.Generator.Metadata;
 using Tangsem.Generator.Settings;
 
 namespace Tangsem.Generator.Templates
 {
 	/// <summary>
-	/// The MultipleTableMetadataTemplate class.
+	/// The TemplateBase class.
 	/// </summary>
-	public class MultipleTableMetadataTemplate : TemplateBase
+	public abstract class TemplateBase : RazorTemplateBase
 	{
 		/// <summary>
-		/// The list of TableMetadatas.
+		/// The generator configuration instance.
 		/// </summary>
-		public virtual List<TableMetadata> TableMetadatas { get; set; }
+		public virtual GeneratorConfiguration Configuration { get; set; }
 	}
 }

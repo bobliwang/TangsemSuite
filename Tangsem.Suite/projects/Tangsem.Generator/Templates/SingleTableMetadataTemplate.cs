@@ -13,16 +13,11 @@ namespace Tangsem.Generator.Templates
 	/// <summary>
 	/// The OneFilePerTableMetadataTemplate class.
 	/// </summary>
-	public class SingleTableMetadataTemplate : RazorTemplateBase
+	public class SingleTableMetadataTemplate : TemplateBase
 	{
 		/// <summary>
 		/// The table metadata.
 		/// </summary>
-		public TableMetadata TableMetadata { get; set; }
-
-		/// <summary>
-		/// The generator configuration instance.
-		/// </summary>
-		public GeneratorConfiguration Configuration { get; set; }
+		public virtual TableMetadata TableMetadata { get; set; }
 	}
 }
