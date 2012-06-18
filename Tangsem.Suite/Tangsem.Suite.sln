@@ -26,6 +26,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C992E35A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.Generator.NHibernateTest", "tests\Tangsem.Generator.NHibernateTest\Tangsem.Generator.NHibernateTest.csproj", "{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "web", "web", "{DDD685F9-4337-4C75-BFB9-CC4668AF4792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.Generator.WebMvc3Demo", "tests\web\Tangsem.Generator.WebMvc3Demo\Tangsem.Generator.WebMvc3Demo.csproj", "{7E4AE88B-208D-4718-B9D2-5E09F785EE87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.Generator.WebMvc3Demo.Tests", "tests\web\Tangsem.Generator.WebMvc3Demo.Tests\Tangsem.Generator.WebMvc3Demo.Tests.csproj", "{D3EFFE84-DAF5-4435-9BFF-F69A5969C17B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.Generator.WebMvc3Demo.Common", "tests\web\Tangsem.Generator.WebMvc3Demo.Common\Tangsem.Generator.WebMvc3Demo.Common.csproj", "{E638683E-9173-485D-8AB9-EECD66E2328E}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Tangsem.Suite.vsmdi
@@ -63,6 +71,18 @@ Global
 		{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E4AE88B-208D-4718-B9D2-5E09F785EE87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E4AE88B-208D-4718-B9D2-5E09F785EE87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E4AE88B-208D-4718-B9D2-5E09F785EE87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E4AE88B-208D-4718-B9D2-5E09F785EE87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3EFFE84-DAF5-4435-9BFF-F69A5969C17B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3EFFE84-DAF5-4435-9BFF-F69A5969C17B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3EFFE84-DAF5-4435-9BFF-F69A5969C17B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3EFFE84-DAF5-4435-9BFF-F69A5969C17B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E638683E-9173-485D-8AB9-EECD66E2328E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E638683E-9173-485D-8AB9-EECD66E2328E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E638683E-9173-485D-8AB9-EECD66E2328E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E638683E-9173-485D-8AB9-EECD66E2328E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,5 +95,9 @@ Global
 		{6CE102E0-7F36-434A-AEC0-541A20FD2548} = {E389CD07-467E-4882-A43A-CC82DEF974C0}
 		{E4635055-63B6-4DFB-93B1-DA6F9482BC3A} = {C992E35A-AADA-4A93-9C98-0AC03638436A}
 		{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0} = {C992E35A-AADA-4A93-9C98-0AC03638436A}
+		{DDD685F9-4337-4C75-BFB9-CC4668AF4792} = {C992E35A-AADA-4A93-9C98-0AC03638436A}
+		{7E4AE88B-208D-4718-B9D2-5E09F785EE87} = {DDD685F9-4337-4C75-BFB9-CC4668AF4792}
+		{D3EFFE84-DAF5-4435-9BFF-F69A5969C17B} = {DDD685F9-4337-4C75-BFB9-CC4668AF4792}
+		{E638683E-9173-485D-8AB9-EECD66E2328E} = {DDD685F9-4337-4C75-BFB9-CC4668AF4792}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,14 @@
+﻿@model System.Collections.Generic.List<Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Country>
+
+@{
+    ViewBag.Title = "Countries";
+}
+
+<h2>Countries</h2>
+
+<ul>
+@foreach(var c in this.Model)
+{
+  <li>@c.Name</li>
+}
+</ul>

@@ -1,0 +1,33 @@
+﻿@model Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.DTOs.StateDTO
+
+@{
+  ViewBag.Title = "Add New State";
+}
+
+<h2>Add New State</h2>
+
+@using(Html.BeginForm())
+{
+  <ul class="inputs">
+    <li class="lbl">
+      @Html.LabelFor(m => m.Name)
+    </li>
+    <li class="fld">
+      @Html.TextBoxFor(m => m.Name)
+    </li>
+  
+    <li class="lineSeparator"></li>
+
+    <li class="lbl">
+      @Html.LabelFor(m => m.CountryId)                             
+    </li>
+    <li class="fld">
+      @Html.TextBoxFor(m => m.CountryId)
+    </li>
+    <li class="lineSeparator"></li>
+    <li class="fld"><input type="submit" value="Save" /></li>
+  </ul>
+  
+  
+}
+
