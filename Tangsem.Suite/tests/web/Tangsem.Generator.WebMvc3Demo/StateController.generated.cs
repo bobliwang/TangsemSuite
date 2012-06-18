@@ -37,6 +37,16 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ListStates() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ListStates);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult QryStates() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.QryStates);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public StateController Actions { get { return MVC.State; } }
@@ -54,20 +64,38 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         public class ActionNamesClass {
             public readonly string ListStates = "ListStates";
             public readonly string Add = "Add";
+            public readonly string QryStates = "QryStates";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
             public const string ListStates = "ListStates";
             public const string Add = "Add";
+            public const string QryStates = "QryStates";
         }
 
 
+        static readonly ActionParamsClass_ListStates s_params_ListStates = new ActionParamsClass_ListStates();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ListStates ListStatesParams { get { return s_params_ListStates; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ListStates {
+            public readonly string vm = "vm";
+        }
+        static readonly ActionParamsClass_QryStates s_params_QryStates = new ActionParamsClass_QryStates();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_QryStates QryStatesParams { get { return s_params_QryStates; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_QryStates {
+            public readonly string stateQryStr = "stateQryStr";
+        }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Add = "~/Views/State/Add.cshtml";
+            public readonly string ListStates = "~/Views/State/ListStates.cshtml";
         }
     }
 
@@ -75,8 +103,9 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
     public class T4MVC_StateController: Tangsem.Generator.WebMvc3Demo.Controllers.StateController {
         public T4MVC_StateController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult ListStates() {
+        public override System.Web.Mvc.ActionResult ListStates(Tangsem.Generator.WebMvc3Demo.ViewModels.StateViewModel vm) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ListStates);
+            callInfo.RouteValueDictionary.Add("vm", vm);
             return callInfo;
         }
 
@@ -88,6 +117,12 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         public override System.Web.Mvc.ActionResult Add(Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.DTOs.StateDTO stateDTO) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Add);
             callInfo.RouteValueDictionary.Add("stateDTO", stateDTO);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult QryStates(string stateQryStr) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.QryStates);
+            callInfo.RouteValueDictionary.Add("stateQryStr", stateQryStr);
             return callInfo;
         }
 

@@ -9,56 +9,63 @@ using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.DTOs;
 
 namespace Tangsem.Generator.WebMvc3Demo.ViewModels
 {
-  public class StateQry
-  {
-    public virtual int? Id { get; set; }
+	public class StateQry
+	{
+		public virtual int? Id { get; set; }
 
-    public virtual string Name { get; set; }
+		public virtual string Name { get; set; }
 
-    public virtual int? CountryId { get; set; }
+		public virtual int? CountryId { get; set; }
 
-    public StateQry()
-    {
-      this.Comparator_Id = (int)Comparators.Eq;
-      this.Comparator_Name = (int)Comparators.Like;
-      this.Comparator_CountryId = (int)Comparators.Eq;
-    }
+		public virtual IEnumerable<SelectListItem> CountryOptions { get; set; }
 
-    public int Comparator_Id { get; set; }
+		public StateQry()
+		{
+			this.Comparator_Id = (int)Comparators.Eq;
+			this.Comparator_Name = (int)Comparators.Like;
+			this.Comparator_CountryId = (int)Comparators.Eq;
+		}
 
-    public int Comparator_Name { get; set; }
+		public int Comparator_Id { get; set; }
 
-    public int Comparator_CountryId { get; set; }
+		public int Comparator_Name { get; set; }
 
-    public List<SelectListItem> CompareOperators
-    {
-      get
-      {
-        return Enum.GetValues(typeof(Comparators)).Cast<Comparators>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }).ToList();
-      }
-    }
+		public int Comparator_CountryId { get; set; }
 
-    public IQueryable<State> CreateQry(IQueryable<State> states)
-    {
-      var qry = states;
+		public List<SelectListItem> CompareOperators
+		{
+			get
+			{
+				return Enum.GetValues(typeof(Comparators)).Cast<Comparators>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }).ToList();
+			}
+		}
 
-      if (this.Id.HasValue)
-      {
-        if (this.Comparator_Id == (int)Comparators.Eq)
-        {
-          qry = qry.Where(x => x.Id == this.Id);
-        }
-      }
+		public IQueryable<State> CreateQry(IQueryable<State> states)
+		{
+			var qry = states;
 
-      if (this.Name != null)
-      {
-        if (this.Comparator_Name == (int)Comparators.Like)
-        {
-          qry = qry.Where(x => x.Name == this.Name);
-        }
-      }
+			if (this.Id.HasValue)
+			{
+				if (this.Comparator_Id == (int)Comparators.Eq)
+				{
+					qry = qry.Where(x => x.Id == this.Id);
+				}
+			}
 
-      return qry;
-    }
-  }
+			if (this.CountryId.HasValue)
+			{
+				qry = qry.Where(x => x.Country.Id == this.CountryId);
+			}
+
+			if (this.Name != null)
+			{
+				if (this.Comparator_Name == (int)Comparators.Like)
+				{
+					qry = qry.Where(x => x.Name.Contains(this.Name));
+				}
+			}
+
+			return qry;
+		}
+	}
 }
