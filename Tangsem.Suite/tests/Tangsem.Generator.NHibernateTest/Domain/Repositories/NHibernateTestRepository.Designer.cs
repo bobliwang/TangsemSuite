@@ -43,6 +43,19 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Repositories
 			}
 		}
 
+		
+		
+		/// <summary>
+		/// The IQueryable for VStates.
+		/// </summary>
+		public virtual IQueryable<VState> VStates
+		{
+			get
+			{
+				return this.GetEntities<VState>();
+			}
+		}
+
 				
 		
 

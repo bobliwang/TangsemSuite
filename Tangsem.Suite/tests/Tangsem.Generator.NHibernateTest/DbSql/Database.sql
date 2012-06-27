@@ -44,3 +44,17 @@ REFERENCES [Country] ([Id])
 GO
 ALTER TABLE [State] CHECK CONSTRAINT [FK_State_Country]
 GO
+
+
+CREATE VIEW v_State AS 
+SELECT
+[RowNum] = ROW_NUMBER() OVER (ORDER BY [State].[Name])
+, [State].*
+, [CountryName] = [Country].[Name]
+, [Country].[CountryCode]
+, [Country].[Continent]
+FROM
+[State] LEFT JOIN [Country]
+	ON [State].[CountryId] = [Country].[Id]
+
+GO

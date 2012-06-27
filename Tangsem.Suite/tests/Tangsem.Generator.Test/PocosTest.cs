@@ -14,7 +14,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RazorGenerator.Templating;
 
 using Tangsem.Generator.Metadata.Builder;
-using Tangsem.Generator.NHibernateTest.Domain.Entities;
 using Tangsem.Generator.Settings;
 using Tangsem.Generator.Templates.Entities;
 using Tangsem.Generator.Templates.Repositories;
@@ -32,15 +31,15 @@ namespace Tangsem.Generator.Test
 			gen.Run();
 		}
 
-		[TestMethod]
-		public void Test_Expressions()
-		{
-			var auName = "Australia";
-			var auCode = "AU";
-			Expression<Predicate<Country>> expr = c => c.Name == auName && c.CountryCode == auCode;
+		////[TestMethod]
+		////public void Test_Expressions()
+		////{
+		////    var auName = "Australia";
+		////    var auCode = "AU";
+		////    Expression<Predicate<Country>> expr = c => c.Name == auName && c.CountryCode == auCode;
 
-			Console.WriteLine(expr.ToString());
-		}
+		////    Console.WriteLine(expr.ToString());
+		////}
 
 		////public GeneratorConfiguration GeneratorConfiguration { get; set; }
 
