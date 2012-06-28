@@ -89,9 +89,43 @@ namespace Tangsem.Generator.WebMvc3Demo.App_Start
     /// <param name="kernel">The kernel.</param>
     private static void RegisterServices(IKernel kernel)
     {
-      kernel.Bind<IMyRepository>().To<MyRepository>().WithPropertyValue("CurrentSession", ctx => SessionFactory.OpenSession());
+      kernel.Bind<IMyRepository>()
+            .To<MyRepository>()
+            .InRequestScope()
+            .WithPropertyValue("CurrentSession", ctx => SessionFactory.OpenSession())
+            .OnActivation<MyRepository>((ctx, repo) => repo.BeginTransaction())
+            .OnDeactivation<MyRepository>((ctx, repo) => repo.Close());
+
 
       InitAutoMapper(kernel);
+    }
+
+    private static void Close(this IMyRepository repo)
+    {
+      try
+      {
+        repo.Commit();
+      }
+      catch
+      {
+        try
+        {
+          repo.Rollback();
+        }
+        catch
+        {
+        }
+      }
+      finally
+      {
+        try
+        {
+          repo.Dispose();
+        }
+        catch
+        {
+        }
+      }
     }
 
     private static void InitAutoMapper(IKernel kernel)

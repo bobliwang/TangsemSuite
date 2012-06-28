@@ -35,17 +35,49 @@
   </ul>
 }
 
+
+
 @{
 	var js = new JavaScriptSerializer();
 	var statesQry = js.Serialize(this.Model.StateQry);
 }
 
 
+<script language="javascript" type="text/javascript">
+  // --  --
+  function deleteState(id) {
+    $.ajax(
+      {
+        type: 'POST',
+        url: '@Url.Action(MVC.State.DeleteState())',
+        data: { id: id },
+        dataType: 'json',
+        success: function (data) { msg('Deleted:' + data.deleted); },
+        error: function () { msg('Error!'); }
+      }
+    );
+    }
+  
+  function msg(msg) {
+    $('#msg').text(msg);
+  }
+  
+</script>
+
+
 <div>
-<ul style="clear:both">
-@foreach (var s in this.Model.States)
-{
-  <li>@s.Name</li>
-}
-</ul>
+  
+  <div id="msg"></div>
+
+  <ul style="clear:both">
+    @foreach (var s in this.Model.States)
+    {
+      <li>
+        @(s.Id).
+        @(s.Name)
+        <input type="button" value="Delete" name="delete_@(s.Name)" onclick="deleteState(@(s.Id))" />
+      </li>
+  
+    }
+  </ul>
 </div>

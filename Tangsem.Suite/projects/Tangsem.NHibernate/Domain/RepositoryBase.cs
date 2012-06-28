@@ -32,12 +32,12 @@ namespace Tangsem.NHibernate.Domain
     /// <summary>
     /// Gets or sets the hiberante ISession object.
     /// </summary>
-    public virtual ISession CurrentSession { get; set; }
+    public ISession CurrentSession { get; set; }
 
     /// <summary>
     /// Gets the database transaction.
     /// </summary>
-    public virtual ITransaction Transaction { get; protected set; }
+    public ITransaction Transaction { get; protected set; }
 
     /// <summary>
     /// Gets the entity query by entity type. Please use entities properties from subclasses. e.g. XXXRepository.Users instead of this.GetEntities(User).
@@ -137,9 +137,8 @@ namespace Tangsem.NHibernate.Domain
     /// </summary>
     public virtual void Commit()
     {
-      Transaction.Commit();
-	  this.Transaction = null;
-
+      this.Transaction.Commit();
+      this.Transaction = null;
     }
 
     /// <summary>
@@ -147,8 +146,8 @@ namespace Tangsem.NHibernate.Domain
     /// </summary>
     public virtual void Rollback()
     {
-      Transaction.Rollback();
-	  this.Transaction = null;
+      this.Transaction.Rollback();
+      this.Transaction = null;
     }
 
     /// <summary>
@@ -164,48 +163,40 @@ namespace Tangsem.NHibernate.Domain
       this.Transaction = this.CurrentSession.BeginTransaction();
     }
 
-	private bool _isDisposed = false;
+    private bool _isDisposed = false;
 
-  	public virtual void Dispose()
-  	{
-		Exception ex = null;
+    protected virtual void Dispose(bool disposing)
+    {
+      if (!_isDisposed)
+      {
+        if (disposing)
+        {
+          if (this.Transaction != null)
+          {
+            try
+            {
+              this.Transaction.Rollback();
+            }
+            catch { }
+          }
 
-		lock (this)
-		{
-			if (this._isDisposed)
-			{
-				return;
-			}
+          if (this.CurrentSession != null)
+          {
+            this.CurrentSession.Dispose();
+          }
+        }
+
+        // There are no unmanaged resources to release, but
+        // if we add them, they need to be released here.
+      }
+      _isDisposed = true;
+    }
 
 
-			try
-			{
-				if (this.CurrentSession != null)
-				{
-					if (this.Transaction != null)
-					{
-						try
-						{
-							this.Transaction.Rollback();
-						}
-						finally
-						{
-							this.CurrentSession.Dispose();
-						}
-					}
-				}
-			}catch(Exception e)
-			{
-				ex = e;
-			}
-
-			this._isDisposed = true;
-		}
-
-		if (ex != null)
-		{
-			throw new Exception("Dispose failed!", ex);
-		}
-  	}
+    public void Dispose()
+    {
+      Dispose(true);
+      //System.GC.SupressFinalize(this);
+    }
   }
 }
