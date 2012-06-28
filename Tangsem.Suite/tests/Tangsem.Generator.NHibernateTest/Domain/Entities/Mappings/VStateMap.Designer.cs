@@ -9,18 +9,20 @@ using FluentNHibernate.Mapping;
 namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 {
 	/// <summary>
-	/// The mapping configuration for Country.
+	/// The mapping configuration for VState.
 	/// </summary>
-	public partial class CountryMap : ClassMap<Country>
+	public partial class VStateMap : ClassMap<VState>
 	{
 		/// <summary>
 		/// The constructor.
 		/// </summary>
-		public CountryMap()
+		public VStateMap()
 		{
-			this.Table("Country");
+			this.Table("v_State");
 			
 
+			this.ReadOnly();
+			
 			// primary key mapping
 			this.MapId();
 			
@@ -40,10 +42,8 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 		private void MapId()
 		{
 
-			this.Id(x => x.Id)
-				.Column("Id")
-				.GeneratedBy
-				.Native();
+			this.Id(x => x.RowNum)
+				.Column("RowNum");	
 					  
 		}
 		
@@ -53,8 +53,16 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 		private void MapBasicColumns()
 		{
 
+			this.Map(x => x.RowNum)
+                .Column("RowNum");			
+			this.Map(x => x.Id)
+                .Column("Id").Not.Nullable();			
 			this.Map(x => x.Name)
                 .Column("Name").Not.Nullable();			
+			this.Map(x => x.CountryId)
+                .Column("CountryId");			
+			this.Map(x => x.CountryName)
+                .Column("CountryName");			
 			this.Map(x => x.CountryCode)
                 .Column("CountryCode");			
 			this.Map(x => x.Continent)
@@ -75,12 +83,6 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 		private void MapIncomingReferences()
 		{
 
-			this.HasMany<State>(x => x.States)
-				.KeyColumn("CountryId")
-                .Inverse()
-                .LazyLoad()
-                .AsBag();
-			
 		}
 	}
 }

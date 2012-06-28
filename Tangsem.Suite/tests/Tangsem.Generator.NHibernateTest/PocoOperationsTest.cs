@@ -142,6 +142,17 @@ namespace Tangsem.Generator.NHibernateTest
       }
     }
 
+	  [TestMethod]
+	  public void TestView()
+	  {
+		using (var repo = this.CreateRepository())
+		{
+			foreach (var vstate in repo.VStates.ToList())
+			{
+				Console.WriteLine(vstate.CountryName + "." + vstate.Name);
+			}
+		}	
+	  }
 
     /// <summary>
     /// Create the repository.

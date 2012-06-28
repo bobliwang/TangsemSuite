@@ -141,7 +141,7 @@ WriteLiteral("\t\t\r\n\t\t\r\n");
 
             
             #line 37 "..\..\Templates\Repositories\IRepository.NHibernate.Designer.cshtml"
- 		foreach (var tableMetadata in this.TableMetadatas)
+ 		foreach (var tableMetadata in this.TableMetadatas.Where(x => !x.IsView))
 		{
             
             #line default

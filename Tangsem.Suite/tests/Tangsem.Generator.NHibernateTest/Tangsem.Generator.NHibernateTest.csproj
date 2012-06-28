@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="Domain\Entities\DTOs\CountryDTO.Designer.cs" />
     <Compile Include="Domain\Entities\DTOs\StateDTO.Designer.cs" />
+    <Compile Include="Domain\Entities\DTOs\VStateDTO.Designer.cs" />
     <Compile Include="Domain\Entities\Mappings\CountryMap.cs" />
     <Compile Include="Domain\Entities\Mappings\CountryMap.Designer.cs">
       <DependentUpon>CountryMap.cs</DependentUpon>
@@ -68,11 +69,13 @@
     <Compile Include="Domain\Entities\Mappings\StateMap.Designer.cs">
       <DependentUpon>StateMap.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Entities\Mappings\VStateMap.Designer.cs" />
     <Compile Include="Domain\Entities\State.cs" />
     <Compile Include="Domain\Entities\State.Designer.cs">
       <DependentUpon>State.cs</DependentUpon>
     </Compile>
     <Compile Include="Domain\Entities\Mappings\StateMap.cs" />
+    <Compile Include="Domain\Entities\VState.Designer.cs" />
     <Compile Include="Domain\Repositories\INHibernateTestRepository.cs" />
     <Compile Include="Domain\Repositories\INHibernateTestRepository.Designer.cs">
       <DependentUpon>INHibernateTestRepository.cs</DependentUpon>

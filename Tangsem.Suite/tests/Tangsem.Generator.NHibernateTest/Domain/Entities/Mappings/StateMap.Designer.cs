@@ -18,6 +18,9 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 		/// </summary>
 		public StateMap()
 		{
+			this.Table("State");
+			
+
 			// primary key mapping
 			this.MapId();
 			
@@ -36,10 +39,12 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 		/// </summary>
 		private void MapId()
 		{
+
 			this.Id(x => x.Id)
 				.Column("Id")
 				.GeneratedBy
 				.Native();
+					  
 		}
 		
 		/// <summary>

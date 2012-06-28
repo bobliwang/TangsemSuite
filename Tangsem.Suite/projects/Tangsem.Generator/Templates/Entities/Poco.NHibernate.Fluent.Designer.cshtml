@@ -25,6 +25,13 @@ namespace @(Configuration.MappingNamespace)
 		/// </summary>
 		public @(TableMetadata.EntityName)Map()
 		{
+			this.Table("@(TableMetadata.Name)");
+			
+			@if(TableMetadata.IsView)
+			{<text>
+			this.ReadOnly();
+			</text>}
+
 			// primary key mapping
 			this.MapId();
 			
@@ -43,10 +50,19 @@ namespace @(Configuration.MappingNamespace)
 		/// </summary>
 		private void MapId()
 		{
+			@if(TableMetadata.PrimaryKeys.Any())
+			{<text>
 			this.Id(x => x.@(TableMetadata.PrimaryKeys[0].PropertyName))
 				.Column("@(TableMetadata.PrimaryKeys[0].ColumnName)")
 				.GeneratedBy
 				.Native();
+			</text>}
+			else
+			{<text>
+			this.Id(x => x.@(TableMetadata.Columns[0].PropertyName))
+				.Column("@(TableMetadata.Columns[0].ColumnName)");	
+			</text>}
+		  
 		}
 		
 		/// <summary>

@@ -40,7 +40,7 @@ namespace @(Configuration.RepositoryNamespace)
 		</text>}
 		
 		
-		@foreach (var tableMetadata in this.TableMetadatas)
+		@foreach (var tableMetadata in this.TableMetadatas.Where(x => !x.IsView))
 		{<text>
 		
 		/// <summary>
