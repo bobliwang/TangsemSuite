@@ -14,6 +14,11 @@ namespace Tangsem.NHibernate.Domain
   public abstract class RepositoryBase : IRepository
   {
     /// <summary>
+    /// The _isDisposed field.
+    /// </summary>
+    private bool _isDisposed = false;
+
+    /// <summary>
     /// Default constructor.
     /// </summary>
     protected RepositoryBase()
@@ -38,6 +43,12 @@ namespace Tangsem.NHibernate.Domain
     /// Gets the database transaction.
     /// </summary>
     public ITransaction Transaction { get; protected set; }
+
+    public void Dispose()
+    {
+      this.Dispose(true);
+      //System.GC.SupressFinalize(this);
+    }
 
     /// <summary>
     /// Gets the entity query by entity type. Please use entities properties from subclasses. e.g. XXXRepository.Users instead of this.GetEntities(User).
@@ -163,8 +174,6 @@ namespace Tangsem.NHibernate.Domain
       this.Transaction = this.CurrentSession.BeginTransaction();
     }
 
-    private bool _isDisposed = false;
-
     protected virtual void Dispose(bool disposing)
     {
       if (!_isDisposed)
@@ -190,13 +199,6 @@ namespace Tangsem.NHibernate.Domain
         // if we add them, they need to be released here.
       }
       _isDisposed = true;
-    }
-
-
-    public void Dispose()
-    {
-      Dispose(true);
-      //System.GC.SupressFinalize(this);
     }
   }
 }

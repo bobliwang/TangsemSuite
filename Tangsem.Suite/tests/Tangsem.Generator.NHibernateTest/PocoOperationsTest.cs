@@ -80,7 +80,11 @@ namespace Tangsem.Generator.NHibernateTest
 
         var nz1 = repo.LookupById<Country>(2);
 
+        nz1.Continent += "1";
+
         var nz2 = repo.Countries.FirstOrDefault(x => x.Id == 2);
+
+        Assert.AreEqual(nz1.Continent, nz2.Continent);
 
         Assert.IsTrue(object.ReferenceEquals(nz1, nz2));
       }
@@ -142,17 +146,17 @@ namespace Tangsem.Generator.NHibernateTest
       }
     }
 
-	  [TestMethod]
-	  public void TestView()
-	  {
-		using (var repo = this.CreateRepository())
-		{
-			foreach (var vstate in repo.VStates.ToList())
-			{
-				Console.WriteLine(vstate.CountryName + "." + vstate.Name);
-			}
-		}	
-	  }
+    [TestMethod]
+    public void TestView()
+    {
+      using (var repo = this.CreateRepository())
+      {
+        foreach (var vstate in repo.VStates.ToList())
+        {
+          Console.WriteLine(vstate.CountryName + "." + vstate.Name);
+        }
+      }
+    }
 
     /// <summary>
     /// Create the repository.
