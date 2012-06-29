@@ -11,7 +11,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using NHibernate;
 using NHibernate.Dialect;
+using NHibernate.Linq;
 
+using Tangsem.Common.Extensions.Linq;
 using Tangsem.Generator.NHibernateTest.Domain.Entities;
 using Tangsem.Generator.NHibernateTest.Domain.Repositories;
 
@@ -154,6 +156,82 @@ namespace Tangsem.Generator.NHibernateTest
         foreach (var vstate in repo.VStates.ToList())
         {
           Console.WriteLine(vstate.CountryName + "." + vstate.Name);
+        }
+      }
+    }
+
+    [TestMethod]
+    public void TestEagerFetch_OneToMany_WithSubQry()
+    {
+      using (var repo = this.CreateRepository())
+      {
+        var countries = repo.Countries
+                         .FetchMany(x => x.States)
+                         .Where(x => x.States.Count() > 1)
+                         .ToList();
+
+        foreach (var country in countries)
+        {
+          Console.WriteLine(country.States.ToList().Count);
+        }
+      }
+    }
+
+    [TestMethod]
+    public void TestLazyLoad_OneToMany_WithSubQry()
+    {
+      using (var repo = this.CreateRepository())
+      {
+        var countries = repo.Countries
+                         .Where(x => x.States.Count() > 1)
+                         .ToList();
+
+        foreach (var country in countries)
+        {
+          Console.WriteLine(country.States.ToList().Count);
+        }
+      }
+    }
+
+    [TestMethod]
+    public void TestEagerFetch_ManyToOne()
+    {
+      using (var repo = this.CreateRepository())
+      {
+        var states = repo.States
+                         .Fetch(x => x.Country)
+                         .ToList();
+
+        foreach (var state in states)
+        {
+          Console.WriteLine(state.Country.Name + "." + state.Name);
+        }
+      }
+    }
+
+    [TestMethod]
+    public void TestLazyLoad_ManyToOne()
+    {
+      using (var repo = this.CreateRepository())
+      {
+        var states = repo.States
+                         .ToList();
+
+        foreach (var state in states)
+        {
+          Console.WriteLine(state.Country.Name + "." + state.Name);
+        }
+      }
+    }
+
+    [TestMethod]
+    public void TestDynamicQuery()
+    {
+      using (var repo = this.CreateRepository())
+      {
+        foreach (var state in repo.States.Where("Country.Name.StartsWith(@0)", "China").ToList())
+        {
+          Console.WriteLine(state.Country.Name + "." + state.Name);
         }
       }
     }

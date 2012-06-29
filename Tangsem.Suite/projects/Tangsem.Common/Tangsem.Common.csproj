@@ -45,7 +45,17 @@
     <Compile Include="DataAccess\DbConnectionExtension.cs" />
     <Compile Include="DataAccess\Parameter.cs" />
     <Compile Include="DataAccess\PropertyColumnAttribute.cs" />
+    <Compile Include="Extensions\Linq\ClassFactory.cs" />
+    <Compile Include="Extensions\Linq\DynamicClass.cs" />
+    <Compile Include="Extensions\Linq\DynamicExpression.cs" />
+    <Compile Include="Extensions\Linq\DynamicOrdering.cs" />
+    <Compile Include="Extensions\Linq\DynamicProperty.cs" />
+    <Compile Include="Extensions\Linq\DynamicQueryable.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
+    <Compile Include="Extensions\Linq\ExpressionParser.cs" />
+    <Compile Include="Extensions\Linq\ParseException.cs" />
+    <Compile Include="Extensions\Linq\Res.cs" />
+    <Compile Include="Extensions\Linq\Signature.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

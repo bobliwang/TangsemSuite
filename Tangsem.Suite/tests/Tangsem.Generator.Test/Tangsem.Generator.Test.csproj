@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PocosTest.cs" />
+    <Compile Include="PocosGenerationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\projects\Tangsem.Generator.Metadata\Tangsem.Generator.Metadata.csproj">
@@ -61,6 +61,10 @@
     <ProjectReference Include="..\..\projects\Tangsem.Generator\Tangsem.Generator.csproj">
       <Project>{6CE102E0-7F36-434A-AEC0-541A20FD2548}</Project>
       <Name>Tangsem.Generator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tangsem.Generator.NHibernateTest\Tangsem.Generator.NHibernateTest.csproj">
+      <Project>{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}</Project>
+      <Name>Tangsem.Generator.NHibernateTest</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

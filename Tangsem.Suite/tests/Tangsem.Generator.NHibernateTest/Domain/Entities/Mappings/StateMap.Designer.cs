@@ -8,72 +8,72 @@ using FluentNHibernate.Mapping;
 
 namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 {
-	/// <summary>
-	/// The mapping configuration for State.
-	/// </summary>
-	public partial class StateMap : ClassMap<State>
-	{
-		/// <summary>
-		/// The constructor.
-		/// </summary>
-		public StateMap()
-		{
-			this.Table("State");
-			
+  /// <summary>
+  /// The mapping configuration for State.
+  /// </summary>
+  public partial class StateMap : ClassMap<State>
+  {
+    /// <summary>
+    /// The constructor.
+    /// </summary>
+    public StateMap()
+    {
+      this.Table("State");
 
-			// primary key mapping
-			this.MapId();
-			
-			// basic columns mapping
-			this.MapBasicColumns();
-			
-			// outgoing references mapping
-			this.MapOutgoingReferences();
-			
-			// incoming references mapping
-			this.MapIncomingReferences();
-		}
-		
-		/// <summary>
-		/// Map the Primary Key.
-		/// </summary>
-		private void MapId()
-		{
 
-			this.Id(x => x.Id)
-				.Column("Id")
-				.GeneratedBy
-				.Native();
-					  
-		}
-		
-		/// <summary>
-		/// Map the Basic Columns.
-		/// </summary>
-		private void MapBasicColumns()
-		{
+      // primary key mapping
+      this.MapId();
 
-			this.Map(x => x.Name)
-                .Column("Name").Not.Nullable();			
-		}
-		
-		/// <summary>
-		/// Map the Outgoing References.
-		/// </summary>
-		private void MapOutgoingReferences()
-		{
+      // basic columns mapping
+      this.MapBasicColumns();
 
-			this.References<Country>(x => x.Country)
-                .Fetch.Join()
-                .Column("CountryId");			
-		}
-		
-		/// <summary>
-		/// Map the Incoming References.
-		/// </summary>
-		private void MapIncomingReferences()
-		{
+      // outgoing references mapping
+      this.MapOutgoingReferences();
 
-		}
-	}
+      // incoming references mapping
+      this.MapIncomingReferences();
+    }
+
+    /// <summary>
+    /// Map the Primary Key.
+    /// </summary>
+    private void MapId()
+    {
+
+      this.Id(x => x.Id)
+        .Column("Id")
+        .GeneratedBy
+        .Native();
+
+    }
+
+    /// <summary>
+    /// Map the Basic Columns.
+    /// </summary>
+    private void MapBasicColumns()
+    {
+
+      this.Map(x => x.Name)
+                .Column("Name").Not.Nullable();
+    }
+
+    /// <summary>
+    /// Map the Outgoing References.
+    /// </summary>
+    private void MapOutgoingReferences()
+    {
+      this.References<Country>(x => x.Country)
+                .Column("CountryId")
+                .Fetch.Join();
+
+    }
+
+    /// <summary>
+    /// Map the Incoming References.
+    /// </summary>
+    private void MapIncomingReferences()
+    {
+
+    }
+  }
 }
