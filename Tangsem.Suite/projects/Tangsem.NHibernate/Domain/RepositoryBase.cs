@@ -47,7 +47,7 @@ namespace Tangsem.NHibernate.Domain
     public void Dispose()
     {
       this.Dispose(true);
-      //System.GC.SupressFinalize(this);
+      System.GC.SuppressFinalize(this);
     }
 
     /// <summary>
