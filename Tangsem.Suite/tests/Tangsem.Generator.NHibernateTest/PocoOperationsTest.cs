@@ -38,7 +38,7 @@ namespace Tangsem.Generator.NHibernateTest
     {
       using (var repo = this.CreateRepository())
       {
-        var countries = repo.Countries.ToList();
+        var countries = repo.Countries.FetchMany(c => c.States).ToList();
 
         foreach (var country in countries)
         {

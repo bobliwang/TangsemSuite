@@ -79,7 +79,7 @@ namespace Tangsem.Generator.Metadata.Builder
       get
       {
         return
-          @"
+		  @"
               WITH PrimaryKeys
               AS
               (
@@ -91,7 +91,7 @@ namespace Tangsem.Generator.Metadata.Builder
                            AND c.constraint_name = pk.constraint_name
                      WHERE constraint_type = 'PRIMARY KEY'
               )
-              SELECT [Table] = col.TABLE_NAME
+              SELECT  [Table] = col.TABLE_NAME
                      ,[Column] = col.COLUMN_NAME
                      ,[Nullable] = CAST(CASE WHEN col.IS_NULLABLE = 'YES' THEN 1 ELSE 0 END AS BIT)
                      ,[DataType] = col.DATA_TYPE
@@ -100,19 +100,10 @@ namespace Tangsem.Generator.Metadata.Builder
                                          'IsIdentity') AS BIT)
                      ,[IsComputed] = CAST(COLUMNPROPERTY(OBJECT_ID(col.TABLE_NAME), col.COLUMN_NAME,
                                          'IsComputed') AS BIT)
-                     ,[IsPrimaryKey] = CAST(PkCheck.IsPk AS BIT)
+                     ,[IsPrimaryKey] = CAST((CASE WHEN pk.TABLE_NAME IS NULL Then 0 ELSE 1 END) AS BIT)
                      
-              FROM INFORMATION_SCHEMA.COLUMNS col
-              CROSS APPLY
-              (
-                SELECT CASE WHEN EXISTS (
-                        SELECT *
-                        FROM PrimaryKeys pk
-                        WHERE pk.TABLE_NAME = col.TABLE_NAME
-                          AND pk.COLUMN_NAME = col.COLUMN_NAME
-                        )
-                      THEN 1 ELSE 0 END AS IsPk
-              ) AS PkCheck
+              FROM INFORMATION_SCHEMA.COLUMNS AS col
+			  LEFT JOIN PrimaryKeys pk ON pk.TABLE_NAME = col.TABLE_NAME AND pk.COLUMN_NAME = col.COLUMN_NAME              
               WHERE (@TableName IS NULL OR col.TABLE_NAME = @TableName)
               ORDER BY col.TABLE_NAME, col.ORDINAL_POSITION";
       }
