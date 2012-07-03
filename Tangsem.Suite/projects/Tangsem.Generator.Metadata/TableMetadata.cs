@@ -9,6 +9,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+
+using Tangsem.Common.Entities;
 
 namespace Tangsem.Generator.Metadata
 {
@@ -17,6 +20,21 @@ namespace Tangsem.Generator.Metadata
   /// </summary>
   public class TableMetadata : ColumnsContainer
   {
+    private static PropertyInfo[] _trackingPropertyInfos;
+
+    static TableMetadata()
+    {
+      _trackingPropertyInfos = typeof(ITrackableEntity).GetProperties();
+    }
+
+    public static PropertyInfo[] TrackingPropertyInfos
+    {
+      get
+      {
+        return _trackingPropertyInfos;
+      }
+    }
+
     public TableMetadata()
     {
       this.OutgoingReferences = new List<ReferenceMetadata>();
@@ -80,6 +98,32 @@ namespace Tangsem.Generator.Metadata
       get
       {
         return this.Keys.Where(k => !k.IsPrimaryKey).ToList();
+      }
+    }
+
+    public bool IsTrackableEntity
+    {
+      get
+      {
+        foreach (var p in TrackingPropertyInfos)
+        {
+          var flag = false;
+          foreach (var c in this.Columns)
+          {
+            if (c.PropertyName == p.Name)
+            {
+              flag = true;
+              break;
+            }
+          }
+
+          if (!flag)
+          {
+            return false;
+          }
+        }
+
+        return true;
       }
     }
   }

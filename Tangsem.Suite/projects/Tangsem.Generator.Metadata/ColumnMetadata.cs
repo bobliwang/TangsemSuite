@@ -177,5 +177,13 @@ namespace Tangsem.Generator.Metadata
         return this.TableMetadata.UniqueKeys.Any(uk => uk.Columns.Any(c => c.ColumnName == this.ColumnName));
       }
     }
+
+    public bool IsTrackingColumn
+    {
+      get
+      {
+        return TableMetadata.TrackingPropertyInfos.ToList().Any(x => x.Name == this.PropertyName);
+      }
+    }
   }
 }

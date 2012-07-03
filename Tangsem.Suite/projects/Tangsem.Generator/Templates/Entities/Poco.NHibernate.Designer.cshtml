@@ -12,9 +12,11 @@ using System.Text;
 using System.Linq;
 using System.Linq.Expressions;
 
+using Tangsem.Common.Entities;
+
 namespace @Configuration.EntityNamespace
 {
-	public partial class @TableMetadata.EntityName
+	public partial class @(TableMetadata.EntityName)@(TableMetadata.IsTrackableEntity ? @" : ITrackableEntity" : string.Empty)
 	{
 		@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey))
 		{<text>

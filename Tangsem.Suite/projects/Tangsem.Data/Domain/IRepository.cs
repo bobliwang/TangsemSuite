@@ -78,5 +78,10 @@ namespace Tangsem.Data.Domain
     /// Start a transaction.
     /// </summary>
     void BeginTransaction();
+
+    /// <summary>
+    /// Gets or sets current user id.
+    /// </summary>
+    int? CurrentUserId { get; set; }
   }
 }
