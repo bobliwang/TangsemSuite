@@ -55,6 +55,16 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
 
 			this.Map(x => x.Name)
                 .Column("Name").Not.Nullable();			
+			this.Map(x => x.CreatedById)
+                .Column("CreatedById");			
+			this.Map(x => x.ModifiedById)
+                .Column("ModifiedById");			
+			this.Map(x => x.CreatedTime)
+                .Column("CreatedTime");			
+			this.Map(x => x.ModifiedTime)
+                .Column("ModifiedTime");			
+			this.Map(x => x.Active)
+                .Column("Active");			
 		}
 		
 		/// <summary>

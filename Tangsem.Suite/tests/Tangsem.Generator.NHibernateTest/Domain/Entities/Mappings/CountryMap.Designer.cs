@@ -59,6 +59,16 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.Mappings
                 .Column("CountryCode");			
 			this.Map(x => x.Continent)
                 .Column("Continent");			
+			this.Map(x => x.CreatedById)
+                .Column("CreatedById");			
+			this.Map(x => x.ModifiedById)
+                .Column("ModifiedById");			
+			this.Map(x => x.CreatedTime)
+                .Column("CreatedTime");			
+			this.Map(x => x.ModifiedTime)
+                .Column("ModifiedTime");			
+			this.Map(x => x.Active)
+                .Column("Active");			
 		}
 		
 		/// <summary>

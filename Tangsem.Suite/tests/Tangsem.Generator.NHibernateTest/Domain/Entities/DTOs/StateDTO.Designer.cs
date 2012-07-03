@@ -32,5 +32,30 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Entities.DTOs
 		/// </summary>
 		public virtual int? CountryId { get; set; }
 		
+		/// <summary>
+		/// Property CreatedById mapping to State.CreatedById
+		/// </summary>
+		public virtual int? CreatedById { get; set; }
+		
+		/// <summary>
+		/// Property ModifiedById mapping to State.ModifiedById
+		/// </summary>
+		public virtual int? ModifiedById { get; set; }
+		
+		/// <summary>
+		/// Property CreatedTime mapping to State.CreatedTime
+		/// </summary>
+		public virtual System.DateTime? CreatedTime { get; set; }
+		
+		/// <summary>
+		/// Property ModifiedTime mapping to State.ModifiedTime
+		/// </summary>
+		public virtual System.DateTime? ModifiedTime { get; set; }
+		
+		/// <summary>
+		/// Property Active mapping to State.Active
+		/// </summary>
+		public virtual bool? Active { get; set; }
+		
 	}
 }

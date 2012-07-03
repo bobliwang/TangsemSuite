@@ -87,3 +87,33 @@ namespace @(Configuration.RepositoryNamespace)
 
 	}
 }
+@{
+  var plainEntities = this.TableMetadatas.Where(x => !x.IsAuditableEntity && !x.IsView).ToList();
+}
+@if(plainEntities.Any())
+{<text>
+/*    
+  @@NOTE: The following entities are not IAuditableEntities:
+     
+  @foreach(var entity in plainEntities)
+  {<text>
+     
+  ------------------------------
+  -- @entity.EntityName     ----
+  ------------------------------
+  ALTER TABLE @entity.Name ADD CreatedById INT NULL
+  GO
+  ALTER TABLE @entity.Name ADD ModifiedById INT NULL
+  GO
+  ALTER TABLE @entity.Name ADD CreatedTime DATETIME NULL
+  GO
+  ALTER TABLE @entity.Name ADD ModifiedTime DATETIME NULL
+  GO
+  ALTER TABLE @entity.Name ADD Active BIT NULL
+  GO
+         
+       
+  </text>}
+*/
+</text>}
+

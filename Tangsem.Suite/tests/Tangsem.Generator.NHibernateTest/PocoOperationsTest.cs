@@ -134,6 +134,10 @@ namespace Tangsem.Generator.NHibernateTest
 
         Assert.IsNotNull(tas, "Tasmania for Australia is not found!");
 
+        Assert.IsNotNull(tas.Active);
+        Assert.IsTrue(tas.Active.Value);
+        Assert.IsNotNull(tas.CreatedById);
+
         repo.BeginTransaction();
         repo.Delete(tas);
         Console.WriteLine("Tasmania Deleted.");
