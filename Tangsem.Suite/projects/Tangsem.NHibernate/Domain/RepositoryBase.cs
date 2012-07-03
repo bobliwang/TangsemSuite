@@ -174,6 +174,11 @@ namespace Tangsem.NHibernate.Domain
       this.Transaction = this.CurrentSession.BeginTransaction();
     }
 
+    /// <summary>
+    /// Gets or sets current user id.
+    /// </summary>
+    public int? CurrentUserId { get; set; }
+
     protected virtual void Dispose(bool disposing)
     {
       if (!_isDisposed)
