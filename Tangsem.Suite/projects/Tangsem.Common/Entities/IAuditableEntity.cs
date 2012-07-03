@@ -6,9 +6,9 @@ using System.Text;
 namespace Tangsem.Common.Entities
 {
   /// <summary>
-  /// The ITrackableEntity interface.
+  /// The IAuditableEntity interface.
   /// </summary>
-  public interface ITrackableEntity
+  public interface IAuditableEntity
   {
     int? CreatedById { get; set; }
 

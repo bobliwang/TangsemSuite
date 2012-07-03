@@ -5,9 +5,9 @@ using System.Text;
 namespace Tangsem.Common.Entities
 {
   /// <summary>
-  /// The TrackableEntity class.
+  /// The AuditableEntity class.
   /// </summary>
-  public class TrackableEntity : ITrackableEntity
+  public class AuditableEntity : IAuditableEntity
   {
     public virtual int? CreatedById { get; set; }
 

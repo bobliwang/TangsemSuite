@@ -20,6 +20,32 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Repositories
 
 		
 		/// <summary>
+		/// The IQueryable for VStates.
+		/// </summary>
+		public virtual IQueryable<VState> VStates
+		{
+			get
+			{
+				return this.GetEntities<VState>();
+			}
+		}
+
+		
+		
+		/// <summary>
+		/// The IQueryable for Categories.
+		/// </summary>
+		public virtual IQueryable<Category> Categories
+		{
+			get
+			{
+				return this.GetEntities<Category>();
+			}
+		}
+
+		
+		
+		/// <summary>
 		/// The IQueryable for Countries.
 		/// </summary>
 		public virtual IQueryable<Country> Countries
@@ -43,22 +69,51 @@ namespace Tangsem.Generator.NHibernateTest.Domain.Repositories
 			}
 		}
 
-		
-		
-		/// <summary>
-		/// The IQueryable for VStates.
-		/// </summary>
-		public virtual IQueryable<VState> VStates
-		{
-			get
-			{
-				return this.GetEntities<VState>();
-			}
-		}
-
 				
 		
 
+		
+		/// <summary>
+		/// Get Category by primary key.
+		/// </summary>
+		public virtual Category LookupCategoryById(int id)
+		{
+			return this.LookupById<Category>(id);
+		}
+		
+		/// <summary>
+		/// Delete Category by primary key.
+		/// </summary>
+		public virtual Category DeleteCategoryById(int id)
+		{
+			return this.DeleteById<Category>(id);
+		}
+		
+		/// <summary>
+		/// Save a new Category instance.
+		/// </summary>
+		public virtual Category SaveCategory(Category category)
+		{
+			return this.Save<Category>(category);
+		}
+		
+		/// <summary>
+		/// Update an existing Category instance.
+		/// </summary>
+		public virtual Category UpdateCategory(Category category)
+		{
+			return this.Update<Category>(category);
+		}
+		
+		/// <summary>
+		/// Save or update an existing Category instance.
+		/// </summary>
+		public virtual Category SaveOrUpdateCategory(Category category)
+		{
+			return this.SaveOrUpdate<Category>(category);
+		}
+
+		
 		
 		/// <summary>
 		/// Get Country by primary key.

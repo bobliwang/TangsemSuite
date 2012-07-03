@@ -178,11 +178,11 @@ namespace Tangsem.Generator.Metadata
       }
     }
 
-    public bool IsTrackingColumn
+    public bool IsAuditingingColumn
     {
       get
       {
-        return TableMetadata.TrackingPropertyInfos.ToList().Any(x => x.Name == this.PropertyName);
+        return TableMetadata.AuditingPropertyInfos.ToList().Any(x => x.Name == this.PropertyName);
       }
     }
   }

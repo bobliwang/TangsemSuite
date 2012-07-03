@@ -5,6 +5,8 @@ using System.Text;
 using System.Linq;
 using System.Linq.Expressions;
 
+using Tangsem.Common.Entities;
+
 namespace Tangsem.Generator.NHibernateTest.Domain.Entities
 {
 	public partial class Country

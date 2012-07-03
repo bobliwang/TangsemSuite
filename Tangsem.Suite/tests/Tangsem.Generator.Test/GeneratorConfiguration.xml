@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <GeneratorConfiguration	
-						ProjectName="Tangsem.Generator.WebMvc3Demo.Common"
+						ProjectName="Tangsem.Generator.NHibernateTest"
 						OutputDir=""
-						RepositoryName ="MyRepository"
+						RepositoryName ="NHibernateTestRepository"
 						ConnectionString="Data Source=(local);Initial Catalog=TangsemGeneratorNHibernateTest;Integrated Security=True"
 						MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
 						OpenOutputDirAfterGeneration="true">

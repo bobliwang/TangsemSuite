@@ -69,7 +69,7 @@ namespace Tangsem.NHibernate.Domain
     /// <returns>The saved entity.</returns>
     public virtual T Save<T>(T entity) where T : class
     {
-      this.OnEntityInserting(entity);
+      ////this.OnEntityInserting(entity);
 
       this.CurrentSession.Save(entity);
 
@@ -97,7 +97,7 @@ namespace Tangsem.NHibernate.Domain
     /// <returns>The updated entity.</returns>
     public virtual T Update<T>(T entity) where T : class
     {
-      this.OnEntityUpdating(entity);
+      ////this.OnEntityUpdating(entity);
 
       this.CurrentSession.Update(entity);
 
@@ -154,7 +154,7 @@ namespace Tangsem.NHibernate.Domain
     /// <typeparam name="T">The entity type.</typeparam>
     /// <param name="entity">The enitity object.</param>
     /// <returns>The virtual deleted entity.</returns>
-    public virtual T VirtualDelete<T>(T entity) where T : class, ITrackableEntity
+    public virtual T VirtualDelete<T>(T entity) where T : class, IAuditableEntity
     {
       entity.Active = false;
       return this.Update(entity);
@@ -221,33 +221,6 @@ namespace Tangsem.NHibernate.Domain
         // if we add them, they need to be released here.
       }
       _isDisposed = true;
-    }
-
-    private void OnEntityInserting(object entity)
-    {
-      var trackable = entity as ITrackableEntity;
-      if (trackable != null)
-      {
-        var now = DateTime.Now;
-        trackable.CreatedTime = now;
-        trackable.CreatedById = this.CurrentUserId;
-
-        if (!trackable.Active.HasValue)
-        {
-          trackable.Active = true;
-        }
-      }
-    }
-
-    private void OnEntityUpdating(object entity)
-    {
-      var trackable = entity as ITrackableEntity;
-      if (trackable != null)
-      {
-        var now = DateTime.Now;
-        trackable.ModifiedTime = now;
-        trackable.ModifiedById = this.CurrentUserId;
-      }
     }
   }
 }

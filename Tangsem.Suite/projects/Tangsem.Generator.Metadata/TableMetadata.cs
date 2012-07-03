@@ -20,18 +20,18 @@ namespace Tangsem.Generator.Metadata
   /// </summary>
   public class TableMetadata : ColumnsContainer
   {
-    private static PropertyInfo[] _trackingPropertyInfos;
+    private static PropertyInfo[] _auditingPropertyInfos;
 
     static TableMetadata()
     {
-      _trackingPropertyInfos = typeof(ITrackableEntity).GetProperties();
+      _auditingPropertyInfos = typeof(IAuditableEntity).GetProperties();
     }
 
-    public static PropertyInfo[] TrackingPropertyInfos
+    public static PropertyInfo[] AuditingPropertyInfos
     {
       get
       {
-        return _trackingPropertyInfos;
+        return _auditingPropertyInfos;
       }
     }
 
@@ -101,11 +101,11 @@ namespace Tangsem.Generator.Metadata
       }
     }
 
-    public bool IsTrackableEntity
+    public bool IsAuditableEntity
     {
       get
       {
-        foreach (var p in TrackingPropertyInfos)
+        foreach (var p in AuditingPropertyInfos)
         {
           var flag = false;
           foreach (var c in this.Columns)

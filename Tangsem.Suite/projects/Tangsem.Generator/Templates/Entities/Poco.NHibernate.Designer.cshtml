@@ -16,7 +16,7 @@ using Tangsem.Common.Entities;
 
 namespace @Configuration.EntityNamespace
 {
-	public partial class @(TableMetadata.EntityName)@(TableMetadata.IsTrackableEntity ? @" : ITrackableEntity" : string.Empty)
+	public partial class @(TableMetadata.EntityName)@(TableMetadata.IsAuditableEntity ? @" : AuditableEntity" : string.Empty)
 	{
 		@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey))
 		{<text>

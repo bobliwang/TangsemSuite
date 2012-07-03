@@ -72,7 +72,7 @@ namespace Tangsem.Data.Domain
     /// <typeparam name="T">The entity type.</typeparam>
     /// <param name="entity">The enitity object.</param>
     /// <returns>The virtual deleted entity.</returns>
-    T VirtualDelete<T>(T entity) where T : class, ITrackableEntity
+    T VirtualDelete<T>(T entity) where T : class, IAuditableEntity;
 
     /// <summary>
     /// Commit transaction to database.

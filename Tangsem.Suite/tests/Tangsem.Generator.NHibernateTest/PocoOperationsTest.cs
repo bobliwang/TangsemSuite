@@ -13,15 +13,19 @@ using NHibernate;
 using NHibernate.Dialect;
 using NHibernate.Linq;
 
+using Tangsem.Common.Entities;
 using Tangsem.Common.Extensions.Linq;
 using Tangsem.Generator.NHibernateTest.Domain.Entities;
 using Tangsem.Generator.NHibernateTest.Domain.Repositories;
+using Tangsem.NHibernate.Interceptors;
 
 namespace Tangsem.Generator.NHibernateTest
 {
   [TestClass]
   public class PocoOperationsTest
   {
+    public const int CurrentUserId = 5;
+
     /// <summary>
     /// The SessionFactory.
     /// </summary>
@@ -236,13 +240,46 @@ namespace Tangsem.Generator.NHibernateTest
       }
     }
 
+    [TestMethod]
+    public void TestAuditableEntity()
+    {
+      var cat = new Category();
+      cat.Name = "Test category";
+      cat.ShortDescription = "Category for testing.";
+
+      using (var repo = this.CreateRepository())
+      {
+        repo.BeginTransaction();
+
+        foreach (var c in repo.Categories.ToList())
+        {
+          repo.VirtualDelete(c);
+        }
+
+        repo.SaveCategory(cat);
+        repo.Commit();
+      }
+
+      using (var repo = this.CreateRepository())
+      {
+        cat = repo.Categories.ActiveOnly().FirstOrDefault();
+
+        Assert.IsNotNull(cat, "Category 'Test category' is null!");
+        Assert.AreEqual(cat.Active, true);
+        Assert.AreEqual(CurrentUserId, cat.CreatedById);
+        Assert.IsNotNull(cat.CreatedTime, "cat.CreatedTime");
+      }
+    }
+
     /// <summary>
     /// Create the repository.
     /// </summary>
     /// <returns>The repository.</returns>
-    private NHibernateTestRepository CreateRepository()
+    private INHibernateTestRepository CreateRepository()
     {
-      return new NHibernateTestRepository { CurrentSession = this.SessionFactory.OpenSession() };
+      var ai = new AuditingInterceptor { CurrentUserId = CurrentUserId };
+      var session = this.SessionFactory.OpenSession(ai);
+      return new NHibernateTestRepository { CurrentSession = session };
     }
 
     /// <summary>

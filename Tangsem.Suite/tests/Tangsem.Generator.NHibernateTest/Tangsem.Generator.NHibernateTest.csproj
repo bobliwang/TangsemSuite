@@ -48,6 +48,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -55,13 +56,16 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Entities\Category.Designer.cs" />
     <Compile Include="Domain\Entities\Country.cs" />
     <Compile Include="Domain\Entities\Country.Designer.cs">
       <DependentUpon>Country.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Entities\DTOs\CategoryDTO.Designer.cs" />
     <Compile Include="Domain\Entities\DTOs\CountryDTO.Designer.cs" />
     <Compile Include="Domain\Entities\DTOs\StateDTO.Designer.cs" />
     <Compile Include="Domain\Entities\DTOs\VStateDTO.Designer.cs" />
+    <Compile Include="Domain\Entities\Mappings\CategoryMap.Designer.cs" />
     <Compile Include="Domain\Entities\Mappings\CountryMap.cs" />
     <Compile Include="Domain\Entities\Mappings\CountryMap.Designer.cs">
       <DependentUpon>CountryMap.cs</DependentUpon>
