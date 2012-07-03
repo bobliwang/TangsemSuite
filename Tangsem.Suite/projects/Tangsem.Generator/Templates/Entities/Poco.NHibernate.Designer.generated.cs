@@ -76,7 +76,7 @@ WriteLiteral("\r\n{\r\n\tpublic partial class ");
 
             
             #line 19 "..\..\Templates\Entities\Poco.NHibernate.Designer.cshtml"
-                                             Write(TableMetadata.IsAuditableEntity ? @" : AuditableEntity" : string.Empty);
+                                             Write(TableMetadata.IsAuditableEntity ? @" : IAuditableEntity" : string.Empty);
 
             
             #line default
