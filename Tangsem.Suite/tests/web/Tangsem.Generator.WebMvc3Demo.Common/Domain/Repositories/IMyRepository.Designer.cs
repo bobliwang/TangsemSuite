@@ -31,6 +31,20 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories
 		/// </summary>
 		IQueryable<State> States { get; }
 
+		
+		
+		/// <summary>
+		/// The IQueryable for VStates.
+		/// </summary>
+		IQueryable<VState> VStates { get; }
+
+		
+		
+		/// <summary>
+		/// The IQueryable for Categories.
+		/// </summary>
+		IQueryable<Category> Categories { get; }
+
 				
 		
 
@@ -86,6 +100,33 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories
 		/// Save or update an existing State instance.
 		/// </summary>
 		State SaveOrUpdateState(State state);
+
+		
+		
+		/// <summary>
+		/// Get Category by primary key.
+		/// </summary>
+		Category LookupCategoryById(int id);
+		
+		/// <summary>
+		/// Delete Category by primary key.
+		/// </summary>
+		Category DeleteCategoryById(int id);
+		
+		/// <summary>
+		/// Save a new Category instance.
+		/// </summary>
+		Category SaveCategory(Category category);
+		
+		/// <summary>
+		/// Update an existing Category instance.
+		/// </summary>
+		Category UpdateCategory(Category category);
+		
+		/// <summary>
+		/// Save or update an existing Category instance.
+		/// </summary>
+		Category SaveOrUpdateCategory(Category category);
 
 		
 	}

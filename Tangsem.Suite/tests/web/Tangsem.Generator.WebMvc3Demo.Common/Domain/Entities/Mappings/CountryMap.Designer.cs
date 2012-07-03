@@ -18,6 +18,9 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
 		/// </summary>
 		public CountryMap()
 		{
+			this.Table("Country");
+			
+
 			// primary key mapping
 			this.MapId();
 			
@@ -36,10 +39,12 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
 		/// </summary>
 		private void MapId()
 		{
+
 			this.Id(x => x.Id)
 				.Column("Id")
 				.GeneratedBy
 				.Native();
+					  
 		}
 		
 		/// <summary>
@@ -54,6 +59,16 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
                 .Column("CountryCode");			
 			this.Map(x => x.Continent)
                 .Column("Continent");			
+			this.Map(x => x.CreatedById)
+                .Column("CreatedById");			
+			this.Map(x => x.ModifiedById)
+                .Column("ModifiedById");			
+			this.Map(x => x.CreatedTime)
+                .Column("CreatedTime");			
+			this.Map(x => x.ModifiedTime)
+                .Column("ModifiedTime");			
+			this.Map(x => x.Active)
+                .Column("Active");			
 		}
 		
 		/// <summary>

@@ -37,5 +37,30 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.DTOs
 		/// </summary>
 		public virtual string Continent { get; set; }
 		
+		/// <summary>
+		/// Property CreatedById mapping to Country.CreatedById
+		/// </summary>
+		public virtual int? CreatedById { get; set; }
+		
+		/// <summary>
+		/// Property ModifiedById mapping to Country.ModifiedById
+		/// </summary>
+		public virtual int? ModifiedById { get; set; }
+		
+		/// <summary>
+		/// Property CreatedTime mapping to Country.CreatedTime
+		/// </summary>
+		public virtual System.DateTime? CreatedTime { get; set; }
+		
+		/// <summary>
+		/// Property ModifiedTime mapping to Country.ModifiedTime
+		/// </summary>
+		public virtual System.DateTime? ModifiedTime { get; set; }
+		
+		/// <summary>
+		/// Property Active mapping to Country.Active
+		/// </summary>
+		public virtual bool? Active { get; set; }
+		
 	}
 }

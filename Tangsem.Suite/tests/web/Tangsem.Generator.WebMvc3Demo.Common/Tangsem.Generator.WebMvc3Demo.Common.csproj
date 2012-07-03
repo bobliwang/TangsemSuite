@@ -49,12 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Entities\Category.Designer.cs" />
     <Compile Include="Domain\Entities\Country.Designer.cs" />
+    <Compile Include="Domain\Entities\DTOs\CategoryDTO.Designer.cs" />
     <Compile Include="Domain\Entities\DTOs\CountryDTO.Designer.cs" />
     <Compile Include="Domain\Entities\DTOs\StateDTO.Designer.cs" />
+    <Compile Include="Domain\Entities\DTOs\VStateDTO.Designer.cs" />
+    <Compile Include="Domain\Entities\Mappings\CategoryMap.Designer.cs" />
     <Compile Include="Domain\Entities\Mappings\CountryMap.Designer.cs" />
     <Compile Include="Domain\Entities\Mappings\StateMap.Designer.cs" />
+    <Compile Include="Domain\Entities\Mappings\VStateMap.Designer.cs" />
     <Compile Include="Domain\Entities\State.Designer.cs" />
+    <Compile Include="Domain\Entities\VState.Designer.cs" />
     <Compile Include="Domain\Repositories\IMyRepository.Designer.cs" />
     <Compile Include="Domain\Repositories\MyRepository.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

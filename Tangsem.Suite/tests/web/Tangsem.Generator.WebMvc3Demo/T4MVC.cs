@@ -24,6 +24,7 @@ using T4MVC;
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class MVC {
     public static Tangsem.Generator.WebMvc3Demo.Controllers.AccountController Account = new Tangsem.Generator.WebMvc3Demo.Controllers.T4MVC_AccountController();
+    public static Tangsem.Generator.WebMvc3Demo.Controllers.CategoryController Category = new Tangsem.Generator.WebMvc3Demo.Controllers.T4MVC_CategoryController();
     public static Tangsem.Generator.WebMvc3Demo.Controllers.CountryController Country = new Tangsem.Generator.WebMvc3Demo.Controllers.T4MVC_CountryController();
     public static Tangsem.Generator.WebMvc3Demo.Controllers.HomeController Home = new Tangsem.Generator.WebMvc3Demo.Controllers.T4MVC_HomeController();
     public static Tangsem.Generator.WebMvc3Demo.Controllers.StateController State = new Tangsem.Generator.WebMvc3Demo.Controllers.T4MVC_StateController();

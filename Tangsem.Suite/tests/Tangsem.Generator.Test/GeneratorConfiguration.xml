@@ -1,17 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <GeneratorConfiguration	
-						ProjectName="Tangsem.Generator.NHibernateTest"
+						ProjectName="Tangsem.Generator.WebMvc3Demo.Common"
 						OutputDir=""
-						RepositoryName ="NHibernateTestRepository"
+						RepositoryName ="MyRepository"
 						ConnectionString="Data Source=(local);Initial Catalog=TangsemGeneratorNHibernateTest;Integrated Security=True"
 						MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
 						OpenOutputDirAfterGeneration="true">
-	
-	<!-- Auto calculated namespaces: -->
-	<!-- 1. EntityNamespace="Tangsem.Generator.NHibernateTest.Domain.Entities"-->
-	<!-- 2. RepositoryNamespace ="Tangsem.Generator.NHibernateTest.Domain.Repositories" optional -->
-	<!-- 3. ServiceNamespace ="Tangsem.Generator.NHibernateTest.Domain.Servicies" optional -->
-	
+		
 	<!-- MetadataBuilder: className[;assemblyName]  -->
 	<IgnoredTable>Sysdiagrams</IgnoredTable>
 </GeneratorConfiguration>

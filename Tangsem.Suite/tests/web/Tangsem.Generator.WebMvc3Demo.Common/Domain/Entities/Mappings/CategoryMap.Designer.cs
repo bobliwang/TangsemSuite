@@ -9,16 +9,16 @@ using FluentNHibernate.Mapping;
 namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
 {
 	/// <summary>
-	/// The mapping configuration for State.
+	/// The mapping configuration for Category.
 	/// </summary>
-	public partial class StateMap : ClassMap<State>
+	public partial class CategoryMap : ClassMap<Category>
 	{
 		/// <summary>
 		/// The constructor.
 		/// </summary>
-		public StateMap()
+		public CategoryMap()
 		{
-			this.Table("State");
+			this.Table("Category");
 			
 
 			// primary key mapping
@@ -55,6 +55,14 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
 
 			this.Map(x => x.Name)
                 .Column("Name").Not.Nullable();			
+			this.Map(x => x.ShortDescription)
+                .Column("ShortDescription");			
+			this.Map(x => x.Description)
+                .Column("Description");			
+			this.Map(x => x.ParentId)
+                .Column("ParentId");			
+			this.Map(x => x.KeyWords)
+                .Column("KeyWords");			
 			this.Map(x => x.CreatedById)
                 .Column("CreatedById");			
 			this.Map(x => x.ModifiedById)
@@ -73,9 +81,6 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
 		private void MapOutgoingReferences()
 		{
 
-			this.References<Country>(x => x.Country)
-                .Fetch.Join()
-                .Column("CountryId");			
 		}
 		
 		/// <summary>

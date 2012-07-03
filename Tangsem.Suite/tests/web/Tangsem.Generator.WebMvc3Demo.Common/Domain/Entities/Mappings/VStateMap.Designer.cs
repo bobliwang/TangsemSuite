@@ -9,18 +9,20 @@ using FluentNHibernate.Mapping;
 namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
 {
 	/// <summary>
-	/// The mapping configuration for State.
+	/// The mapping configuration for VState.
 	/// </summary>
-	public partial class StateMap : ClassMap<State>
+	public partial class VStateMap : ClassMap<VState>
 	{
 		/// <summary>
 		/// The constructor.
 		/// </summary>
-		public StateMap()
+		public VStateMap()
 		{
-			this.Table("State");
+			this.Table("v_State");
 			
 
+			this.ReadOnly();
+			
 			// primary key mapping
 			this.MapId();
 			
@@ -40,10 +42,8 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
 		private void MapId()
 		{
 
-			this.Id(x => x.Id)
-				.Column("Id")
-				.GeneratedBy
-				.Native();
+			this.Id(x => x.RowNum)
+				.Column("RowNum");	
 					  
 		}
 		
@@ -53,18 +53,20 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
 		private void MapBasicColumns()
 		{
 
+			this.Map(x => x.RowNum)
+                .Column("RowNum");			
+			this.Map(x => x.Id)
+                .Column("Id").Not.Nullable();			
 			this.Map(x => x.Name)
                 .Column("Name").Not.Nullable();			
-			this.Map(x => x.CreatedById)
-                .Column("CreatedById");			
-			this.Map(x => x.ModifiedById)
-                .Column("ModifiedById");			
-			this.Map(x => x.CreatedTime)
-                .Column("CreatedTime");			
-			this.Map(x => x.ModifiedTime)
-                .Column("ModifiedTime");			
-			this.Map(x => x.Active)
-                .Column("Active");			
+			this.Map(x => x.CountryId)
+                .Column("CountryId");			
+			this.Map(x => x.CountryName)
+                .Column("CountryName");			
+			this.Map(x => x.CountryCode)
+                .Column("CountryCode");			
+			this.Map(x => x.Continent)
+                .Column("Continent");			
 		}
 		
 		/// <summary>
@@ -73,9 +75,6 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
 		private void MapOutgoingReferences()
 		{
 
-			this.References<Country>(x => x.Country)
-                .Fetch.Join()
-                .Column("CountryId");			
 		}
 		
 		/// <summary>

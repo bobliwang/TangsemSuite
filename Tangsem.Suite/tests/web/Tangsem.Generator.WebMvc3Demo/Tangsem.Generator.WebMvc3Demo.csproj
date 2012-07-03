@@ -95,7 +95,11 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="CategoryController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RepositoryController.cs" />
@@ -125,6 +129,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\Comparators.cs" />
     <Compile Include="ViewModels\StateQry.cs" />
     <Compile Include="ViewModels\StateViewModel.cs" />
@@ -232,6 +237,7 @@
     <Content Include="Views\Country\Add.cshtml" />
     <Content Include="Views\State\ListStates.cshtml" />
     <Content Include="Views\State\Add.cshtml" />
+    <Content Include="Views\Category\ListCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
