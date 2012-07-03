@@ -47,6 +47,7 @@
     <Compile Include="DataAccess\PropertyColumnAttribute.cs" />
     <Compile Include="Entities\ITrackableEntity.cs" />
     <Compile Include="Entities\TrackableEntity.cs" />
+    <Compile Include="Entities\TrackableEntityExtensions.cs" />
     <Compile Include="Extensions\Linq\ClassFactory.cs" />
     <Compile Include="Extensions\Linq\DynamicClass.cs" />
     <Compile Include="Extensions\Linq\DynamicExpression.cs" />

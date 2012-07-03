@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
+using Tangsem.Common.Entities;
+
 namespace Tangsem.Data.Domain
 {
   /// <summary>
@@ -63,6 +65,14 @@ namespace Tangsem.Data.Domain
     /// <param name="id">The id value.</param>
     /// <returns>The deleted entity if the operation is successful. Otherwise it returns null.</returns>
     T DeleteById<T>(object id) where T : class;
+
+    /// <summary>
+    /// Virutal delete entity.
+    /// </summary>
+    /// <typeparam name="T">The entity type.</typeparam>
+    /// <param name="entity">The enitity object.</param>
+    /// <returns>The virtual deleted entity.</returns>
+    T VirtualDelete<T>(T entity) where T : class, ITrackableEntity
 
     /// <summary>
     /// Commit transaction to database.

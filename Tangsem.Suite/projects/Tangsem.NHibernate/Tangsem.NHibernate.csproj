@@ -73,6 +73,10 @@
     <Compile Include="ReflectionUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Tangsem.Common\Tangsem.Common.csproj">
+      <Project>{A5DAFCC5-6AC6-4805-B7CA-A351084654CA}</Project>
+      <Name>Tangsem.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tangsem.Data\Tangsem.Data.csproj">
       <Project>{62351D99-DF6A-4329-8F50-F75ED133EBA7}</Project>
       <Name>Tangsem.Data</Name>

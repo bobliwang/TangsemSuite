@@ -10,8 +10,6 @@ namespace Tangsem.Common.Extensions
       return new List<T> { obj };
     }
 
-
-
     ////public static void Test()
     ////{
     ////  var typeMapper = new Dictionary<string, Type>();
