@@ -6,8 +6,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Tangsem.Common.Extensions;
-using Tangsem.Generator.NHibernateTest.Domain.Entities;
-using Tangsem.Generator.NHibernateTest.Domain.Repositories;
+using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
 
 namespace Tangsem.Generator.Test
 {

@@ -15,7 +15,6 @@ using RazorGenerator.Templating;
 
 using Tangsem.Generator;
 using Tangsem.Generator.Metadata.Builder;
-using Tangsem.Generator.NHibernateTest.Domain.Entities;
 using Tangsem.Generator.Settings;
 using Tangsem.Generator.Templates.Entities;
 using Tangsem.Generator.Templates.Repositories;

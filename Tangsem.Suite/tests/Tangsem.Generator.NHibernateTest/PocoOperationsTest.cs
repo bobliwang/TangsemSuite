@@ -15,8 +15,8 @@ using NHibernate.Linq;
 
 using Tangsem.Common.Entities;
 using Tangsem.Common.Extensions.Linq;
-using Tangsem.Generator.NHibernateTest.Domain.Entities;
-using Tangsem.Generator.NHibernateTest.Domain.Repositories;
+using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
+using Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories;
 using Tangsem.NHibernate.Interceptors;
 
 namespace Tangsem.Generator.NHibernateTest
@@ -303,11 +303,11 @@ namespace Tangsem.Generator.NHibernateTest
     /// Create the repository.
     /// </summary>
     /// <returns>The repository.</returns>
-    private INHibernateTestRepository CreateRepository()
+    private IMyRepository CreateRepository()
     {
       var ai = new AuditingInterceptor { CurrentUserId = CurrentUserId };
       var session = this.SessionFactory.OpenSession(ai);
-      return new NHibernateTestRepository { CurrentSession = session };
+      return new MyRepository { CurrentSession = session };
     }
 
     /// <summary>
