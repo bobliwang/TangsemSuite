@@ -22,7 +22,13 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers
     public virtual ActionResult ListCategories(CategoryViewModel vm)
     {
       var qry = vm.GetQueryable(this.Repository.Categories).ActiveOnly();
-      vm.Categories = qry.ToList();
+      ////vm.Categories = qry.ToList();
+      vm.Categories = qry;
+
+      if (this.Request.IsAjaxRequest())
+      {
+        return this.PartialView(MVC.Category.Views.CatsGrid, vm.Categories);
+      }
 
       return this.View(vm);
     }

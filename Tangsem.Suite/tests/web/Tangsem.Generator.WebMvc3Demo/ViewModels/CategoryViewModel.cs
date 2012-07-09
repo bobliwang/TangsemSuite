@@ -13,7 +13,6 @@ namespace Tangsem.Generator.WebMvc3Demo.ViewModels
     public CategoryViewModel()
     {
       this.SearchParams = new CategoryDTO();
-      this.Categories = new List<Category>();
     }
 
     public IQueryable<Category> GetQueryable(IQueryable<Category> qry)
@@ -31,7 +30,8 @@ namespace Tangsem.Generator.WebMvc3Demo.ViewModels
       return qry;
     }
 
-    public List<Category> Categories { get; set; }
+    public IQueryable<Category> Categories { get; set; }
+
 
     public CategoryDTO SearchParams { get; set; }
   }

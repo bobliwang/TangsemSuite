@@ -107,6 +107,7 @@
     <Compile Include="CountryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\WebGridExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,6 +239,7 @@
     <Content Include="Views\State\ListStates.cshtml" />
     <Content Include="Views\State\Add.cshtml" />
     <Content Include="Views\Category\ListCategories.cshtml" />
+    <Content Include="Views\Category\CatsGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

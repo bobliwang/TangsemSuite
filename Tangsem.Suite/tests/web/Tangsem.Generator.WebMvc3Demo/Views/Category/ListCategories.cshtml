@@ -1,5 +1,6 @@
 ﻿@using System.Web.Script.Serialization
 @using Tangsem.Generator.WebMvc3Demo.ViewModels
+@using Tangsem.Generator.WebMvc3Demo.Extensions
 
 @model CategoryViewModel
          
@@ -40,25 +41,10 @@
 }
 
 <h3>Categories Found</h3>
-<table>
+
+
+
   
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Short Description</th>
-      <th>Description</th>
-    </tr>
-    
-  </thead>
-    
-  <tbody>
-  @foreach(var cat in this.Model.Categories)
-  {
-    <tr>
-      <td>@cat.Name</td>
-      <td>@cat.ShortDescription</td>
-      <td>@cat.Description</td>
-    </tr>
-  }
-  </tbody>
-</table>
+  @Html.Partial(MVC.Category.Views.CatsGrid, this.Model.Categories)
+
+
