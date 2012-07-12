@@ -30,5 +30,6 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions
       qry = qry.Skip(page * webGrid.RowsPerPage).Take(webGrid.RowsPerPage);
       webGrid.Bind(qry.ToList(), autoSortAndPage: false, rowCount: rowsCount);
     }
+
   }
 }

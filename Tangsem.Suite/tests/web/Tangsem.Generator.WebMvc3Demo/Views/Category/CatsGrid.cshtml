@@ -20,6 +20,22 @@
           )
 )
 
-</div>
 
 @* Probably render paging bar with grid.GetPageUrl..*@
+
+<ul>
+@for(var i = 0; i < grid.PageCount; i++)
+{
+  <li style="display:table-cell; padding: 5px;"><a class="pjax_link" href="@grid.GetPageUrl(i)">@(i+1)</a></li>
+}
+</ul>
+
+
+<script language="javascript" type="text/javascript">  // --  --
+  $(document).ready(function () {
+    $('.pjax_link').pjax('#myGrid');
+  });
+</script>
+
+
+</div>
