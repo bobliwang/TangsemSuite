@@ -8,11 +8,22 @@
     <script src="@Url.Content("~/Scripts/modernizr-1.7.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.pjax.js")" type="text/javascript"></script>
     
+  <style type="text/css">
+    ul.footer {
+      
+    }
     
+    ul.footer li {
+      display:table-cell;
+      padding: 5px;
+    }
+  </style>
     
 <script language="javascript" type="text/javascript">  // --  --
   $(document).ready(function () {
     $('a[data-pjax]').pjax();
+
+    $('#myGrid a').pjax('#myGrid');
   });
 </script>
 </head>

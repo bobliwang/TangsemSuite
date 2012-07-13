@@ -4,35 +4,18 @@
 
 @model IQueryable<Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Category>
 
-
-
-<div id="myGrid">
 @{
-  
-  
-  var grid = new WebGrid(ajaxUpdateContainerId: "myGrid");
+  var grid = new WebGrid();
   grid.Bind(this, this.Model);
 }
 
+
+
 @grid.GetHtml(
   columns: grid.Columns(
+            grid.Column(columnName: "Id", header: "Id", format: @<text>@item.Id</text>, style: null, canSort: true),
             grid.Column(columnName: "Name", header: "Name", format: @<text>@item.Name</text>, style: null, canSort: true)
           )
+          , htmlAttributes: new {id = "gridTbl", width = "100%"}
 )
-
-
-@* Probably render paging bar with grid.GetPageUrl..*@
-
-<ul>
-@for(var i = 0; i < grid.PageCount; i++)
-{
-  <li style="display:table-cell; padding: 5px;"><a data-pjax='#myGrid' href="@grid.GetPageUrl(i)">@(i+1)</a></li>
-}
-</ul>
-
-
-
-
-</div>
-
  
