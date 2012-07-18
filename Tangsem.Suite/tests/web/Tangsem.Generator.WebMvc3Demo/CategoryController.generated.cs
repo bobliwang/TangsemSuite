@@ -42,6 +42,11 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         public System.Web.Mvc.ActionResult ListCategories() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.ListCategories);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult DeleteCategory() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.DeleteCategory);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public CategoryController Actions { get { return MVC.Category; } }
@@ -58,11 +63,13 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string ListCategories = "ListCategories";
+            public readonly string DeleteCategory = "DeleteCategory";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
             public const string ListCategories = "ListCategories";
+            public const string DeleteCategory = "DeleteCategory";
         }
 
 
@@ -72,6 +79,13 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_ListCategories {
             public readonly string vm = "vm";
+        }
+        static readonly ActionParamsClass_DeleteCategory s_params_DeleteCategory = new ActionParamsClass_DeleteCategory();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DeleteCategory DeleteCategoryParams { get { return s_params_DeleteCategory; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DeleteCategory {
+            public readonly string id = "id";
         }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -90,6 +104,12 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         public override System.Web.Mvc.ActionResult ListCategories(Tangsem.Generator.WebMvc3Demo.ViewModels.CategoryViewModel vm) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ListCategories);
             callInfo.RouteValueDictionary.Add("vm", vm);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult DeleteCategory(int id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.DeleteCategory);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 

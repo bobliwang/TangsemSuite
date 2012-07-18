@@ -48,3 +48,25 @@
 <div id="myGrid">
   @Html.Partial(MVC.Category.Views.CatsGrid, this.Model.Categories)
 </div>
+
+<script language="javascript" type="text/javascript">  // --  --
+  function deleteCat(id) {
+    $.ajax(
+      {
+        url: '@Url.Action(MVC.Category.DeleteCategory())',
+        type: "post",
+        dataType: "json",
+        data: { id: id },
+        success: function (data) {
+          $('#myGrid').load(document.location.href);
+
+          try {
+            $.jGrowl("Deleted:" + data.deleted, { header: 'Message', position: "bottom-right" });
+          } catch (e) {
+            alert(e);
+          }
+        }
+      }
+    );
+  }
+</script>

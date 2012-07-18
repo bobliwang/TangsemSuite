@@ -32,5 +32,13 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers
 
       return this.View(vm);
     }
+
+    [HttpPost]
+    public virtual ActionResult DeleteCategory(int id)
+    {
+      var deletedCategory = this.Repository.DeleteCategoryById(id);
+
+      return this.Json(new { deleted = (deletedCategory != null) });
+    }
   }
 }

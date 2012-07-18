@@ -11,10 +11,12 @@
 
 
 
+
 @grid.GetHtml(
   columns: grid.Columns(
             grid.Column(columnName: "Id", header: "Id", format: @<text>@item.Id</text>, style: null, canSort: true),
-            grid.Column(columnName: "Name", header: "Name", format: @<text>@item.Name</text>, style: null, canSort: true)
+            grid.Column(columnName: "Name", header: "Name", format: @<text>@item.Name</text>, style: null, canSort: true),
+            grid.Column(columnName: "", header: "Action", format: @<text><a href="javascript:deleteCat(@item.Id)">Delete</a></text>, style: null, canSort: false)
           )
           , htmlAttributes: new {id = "gridTbl", width = "100%"}
 )
