@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.WebPages;
 using Tangsem.Common.Extensions.Linq;
-namespace Tangsem.Generator.WebMvc3Demo.Extensions
+
+namespace Tangsem.Web.Mvc.Extensions
 {
   public static class WebGridExtensions
   {

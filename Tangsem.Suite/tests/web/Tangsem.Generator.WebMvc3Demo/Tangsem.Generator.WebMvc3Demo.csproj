@@ -107,7 +107,7 @@
     <Compile Include="CountryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Extensions\WebGridExtensions.cs" />
+    <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -305,6 +305,10 @@
     <ProjectReference Include="..\..\..\projects\Tangsem.NHibernate\Tangsem.NHibernate.csproj">
       <Project>{804A3FB9-89DF-4C66-B09B-AFAEF76069FD}</Project>
       <Name>Tangsem.NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\projects\Tangsem.Web.Mvc\Tangsem.Web.Mvc.csproj">
+      <Project>{EED36856-EA81-4EAF-B661-0FA9DBE67BB4}</Project>
+      <Name>Tangsem.Web.Mvc</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tangsem.Generator.WebMvc3Demo.Common\Tangsem.Generator.WebMvc3Demo.Common.csproj">
       <Project>{E638683E-9173-485D-8AB9-EECD66E2328E}</Project>

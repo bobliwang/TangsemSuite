@@ -362,6 +362,171 @@ namespace Links {
         private const string URLPATH = "~/Content";
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class jgrowl {
+            private const string URLPATH = "~/Content/jgrowl";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class examples {
+                private const string URLPATH = "~/Content/jgrowl/examples";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string _DS_Store = Url(".DS_Store");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class css {
+                    private const string URLPATH = "~/Content/jgrowl/examples/css";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class eggplant {
+                        private const string URLPATH = "~/Content/jgrowl/examples/css/eggplant";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class images {
+                            private const string URLPATH = "~/Content/jgrowl/examples/css/eggplant/images";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            public static readonly string ui_bg_flat_0_aaaaaa_40x100_png = Url("ui-bg_flat_0_aaaaaa_40x100.png");
+                            public static readonly string ui_bg_flat_0_eeeeee_40x100_png = Url("ui-bg_flat_0_eeeeee_40x100.png");
+                            public static readonly string ui_bg_flat_55_994d53_40x100_png = Url("ui-bg_flat_55_994d53_40x100.png");
+                            public static readonly string ui_bg_flat_55_fafafa_40x100_png = Url("ui-bg_flat_55_fafafa_40x100.png");
+                            public static readonly string ui_bg_gloss_wave_30_3d3644_500x100_png = Url("ui-bg_gloss-wave_30_3d3644_500x100.png");
+                            public static readonly string ui_bg_highlight_soft_100_dcd9de_1x100_png = Url("ui-bg_highlight-soft_100_dcd9de_1x100.png");
+                            public static readonly string ui_bg_highlight_soft_100_eae6ea_1x100_png = Url("ui-bg_highlight-soft_100_eae6ea_1x100.png");
+                            public static readonly string ui_bg_highlight_soft_25_30273a_1x100_png = Url("ui-bg_highlight-soft_25_30273a_1x100.png");
+                            public static readonly string ui_bg_highlight_soft_45_5f5964_1x100_png = Url("ui-bg_highlight-soft_45_5f5964_1x100.png");
+                            public static readonly string ui_icons_454545_256x240_png = Url("ui-icons_454545_256x240.png");
+                            public static readonly string ui_icons_734d99_256x240_png = Url("ui-icons_734d99_256x240.png");
+                            public static readonly string ui_icons_8d78a5_256x240_png = Url("ui-icons_8d78a5_256x240.png");
+                            public static readonly string ui_icons_a8a3ae_256x240_png = Url("ui-icons_a8a3ae_256x240.png");
+                            public static readonly string ui_icons_ebccce_256x240_png = Url("ui-icons_ebccce_256x240.png");
+                            public static readonly string ui_icons_ffffff_256x240_png = Url("ui-icons_ffffff_256x240.png");
+                        }
+                    
+                        public static readonly string jquery_ui_1_7_2_custom_css = Url("jquery-ui-1.7.2.custom.css");
+                    }
+                
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class le_frog {
+                        private const string URLPATH = "~/Content/jgrowl/examples/css/le-frog";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class images {
+                            private const string URLPATH = "~/Content/jgrowl/examples/css/le-frog/images";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            public static readonly string ui_bg_diagonals_small_0_aaaaaa_40x40_png = Url("ui-bg_diagonals-small_0_aaaaaa_40x40.png");
+                            public static readonly string ui_bg_diagonals_thick_15_444444_40x40_png = Url("ui-bg_diagonals-thick_15_444444_40x40.png");
+                            public static readonly string ui_bg_diagonals_thick_95_ffdc2e_40x40_png = Url("ui-bg_diagonals-thick_95_ffdc2e_40x40.png");
+                            public static readonly string ui_bg_glass_55_fbf5d0_1x400_png = Url("ui-bg_glass_55_fbf5d0_1x400.png");
+                            public static readonly string ui_bg_highlight_hard_30_285c00_1x100_png = Url("ui-bg_highlight-hard_30_285c00_1x100.png");
+                            public static readonly string ui_bg_highlight_soft_33_3a8104_1x100_png = Url("ui-bg_highlight-soft_33_3a8104_1x100.png");
+                            public static readonly string ui_bg_highlight_soft_50_4eb305_1x100_png = Url("ui-bg_highlight-soft_50_4eb305_1x100.png");
+                            public static readonly string ui_bg_highlight_soft_60_4ca20b_1x100_png = Url("ui-bg_highlight-soft_60_4ca20b_1x100.png");
+                            public static readonly string ui_bg_inset_soft_10_285c00_1x100_png = Url("ui-bg_inset-soft_10_285c00_1x100.png");
+                            public static readonly string ui_icons_4eb305_256x240_png = Url("ui-icons_4eb305_256x240.png");
+                            public static readonly string ui_icons_72b42d_256x240_png = Url("ui-icons_72b42d_256x240.png");
+                            public static readonly string ui_icons_cd0a0a_256x240_png = Url("ui-icons_cd0a0a_256x240.png");
+                            public static readonly string ui_icons_ffffff_256x240_png = Url("ui-icons_ffffff_256x240.png");
+                        }
+                    
+                        public static readonly string jquery_ui_1_7_2_custom_css = Url("jquery-ui-1.7.2.custom.css");
+                    }
+                
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class redmond {
+                        private const string URLPATH = "~/Content/jgrowl/examples/css/redmond";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class images {
+                            private const string URLPATH = "~/Content/jgrowl/examples/css/redmond/images";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            public static readonly string ui_bg_flat_0_aaaaaa_40x100_png = Url("ui-bg_flat_0_aaaaaa_40x100.png");
+                            public static readonly string ui_bg_flat_55_fbec88_40x100_png = Url("ui-bg_flat_55_fbec88_40x100.png");
+                            public static readonly string ui_bg_glass_75_d0e5f5_1x400_png = Url("ui-bg_glass_75_d0e5f5_1x400.png");
+                            public static readonly string ui_bg_glass_85_dfeffc_1x400_png = Url("ui-bg_glass_85_dfeffc_1x400.png");
+                            public static readonly string ui_bg_glass_95_fef1ec_1x400_png = Url("ui-bg_glass_95_fef1ec_1x400.png");
+                            public static readonly string ui_bg_gloss_wave_55_5c9ccc_500x100_png = Url("ui-bg_gloss-wave_55_5c9ccc_500x100.png");
+                            public static readonly string ui_bg_inset_hard_100_f5f8f9_1x100_png = Url("ui-bg_inset-hard_100_f5f8f9_1x100.png");
+                            public static readonly string ui_bg_inset_hard_100_fcfdfd_1x100_png = Url("ui-bg_inset-hard_100_fcfdfd_1x100.png");
+                            public static readonly string ui_icons_217bc0_256x240_png = Url("ui-icons_217bc0_256x240.png");
+                            public static readonly string ui_icons_2e83ff_256x240_png = Url("ui-icons_2e83ff_256x240.png");
+                            public static readonly string ui_icons_469bdd_256x240_png = Url("ui-icons_469bdd_256x240.png");
+                            public static readonly string ui_icons_6da8d5_256x240_png = Url("ui-icons_6da8d5_256x240.png");
+                            public static readonly string ui_icons_cd0a0a_256x240_png = Url("ui-icons_cd0a0a_256x240.png");
+                            public static readonly string ui_icons_d8e7f3_256x240_png = Url("ui-icons_d8e7f3_256x240.png");
+                            public static readonly string ui_icons_f9bd01_256x240_png = Url("ui-icons_f9bd01_256x240.png");
+                        }
+                    
+                        public static readonly string jquery_ui_1_7_2_custom_css = Url("jquery-ui-1.7.2.custom.css");
+                    }
+                
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class start {
+                        private const string URLPATH = "~/Content/jgrowl/examples/css/start";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class images {
+                            private const string URLPATH = "~/Content/jgrowl/examples/css/start/images";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            public static readonly string ui_bg_flat_55_999999_40x100_png = Url("ui-bg_flat_55_999999_40x100.png");
+                            public static readonly string ui_bg_flat_75_aaaaaa_40x100_png = Url("ui-bg_flat_75_aaaaaa_40x100.png");
+                            public static readonly string ui_bg_glass_45_0078ae_1x400_png = Url("ui-bg_glass_45_0078ae_1x400.png");
+                            public static readonly string ui_bg_glass_55_f8da4e_1x400_png = Url("ui-bg_glass_55_f8da4e_1x400.png");
+                            public static readonly string ui_bg_glass_75_79c9ec_1x400_png = Url("ui-bg_glass_75_79c9ec_1x400.png");
+                            public static readonly string ui_bg_gloss_wave_45_e14f1c_500x100_png = Url("ui-bg_gloss-wave_45_e14f1c_500x100.png");
+                            public static readonly string ui_bg_gloss_wave_50_6eac2c_500x100_png = Url("ui-bg_gloss-wave_50_6eac2c_500x100.png");
+                            public static readonly string ui_bg_gloss_wave_75_2191c0_500x100_png = Url("ui-bg_gloss-wave_75_2191c0_500x100.png");
+                            public static readonly string ui_bg_inset_hard_100_fcfdfd_1x100_png = Url("ui-bg_inset-hard_100_fcfdfd_1x100.png");
+                            public static readonly string ui_icons_0078ae_256x240_png = Url("ui-icons_0078ae_256x240.png");
+                            public static readonly string ui_icons_056b93_256x240_png = Url("ui-icons_056b93_256x240.png");
+                            public static readonly string ui_icons_d8e7f3_256x240_png = Url("ui-icons_d8e7f3_256x240.png");
+                            public static readonly string ui_icons_e0fdff_256x240_png = Url("ui-icons_e0fdff_256x240.png");
+                            public static readonly string ui_icons_f5e175_256x240_png = Url("ui-icons_f5e175_256x240.png");
+                            public static readonly string ui_icons_f7a50d_256x240_png = Url("ui-icons_f7a50d_256x240.png");
+                            public static readonly string ui_icons_fcd113_256x240_png = Url("ui-icons_fcd113_256x240.png");
+                        }
+                    
+                        public static readonly string jquery_ui_1_7_2_custom_css = Url("jquery-ui-1.7.2.custom.css");
+                    }
+                
+                }
+            
+                public static readonly string flora_close_png = Url("flora-close.png");
+                public static readonly string flora_header_png = Url("flora-header.png");
+                public static readonly string flora_notification_png = Url("flora-notification.png");
+                public static readonly string iphone_png = Url("iphone.png");
+                public static readonly string jgrowl_pool_html = Url("jgrowl-pool.html");
+                public static readonly string jgrowl_html = Url("jgrowl.html");
+                public static readonly string jquery_ui1_html = Url("jquery-ui1.html");
+                public static readonly string jquery_ui2_html = Url("jquery-ui2.html");
+                public static readonly string jquery_ui3_html = Url("jquery-ui3.html");
+                public static readonly string jquery_ui_all_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.all.min.js") ? Url("jquery.ui.all.min.js") : Url("jquery.ui.all.js");
+                              
+                public static readonly string jtweet_html = Url("jtweet.html");
+                public static readonly string multiple_containers_html = Url("multiple-containers.html");
+                public static readonly string sideways_html = Url("sideways.html");
+                public static readonly string smoke_png = Url("smoke.png");
+            }
+        
+            public static readonly string jquery_jgrowl_css = Url("jquery.jgrowl.css");
+            public static readonly string jquery_jgrowl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.jgrowl.min.js") ? Url("jquery.jgrowl.min.js") : Url("jquery.jgrowl.js");
+                          
+            public static readonly string jquery_jgrowl_compressed_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.jgrowl_compressed.min.js") ? Url("jquery.jgrowl_compressed.min.js") : Url("jquery.jgrowl_compressed.js");
+                          
+            public static readonly string jquery_jgrowl_google_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.jgrowl_google.min.js") ? Url("jquery.jgrowl_google.min.js") : Url("jquery.jgrowl_google.js");
+                          
+            public static readonly string jquery_jgrowl_minimized_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.jgrowl_minimized.min.js") ? Url("jquery.jgrowl_minimized.min.js") : Url("jquery.jgrowl_minimized.js");
+                          
+        }
+    
         public static readonly string Site_css = Url("Site.css");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class themes {
