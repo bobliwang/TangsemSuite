@@ -47,6 +47,11 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         public System.Web.Mvc.ActionResult DeleteCategory() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.DeleteCategory);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult Autocomplete() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.Autocomplete);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public CategoryController Actions { get { return MVC.Category; } }
@@ -64,12 +69,14 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         public class ActionNamesClass {
             public readonly string ListCategories = "ListCategories";
             public readonly string DeleteCategory = "DeleteCategory";
+            public readonly string Autocomplete = "Autocomplete";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
             public const string ListCategories = "ListCategories";
             public const string DeleteCategory = "DeleteCategory";
+            public const string Autocomplete = "Autocomplete";
         }
 
 
@@ -86,6 +93,13 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_DeleteCategory {
             public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_Autocomplete s_params_Autocomplete = new ActionParamsClass_Autocomplete();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Autocomplete AutocompleteParams { get { return s_params_Autocomplete; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Autocomplete {
+            public readonly string term = "term";
         }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -110,6 +124,12 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         public override System.Web.Mvc.ActionResult DeleteCategory(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.DeleteCategory);
             callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult Autocomplete(string term) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.Autocomplete);
+            callInfo.RouteValueDictionary.Add("term", term);
             return callInfo;
         }
 

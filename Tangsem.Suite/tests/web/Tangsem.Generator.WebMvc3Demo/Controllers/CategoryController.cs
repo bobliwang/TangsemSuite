@@ -40,5 +40,11 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers
 
       return this.Json(new { deleted = (deletedCategory != null) });
     }
+
+    public virtual JsonResult Autocomplete(string term)
+    {
+      var filteredItems = this.Repository.Categories.Where(cat => cat.Name.Contains(term)).Select(cat => new {label = cat.Name, value = cat.Id}).ToList();
+      return Json(filteredItems, JsonRequestBehavior.AllowGet);
+    }
   }
 }

@@ -527,6 +527,16 @@ namespace Links {
                           
         }
     
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class selectmenu {
+            private const string URLPATH = "~/Content/selectmenu";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string jquery_ui_selectmenu_css = Url("jquery.ui.selectmenu.css");
+            public static readonly string jquery_ui_selectmenu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.selectmenu.min.js") ? Url("jquery.ui.selectmenu.min.js") : Url("jquery.ui.selectmenu.js");
+                          
+        }
+    
         public static readonly string Site_css = Url("Site.css");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class themes {

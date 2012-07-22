@@ -21,7 +21,7 @@
         @Html.LabelFor(m => m.SearchParams.Name)
       </li>
       <li class="fld">
-        @Html.TextBoxFor(m => m.SearchParams.Name)
+        @Html.TextBoxFor(m => m.SearchParams.Name, new { id = "SearchParams.Name", data_autocomplete_url = Url.Action(MVC.Category.Autocomplete()) })
       </li>
   
       <li class="lineSeparator"></li>
@@ -31,6 +31,18 @@
       </li>
       <li class="fld">
         @Html.TextBoxFor(m => m.SearchParams.ShortDescription)
+      </li>
+      
+      <li class="lineSeparator"></li>
+
+      <li class="lbl">
+        <label id="test" for="testSel">Test</label>
+      </li>
+      <li class="fld">
+        <select id="testSel">
+          <option>English</option>
+          <option>Chinese</option>
+        </select>
       </li>
 
       <li class="lineSeparator"></li>
