@@ -9,7 +9,7 @@ using Tangsem.Common.Entities;
 
 namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities
 {
-	public partial class VState
+	public partial class VState : IAuditableEntity
 	{
 
 		/// <summary>
@@ -51,6 +51,56 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities
 		/// The lamda expression for CountryId.
 		/// </summary>
 		public static readonly Expression<Func<VState, object>> Expr_CountryId = x => x.CountryId;
+		
+		/// <summary>
+		/// The property name 'CreatedById'. It matches the property to column 'CreatedById'.
+		/// </summary>
+		public static readonly string Prop_CreatedById = "CreatedById";
+		
+		/// <summary>
+		/// The lamda expression for CreatedById.
+		/// </summary>
+		public static readonly Expression<Func<VState, object>> Expr_CreatedById = x => x.CreatedById;
+		
+		/// <summary>
+		/// The property name 'ModifiedById'. It matches the property to column 'ModifiedById'.
+		/// </summary>
+		public static readonly string Prop_ModifiedById = "ModifiedById";
+		
+		/// <summary>
+		/// The lamda expression for ModifiedById.
+		/// </summary>
+		public static readonly Expression<Func<VState, object>> Expr_ModifiedById = x => x.ModifiedById;
+		
+		/// <summary>
+		/// The property name 'CreatedTime'. It matches the property to column 'CreatedTime'.
+		/// </summary>
+		public static readonly string Prop_CreatedTime = "CreatedTime";
+		
+		/// <summary>
+		/// The lamda expression for CreatedTime.
+		/// </summary>
+		public static readonly Expression<Func<VState, object>> Expr_CreatedTime = x => x.CreatedTime;
+		
+		/// <summary>
+		/// The property name 'ModifiedTime'. It matches the property to column 'ModifiedTime'.
+		/// </summary>
+		public static readonly string Prop_ModifiedTime = "ModifiedTime";
+		
+		/// <summary>
+		/// The lamda expression for ModifiedTime.
+		/// </summary>
+		public static readonly Expression<Func<VState, object>> Expr_ModifiedTime = x => x.ModifiedTime;
+		
+		/// <summary>
+		/// The property name 'Active'. It matches the property to column 'Active'.
+		/// </summary>
+		public static readonly string Prop_Active = "Active";
+		
+		/// <summary>
+		/// The lamda expression for Active.
+		/// </summary>
+		public static readonly Expression<Func<VState, object>> Expr_Active = x => x.Active;
 		
 		/// <summary>
 		/// The property name 'CountryName'. It matches the property to column 'CountryName'.
@@ -116,6 +166,31 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities
 		/// Property CountryId mapping to v_State.CountryId
 		/// </summary>
 		public virtual int? CountryId { get; set; }
+		
+		/// <summary>
+		/// Property CreatedById mapping to v_State.CreatedById
+		/// </summary>
+		public virtual int? CreatedById { get; set; }
+		
+		/// <summary>
+		/// Property ModifiedById mapping to v_State.ModifiedById
+		/// </summary>
+		public virtual int? ModifiedById { get; set; }
+		
+		/// <summary>
+		/// Property CreatedTime mapping to v_State.CreatedTime
+		/// </summary>
+		public virtual System.DateTime? CreatedTime { get; set; }
+		
+		/// <summary>
+		/// Property ModifiedTime mapping to v_State.ModifiedTime
+		/// </summary>
+		public virtual System.DateTime? ModifiedTime { get; set; }
+		
+		/// <summary>
+		/// Property Active mapping to v_State.Active
+		/// </summary>
+		public virtual bool? Active { get; set; }
 		
 		/// <summary>
 		/// Property CountryName mapping to v_State.CountryName

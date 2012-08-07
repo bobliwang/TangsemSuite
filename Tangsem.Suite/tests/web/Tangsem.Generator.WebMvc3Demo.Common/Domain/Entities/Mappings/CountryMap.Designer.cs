@@ -3,94 +3,82 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Data.Entity;
 
-using FluentNHibernate.Mapping;
-
+using Tangsem.EF.Mappings;
+/* http://msdn.microsoft.com/en-us/library/hh295843(v=vs.103) */
 namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
 {
-	/// <summary>
-	/// The mapping configuration for Country.
-	/// </summary>
-	public partial class CountryMap : ClassMap<Country>
-	{
-		/// <summary>
-		/// The constructor.
-		/// </summary>
-		public CountryMap()
-		{
-			this.Table("Country");
-			
+  /// <summary>
+  /// The mapping configuration for Country.
+  /// </summary>
+  public partial class CountryMap : ClassMap<Country>
+  {
+    /// <summary>
+    /// The constructor.
+    /// </summary>
+    public CountryMap() : base()
+    {
+    }
+    
+    /// <summary>
+    /// Map Table.
+    /// </summary>
+    protected override void MapTable(DbModelBuilder modelBuilder)
+    {
+      this.EntityTypeConfiguration.ToTable("Country");
+    }
 
-			// primary key mapping
-			this.MapId();
-			
-			// basic columns mapping
-			this.MapBasicColumns();
-			
-			// outgoing references mapping
-			this.MapOutgoingReferences();
-			
-			// incoming references mapping
-			this.MapIncomingReferences();
-		}
-		
-		/// <summary>
-		/// Map the Primary Key.
-		/// </summary>
-		private void MapId()
-		{
+    /// <summary>
+    /// Map the Primary Key.
+    /// </summary>
+    protected override void MapId(DbModelBuilder modelBuilder)
+    {
 
-			this.Id(x => x.Id)
-				.Column("Id")
-				.GeneratedBy
-				.Native();
-					  
-		}
-		
-		/// <summary>
-		/// Map the Basic Columns.
-		/// </summary>
-		private void MapBasicColumns()
-		{
+        this.EntityTypeConfiguration
+            .HasKey(x => x.Id)
+            .Property(x => x.Id)
+            .HasColumnName("Id");
+        }
+    
+    /// <summary>
+    /// Map the Basic Columns.
+    /// </summary>
+    protected override void MapBasicColumns(DbModelBuilder modelBuilder)
+    {
 
-			this.Map(x => x.Name)
-                .Column("Name").Not.Nullable();			
-			this.Map(x => x.CountryCode)
-                .Column("CountryCode");			
-			this.Map(x => x.Continent)
-                .Column("Continent");			
-			this.Map(x => x.CreatedById)
-                .Column("CreatedById");			
-			this.Map(x => x.ModifiedById)
-                .Column("ModifiedById");			
-			this.Map(x => x.CreatedTime)
-                .Column("CreatedTime");			
-			this.Map(x => x.ModifiedTime)
-                .Column("ModifiedTime");			
-			this.Map(x => x.Active)
-                .Column("Active");			
-		}
-		
-		/// <summary>
-		/// Map the Outgoing References.
-		/// </summary>
-		private void MapOutgoingReferences()
-		{
+         this.EntityTypeConfiguration
+             .Property(x => x.Name)
+             .HasColumnName("Name").IsRequired();      
+         this.EntityTypeConfiguration
+             .Property(x => x.CountryCode)
+             .HasColumnName("CountryCode");      
+         this.EntityTypeConfiguration
+             .Property(x => x.Continent)
+             .HasColumnName("Continent");      
+         this.EntityTypeConfiguration
+             .Property(x => x.CreatedById)
+             .HasColumnName("CreatedById");      
+         this.EntityTypeConfiguration
+             .Property(x => x.ModifiedById)
+             .HasColumnName("ModifiedById");      
+         this.EntityTypeConfiguration
+             .Property(x => x.CreatedTime)
+             .HasColumnName("CreatedTime");      
+         this.EntityTypeConfiguration
+             .Property(x => x.ModifiedTime)
+             .HasColumnName("ModifiedTime");      
+         this.EntityTypeConfiguration
+             .Property(x => x.Active)
+             .HasColumnName("Active");      
+    }
+    
+    /// <summary>
+    /// Map the MapRelationships.
+    /// </summary>
+    protected override void MapRelationships(DbModelBuilder modelBuilder)
+    {
 
-		}
-		
-		/// <summary>
-		/// Map the Incoming References.
-		/// </summary>
-		private void MapIncomingReferences()
-		{
-
-			this.HasMany<State>(x => x.States)
-				.KeyColumn("CountryId")
-                .Inverse()
-                .LazyLoad()
-                .AsBag();
-			
-		}
-	}
+    }
+  }
 }

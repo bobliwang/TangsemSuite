@@ -1,23 +1,18 @@
-﻿/*
-using System;
+﻿using System;
 using System.Configuration;
 using System.Data.Entity;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using NHibernate;
-using NHibernate.Dialect;
-using NHibernate.Linq;
 
 using Tangsem.Common.Entities;
 using Tangsem.Common.Extensions.Linq;
 using Tangsem.EF.Mappings;
+
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories;
 using Tangsem.NHibernate.Interceptors;
@@ -25,27 +20,16 @@ using Tangsem.NHibernate.Interceptors;
 namespace Tangsem.Generator.NHibernateTest
 {
   [TestClass]
-  public class PocoOperationsTest
+  public class EfPocoOperationsTest
   {
     public const int CurrentUserId = 5;
-
-    /// <summary>
-    /// The SessionFactory.
-    /// </summary>
-    public ISessionFactory SessionFactory { get; private set; }
-
-    [TestInitialize]
-    public void Init()
-    {
-      this.SessionFactory = this.CreateSessionFactory();
-    }
 
     [TestMethod]
     public void Test_ShowStatesUnderCountries()
     {
       using (var repo = this.CreateRepository())
       {
-        var countries = repo.Countries.FetchMany(c => c.States).ToList();
+        var countries = repo.Countries.Include(c => c.States).ToList();
 
         foreach (var country in countries)
         {
@@ -177,7 +161,7 @@ namespace Tangsem.Generator.NHibernateTest
       using (var repo = this.CreateRepository())
       {
         var countries = repo.Countries
-                         .FetchMany(x => x.States)
+                         .Include(x => x.States)
                          .Where(x => x.States.Count() > 1)
                          .ToList();
 
@@ -210,7 +194,6 @@ namespace Tangsem.Generator.NHibernateTest
       using (var repo = this.CreateRepository())
       {
         var states = repo.States
-                         .Fetch(x => x.Country)
                          .ToList();
 
         foreach (var state in states)
@@ -269,7 +252,7 @@ namespace Tangsem.Generator.NHibernateTest
 
       using (var repo = this.CreateRepository())
       {
-        cat = repo.Categories.ActiveOnly().FirstOrDefault();
+        cat = repo.Categories.FirstOrDefault(x => x.Active != null && x.Active.Value);
 
         Assert.IsNotNull(cat, "Category 'Test category' is null!");
         Assert.AreEqual(cat.Active, true);
@@ -309,11 +292,10 @@ namespace Tangsem.Generator.NHibernateTest
     private IMyRepository CreateRepository()
     {
       var ai = new AuditingInterceptor { CurrentUserId = CurrentUserId };
-      var session = this.SessionFactory.OpenSession(ai);
       //return new MyRepository { CurrentSession = session };
 
       var dbContext = new MyDbContext(this.GetConnString());
-      return new MyRepository { CurrentDbContext = dbContext };
+      return new MyRepository { CurrentDbContext = dbContext, CurrentUserId = 1 };
     }
 
 
@@ -323,23 +305,5 @@ namespace Tangsem.Generator.NHibernateTest
 
       return connString;
     }
-
-    /// <summary>
-    /// Create the SessionFactory.
-    /// </summary>
-    /// <returns>The session factory.</returns>
-    private ISessionFactory CreateSessionFactory()
-    {
-
-
-      return Fluently
-        .Configure()
-        .Database(MsSqlConfiguration.MsSql2008.ConnectionString(this.GetConnString()).ShowSql().MaxFetchDepth(3).Dialect<MsSql2008Dialect>())
-        .Mappings(m =>
-          m.FluentMappings.AddFromAssemblyOf<Country>())
-        .BuildSessionFactory();
-    }
-
   }
 }
-*/

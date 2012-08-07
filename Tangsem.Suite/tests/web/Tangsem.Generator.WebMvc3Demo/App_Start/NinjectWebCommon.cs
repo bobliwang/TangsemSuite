@@ -32,13 +32,18 @@ namespace Tangsem.Generator.WebMvc3Demo.App_Start
 
     private static ISessionFactory sessionFactory;
 
+    private static string GetConnString()
+    {
+      return ConfigurationManager.ConnectionStrings["TangsemGeneratorNHibernateTest"].ConnectionString;
+    }
+
     private static ISessionFactory SessionFactory
     {
       get
       {
         if (sessionFactory == null)
         {
-          var connString = ConfigurationManager.ConnectionStrings["TangsemGeneratorNHibernateTest"].ConnectionString;
+          var connString = GetConnString();
 
           sessionFactory = Fluently.Configure()
                                         .Database(MsSqlConfiguration.MsSql2008.ConnectionString(connString).ShowSql().MaxFetchDepth(3).Dialect<MsSql2008Dialect>())
@@ -92,7 +97,8 @@ namespace Tangsem.Generator.WebMvc3Demo.App_Start
       kernel.Bind<IMyRepository>()
             .To<MyRepository>()
             .InRequestScope()
-            .WithPropertyValue("CurrentSession", ctx => SessionFactory.OpenSession())
+        //.WithPropertyValue("CurrentSession", ctx => SessionFactory.OpenSession())
+            .WithPropertyValue("CurrentDbContext", ctx => new MyDbContext(GetConnString()))
             .OnActivation<MyRepository>((ctx, repo) => repo.BeginTransaction())
             .OnDeactivation<MyRepository>((ctx, repo) => repo.Close());
 

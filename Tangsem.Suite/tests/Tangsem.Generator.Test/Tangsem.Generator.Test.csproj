@@ -62,10 +62,6 @@
       <Project>{6CE102E0-7F36-434A-AEC0-541A20FD2548}</Project>
       <Name>Tangsem.Generator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tangsem.Generator.NHibernateTest\Tangsem.Generator.NHibernateTest.csproj">
-      <Project>{5FBDE8A5-D85C-402D-B8A2-5DADE65C3EA0}</Project>
-      <Name>Tangsem.Generator.NHibernateTest</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="GeneratorConfiguration.xml">
@@ -74,6 +70,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

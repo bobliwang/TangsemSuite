@@ -7,7 +7,12 @@ using System.Text;
 
 namespace Tangsem.EF.Mappings
 {
-  public class ClassMap<TEntity>
+  public interface IClassMap
+  {
+    void Map(DbModelBuilder modelBuilder);
+  }
+
+  public class ClassMap<TEntity> : IClassMap
     where TEntity : class
   {
     public ClassMap()

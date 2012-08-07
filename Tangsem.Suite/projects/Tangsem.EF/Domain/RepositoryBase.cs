@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
+using System.Transactions;
 
 using Tangsem.Common.Entities;
 using Tangsem.Data.Domain;
@@ -40,11 +41,6 @@ namespace Tangsem.EF.Domain
     /// Gets or sets the hiberante ISession object.
     /// </summary>
     public DbContext CurrentDbContext { get; set; }
-
-    /// <summary>
-    /// Gets the database transaction.
-    /// </summary>
-    public IDbTransaction Transaction { get; protected set; }
 
     public void Dispose()
     {
@@ -193,9 +189,11 @@ namespace Tangsem.EF.Domain
         }
       }
 
-      this.CurrentDbContext.SaveChanges();
-      this.Transaction.Commit();
-      this.Transaction = null;
+      using (var scope = new TransactionScope())
+      {
+        this.CurrentDbContext.SaveChanges();
+        scope.Complete();
+      }
     }
 
     /// <summary>
@@ -203,8 +201,7 @@ namespace Tangsem.EF.Domain
     /// </summary>
     public virtual void Rollback()
     {
-      this.Transaction.Rollback();
-      this.Transaction = null;
+      // do nothing.
     }
 
     /// <summary>
@@ -212,12 +209,7 @@ namespace Tangsem.EF.Domain
     /// </summary>
     public virtual void BeginTransaction()
     {
-      if (this.Transaction != null)
-      {
-        throw new Exception("There is already an existing active transaction!");
-      }
-
-      this.Transaction = this.CurrentDbContext.Database.Connection.BeginTransaction();
+      // do nothing.
     }
 
     /// <summary>
@@ -231,15 +223,6 @@ namespace Tangsem.EF.Domain
       {
         if (disposing)
         {
-          if (this.Transaction != null)
-          {
-            try
-            {
-              this.Transaction.Rollback();
-            }
-            catch { }
-          }
-
           if (this.CurrentDbContext != null)
           {
             this.CurrentDbContext.Dispose();

@@ -52,12 +52,13 @@ WriteLiteral("        \r\n");
 
 
 WriteLiteral("\r\nusing System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\nus" +
-"ing System.Text;\r\nusing System.Linq;\r\n\r\nusing Tangsem.EF.Mappings;\r\n/* http://ms" +
-"dn.microsoft.com/en-us/library/hh295843(v=vs.103) */\r\nnamespace ");
+"ing System.Text;\r\nusing System.Linq;\r\nusing System.Data.Entity;\r\n\r\nusing Tangsem" +
+".EF.Mappings;\r\n/* http://msdn.microsoft.com/en-us/library/hh295843(v=vs.103) */\r" +
+"\nnamespace ");
 
 
             
-            #line 16 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 17 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
       Write(Configuration.MappingNamespace);
 
             
@@ -67,7 +68,7 @@ WriteLiteral("\r\n{\r\n  /// <summary>\r\n  /// The mapping configuration for ")
 
 
             
-            #line 19 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 20 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                                 Write(TableMetadata.EntityName);
 
             
@@ -77,7 +78,7 @@ WriteLiteral(".\r\n  /// </summary>\r\n  public partial class ");
 
 
             
-            #line 21 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 22 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                    Write(TableMetadata.EntityName);
 
             
@@ -87,7 +88,7 @@ WriteLiteral("Map : ClassMap<");
 
 
             
-            #line 21 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 22 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                                                              Write(TableMetadata.EntityName);
 
             
@@ -98,81 +99,82 @@ WriteLiteral(">\r\n  {\r\n    /// <summary>\r\n    /// The constructor.\r\n    /
 
 
             
-            #line 26 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 27 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
        Write(TableMetadata.EntityName);
 
             
             #line default
             #line hidden
 WriteLiteral("Map() : base()\r\n    {\r\n    }\r\n    \r\n    /// <summary>\r\n    /// Map Table.\r\n    //" +
-"/ </summary>\r\n    protected virtual void MapTable(DbModelBuilder modelBuilder)\r\n" +
-"    {\r\n      this.EntityTypeConfiguration.ToTable(\"");
+"/ </summary>\r\n    protected override void MapTable(DbModelBuilder modelBuilder)\r" +
+"\n    {\r\n      this.EntityTypeConfiguration.ToTable(\"");
 
 
             
-            #line 35 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 36 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                                         Write(TableMetadata.Name);
 
             
             #line default
             #line hidden
 WriteLiteral("\");\r\n    }\r\n\r\n    /// <summary>\r\n    /// Map the Primary Key.\r\n    /// </summary>" +
-"\r\n    private void MapId()\r\n    {\r\n");
+"\r\n    protected override void MapId(DbModelBuilder modelBuilder)\r\n    {\r\n");
 
 
             
-            #line 43 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 44 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
      if(TableMetadata.PrimaryKeys.Any())
     {
             
             #line default
             #line hidden
-WriteLiteral("\r\n        this.EntityTypeConfiguration\r\n        .Property(x => x => x.");
-
-
-            
-            #line 46 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
-                          Write(TableMetadata.PrimaryKeys[0].PropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(")\r\n        .HasColumnName(\"");
+WriteLiteral("\r\n        this.EntityTypeConfiguration\r\n            .HasKey(x => x.");
 
 
             
             #line 47 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
-                    Write(TableMetadata.PrimaryKeys[0].ColumnName);
+                       Write(TableMetadata.PrimaryKeys[0].PropertyName);
 
             
             #line default
             #line hidden
-WriteLiteral("\")\r\n        .HasKey(x => x.");
+WriteLiteral(")\r\n            .Property(x => x.");
 
 
             
             #line 48 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
-                   Write(TableMetadata.PrimaryKeys[0].PropertyName);
+                         Write(TableMetadata.PrimaryKeys[0].PropertyName);
 
             
             #line default
             #line hidden
-WriteLiteral(");\r\n    ");
+WriteLiteral(")\r\n            .HasColumnName(\"");
 
 
             
             #line 49 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+                        Write(TableMetadata.PrimaryKeys[0].ColumnName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\");\r\n    ");
+
+
+            
+            #line 50 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
            }
 
             
             #line default
             #line hidden
 WriteLiteral("    }\r\n    \r\n    /// <summary>\r\n    /// Map the Basic Columns.\r\n    /// </summary" +
-">\r\n    private void MapBasicColumns()\r\n    {\r\n");
+">\r\n    protected override void MapBasicColumns(DbModelBuilder modelBuilder)\r\n   " +
+" {\r\n");
 
 
             
-            #line 57 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 58 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
        foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey && !c.IsPrimaryKey))
       {
             
@@ -182,7 +184,7 @@ WriteLiteral("\r\n         this.EntityTypeConfiguration\r\n             .Propert
 
 
             
-            #line 60 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 61 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                           Write(col.PropertyName);
 
             
@@ -192,7 +194,7 @@ WriteLiteral(")\r\n             .HasColumnName(\"");
 
 
             
-            #line 61 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 62 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                          Write(col.ColumnName);
 
             
@@ -200,14 +202,14 @@ WriteLiteral(")\r\n             .HasColumnName(\"");
             #line hidden
 
             
-            #line 61 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 62 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                                               WriteLiteral("\")");
 
             
             #line default
             #line hidden
             
-            #line 61 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 62 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                                                  if (col.Nullable) {
             
             #line default
@@ -216,7 +218,7 @@ WriteLiteral(";");
 
 
             
-            #line 61 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 62 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                                                                                   }else{
             
             #line default
@@ -225,7 +227,7 @@ WriteLiteral(".IsRequired();");
 
 
             
-            #line 61 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 62 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                                                                                                                    }
 
             
@@ -235,18 +237,19 @@ WriteLiteral("      ");
 
 
             
-            #line 62 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 63 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
              }
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n    }\r\n    \r\n    /// <summary>\r\n    /// Map the MapRelationships.\r\n    /// </su" +
-"mmary>\r\n    private void MapRelationships()\r\n    {\r\n");
+"mmary>\r\n    protected override void MapRelationships(DbModelBuilder modelBuilder" +
+")\r\n    {\r\n");
 
 
             
-            #line 71 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 72 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
        foreach (var reference in this.TableMetadata.OutgoingReferences)
       {
         var optional = reference.ColumnPairs[0].ChildColumnMetadata.Nullable;
@@ -260,7 +263,7 @@ WriteLiteral("\r\n        this.EntityTypeConfiguration\r\n            .Has");
 
 
             
-            #line 76 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 77 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
             Write(optional ? "Optional" : "Required");
 
             
@@ -270,7 +273,7 @@ WriteLiteral("(x => x.");
 
 
             
-            #line 76 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 77 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                                                          Write(reference.ParentPropertyName);
 
             
@@ -280,27 +283,27 @@ WriteLiteral(")\r\n        .WithMany(x => x.");
 
 
             
-            #line 77 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+            #line 78 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
                      Write(reference.ChildListPropertyName);
 
             
             #line default
             #line hidden
-WriteLiteral(")\r\n        .HasForeignKey(x => ");
-
-
-            
-            #line 78 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
-                        Write(reference.ColumnPairs[0].ChildColumnMetadata.PropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(");\r\n      ");
+WriteLiteral(")\r\n        .Map(m => m.MapKey(\"");
 
 
             
             #line 79 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
+                        Write(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\"));\r\n      ");
+
+
+            
+            #line 80 "..\..\Templates\Entities\Poco.EF.Fluent.Designer.cshtml"
              }
 
             

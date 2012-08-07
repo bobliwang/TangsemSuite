@@ -3,86 +3,89 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Data.Entity;
 
-using FluentNHibernate.Mapping;
-
+using Tangsem.EF.Mappings;
+/* http://msdn.microsoft.com/en-us/library/hh295843(v=vs.103) */
 namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
 {
-	/// <summary>
-	/// The mapping configuration for VState.
-	/// </summary>
-	public partial class VStateMap : ClassMap<VState>
-	{
-		/// <summary>
-		/// The constructor.
-		/// </summary>
-		public VStateMap()
-		{
-			this.Table("v_State");
-			
+  /// <summary>
+  /// The mapping configuration for VState.
+  /// </summary>
+  public partial class VStateMap : ClassMap<VState>
+  {
+    /// <summary>
+    /// The constructor.
+    /// </summary>
+    public VStateMap() : base()
+    {
+    }
+    
+    /// <summary>
+    /// Map Table.
+    /// </summary>
+    protected override void MapTable(DbModelBuilder modelBuilder)
+    {
+      this.EntityTypeConfiguration.ToTable("v_State");
+    }
 
-			this.ReadOnly();
-			
-			// primary key mapping
-			this.MapId();
-			
-			// basic columns mapping
-			this.MapBasicColumns();
-			
-			// outgoing references mapping
-			this.MapOutgoingReferences();
-			
-			// incoming references mapping
-			this.MapIncomingReferences();
-		}
-		
-		/// <summary>
-		/// Map the Primary Key.
-		/// </summary>
-		private void MapId()
-		{
+    /// <summary>
+    /// Map the Primary Key.
+    /// </summary>
+    protected override void MapId(DbModelBuilder modelBuilder)
+    {
+    }
+    
+    /// <summary>
+    /// Map the Basic Columns.
+    /// </summary>
+    protected override void MapBasicColumns(DbModelBuilder modelBuilder)
+    {
 
-			this.Id(x => x.RowNum)
-				.Column("RowNum");	
-					  
-		}
-		
-		/// <summary>
-		/// Map the Basic Columns.
-		/// </summary>
-		private void MapBasicColumns()
-		{
+         this.EntityTypeConfiguration
+             .Property(x => x.RowNum)
+             .HasColumnName("RowNum");      
+         this.EntityTypeConfiguration
+             .Property(x => x.Id)
+             .HasColumnName("Id").IsRequired();      
+         this.EntityTypeConfiguration
+             .Property(x => x.Name)
+             .HasColumnName("Name").IsRequired();      
+         this.EntityTypeConfiguration
+             .Property(x => x.CountryId)
+             .HasColumnName("CountryId");      
+         this.EntityTypeConfiguration
+             .Property(x => x.CreatedById)
+             .HasColumnName("CreatedById");      
+         this.EntityTypeConfiguration
+             .Property(x => x.ModifiedById)
+             .HasColumnName("ModifiedById");      
+         this.EntityTypeConfiguration
+             .Property(x => x.CreatedTime)
+             .HasColumnName("CreatedTime");      
+         this.EntityTypeConfiguration
+             .Property(x => x.ModifiedTime)
+             .HasColumnName("ModifiedTime");      
+         this.EntityTypeConfiguration
+             .Property(x => x.Active)
+             .HasColumnName("Active");      
+         this.EntityTypeConfiguration
+             .Property(x => x.CountryName)
+             .HasColumnName("CountryName");      
+         this.EntityTypeConfiguration
+             .Property(x => x.CountryCode)
+             .HasColumnName("CountryCode");      
+         this.EntityTypeConfiguration
+             .Property(x => x.Continent)
+             .HasColumnName("Continent");      
+    }
+    
+    /// <summary>
+    /// Map the MapRelationships.
+    /// </summary>
+    protected override void MapRelationships(DbModelBuilder modelBuilder)
+    {
 
-			this.Map(x => x.RowNum)
-                .Column("RowNum");			
-			this.Map(x => x.Id)
-                .Column("Id").Not.Nullable();			
-			this.Map(x => x.Name)
-                .Column("Name").Not.Nullable();			
-			this.Map(x => x.CountryId)
-                .Column("CountryId");			
-			this.Map(x => x.CountryName)
-                .Column("CountryName");			
-			this.Map(x => x.CountryCode)
-                .Column("CountryCode");			
-			this.Map(x => x.Continent)
-                .Column("Continent");			
-		}
-		
-		/// <summary>
-		/// Map the Outgoing References.
-		/// </summary>
-		private void MapOutgoingReferences()
-		{
-
-		}
-		
-		/// <summary>
-		/// Map the Incoming References.
-		/// </summary>
-		private void MapIncomingReferences()
-		{
-
-		}
-	}
+    }
+  }
 }
