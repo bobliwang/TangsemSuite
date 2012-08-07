@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{62351D99-DF6A-4329-8F50-F75ED133EBA7}</ProjectGuid>
+    <ProjectGuid>{B6C6C2C0-4276-4307-BE2B-0DE3E81AB4F2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tangsem.Data</RootNamespace>
-    <AssemblyName>Tangsem.Data</AssemblyName>
+    <RootNamespace>Tangsem.EF</RootNamespace>
+    <AssemblyName>Tangsem.EF</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,8 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,17 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\IRepository.cs" />
-    <Compile Include="Domain\RepositoryContext.cs" />
-    <Compile Include="Service\EntityServiceBase.cs" />
-    <Compile Include="Service\IEntityService.cs" />
+    <Compile Include="Domain\RepositoryBase.cs" />
+    <Compile Include="Mappings\ClassMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SortBy.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tangsem.Common\Tangsem.Common.csproj">
       <Project>{A5DAFCC5-6AC6-4805-B7CA-A351084654CA}</Project>
       <Name>Tangsem.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tangsem.Data\Tangsem.Data.csproj">
+      <Project>{62351D99-DF6A-4329-8F50-F75ED133EBA7}</Project>
+      <Name>Tangsem.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

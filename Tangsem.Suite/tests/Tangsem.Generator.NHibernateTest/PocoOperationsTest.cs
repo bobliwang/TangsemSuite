@@ -275,29 +275,29 @@ namespace Tangsem.Generator.NHibernateTest
       }
     }
 
-	[TestMethod]
-	public void Test_CreatingCategories()
-	{
-		using (var repo = this.CreateRepository())
-		{
-      var oldCount = repo.Categories.Count();
+    [TestMethod]
+    public void Test_CreatingCategories()
+    {
+      using (var repo = this.CreateRepository())
+      {
+        var oldCount = repo.Categories.Count();
 
-			repo.BeginTransaction();
+        repo.BeginTransaction();
 
-			for (var i = 1; i <= 100; i ++ )
-			{
-				var cat = new Category { Name = "Category_" + i, ShortDescription = "Short Description for " + i, Description = "Description " + i };
+        for (var i = 1; i <= 100; i++)
+        {
+          var cat = new Category { Name = "Category_" + i, ShortDescription = "Short Description for " + i, Description = "Description " + i };
 
-				repo.SaveCategory(cat);
-			}
+          repo.SaveCategory(cat);
+        }
 
-			repo.Commit();
+        repo.Commit();
 
-      var newCount = repo.Categories.Count();
+        var newCount = repo.Categories.Count();
 
-      Assert.AreEqual(100, newCount - oldCount);
-		}
-	}
+        Assert.AreEqual(100, newCount - oldCount);
+      }
+    }
 
     /// <summary>
     /// Create the repository.

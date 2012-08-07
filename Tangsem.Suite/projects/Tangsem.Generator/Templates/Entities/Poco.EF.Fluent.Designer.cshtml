@@ -1,0 +1,83 @@
+﻿@* Generator: Template *@
+@inherits SingleTableMetadataTemplate
+        
+@using Tangsem.Generator.Metadata
+@using Tangsem.Generator.Settings
+@using Tangsem.Generator.Templates;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+
+using Tangsem.EF.Mappings;
+/* http://msdn.microsoft.com/en-us/library/hh295843(v=vs.103) */
+namespace @(Configuration.MappingNamespace)
+{
+  /// <summary>
+  /// The mapping configuration for @(TableMetadata.EntityName).
+  /// </summary>
+  public partial class @(TableMetadata.EntityName)Map : ClassMap<@(TableMetadata.EntityName)>
+  {
+    /// <summary>
+    /// The constructor.
+    /// </summary>
+    public @(TableMetadata.EntityName)Map() : base()
+    {
+    }
+    
+    /// <summary>
+    /// Map Table.
+    /// </summary>
+    protected virtual void MapTable(DbModelBuilder modelBuilder)
+    {
+      this.EntityTypeConfiguration.ToTable("@(TableMetadata.Name)");
+    }
+
+    /// <summary>
+    /// Map the Primary Key.
+    /// </summary>
+    private void MapId()
+    {
+    @if(TableMetadata.PrimaryKeys.Any())
+    {<text>
+        this.EntityTypeConfiguration
+        .Property(x => x => x.@(TableMetadata.PrimaryKeys[0].PropertyName))
+        .HasColumnName("@(TableMetadata.PrimaryKeys[0].ColumnName)")
+        .HasKey(x => x.@(TableMetadata.PrimaryKeys[0].PropertyName));
+    </text>}
+    }
+    
+    /// <summary>
+    /// Map the Basic Columns.
+    /// </summary>
+    private void MapBasicColumns()
+    {
+      @foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey && !c.IsPrimaryKey))
+      {<text>
+         this.EntityTypeConfiguration
+             .Property(x => x.@(col.PropertyName))
+             .HasColumnName("@(col.ColumnName)")@if (col.Nullable) {<text>;</text>}else{<text>.IsRequired();</text>}
+      </text>}
+
+    }
+    
+    /// <summary>
+    /// Map the MapRelationships.
+    /// </summary>
+    private void MapRelationships()
+    {
+      @foreach (var reference in this.TableMetadata.OutgoingReferences)
+      {
+        var optional = reference.ColumnPairs[0].ChildColumnMetadata.Nullable;
+      <text>
+        this.EntityTypeConfiguration
+            .Has@(optional ? "Optional" : "Required")(x => x.@(reference.ParentPropertyName))
+        .WithMany(x => x.@(reference.ChildListPropertyName))
+        .HasForeignKey(x => @(reference.ColumnPairs[0].ChildColumnMetadata.PropertyName));
+      </text>}
+
+    }
+  }
+}

@@ -66,12 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interceptors\AuditingInterceptor.cs" />
-    <Compile Include="Service\ServiceBase.cs" />
+    <Compile Include="Service\NhEntityServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\RepositoryBase.cs" />
-    <Compile Include="ReflectionUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tangsem.Common\Tangsem.Common.csproj">

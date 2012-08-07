@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 
-using NHibernate;
-
-using Tangsem.Data;
 using Tangsem.Data.Domain;
-using Tangsem.Data.Service;
-using Tangsem.NHibernate.Domain;
 
-namespace Tangsem.NHibernate.Service
+namespace Tangsem.Data.Service
 {
   public class EntityServiceBase<TEntity> : IEntityService<TEntity>
-    where TEntity : class
+     where TEntity : class
   {
 
     /// <summary>
@@ -32,27 +28,10 @@ namespace Tangsem.NHibernate.Service
       this.Repository = repository;
     }
 
-  	/// <summary>
-  	/// Get current nhibernate session.
-  	/// </summary>
-  	public virtual ISession CurrentSession
-  	{
-  		get
-  		{
-  			var dbRepo = this.Repository as RepositoryBase;
-  			if (dbRepo != null)
-  			{
-  				return dbRepo.CurrentSession;
-  			}
-
-  			throw new Exception("Current Repository is not an instance of " + typeof(RepositoryBase).FullName + ". You may not get NHibernate session.");
-  		}
-  	}
-
-  	/// <summary>
+    /// <summary>
     /// The repository.
     /// </summary>
-    public virtual IRepository Repository { get; private set; }
+    public virtual IRepository Repository { get; protected set; }
 
     /// <summary>
     /// Saves an entity.
@@ -127,7 +106,7 @@ namespace Tangsem.NHibernate.Service
       return this.Repository.GetEntities<TEntity>().Count(expression);
     }
 
-  	/// <summary> Get paged entity list. </summary>
+    /// <summary> Get paged entity list. </summary>
     /// <param name="firstResult"> The first result. </param>
     /// <param name="maxResults"> The max results. </param>
     /// <param name="expression"> The criterion expression. </param>

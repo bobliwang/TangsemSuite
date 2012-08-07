@@ -1,0 +1,119 @@
+﻿@* Generator: Template *@
+@inherits MultipleTableMetadataTemplate
+        
+@using Tangsem.Common.Extensions
+@using Tangsem.Generator.Templates
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
+
+using Tangsem.Data.Domain;
+using Tangsem.@(Configuration.OrmType == Tangsem.Generator.Settings.OrmTypes.NHibernate ? "NHibernate" : "EF" ).Domain;
+
+using @(Configuration.EntityNamespace);
+
+namespace @(Configuration.RepositoryNamespace)
+{
+  /// <summary>
+  /// The @(Configuration.RepositoryName) class.
+  /// </summary>
+  public partial class @(Configuration.RepositoryName) : RepositoryBase, I@(Configuration.RepositoryName)
+  {
+    @foreach (var tableMetadata in this.TableMetadatas)
+    {<text>
+    
+    /// <summary>
+    /// The IQueryable for @(tableMetadata.EntityName.Pluralize()).
+    /// </summary>
+    public virtual IQueryable<@(tableMetadata.EntityName)> @(tableMetadata.EntityName.Pluralize())
+    {
+      get
+      {
+        return this.GetEntities<@(tableMetadata.EntityName)>();
+      }
+    }
+
+    </text>}
+    
+    
+    @foreach (var tableMetadata in this.TableMetadatas.Where(x => !x.IsView))
+    {<text>
+    
+    /// <summary>
+    /// Get @(tableMetadata.EntityName) by primary key.
+    /// </summary>
+    public virtual @(tableMetadata.EntityName) Lookup@(tableMetadata.EntityName)By@(tableMetadata.PrimaryKeys[0].PropertyName)(@(tableMetadata.PrimaryKeys[0].CSharpTypeAsString) @(tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()))
+    {
+      return this.LookupById<@(tableMetadata.EntityName)>(@(tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()));
+    }
+    
+    /// <summary>
+    /// Delete @(tableMetadata.EntityName) by primary key.
+    /// </summary>
+    public virtual @(tableMetadata.EntityName) Delete@(tableMetadata.EntityName)By@(tableMetadata.PrimaryKeys[0].PropertyName)(@(tableMetadata.PrimaryKeys[0].CSharpTypeAsString) @(tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()))
+    {
+      return this.DeleteById<@(tableMetadata.EntityName)>(@(tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()));
+    }
+    
+    /// <summary>
+    /// Save a new @(tableMetadata.EntityName) instance.
+    /// </summary>
+    public virtual @(tableMetadata.EntityName) Save@(tableMetadata.EntityName)(@(tableMetadata.EntityName) @(tableMetadata.EntityName.LowerFirst()))
+    {
+      return this.Save<@(tableMetadata.EntityName)>(@(tableMetadata.EntityName.LowerFirst()));
+    }
+    
+    /// <summary>
+    /// Update an existing @(tableMetadata.EntityName) instance.
+    /// </summary>
+    public virtual @(tableMetadata.EntityName) Update@(tableMetadata.EntityName)(@(tableMetadata.EntityName) @(tableMetadata.EntityName.LowerFirst()))
+    {
+      return this.Update<@(tableMetadata.EntityName)>(@(tableMetadata.EntityName.LowerFirst()));
+    }
+    
+    /// <summary>
+    /// Save or update an existing @(tableMetadata.EntityName) instance.
+    /// </summary>
+    public virtual @(tableMetadata.EntityName) SaveOrUpdate@(tableMetadata.EntityName)(@(tableMetadata.EntityName) @(tableMetadata.EntityName.LowerFirst()))
+    {
+      return this.SaveOrUpdate<@(tableMetadata.EntityName)>(@(tableMetadata.EntityName.LowerFirst()));
+    }
+
+    </text>}
+
+  }
+}
+@{
+  var plainEntities = this.TableMetadatas.Where(x => !x.IsAuditableEntity && !x.IsView).ToList();
+}
+@if(plainEntities.Any())
+{<text>
+/*    
+  @@NOTE: The following entities are not IAuditableEntities:
+     
+  @foreach(var entity in plainEntities)
+  {<text>
+     
+  ------------------------------
+  -- @entity.EntityName     ----
+  ------------------------------
+  ALTER TABLE @entity.Name ADD CreatedById INT NULL
+  GO
+  ALTER TABLE @entity.Name ADD ModifiedById INT NULL
+  GO
+  ALTER TABLE @entity.Name ADD CreatedTime DATETIME NULL
+  GO
+  ALTER TABLE @entity.Name ADD ModifiedTime DATETIME NULL
+  GO
+  ALTER TABLE @entity.Name ADD Active BIT NULL
+  GO
+         
+       
+  </text>}
+*/
+</text>}
+

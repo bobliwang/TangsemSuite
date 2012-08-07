@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 
 using Tangsem.Data.Domain;
-using Tangsem.NHibernate.Domain;
+//using Tangsem.NHibernate.Domain;
 
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
 
