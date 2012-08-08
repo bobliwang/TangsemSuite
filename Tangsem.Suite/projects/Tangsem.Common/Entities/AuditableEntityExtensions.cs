@@ -6,7 +6,7 @@ namespace Tangsem.Common.Entities
   {
     public static IQueryable<T> ActiveOnly<T>(this IQueryable<T> qry) where T : IAuditableEntity
     {
-      return qry.Where(x => x.Active == null || x.Active == true);
+      return qry.Where(x => !x.Active.HasValue || x.Active == true);
     }
   }
 }

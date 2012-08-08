@@ -28,9 +28,13 @@ namespace Tangsem.Web.Mvc.Extensions
       {
         qry = qry.OrderBy(sortExpression);
       }
+      else
+      {
+        qry = qry.OrderBy("1");
+      }
+
       qry = qry.Skip(page * webGrid.RowsPerPage).Take(webGrid.RowsPerPage);
       webGrid.Bind(qry.ToList(), autoSortAndPage: false, rowCount: rowsCount);
     }
-
   }
 }

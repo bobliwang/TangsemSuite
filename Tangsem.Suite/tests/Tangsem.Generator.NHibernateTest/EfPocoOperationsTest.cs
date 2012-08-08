@@ -252,7 +252,7 @@ namespace Tangsem.Generator.NHibernateTest
 
       using (var repo = this.CreateRepository())
       {
-        cat = repo.Categories.FirstOrDefault(x => x.Active != null && x.Active.Value);
+        cat = repo.Categories.FirstOrDefault(x => !x.Active.HasValue || x.Active.Value);
 
         Assert.IsNotNull(cat, "Category 'Test category' is null!");
         Assert.AreEqual(cat.Active, true);

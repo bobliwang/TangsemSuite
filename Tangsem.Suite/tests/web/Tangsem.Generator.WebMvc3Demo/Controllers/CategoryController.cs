@@ -21,7 +21,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers
     [HttpGet]
     public virtual ActionResult ListCategories(CategoryViewModel vm)
     {
-      var qry = vm.GetQueryable(this.Repository.Categories).ActiveOnly();
+      var qry = vm.GetQueryable(this.Repository.Categories).ActiveOnly();////.Where(x => !x.Active.HasValue || x.Active.Value);
       ////vm.Categories = qry.ToList();
       vm.Categories = qry;
 
@@ -43,7 +43,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers
 
     public virtual JsonResult Autocomplete(string term)
     {
-      var filteredItems = this.Repository.Categories.Where(cat => cat.Name.Contains(term)).Select(cat => new {label = cat.Name, value = cat.Id}).ToList();
+      var filteredItems = this.Repository.Categories.Where(cat => cat.Name.Contains(term)).Select(cat => new { label = cat.Name, value = cat.Id }).ToList();
       return Json(filteredItems, JsonRequestBehavior.AllowGet);
     }
   }
