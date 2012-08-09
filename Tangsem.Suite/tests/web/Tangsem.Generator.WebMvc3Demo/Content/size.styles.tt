@@ -1,0 +1,19 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".css" #>
+
+<# for(var i = 1; i < 2000; i ++){ #>
+  .w<#= i#>{
+    width: <#= i#>px;
+  }
+
+.h<#= i#>{
+    height: <#= i#>px;
+  }
+<#}#>
+
+<#
+  var contents = this.GenerationEnvironment.ToString();
+  contents = contents.Replace(" ", "").Replace("\r\n","");
+  this.GenerationEnvironment.Clear();
+  this.GenerationEnvironment.Append(contents);
+#>

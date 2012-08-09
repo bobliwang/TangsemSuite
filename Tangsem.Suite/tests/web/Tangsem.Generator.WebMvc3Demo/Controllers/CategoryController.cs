@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,7 +25,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers
       var qry = vm.GetQueryable(this.Repository.Categories).ActiveOnly();////.Where(x => !x.Active.HasValue || x.Active.Value);
       ////vm.Categories = qry.ToList();
       vm.Categories = qry;
-
+      Debug.WriteLine("#####" + this.Request.RawUrl);
       if (this.Request.IsAjaxRequest())
       {
         return this.PartialView(MVC.Category.Views.CatsGrid, vm.Categories);

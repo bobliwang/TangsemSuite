@@ -538,6 +538,8 @@ namespace Links {
         }
     
         public static readonly string Site_css = Url("Site.css");
+        public static readonly string size_styles_tt = Url("size.styles.tt");
+        public static readonly string size_styles_css = Url("size.styles.css");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class themes {
             private const string URLPATH = "~/Content/themes";
