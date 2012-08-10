@@ -44,20 +44,14 @@
 
 
 <script language="javascript" type="text/javascript">
-  
-
-
   $(function () {
     
     @{
       var i = 0;
       foreach (var col in options.Columns)
-      {
-        <text>
-            $('#@(tableId) th:nth-child(@(i+1))').attr('width', @(col.HeaderWidth));
-        </text>
-        i++;
-      }
+      {<text>
+            $('#@(tableId) th:nth-child(@(++i))').attr('width', @(col.HeaderWidth));
+      </text>}
     }
     
     $('#@(tableId) tfoot').remove();
@@ -73,45 +67,47 @@
       page: @(grid.PageIndex)
     });
     
+    
+
+    
     @{
       var firstPage = grid.GetPageUrl(0);
       var lastPage =  grid.GetPageUrl(grid.PageCount - 1 >= 0 ? grid.PageCount - 1 : 0);
       var prevPage =  grid.GetPageUrl(grid.PageIndex - 1 >= 0 ? grid.PageIndex - 1 : 0);
       var nextPage =  grid.GetPageUrl(grid.PageIndex + 1 < grid.PageCount ? grid.PageIndex + 1 : grid.PageIndex);
-      var template = firstPage;
+      var pageUrlTemplate = firstPage;
     }
 
-    $('@(tableId) .pcontrol input').val(@(grid.PageIndex + 1));
-    $('@(tableId) .pcontrol span').html('@(grid.PageCount)');
-    $('@(tableId) .pPageStat').html('Displaying @(grid.PageIndex * grid.RowsPerPage + 1) to @(Math.Min((grid.PageIndex+1) * grid.RowsPerPage, grid.TotalRowCount)) of @(grid.TotalRowCount) items.');
+    $('.pcontrol input').val(@(grid.PageIndex + 1));
+    $('.pcontrol span').html('@(grid.PageCount)');
+    $('.pPageStat').html('Displaying @(grid.PageIndex * grid.RowsPerPage + 1) to @(Math.Min((grid.PageIndex+1) * grid.RowsPerPage, grid.TotalRowCount)) of @(grid.TotalRowCount) items.');
     
-    var template = '@(template)';
-    $('@(tableId) .pcontrol input').change(
-      function () {
-        document.location.href = template.replace('@(grid.PageFieldName)=1', '@(grid.PageFieldName)=' + $(this).val());
-      }
-    );
+    var goPage = function() {
+      var template = '@(pageUrlTemplate)';
+      var url = template.replace('@(grid.PageFieldName)=1', '@(grid.PageFieldName)=' + $('.pcontrol input').val());
+      $.pjax( {url: url, container: '#@(this.FlexigridWrapper.ContainerId)' });
+    };
     
-    $('@(tableId) .pcontrol input').keyup(
-      function () {
-        document.location.href = template.replace('@(grid.PageFieldName)=1', '@(grid.PageFieldName)=' + $(this).val());
-      }
-    );
+    $('.pcontrol input').change(goPage);
+    $('.pcontrol input').keyup(goPage);
+    $('.pReload').click(goPage);
     
-    $('@(tableId) .pcontrol input').keypress(function (evt) {
+    var numOnly = function (evt) {
       var e = window.event || evt; // for trans-browser compatibility  
       var charCode = e.which || e.keyCode;  
       if ((charCode > 47 && charCode < 58) || charCode == 8){
         return true;
       }  
       return false;
-    });
-    
-    $('@(tableId) .pFirst').attr("onClick", "$.pjax({url:'@(firstPage)', container:'#myGrid'}");
-    $('@(tableId) .pLast').attr("onClick", "$.pjax({url:'@(lastPage)', container:'#myGrid'}");
-    $('@(tableId) .pPrev').attr("onClick", "$.pjax({url:'@(prevPage)', container:'#myGrid'}");
-    $('@(tableId) .pNext').attr("onClick", "$.pjax({url:'@(nextPage)', container:'#myGrid'}");
+    };
 
+    $('.pcontrol input').keypress(numOnly);
+    
+    $('.pFirst').click(function(){$.pjax({url:'@(firstPage)', container:'#@(this.FlexigridWrapper.ContainerId)'});});
+    $('.pLast').click(function(){$.pjax({url:'@(lastPage)', container:'#@(this.FlexigridWrapper.ContainerId)'});});
+    $('.pPrev').click(function(){$.pjax({url:'@(prevPage)', container:'#@(this.FlexigridWrapper.ContainerId)'});});
+    $('.pNext').click(function(){$.pjax({url:'@(nextPage)', container:'#@(this.FlexigridWrapper.ContainerId)'});});
+    
 
     @if (options.FooterFormat != null)
     {

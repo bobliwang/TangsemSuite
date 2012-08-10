@@ -12,15 +12,19 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
 {
   public class FlexigridWrapper
   {
-    public FlexigridWrapper(IEnumerable<dynamic> source = null, IEnumerable<string> columnNames = null, string defaultSort = null, int rowsPerPage = 10, bool canPage = true, bool canSort = true, string ajaxUpdateContainerId = null, string ajaxUpdateCallback = null, string fieldNamePrefix = null, string pageFieldName = null, string selectionFieldName = null, string sortFieldName = null, string sortDirectionFieldName = null)
+    public FlexigridWrapper(string containerId, IEnumerable<dynamic> source = null, IEnumerable<string> columnNames = null, string defaultSort = null, int rowsPerPage = 10, bool canPage = true, bool canSort = true, string ajaxUpdateContainerId = null, string ajaxUpdateCallback = null, string fieldNamePrefix = null, string pageFieldName = null, string selectionFieldName = null, string sortFieldName = null, string sortDirectionFieldName = null)
     {
+      this.ContainerId = containerId;
       this.WebGrid = new WebGrid(source, columnNames, defaultSort, rowsPerPage, canPage, canSort, ajaxUpdateContainerId, ajaxUpdateCallback, fieldNamePrefix, pageFieldName, selectionFieldName, sortFieldName, sortDirectionFieldName);
     }
 
-    public FlexigridWrapper(WebGrid webGrid)
+    public FlexigridWrapper(string containerId, WebGrid webGrid)
     {
+      this.ContainerId = containerId;
       this.WebGrid = webGrid;
     }
+
+    public string ContainerId { get; private set; }
 
     public WebGrid WebGrid { get; private set; }
 
@@ -39,31 +43,9 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
 
     public IHtmlString GetFlexigridHtml(FlexigridHtmlOptions flexigridHtmlOptions)
     {
-      return this.GetFlexigridHtml(
-          flexigridHtmlOptions.FlexiWidth
-        , flexigridHtmlOptions.FlexiHeight
-        , flexigridHtmlOptions.Title
-        , flexigridHtmlOptions.TableStyle
-        , flexigridHtmlOptions.HeaderStyle
-        , flexigridHtmlOptions.FooterStyle
-        , flexigridHtmlOptions.RowStyle
-        , flexigridHtmlOptions.AlternatingRowStyle
-        , flexigridHtmlOptions.SelectedRowStyle
-        , flexigridHtmlOptions.Caption
-        , flexigridHtmlOptions.DisplayHeader
-        , flexigridHtmlOptions.FillEmptyRows
-        , flexigridHtmlOptions.EmptyRowCellValue
-        , flexigridHtmlOptions.Columns
-        , flexigridHtmlOptions.Exclusions
-        , flexigridHtmlOptions.Mode
-        , flexigridHtmlOptions.FirstText
-        , flexigridHtmlOptions.PreviousText
-        , flexigridHtmlOptions.NextText
-        , flexigridHtmlOptions.LastText
-        , flexigridHtmlOptions.NumericLinksCount
-        , flexigridHtmlOptions.HtmlAttributes
-        , flexigridHtmlOptions.FooterFormat
-      );
+      var gen = new FlexigridHtmlGenerator() { FlexigridHtmlOptions = flexigridHtmlOptions, FlexigridWrapper = this };
+
+      return new HtmlString(gen.TransformText());
     }
 
     public IHtmlString GetFlexigridHtml(
@@ -91,126 +73,9 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
       dynamic htmlAttributes = null,
       Func<dynamic, object> footerFormat = null)
     {
-      string tableId = ((object)htmlAttributes).GetPropertyValue("id") as string;
+      var options = new FlexigridHtmlOptions { FlexiWidth = flexiWidth, FlexiHeight = flexiHeight, Title = title, TableStyle = tableStyle, HeaderStyle = headerStyle, FooterStyle = footerStyle, RowStyle = rowStyle, AlternatingRowStyle = alternatingRowStyle, SelectedRowStyle = selectedRowStyle, Caption = caption, DisplayHeader = displayHeader, FillEmptyRows = fillEmptyRows, EmptyRowCellValue = emptyRowCellValue, Columns = columns, Exclusions = exclusions, Mode = mode, FirstText = firstText, PreviousText = previousText, NextText = nextText, LastText = lastText, NumericLinksCount = numericLinksCount, HtmlAttributes = htmlAttributes, FooterFormat = footerFormat };
 
-      var html = this.WebGrid.GetHtml(
-        tableStyle,
-        headerStyle,
-        footerStyle,
-        rowStyle,
-        alternatingRowStyle,
-        selectedRowStyle,
-        caption,
-        displayHeader,
-        fillEmptyRows,
-        emptyRowCellValue,
-        columns,
-        exclusions,
-        mode,
-        firstText,
-        previousText,
-        nextText,
-        lastText,
-        numericLinksCount,
-        htmlAttributes);
-
-      var sb = new StringBuilder(html.ToString());
-      sb.AppendLine("<script language=\"javascript\" type=\"text/javascript\">");
-      sb.AppendLine("$(document).ready(function () {");
-
-      var i = 0;
-      foreach (var col in columns)
-      {
-        var myCol = col as FlexigridColumn;
-        if (myCol != null)
-        {
-          if (tableId != null)
-          {
-
-            var js = string.Format("$('#{0} th:nth-child({1})').attr(\"width\", {2});", tableId, (i+1), myCol.HeaderWidth);
-            sb.AppendLine(js);
-          }
-        }
-        i++;
-      }
-      if (tableId != null)
-      {
-        sb.AppendLine("$('#" + tableId + " tfoot').remove();");
-
-        var sizeString = string.Format("width: {0}, height:{1}", flexiWidth, flexiHeight);
-        var titleString = string.Format("title:'{0}' ", title);
-        var usepagerString = string.Format("usepager: true, useRp: false, total: {0}, rp: {1}, page: {2}", this.WebGrid.TotalRowCount, this.WebGrid.RowsPerPage, this.WebGrid.PageIndex);
-
-
-        var attrs = string.Join(",", new[] { sizeString, titleString, usepagerString });
-        sb.AppendLine("$('#" + tableId + "').flexigrid({" + attrs + "});");
-
-        this.AttachePagerEvents(this.WebGrid, sb);
-
-        // render customized footer here.
-        if (footerFormat != null)
-        {
-          var newFooter = string.Format("<tfoot><tr><td colspan=\"{0}\">{1}</td></tr></tfoot>"
-            , columns.Count()
-            , Convert.ToString(footerFormat(null)));
-
-          newFooter = newFooter.Replace("'", "\\'").Replace(Environment.NewLine, "");
-
-          sb.AppendLine("$('#" + tableId + "').append('" + newFooter + "');");
-        }
-      }
-
-
-      sb.AppendLine("});");
-      sb.AppendLine("</script>");
-
-      return new HtmlString(sb.ToString());
-    }
-
-    private void AttachePagerEvents(WebGrid grid, StringBuilder sb)
-    {
-      var firstPage = grid.GetPageUrl(0);
-      var lastPage = grid.GetPageUrl(grid.PageCount - 1 >= 0 ? grid.PageCount - 1 : 0);
-      var prevPage = grid.GetPageUrl(grid.PageIndex - 1 >= 0 ? grid.PageIndex - 1 : 0);
-      var nextPage = grid.GetPageUrl(grid.PageIndex + 1 < grid.PageCount ? grid.PageIndex + 1 : grid.PageIndex);
-
-      var template = firstPage;
-
-      ////.Replace(grid.PageFieldName + "=1", );
-
-
-      var first = string.Format("$('.pFirst').attr(\"onClick\", \"document.location.href = '{0}'\");", firstPage);
-      var last = string.Format("$('.pLast').attr(\"onClick\", \"document.location.href = '{0}'\");", lastPage);
-      var prev = string.Format("$('.pPrev').attr(\"onClick\", \"document.location.href = '{0}'\");", prevPage);
-      var next = string.Format("$('.pNext').attr(\"onClick\", \"document.location.href = '{0}'\");", nextPage);
-
-      sb.AppendLine(string.Format("$('.pcontrol input').val({0});", grid.PageIndex + 1));
-      sb.AppendLine(string.Format("$('.pcontrol span').html('{0}');", grid.PageCount));
-      sb.AppendLine(string.Format("$('.pPageStat').html('Displaying {0} to {1} of {2} items.');",
-          grid.PageIndex * grid.RowsPerPage + 1,
-          Math.Min((grid.PageIndex+1) * grid.RowsPerPage, grid.TotalRowCount),
-          grid.TotalRowCount));
-
-      sb.AppendLine(string.Format("var template = '{0}';", template));
-      sb.AppendLine(@"$('.pcontrol input').change(function () { document.location.href = template.replace('" + grid.PageFieldName + "=1', '" + grid.PageFieldName + "=' + $(this).val()); })");
-      sb.AppendLine(@"$('.pcontrol input').keyup(function (evt) { document.location.href = template.replace('" + grid.PageFieldName + "=1', '" + grid.PageFieldName + "=' + $(this).val()); })");
-
-      // allow only digits.
-      sb.AppendLine(@"$('.pcontrol input').keypress(function (evt) {
-                    var e = window.event || evt; // for trans-browser compatibility  
-                    var charCode = e.which || e.keyCode;  
-                    if ((charCode > 47 && charCode < 58) || charCode == 8){
-                      return true;
-                    }  
-                    return false;
-                  })"
-            );
-
-
-      sb.AppendLine(first);
-      sb.AppendLine(prev);
-      sb.AppendLine(next);
-      sb.AppendLine(last);
+      return this.GetFlexigridHtml(options);
     }
 
     public string GetPageUrl(int pageIndex)

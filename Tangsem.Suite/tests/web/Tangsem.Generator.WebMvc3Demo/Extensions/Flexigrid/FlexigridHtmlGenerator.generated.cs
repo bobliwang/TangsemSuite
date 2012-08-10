@@ -102,27 +102,24 @@ Write(grid.GetHtml(
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n\r\n<script language=\"javascript\" type=\"text/javascript\">\r\n  \r\n\r\n\r\n  $(function" +
-" () {\r\n    \r\n");
+WriteLiteral("\r\n\r\n\r\n<script language=\"javascript\" type=\"text/javascript\">\r\n  $(function () {\r\n " +
+"   \r\n");
 
 
             
-            #line 52 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 49 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
       
       var i = 0;
       foreach (var col in options.Columns)
       {
-
             
             #line default
             #line hidden
-WriteLiteral("        ");
-
 WriteLiteral("\r\n            $(\'#");
 
 
             
-            #line 57 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 53 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
             Write(tableId);
 
             
@@ -132,8 +129,8 @@ WriteLiteral(" th:nth-child(");
 
 
             
-            #line 57 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                    Write(i+1);
+            #line 53 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                    Write(++i);
 
             
             #line default
@@ -142,21 +139,18 @@ WriteLiteral(")\').attr(\'width\', ");
 
 
             
-            #line 57 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 53 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
                                                             Write(col.HeaderWidth);
 
             
             #line default
             #line hidden
-WriteLiteral(");\r\n        ");
-
-WriteLiteral("\r\n");
+WriteLiteral(");\r\n      ");
 
 
             
-            #line 59 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-        i++;
-      }
+            #line 54 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+             }
     
 
             
@@ -166,7 +160,7 @@ WriteLiteral("    \r\n    $(\'#");
 
 
             
-            #line 63 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 57 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
     Write(tableId);
 
             
@@ -176,7 +170,7 @@ WriteLiteral(" tfoot\').remove();\r\n    \r\n    $(\'#");
 
 
             
-            #line 65 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 59 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
     Write(tableId);
 
             
@@ -186,7 +180,7 @@ WriteLiteral("\').flexigrid({\r\n      width:     ");
 
 
             
-            #line 66 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 60 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
              Write(options.FlexiWidth);
 
             
@@ -196,7 +190,7 @@ WriteLiteral(",\r\n      height:    ");
 
 
             
-            #line 67 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 61 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
              Write(options.FlexiHeight);
 
             
@@ -206,7 +200,7 @@ WriteLiteral(",\r\n      title:    \'");
 
 
             
-            #line 68 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 62 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
              Write(options.Title);
 
             
@@ -216,7 +210,7 @@ WriteLiteral("\',\r\n      usepager: true,\r\n      useRp: false,\r\n      total
 
 
             
-            #line 71 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 65 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
          Write(grid.TotalRowCount);
 
             
@@ -226,7 +220,7 @@ WriteLiteral(",\r\n      rp: ");
 
 
             
-            #line 72 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 66 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
       Write(grid.RowsPerPage);
 
             
@@ -236,84 +230,54 @@ WriteLiteral(",\r\n      page: ");
 
 
             
-            #line 73 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 67 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
         Write(grid.PageIndex);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    });\r\n    \r\n");
+WriteLiteral("\r\n    });\r\n    \r\n    \r\n\r\n    \r\n");
 
 
             
-            #line 76 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 73 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
       
       var firstPage = grid.GetPageUrl(0);
       var lastPage =  grid.GetPageUrl(grid.PageCount - 1 >= 0 ? grid.PageCount - 1 : 0);
       var prevPage =  grid.GetPageUrl(grid.PageIndex - 1 >= 0 ? grid.PageIndex - 1 : 0);
       var nextPage =  grid.GetPageUrl(grid.PageIndex + 1 < grid.PageCount ? grid.PageIndex + 1 : grid.PageIndex);
-      var template = firstPage;
+      var pageUrlTemplate = firstPage;
     
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    $(\'");
+WriteLiteral("\r\n    $(\'.pcontrol input\').val(");
 
 
             
-            #line 84 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-   Write(tableId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" .pcontrol input\').val(");
-
-
-            
-            #line 84 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                    Write(grid.PageIndex + 1);
+            #line 81 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                         Write(grid.PageIndex + 1);
 
             
             #line default
             #line hidden
-WriteLiteral(");\r\n    $(\'");
+WriteLiteral(");\r\n    $(\'.pcontrol span\').html(\'");
 
 
             
-            #line 85 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-   Write(tableId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" .pcontrol span\').html(\'");
-
-
-            
-            #line 85 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                     Write(grid.PageCount);
+            #line 82 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                          Write(grid.PageCount);
 
             
             #line default
             #line hidden
-WriteLiteral("\');\r\n    $(\'");
+WriteLiteral("\');\r\n    $(\'.pPageStat\').html(\'Displaying ");
 
 
             
-            #line 86 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-   Write(tableId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" .pPageStat\').html(\'Displaying ");
-
-
-            
-            #line 86 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                            Write(grid.PageIndex * grid.RowsPerPage + 1);
+            #line 83 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                 Write(grid.PageIndex * grid.RowsPerPage + 1);
 
             
             #line default
@@ -322,8 +286,8 @@ WriteLiteral(" to ");
 
 
             
-            #line 86 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                                                                        Write(Math.Min((grid.PageIndex+1) * grid.RowsPerPage, grid.TotalRowCount));
+            #line 83 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                                                             Write(Math.Min((grid.PageIndex+1) * grid.RowsPerPage, grid.TotalRowCount));
 
             
             #line default
@@ -332,188 +296,155 @@ WriteLiteral(" of ");
 
 
             
-            #line 86 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                                                                                                                                                  Write(grid.TotalRowCount);
+            #line 83 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                                                                                                                                       Write(grid.TotalRowCount);
 
             
             #line default
             #line hidden
-WriteLiteral(" items.\');\r\n    \r\n    var template = \'");
+WriteLiteral(" items.\');\r\n    \r\n    var goPage = function() {\r\n      var template = \'");
+
+
+            
+            #line 86 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                  Write(pageUrlTemplate);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\';\r\n      var url = template.replace(\'");
+
+
+            
+            #line 87 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                              Write(grid.PageFieldName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("=1\', \'");
+
+
+            
+            #line 87 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                                         Write(grid.PageFieldName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("=\' + $(\'.pcontrol input\').val());\r\n      $.pjax( {url: url, container: \'#");
 
 
             
             #line 88 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                Write(template);
+                                  Write(this.FlexigridWrapper.ContainerId);
 
             
             #line default
             #line hidden
-WriteLiteral("\';\r\n    $(\'");
-
-
-            
-            #line 89 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-   Write(tableId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" .pcontrol input\').change(\r\n      function () {\r\n        document.location.href =" +
-" template.replace(\'");
-
-
-            
-            #line 91 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                               Write(grid.PageFieldName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("=1\', \'");
-
-
-            
-            #line 91 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                                                          Write(grid.PageFieldName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("=\' + $(this).val());\r\n      }\r\n    );\r\n    \r\n    $(\'");
-
-
-            
-            #line 95 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-   Write(tableId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" .pcontrol input\').keyup(\r\n      function () {\r\n        document.location.href = " +
-"template.replace(\'");
-
-
-            
-            #line 97 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                               Write(grid.PageFieldName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("=1\', \'");
-
-
-            
-            #line 97 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                                                          Write(grid.PageFieldName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("=\' + $(this).val());\r\n      }\r\n    );\r\n    \r\n    $(\'");
-
-
-            
-            #line 101 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-   Write(tableId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(@" .pcontrol input').keypress(function (evt) {
+WriteLiteral(@"' });
+    };
+    
+    $('.pcontrol input').change(goPage);
+    $('.pcontrol input').keyup(goPage);
+    $('.pReload').click(goPage);
+    
+    var numOnly = function (evt) {
       var e = window.event || evt; // for trans-browser compatibility  
       var charCode = e.which || e.keyCode;  
       if ((charCode > 47 && charCode < 58) || charCode == 8){
         return true;
       }  
       return false;
-    });
+    };
+
+    $('.pcontrol input').keypress(numOnly);
     
-    $('");
+    $('.pFirst').click(function(){$.pjax({url:'");
 
 
             
-            #line 110 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-   Write(tableId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" .pFirst\').attr(\"onClick\", \"$.pjax({url:\'");
-
-
-            
-            #line 110 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                                      Write(firstPage);
+            #line 106 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                           Write(firstPage);
 
             
             #line default
             #line hidden
-WriteLiteral("\', container:\'#myGrid\'}\");\r\n    $(\'");
+WriteLiteral("\', container:\'#");
 
 
             
-            #line 111 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-   Write(tableId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" .pLast\').attr(\"onClick\", \"$.pjax({url:\'");
-
-
-            
-            #line 111 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                                     Write(lastPage);
+            #line 106 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                                                      Write(this.FlexigridWrapper.ContainerId);
 
             
             #line default
             #line hidden
-WriteLiteral("\', container:\'#myGrid\'}\");\r\n    $(\'");
+WriteLiteral("\'});});\r\n    $(\'.pLast\').click(function(){$.pjax({url:\'");
+
+
+            
+            #line 107 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                          Write(lastPage);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\', container:\'#");
+
+
+            
+            #line 107 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                                                    Write(this.FlexigridWrapper.ContainerId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\'});});\r\n    $(\'.pPrev\').click(function(){$.pjax({url:\'");
+
+
+            
+            #line 108 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                          Write(prevPage);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\', container:\'#");
+
+
+            
+            #line 108 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                                                    Write(this.FlexigridWrapper.ContainerId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\'});});\r\n    $(\'.pNext\').click(function(){$.pjax({url:\'");
+
+
+            
+            #line 109 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                          Write(nextPage);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\', container:\'#");
+
+
+            
+            #line 109 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+                                                                    Write(this.FlexigridWrapper.ContainerId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\'});});\r\n    \r\n\r\n");
 
 
             
             #line 112 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-   Write(tableId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" .pPrev\').attr(\"onClick\", \"$.pjax({url:\'");
-
-
-            
-            #line 112 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                                     Write(prevPage);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\', container:\'#myGrid\'}\");\r\n    $(\'");
-
-
-            
-            #line 113 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-   Write(tableId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" .pNext\').attr(\"onClick\", \"$.pjax({url:\'");
-
-
-            
-            #line 113 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
-                                                     Write(nextPage);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\', container:\'#myGrid\'}\");\r\n\r\n\r\n");
-
-
-            
-            #line 116 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
      if (options.FooterFormat != null)
     {
       var newFooter = string.Format("<tfoot><tr><td colspan=\"{0}\">{1}</td></tr></tfoot>"
@@ -534,7 +465,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 127 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 123 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
     }
 
             
