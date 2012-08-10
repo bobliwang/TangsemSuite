@@ -19,6 +19,8 @@
   {
     throw new Exception("TableId is required in HtmlAttributes!");
   }
+
+  var containerId = this.FlexigridWrapper.ContainerId;
 }
 
 @grid.GetHtml(
@@ -50,7 +52,7 @@
       var i = 0;
       foreach (var col in options.Columns)
       {<text>
-            $('#@(tableId) th:nth-child(@(++i))').attr('width', @(col.HeaderWidth));
+        $('#@(tableId) th:nth-child(@(++i))').attr('width', @(col.HeaderWidth));
       </text>}
     }
     
@@ -78,19 +80,19 @@
       var pageUrlTemplate = firstPage;
     }
 
-    $('.pcontrol input').val(@(grid.PageIndex + 1));
-    $('.pcontrol span').html('@(grid.PageCount)');
-    $('.pPageStat').html('Displaying @(grid.PageIndex * grid.RowsPerPage + 1) to @(Math.Min((grid.PageIndex+1) * grid.RowsPerPage, grid.TotalRowCount)) of @(grid.TotalRowCount) items.');
+    $('#@(containerId) .pcontrol input').val(@(grid.PageIndex + 1));
+    $('#@(containerId) .pcontrol span').html('@(grid.PageCount)');
+    $('#@(containerId) .pPageStat').html('Displaying @(grid.PageIndex * grid.RowsPerPage + 1) to @(Math.Min((grid.PageIndex+1) * grid.RowsPerPage, grid.TotalRowCount)) of @(grid.TotalRowCount) items.');
     
     var goPage = function() {
       var template = '@(pageUrlTemplate)';
       var url = template.replace('@(grid.PageFieldName)=1', '@(grid.PageFieldName)=' + $('.pcontrol input').val());
-      $.pjax( {url: url, container: '#@(this.FlexigridWrapper.ContainerId)' });
+      $.pjax( {url: url, container: '#@(containerId)' });
     };
     
-    $('.pcontrol input').change(goPage);
-    $('.pcontrol input').keyup(goPage);
-    $('.pReload').click(goPage);
+    $('#@(containerId) .pcontrol input').change(goPage);
+    $('#@(containerId) .pcontrol input').keyup(goPage);
+    $('#@(containerId) .pReload').click(goPage);
     
     var numOnly = function (evt) {
       var e = window.event || evt; // for trans-browser compatibility  
@@ -101,12 +103,12 @@
       return false;
     };
 
-    $('.pcontrol input').keypress(numOnly);
+    $('#@(containerId) .pcontrol input').keypress(numOnly);
     
-    $('.pFirst').click(function(){$.pjax({url:'@(firstPage)', container:'#@(this.FlexigridWrapper.ContainerId)'});});
-    $('.pLast').click(function(){$.pjax({url:'@(lastPage)', container:'#@(this.FlexigridWrapper.ContainerId)'});});
-    $('.pPrev').click(function(){$.pjax({url:'@(prevPage)', container:'#@(this.FlexigridWrapper.ContainerId)'});});
-    $('.pNext').click(function(){$.pjax({url:'@(nextPage)', container:'#@(this.FlexigridWrapper.ContainerId)'});});
+    $('#@(containerId) .pFirst').click(function(){$.pjax({url:'@(firstPage)', container:'#@(containerId)'});});
+    $('#@(containerId) .pLast').click(function(){$.pjax({url:'@(lastPage)', container:'#@(containerId)'});});
+    $('#@(containerId) .pPrev').click(function(){$.pjax({url:'@(prevPage)', container:'#@(containerId)'});});
+    $('#@(containerId) .pNext').click(function(){$.pjax({url:'@(nextPage)', container:'#@(containerId)'});});
     
 
     @if (options.FooterFormat != null)
@@ -118,7 +120,7 @@
       newFooter = newFooter.Replace("'", "\\'").Replace(Environment.NewLine, "");
 
       <text>
-      $('#" + tableId + "').append('" + newFooter + "');
+      $('#@(tableId)').append('" + newFooter + "');
       </text>
     }
     
