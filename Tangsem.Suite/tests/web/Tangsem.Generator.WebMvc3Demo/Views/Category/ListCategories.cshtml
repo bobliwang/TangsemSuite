@@ -14,7 +14,7 @@
 @using(Html.BeginForm(MVC.Category.ListCategories(), FormMethod.Get))
 {
   <fieldset>
-    <legend>Search Criteria</legend>
+    <legend>Search Criteria (@DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"))</legend>
   
     <ul class="inputs">
       <li class="lbl">
