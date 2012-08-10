@@ -363,6 +363,18 @@ namespace Links {
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class flexigrid {
+            private const string URLPATH = "~/Content/flexigrid";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string flexigrid_css = Url("flexigrid.css");
+            public static readonly string flexigrid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/flexigrid.min.js") ? Url("flexigrid.min.js") : Url("flexigrid.js");
+                          
+            public static readonly string flexigrid_ori_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/flexigrid.ori.min.js") ? Url("flexigrid.ori.min.js") : Url("flexigrid.ori.js");
+                          
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class jgrowl {
             private const string URLPATH = "~/Content/jgrowl";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }

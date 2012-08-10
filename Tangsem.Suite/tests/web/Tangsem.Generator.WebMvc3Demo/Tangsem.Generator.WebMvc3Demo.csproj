@@ -110,7 +110,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Extensions\BindingWithSyntaxExtensions.cs" />
+    <Compile Include="Extensions\MyWebGridColumn.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
+    <Compile Include="Extensions\WebGridExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -139,6 +141,9 @@
     <Compile Include="ViewModels\StateViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\flexigrid\flexigrid.css" />
+    <Content Include="Content\flexigrid\flexigrid.js" />
+    <Content Include="Content\flexigrid\flexigrid.ori.js" />
     <Content Include="Content\jgrowl\examples\css\eggplant\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\jgrowl\examples\css\eggplant\images\ui-bg_flat_0_eeeeee_40x100.png" />
     <Content Include="Content\jgrowl\examples\css\eggplant\images\ui-bg_flat_55_994d53_40x100.png" />

@@ -15,16 +15,36 @@
 
 <a href="@(Url.Action(MVC.Category.ListCategories()))">Grid</a>
 
+<div class="w100 h100" style="border:1px solid #eee; background: #aaa" onclick="$.pjax({ url: '@grid.GetPageUrl(0)', container: '#myGrid' })">
+  
+</div>
+
+<a href="@grid.GetPageUrl(2)">Go to Page 2</a>
+
 @{
   Func<dynamic, object> fmt = @<text>@item.Name</text>;
 }
 
-@grid.GetHtml(
+@grid.MyGetHtml(
+  flexiWidth: 600,
+  flexiHeight: 280,
+  title: "Categories",
+  
   columns: grid.Columns(
-            grid.Column(columnName: "Id", header: "Id", format: @<text>@item.Id</text>, style: "w100", canSort: true),
-            grid.Column(columnName: "Name", header: "Name", format: fmt, style: "w100", canSort: true),
-            grid.Column(columnName: "", header: "Action", format: @<text><a href="javascript:deleteCat(@item.Id)">Delete</a></text>, style: "w500", canSort: false)
+              grid.MyColumn(columnName: "Id", header: "Id", format: @<text>@item.Id</text>, style: "w100", canSort: true, headerWidth: 375),
+              grid.MyColumn(columnName: "Name", header: "Name", format: fmt, style: "w100", canSort: true, headerWidth: 100),
+              grid.MyColumn(columnName: "", header: "Action", format: @<text><a href="javascript:deleteCat(@item.Id)">Delete</a></text>, style: "w500", canSort: false, headerWidth: 100)
           ),
   htmlAttributes: new {id = "gridTbl"}
 )
  
+ 
+
+<script language="javascript" type="text/javascript">  // --  --
+  function goPage() {
+    
+    var url = '@grid.GetPageUrl(0)';
+
+    $.pjax({ url: url, container: '#myGrid' });
+   }
+</script>
