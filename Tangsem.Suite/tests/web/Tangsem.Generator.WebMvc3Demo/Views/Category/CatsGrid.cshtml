@@ -22,8 +22,8 @@
 }
 
 @flexigridWrapper.GetFlexigridHtml(
-  flexiWidth: 650,
-  flexiHeight: 280,
+  flexiWidth: 640,
+  flexiHeight: 260,
   title: "Categories",
   
   columns: flexigridWrapper.Columns(
@@ -33,13 +33,3 @@
           ),
   htmlAttributes: htmlAttributes // only merged2 approach works for now.
 )
-
-<script language="javascript" type="text/javascript">  // --  --
-  function goPage() {
-    
-    var url = '@flexigridWrapper.GetPageUrl(0)';
-
-    $.pjax({ url: url, container: '#myGrid' });
-  }
-
-</script>
