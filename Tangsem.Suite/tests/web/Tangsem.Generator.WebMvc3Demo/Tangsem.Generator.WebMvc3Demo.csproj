@@ -110,9 +110,15 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Extensions\BindingWithSyntaxExtensions.cs" />
-    <Compile Include="Extensions\MyWebGridColumn.cs" />
+    <Compile Include="Extensions\Flexigrid\FlexigridHtmlOptions.cs" />
+    <Compile Include="Extensions\Flexigrid\FlexigridWrapper.cs" />
+    <Compile Include="Extensions\Flexigrid\FlexigridColumn.cs" />
+    <Compile Include="Extensions\Flexigrid\FlexigridHtmlGenerator.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FlexigridHtmlGenerator.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
-    <Compile Include="Extensions\WebGridExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -144,6 +150,28 @@
     <Content Include="Content\flexigrid\flexigrid.css" />
     <Content Include="Content\flexigrid\flexigrid.js" />
     <Content Include="Content\flexigrid\flexigrid.ori.js" />
+    <Content Include="Content\flexigrid\Images\._fhbg.gif" />
+    <Content Include="Content\flexigrid\Images\._wbg.gif" />
+    <Content Include="Content\flexigrid\Images\accept.png" />
+    <Content Include="Content\flexigrid\Images\add.png" />
+    <Content Include="Content\flexigrid\Images\bg.gif" />
+    <Content Include="Content\flexigrid\Images\btn-sprite.gif" />
+    <Content Include="Content\flexigrid\Images\close.png" />
+    <Content Include="Content\flexigrid\Images\ddn.png" />
+    <Content Include="Content\flexigrid\Images\dn.png" />
+    <Content Include="Content\flexigrid\Images\fhbg.gif" />
+    <Content Include="Content\flexigrid\Images\first.gif" />
+    <Content Include="Content\flexigrid\Images\hl.png" />
+    <Content Include="Content\flexigrid\Images\last.gif" />
+    <Content Include="Content\flexigrid\Images\line.gif" />
+    <Content Include="Content\flexigrid\Images\load.gif" />
+    <Content Include="Content\flexigrid\Images\load.png" />
+    <Content Include="Content\flexigrid\Images\magnifier.png" />
+    <Content Include="Content\flexigrid\Images\next.gif" />
+    <Content Include="Content\flexigrid\Images\prev.gif" />
+    <Content Include="Content\flexigrid\Images\up.png" />
+    <Content Include="Content\flexigrid\Images\uup.png" />
+    <Content Include="Content\flexigrid\Images\wbg.gif" />
     <Content Include="Content\jgrowl\examples\css\eggplant\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\jgrowl\examples\css\eggplant\images\ui-bg_flat_0_eeeeee_40x100.png" />
     <Content Include="Content\jgrowl\examples\css\eggplant\images\ui-bg_flat_55_994d53_40x100.png" />
@@ -340,6 +368,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>size.styles.css</LastGenOutput>
     </None>
+    <Content Include="Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FlexigridHtmlGenerator.generated.cs</LastGenOutput>
+    </Content>
     <None Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>

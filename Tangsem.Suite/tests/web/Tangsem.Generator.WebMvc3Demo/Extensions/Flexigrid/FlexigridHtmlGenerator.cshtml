@@ -1,0 +1,131 @@
+﻿@* Generator: Template *@
+
+@using Tangsem.Common.Extensions
+@using Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
+
+@functions{
+  public FlexigridWrapper FlexigridWrapper { get; set; }
+  public FlexigridHtmlOptions FlexigridHtmlOptions { get; set; }
+}
+
+@{
+  var grid = this.FlexigridWrapper.WebGrid;
+  
+  var options = this.FlexigridHtmlOptions;
+  
+  var tableId = ((object)options.HtmlAttributes).GetPropertyValue("id") as string;
+  
+  if (tableId == null)
+  {
+    throw new Exception("TableId is required in HtmlAttributes!");
+  }
+}
+
+@grid.GetHtml(
+    options.TableStyle,
+    options.HeaderStyle,
+    options.FooterStyle,
+    options.RowStyle,
+    options.AlternatingRowStyle,
+    options.SelectedRowStyle,
+    options.Caption,
+    options.DisplayHeader,
+    options.FillEmptyRows,
+    options.EmptyRowCellValue,
+    options.Columns,
+    options.Exclusions,
+    options.Mode,
+    options.FirstText,
+    options.PreviousText,
+    options.NextText,
+    options.LastText,
+    options.NumericLinksCount,
+    options.HtmlAttributes)
+
+
+<script language="javascript" type="text/javascript">
+  
+  $(function())
+
+
+  $(function () {
+    
+    @{
+      var i = 0;
+      foreach (var col in options.Columns)
+      {
+        <text>
+            $('#@(tableId) th:nth-child(@(i+1))').attr('width', @(col.HeaderWidth));
+        </text>
+        i++;
+      }
+    }
+    
+    $('#@(tableId) tfoot').remove();
+    
+    $('#@(tableId)').flexigrid({
+      width:     @(options.FlexiWidth),
+      height:    @(options.FlexiHeight),
+      title:    '@(options.Title)',
+      usepager: true,
+      useRp: false,
+      total: @(grid.TotalRowCount),
+      rp: @(grid.RowsPerPage),
+      page: @(grid.PageIndex)
+    });
+    
+    @{
+      var firstPage = grid.GetPageUrl(0);
+      var lastPage =  grid.GetPageUrl(grid.PageCount - 1 >= 0 ? grid.PageCount - 1 : 0);
+      var prevPage =  grid.GetPageUrl(grid.PageIndex - 1 >= 0 ? grid.PageIndex - 1 : 0);
+      var nextPage =  grid.GetPageUrl(grid.PageIndex + 1 < grid.PageCount ? grid.PageIndex + 1 : grid.PageIndex);
+      var template = firstPage;
+    }
+
+    $('@(tableId) .pcontrol input').val(@(grid.PageIndex + 1));
+    $('@(tableId) .pcontrol span').html('@(grid.PageCount)');
+    $('@(tableId) .pPageStat').html('Displaying @(grid.PageIndex * grid.RowsPerPage + 1) to @(Math.Min((grid.PageIndex+1) * grid.RowsPerPage, grid.TotalRowCount)) of @(grid.TotalRowCount) items.');
+    
+    var template = '@(template)';
+    $('@(tableId) .pcontrol input').change(
+      function () {
+        document.location.href = template.replace('@(grid.PageFieldName)=1', '@(grid.PageFieldName)=' + $(this).val());
+      }
+    );
+    
+    $('@(tableId) .pcontrol input').keyup(
+      function () {
+        document.location.href = template.replace('@(grid.PageFieldName)=1', '@(grid.PageFieldName)=' + $(this).val());
+      }
+    );
+    
+    $('@(tableId) .pcontrol input').keypress(function (evt) {
+      var e = window.event || evt; // for trans-browser compatibility  
+      var charCode = e.which || e.keyCode;  
+      if ((charCode > 47 && charCode < 58) || charCode == 8){
+        return true;
+      }  
+      return false;
+    });
+    
+    $('@(tableId) .pFirst').attr("onClick", "$.pjax({url:'@(firstPage)', container:'#myGrid'}");
+    $('@(tableId) .pLast').attr("onClick", "$.pjax({url:'@(lastPage)', container:'#myGrid'}");
+    $('@(tableId) .pPrev').attr("onClick", "$.pjax({url:'@(prevPage)', container:'#myGrid'}");
+    $('@(tableId) .pNext').attr("onClick", "$.pjax({url:'@(nextPage)', container:'#myGrid'}");
+
+
+    @if (options.FooterFormat != null)
+    {
+      var newFooter = string.Format("<tfoot><tr><td colspan=\"{0}\">{1}</td></tr></tfoot>"
+        , options.Columns.Count()
+        , Convert.ToString(options.FooterFormat(null)));
+
+      newFooter = newFooter.Replace("'", "\\'").Replace(Environment.NewLine, "");
+
+      <text>
+      $('#" + tableId + "').append('" + newFooter + "');
+      </text>
+    }
+    
+  });
+</script>

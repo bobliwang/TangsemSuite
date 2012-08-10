@@ -1,10 +1,10 @@
 ﻿using System.Web.Helpers;
 
-namespace Tangsem.Generator.WebMvc3Demo.Extensions
+namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
 {
-  public class MyWebGridColumn : WebGridColumn
+  public class FlexigridColumn : WebGridColumn
   {
-    public MyWebGridColumn(WebGridColumn prototype, int headerWidth)
+    public FlexigridColumn(WebGridColumn prototype, int headerWidth)
     {
       this.HeaderWidth = headerWidth;
 

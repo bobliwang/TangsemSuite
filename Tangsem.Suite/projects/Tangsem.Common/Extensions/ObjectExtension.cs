@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using System.Reflection;
 
 namespace Tangsem.Common.Extensions
 {
@@ -87,7 +89,22 @@ namespace Tangsem.Common.Extensions
     /// </returns>
     public static object GetPropertyValue(this object obj, string propertyName)
     {
-      return obj.GetType().GetProperty(propertyName).GetValue(obj, null);
+      if (obj.GetType().GetProperties().Any(x => x.Name == propertyName))
+      {
+        return obj.GetType().GetProperty(propertyName).GetValue(obj, null);
+      }
+      else if (obj is IDictionary<string, object>)
+      {
+        return (obj as IDictionary<string, object>)[propertyName];
+      }
+      else if (obj is IDictionary)
+      {
+        return (obj as IDictionary)[propertyName];
+      }
+      else
+      {
+        throw new NotImplementedException("GetPropertyValue extension for " + obj.GetType());
+      }
     }
 
     /// <summary>
@@ -124,10 +141,62 @@ namespace Tangsem.Common.Extensions
     /// </param>
     public static void SetPropertyValue(this object obj, string propertyName, object value)
     {
-      obj.GetType().GetProperty(propertyName).SetValue(obj, value, null);
+      if (obj.GetType().GetProperties().Any(x => x.Name == propertyName))
+      {
+        obj.GetType().GetProperty(propertyName).SetValue(obj, value, null);
+      }
+      else if (obj is IDictionary<string, object>)
+      {
+        (obj as IDictionary<string, object>)[propertyName] = value;
+      }
+      else if (obj is IDictionary)
+      {
+        (obj as IDictionary)[propertyName] = value;
+      }
+      else
+      {
+        throw new NotImplementedException("SetPropertyValue extension for " + obj.GetType());
+      }
     }
 
+    public static ExpandoObject Merge(this object obj1, object obj2)
+    {
+      var result = new ExpandoObject();
+      var d = result as IDictionary<string, object>; //work with the Expando as a Dictionary
 
+      CopyValues(obj1, d);
+      CopyValues(obj2, d);
+
+      return result;
+    }
+
+    private static void CopyValues(object obj, IDictionary<string, object> result)
+    {
+      // low priority
+      foreach (var pi in obj.GetType().GetProperties())
+      {
+        result[pi.Name] = pi.GetValue(obj, null);
+      }
+
+      // high priority
+      var dic = obj as IDictionary;
+      if (dic != null)
+      {
+        foreach (var key in dic.Keys)
+        {
+          result[key.ToString()] = dic[key];
+        }
+      }
+
+      var gDic = obj as IDictionary<string, object>;
+      if (gDic != null)
+      {
+        foreach (var key in gDic.Keys)
+        {
+          result[key] = gDic[key];
+        }
+      }
+    }
     ////public static void Test()
     ////{
     ////  var typeMapper = new Dictionary<string, Type>();

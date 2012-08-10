@@ -1,6 +1,9 @@
-﻿@using System.Linq.Expressions
+﻿@using System.Dynamic
+@using System.Linq.Expressions
 @using System.Web.Script.Serialization
+@using Tangsem.Common.Extensions
 @using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities
+@using Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
 @using Tangsem.Generator.WebMvc3Demo.ViewModels
 @using Tangsem.Generator.WebMvc3Demo.Extensions
 @using Tangsem.Web.Mvc.Extensions
@@ -8,42 +11,48 @@
 @model IQueryable<Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Category>
 
 @{
-  var grid = new WebGrid();
-  grid.Bind(this, this.Model);
+  var flexigridWrapper = new FlexigridWrapper();
+  flexigridWrapper.Bind(this, this.Model);
 }
 
 
 <a href="@(Url.Action(MVC.Category.ListCategories()))">Grid</a>
 
-<div class="w100 h100" style="border:1px solid #eee; background: #aaa" onclick="$.pjax({ url: '@grid.GetPageUrl(0)', container: '#myGrid' })">
+<div class="w100 h100" style="border:1px solid #eee; background: #aaa" onclick="$.pjax({ url: '@flexigridWrapper.GetPageUrl(0)', container: '#myGrid' })">
   
 </div>
 
-<a href="@grid.GetPageUrl(2)">Go to Page 2</a>
+<a href="@flexigridWrapper.GetPageUrl(2)">Go to Page 2</a>
+
 
 @{
-  Func<dynamic, object> fmt = @<text>@item.Name</text>;
+  var otherHtmlAttrs = new { name = "gridTbl" };
+  var idAttr = new { id = "gridTbl" };
+  
+  var merged1 = idAttr.Merge(otherHtmlAttrs);
+  var merged2 = new { id = "gridTbl", name = "gridTbl" };
+  var merged3 = new Dictionary<string, object>();
+  merged3["name"]  = "gridTbl";
+  merged3["id"]  = "gridTbl";
 }
 
-@grid.MyGetHtml(
+@flexigridWrapper.GetFlexigridHtml(
   flexiWidth: 600,
   flexiHeight: 280,
   title: "Categories",
   
-  columns: grid.Columns(
-              grid.MyColumn(columnName: "Id", header: "Id", format: @<text>@item.Id</text>, style: "w100", canSort: true, headerWidth: 375),
-              grid.MyColumn(columnName: "Name", header: "Name", format: fmt, style: "w100", canSort: true, headerWidth: 100),
-              grid.MyColumn(columnName: "", header: "Action", format: @<text><a href="javascript:deleteCat(@item.Id)">Delete</a></text>, style: "w500", canSort: false, headerWidth: 100)
+  columns: flexigridWrapper.Columns(
+              flexigridWrapper.FlexigridColumn(columnName: "Id", header: "Id", format: @<text>@item.Id</text>, style: "w100", canSort: true, headerWidth: 375),
+              flexigridWrapper.FlexigridColumn(columnName: "Name", header: "Name", format: @<text>@item.Name</text>, style: "w100", canSort: true, headerWidth: 100),
+              flexigridWrapper.FlexigridColumn(columnName: "", header: "Action", format: @<text><a href="javascript:deleteCat(@item.Id)">Delete</a></text>, style: "w500", canSort: false, headerWidth: 100)
           ),
-  htmlAttributes: new {id = "gridTbl"}
+  htmlAttributes: merged2 // only merged2 approach works for now.
 )
- 
- 
 
 <script language="javascript" type="text/javascript">  // --  --
   function goPage() {
     
-    var url = '@grid.GetPageUrl(0)';
+    var url = '@flexigridWrapper.GetPageUrl(0)';
 
     $.pjax({ url: url, container: '#myGrid' });
    }
