@@ -43,7 +43,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
 
     public IHtmlString GetFlexigridHtml(FlexigridHtmlOptions flexigridHtmlOptions)
     {
-      var gen = new FlexigridHtmlGenerator() { FlexigridHtmlOptions = flexigridHtmlOptions, FlexigridWrapper = this };
+      var gen = new FlexigridHtmlGenerator { FlexigridHtmlOptions = flexigridHtmlOptions, FlexigridWrapper = this };
 
       return new HtmlString(gen.TransformText());
     }
@@ -71,9 +71,10 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
       string lastText = null,
       int numericLinksCount = 5,
       dynamic htmlAttributes = null,
-      Func<dynamic, object> footerFormat = null)
+      Func<dynamic, object> footerFormat = null,
+      IEnumerable<FlexigridSearchItem> searchItems = null)
     {
-      var options = new FlexigridHtmlOptions { FlexiWidth = flexiWidth, FlexiHeight = flexiHeight, Title = title, TableStyle = tableStyle, HeaderStyle = headerStyle, FooterStyle = footerStyle, RowStyle = rowStyle, AlternatingRowStyle = alternatingRowStyle, SelectedRowStyle = selectedRowStyle, Caption = caption, DisplayHeader = displayHeader, FillEmptyRows = fillEmptyRows, EmptyRowCellValue = emptyRowCellValue, Columns = columns, Exclusions = exclusions, Mode = mode, FirstText = firstText, PreviousText = previousText, NextText = nextText, LastText = lastText, NumericLinksCount = numericLinksCount, HtmlAttributes = htmlAttributes, FooterFormat = footerFormat };
+      var options = new FlexigridHtmlOptions { FlexiWidth = flexiWidth, FlexiHeight = flexiHeight, Title = title, TableStyle = tableStyle, HeaderStyle = headerStyle, FooterStyle = footerStyle, RowStyle = rowStyle, AlternatingRowStyle = alternatingRowStyle, SelectedRowStyle = selectedRowStyle, Caption = caption, DisplayHeader = displayHeader, FillEmptyRows = fillEmptyRows, EmptyRowCellValue = emptyRowCellValue, Columns = columns, Exclusions = exclusions, Mode = mode, FirstText = firstText, PreviousText = previousText, NextText = nextText, LastText = lastText, NumericLinksCount = numericLinksCount, HtmlAttributes = htmlAttributes, FooterFormat = footerFormat, SearchItems = searchItems };
 
       return this.GetFlexigridHtml(options);
     }
@@ -96,6 +97,90 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
       }
 
       return columns;
+    }
+
+    public int FirstPageIndex
+    {
+      get
+      {
+        return 0;
+      }
+    }
+
+    public int LastPageIndex
+    {
+      get
+      {
+        return this.WebGrid.PageCount - 1 >= 0 ? this.WebGrid.PageCount - 1 : 0;
+      }
+    }
+
+    public int PrevPageIndex
+    {
+      get
+      {
+        return this.WebGrid.PageIndex - 1 >= 0 ? this.WebGrid.PageIndex - 1 : 0;
+      }
+    }
+
+    public int NextPageIndex
+    {
+      get
+      {
+        return this.WebGrid.PageIndex + 1 < this.WebGrid.PageCount ? this.WebGrid.PageIndex + 1 : this.WebGrid.PageIndex;
+      }
+    }
+
+    public string FirstPageUrl
+    {
+      get
+      {
+        if (this.WebGrid.PageCount == 0)
+        {
+          return "#";
+        }
+
+        return this.WebGrid.GetPageUrl(this.FirstPageIndex);
+      }
+    }
+
+    public string LastPageUrl
+    {
+      get
+      {
+        if (this.WebGrid.PageCount == 0)
+        {
+          return "#";
+        }
+
+        return this.WebGrid.GetPageUrl(this.LastPageIndex);
+      }
+    }
+
+    public string PrevPageUrl
+    {
+      get
+      {
+        if (this.WebGrid.PageCount == 0)
+        {
+          return "#";
+        }
+
+        return this.WebGrid.GetPageUrl(this.PrevPageIndex);
+      }
+    }
+
+    public string NextPageUrl
+    {
+      get
+      {
+        if (this.WebGrid.PageCount == 0)
+        {
+          return "#";
+        }
+
+        return this.WebGrid.GetPageUrl(this.NextPageIndex);
+      }
     }
   }
 }

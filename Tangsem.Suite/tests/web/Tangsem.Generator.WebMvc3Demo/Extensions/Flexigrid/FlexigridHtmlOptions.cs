@@ -60,5 +60,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
     public dynamic HtmlAttributes { get; set; }
 
     public Func<dynamic, object> FooterFormat { get; set; }
+
+    public IEnumerable<FlexigridSearchItem> SearchItems { get; set; }
   }
 }

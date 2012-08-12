@@ -31,5 +31,9 @@
               flexigridWrapper.FlexigridColumn(columnName: "Name", header: "Name", format: @<text>@item.Name</text>, style: "w100", canSort: true, headerWidth: 100),
               flexigridWrapper.FlexigridColumn(columnName: "", header: "Action", format: @<text><a href="javascript:deleteCat(@item.Id)">Delete</a></text>, style: "w500", canSort: false, headerWidth: 100)
           ),
+  searchItems: new [] {
+                        new FlexigridSearchItem{Display = "Name", Name = "Name", IsDefault= true},
+                        new FlexigridSearchItem{Display = "Id", Name = "Id",},
+                      },
   htmlAttributes: htmlAttributes // only merged2 approach works for now.
 )
