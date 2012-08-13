@@ -61,6 +61,14 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
 
     public Func<dynamic, object> FooterFormat { get; set; }
 
-    public IEnumerable<FlexigridSearchItem> SearchItems { get; set; }
+    public SearchSettings SearchSettings { get; set; }
+
+    public bool IsUsingSearchSettings
+    {
+      get
+      {
+        return this.SearchSettings != null && this.SearchSettings.IsInUse;
+      }
+    }
   }
 }

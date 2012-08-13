@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using Tangsem.Common.Extensions.Linq;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.DTOs;
 
@@ -26,6 +27,13 @@ namespace Tangsem.Generator.WebMvc3Demo.ViewModels
       {
         qry = qry.Where(x => x.ShortDescription.Contains(this.SearchParams.ShortDescription));
       }
+
+      return qry;
+    }
+
+    public IQueryable<Category> GetQueryable(string qtype, string q, IQueryable<Category> qry)
+    {
+      qry = qry.Where(qtype + ".Contains(@0)", q);
 
       return qry;
     }

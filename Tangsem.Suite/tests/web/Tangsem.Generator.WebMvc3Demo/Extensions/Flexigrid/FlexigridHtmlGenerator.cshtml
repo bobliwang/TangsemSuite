@@ -59,15 +59,7 @@
     $('#@(tableId) tfoot').remove();
     
     @* Search Items *@
-    @{
-      var searchItemsStr = string.Empty;
-      if( options.SearchItems != null && options.SearchItems.Any()){
-        searchItemsStr += ", searchitems: [";
-        searchItemsStr += string.Join(", ", options.SearchItems.Select(x => x.ToJson()));
-        searchItemsStr += "]";
-      }
-    }
-
+    @{var searchSettings = options.SearchSettings;}
     $('#@(tableId)').flexigrid({
       width:     @(options.FlexiWidth),
       height:    @(options.FlexiHeight),
@@ -77,7 +69,7 @@
       total: @(grid.TotalRowCount),
       rp: @(grid.RowsPerPage),
       page: @(grid.PageIndex)
-      @(searchItemsStr)
+      @(options.IsUsingSearchSettings ? "," + searchSettings.SearchItemsJson : string.Empty)@*render search items*@
     });
     
     @{
@@ -113,20 +105,35 @@
     $('#@(containerId) .pPrev').click(function(){$.pjax({url:'@(this.FlexigridWrapper.PrevPageUrl)', container:'#@(containerId)'});});
     $('#@(containerId) .pNext').click(function(){$.pjax({url:'@(this.FlexigridWrapper.NextPageUrl)', container:'#@(containerId)'});});
     
-    @*Search Box*@
-    var searchBox = $('#@(containerId) input[name="q"]');
-    if (searchBox.length > 0) {
-      searchBox.keypress(function(evt){
-        var e = window.event || evt; // for trans-browser compatibility  
-        var charCode = e.which || e.keyCode;  
-        if (charCode == 13) {
-          @*once it is return key..*@
-          
-          alert(charCode);
-        }
-      });  
+    @*Search Box - Use pjax to do search here..*@
+    @if(options.IsUsingSearchSettings){
+    <text>
+      var searchBox = $('#@(containerId) input[name="q"]');
+      var qtypeSel = $('#@(containerId) select[name="qtype"]');
+      if (searchBox.length > 0) {
+        searchBox.keypress(function(evt){
+          var e = window.event || evt; // for trans-browser compatibility  
+          var charCode = e.which || e.keyCode;
+          if (charCode == 13) {
+            @*once it is return key..*@
+            $.pjax({url:'@(options.SearchSettings.Url)', container:'#@(containerId)', data: {'@(searchSettings.SearchFieldParamName)': qtypeSel.val(), '@(searchSettings.SearchValueParamName)': searchBox.val()}});
+          }
+        });  
+      }
+    </text>
+      var currentQtype = this.FlexigridWrapper.WebPageBase.Request[searchSettings.SearchFieldParamName];
+      var currentQ = this.FlexigridWrapper.WebPageBase.Request[searchSettings.SearchValueParamName];
+
+      if (!string.IsNullOrEmpty(currentQ))
+      {<text>
+        searchBox.val('@(currentQ)');
+      </text>}
+
+      if (!string.IsNullOrEmpty(currentQtype))
+      {<text>
+        qtypeSel.val('@(currentQtype)');
+      </text>}
     }
-    
 
     @if (options.FooterFormat != null)
     {

@@ -34,6 +34,22 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers
       return this.View(vm);
     }
 
+    [HttpGet]
+    public virtual ActionResult SearchCategories(string qtype, string q)
+    {
+      var vm = new CategoryViewModel();
+      var qry = vm.GetQueryable(qtype, q, this.Repository.Categories).ActiveOnly();////.Where(x => !x.Active.HasValue || x.Active.Value);
+      ////vm.Categories = qry.ToList();
+      vm.Categories = qry;
+      Debug.WriteLine("#####" + this.Request.RawUrl);
+      if (this.Request.IsAjaxRequest())
+      {
+        return this.PartialView(MVC.Category.Views.CatsGrid, vm.Categories);
+      }
+
+      return this.View("ListCategories", vm);
+    }
+
     [HttpPost]
     public virtual ActionResult DeleteCategory(int id)
     {

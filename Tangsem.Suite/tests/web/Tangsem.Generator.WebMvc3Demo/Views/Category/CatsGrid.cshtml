@@ -22,18 +22,22 @@
 }
 
 @flexigridWrapper.GetFlexigridHtml(
-  flexiWidth: 640,
-  flexiHeight: 260,
+  flexiWidth: 650,
+  flexiHeight: 280,
   title: "Categories",
   
   columns: flexigridWrapper.Columns(
-              flexigridWrapper.FlexigridColumn(columnName: "Id", header: "Id", format: @<text>@item.Id</text>, style: "w100", canSort: true, headerWidth: 400),
-              flexigridWrapper.FlexigridColumn(columnName: "Name", header: "Name", format: @<text>@item.Name</text>, style: "w100", canSort: true, headerWidth: 100),
-              flexigridWrapper.FlexigridColumn(columnName: "", header: "Action", format: @<text><a href="javascript:deleteCat(@item.Id)">Delete</a></text>, style: "w500", canSort: false, headerWidth: 100)
+              flexigridWrapper.FlexigridColumn(columnName: "Id", header: "Id", format: @<text>@item.Id</text>, canSort: true, headerWidth: 100),
+              flexigridWrapper.FlexigridColumn(columnName: "Name", header: "Name", format: @<text>@item.Name</text>, canSort: true, headerWidth: 100),
+              flexigridWrapper.FlexigridColumn(columnName: "ShortDescription", header: "Short Description", format: @<text>@item.ShortDescription</text>, canSort: true, headerWidth: 300),
+              flexigridWrapper.FlexigridColumn(columnName: "", header: "Action", format: @<text><a href="javascript:deleteCat(@item.Id)">Delete</a></text>, canSort: false, headerWidth: 100)
           ),
-  searchItems: new [] {
-                        new FlexigridSearchItem{Display = "Name", Name = "Name", IsDefault= true},
-                        new FlexigridSearchItem{Display = "Id", Name = "Id",},
-                      },
+  searchSettings: new SearchSettings (
+                      url: Url.Action(MVC.Category.SearchCategories()),
+                      searchItems: new [] {
+                                          new FlexigridSearchItem{Display = "Name", Name = "Name", IsDefault= true},
+                                          new FlexigridSearchItem{Display = "Short Description", Name = "ShortDescription",},
+                                   }
+                    ),
   htmlAttributes: htmlAttributes // only merged2 approach works for now.
 )

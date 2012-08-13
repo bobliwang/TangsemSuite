@@ -372,6 +372,35 @@ namespace Links {
                           
             public static readonly string flexigrid_ori_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/flexigrid.ori.min.js") ? Url("flexigrid.ori.min.js") : Url("flexigrid.ori.js");
                           
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Images {
+                private const string URLPATH = "~/Content/flexigrid/Images";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string __fhbg_gif = Url("._fhbg.gif");
+                public static readonly string __wbg_gif = Url("._wbg.gif");
+                public static readonly string accept_png = Url("accept.png");
+                public static readonly string add_png = Url("add.png");
+                public static readonly string bg_gif = Url("bg.gif");
+                public static readonly string btn_sprite_gif = Url("btn-sprite.gif");
+                public static readonly string close_png = Url("close.png");
+                public static readonly string ddn_png = Url("ddn.png");
+                public static readonly string dn_png = Url("dn.png");
+                public static readonly string fhbg_gif = Url("fhbg.gif");
+                public static readonly string first_gif = Url("first.gif");
+                public static readonly string hl_png = Url("hl.png");
+                public static readonly string last_gif = Url("last.gif");
+                public static readonly string line_gif = Url("line.gif");
+                public static readonly string load_gif = Url("load.gif");
+                public static readonly string load_png = Url("load.png");
+                public static readonly string magnifier_png = Url("magnifier.png");
+                public static readonly string next_gif = Url("next.gif");
+                public static readonly string prev_gif = Url("prev.gif");
+                public static readonly string up_png = Url("up.png");
+                public static readonly string uup_png = Url("uup.png");
+                public static readonly string wbg_gif = Url("wbg.gif");
+            }
+        
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

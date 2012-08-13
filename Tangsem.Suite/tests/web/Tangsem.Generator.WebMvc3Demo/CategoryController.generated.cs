@@ -44,6 +44,11 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SearchCategories() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SearchCategories);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult DeleteCategory() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.DeleteCategory);
         }
@@ -68,6 +73,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string ListCategories = "ListCategories";
+            public readonly string SearchCategories = "SearchCategories";
             public readonly string DeleteCategory = "DeleteCategory";
             public readonly string Autocomplete = "Autocomplete";
         }
@@ -75,6 +81,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
             public const string ListCategories = "ListCategories";
+            public const string SearchCategories = "SearchCategories";
             public const string DeleteCategory = "DeleteCategory";
             public const string Autocomplete = "Autocomplete";
         }
@@ -86,6 +93,14 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_ListCategories {
             public readonly string vm = "vm";
+        }
+        static readonly ActionParamsClass_SearchCategories s_params_SearchCategories = new ActionParamsClass_SearchCategories();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SearchCategories SearchCategoriesParams { get { return s_params_SearchCategories; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SearchCategories {
+            public readonly string qtype = "qtype";
+            public readonly string q = "q";
         }
         static readonly ActionParamsClass_DeleteCategory s_params_DeleteCategory = new ActionParamsClass_DeleteCategory();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -118,6 +133,13 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         public override System.Web.Mvc.ActionResult ListCategories(Tangsem.Generator.WebMvc3Demo.ViewModels.CategoryViewModel vm) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ListCategories);
             callInfo.RouteValueDictionary.Add("vm", vm);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SearchCategories(string qtype, string q) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SearchCategories);
+            callInfo.RouteValueDictionary.Add("qtype", qtype);
+            callInfo.RouteValueDictionary.Add("q", q);
             return callInfo;
         }
 

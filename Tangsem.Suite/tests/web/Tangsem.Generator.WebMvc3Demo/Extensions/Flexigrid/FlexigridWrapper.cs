@@ -28,9 +28,12 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
 
     public WebGrid WebGrid { get; private set; }
 
+    public WebPageBase WebPageBase { get; private set; }
+
     public void Bind<T>(WebPageBase webPage, IQueryable<T> dataSource) where T : class
     {
       this.WebGrid.Bind(webPage, dataSource);
+      this.WebPageBase = webPage;
     }
 
     public FlexigridColumn FlexigridColumn(string columnName = null, string header = null, Func<dynamic, object> format = null, string style = null, bool canSort = true, int headerWidth = 100)
@@ -72,9 +75,9 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
       int numericLinksCount = 5,
       dynamic htmlAttributes = null,
       Func<dynamic, object> footerFormat = null,
-      IEnumerable<FlexigridSearchItem> searchItems = null)
+      SearchSettings searchSettings = null)
     {
-      var options = new FlexigridHtmlOptions { FlexiWidth = flexiWidth, FlexiHeight = flexiHeight, Title = title, TableStyle = tableStyle, HeaderStyle = headerStyle, FooterStyle = footerStyle, RowStyle = rowStyle, AlternatingRowStyle = alternatingRowStyle, SelectedRowStyle = selectedRowStyle, Caption = caption, DisplayHeader = displayHeader, FillEmptyRows = fillEmptyRows, EmptyRowCellValue = emptyRowCellValue, Columns = columns, Exclusions = exclusions, Mode = mode, FirstText = firstText, PreviousText = previousText, NextText = nextText, LastText = lastText, NumericLinksCount = numericLinksCount, HtmlAttributes = htmlAttributes, FooterFormat = footerFormat, SearchItems = searchItems };
+      var options = new FlexigridHtmlOptions { FlexiWidth = flexiWidth, FlexiHeight = flexiHeight, Title = title, TableStyle = tableStyle, HeaderStyle = headerStyle, FooterStyle = footerStyle, RowStyle = rowStyle, AlternatingRowStyle = alternatingRowStyle, SelectedRowStyle = selectedRowStyle, Caption = caption, DisplayHeader = displayHeader, FillEmptyRows = fillEmptyRows, EmptyRowCellValue = emptyRowCellValue, Columns = columns, Exclusions = exclusions, Mode = mode, FirstText = firstText, PreviousText = previousText, NextText = nextText, LastText = lastText, NumericLinksCount = numericLinksCount, HtmlAttributes = htmlAttributes, FooterFormat = footerFormat, SearchSettings = searchSettings };
 
       return this.GetFlexigridHtml(options);
     }
