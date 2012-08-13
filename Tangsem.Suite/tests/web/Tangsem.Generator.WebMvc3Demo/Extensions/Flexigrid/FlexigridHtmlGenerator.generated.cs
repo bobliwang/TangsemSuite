@@ -941,11 +941,11 @@ WriteLiteral("\');\r\n      ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\r\n\r\n\r\n");
 
 
             
-            #line 187 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 189 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
      if (options.FooterFormat != null)
     {
       var newFooter = string.Format("<tfoot><tr><td colspan=\"{0}\">{1}</td></tr></tfoot>"
@@ -964,7 +964,7 @@ WriteLiteral("\r\n      $(\'#");
 
 
             
-            #line 196 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 198 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
       Write(tableId);
 
             
@@ -974,7 +974,7 @@ WriteLiteral("\').append(\'\" + ");
 
 
             
-            #line 196 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 198 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
                                Write(newFooter);
 
             
@@ -986,13 +986,13 @@ WriteLiteral("\r\n");
 
 
             
-            #line 198 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
+            #line 200 "..\..\Extensions\Flexigrid\FlexigridHtmlGenerator.cshtml"
     }
 
             
             #line default
             #line hidden
-WriteLiteral("    \r\n  });\r\n</script>");
+WriteLiteral("  });\r\n</script>");
 
 
         }

@@ -184,6 +184,8 @@
       </text>}
     }
 
+
+
     @if (options.FooterFormat != null)
     {
       var newFooter = string.Format("<tfoot><tr><td colspan=\"{0}\">{1}</td></tr></tfoot>"
@@ -196,6 +198,5 @@
       $('#@(tableId)').append('" + @(newFooter) + "');
       </text>
     }
-    
   });
 </script>

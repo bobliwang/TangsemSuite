@@ -214,17 +214,17 @@ input[type="submit"] {
 /* TABLE
 ----------------------------------------------------------*/
 
-table {
+table.webgrid {
     border: solid 1px #e8eef4;
     border-collapse: collapse;
 }
 
-table td {
+table.webgrid td {
     padding: 5px;
     border: solid 1px #e8eef4;
 }
 
-table th {
+table.webgrid th {
     padding: 6px 5px;
     text-align: left;
     background-color: #e8eef4;
