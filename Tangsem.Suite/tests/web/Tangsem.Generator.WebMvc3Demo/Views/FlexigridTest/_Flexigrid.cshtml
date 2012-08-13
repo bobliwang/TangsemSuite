@@ -11,8 +11,8 @@
 @model IQueryable<Category>
 
 @{
-  var flexi = new FlexigridWrapper("myGrid");
-  flexi.Bind(this, this.Model);
+  var flexi = new FlexigridWrapper("myGrid", rowsPerPage: 10);
+  flexi.Bind(this, this.Model); 
 }
 
 @flexi.GetFlexigridHtml(
@@ -21,10 +21,10 @@
   title: "Categories",
   
   columns: flexi.Columns(
-              flexi.FlexigridColumn(columnName: "Id", header: "Id", format: @<text>@item.Id</text>, canSort: true, headerWidth: 100),
-              flexi.FlexigridColumn(columnName: "Name", header: "Name", format: @<text>@item.Name</text>, canSort: true, headerWidth: 100),
-              flexi.FlexigridColumn(columnName: "ShortDescription", header: "Short Description", format: @<text>@item.ShortDescription</text>, canSort: true, headerWidth: 300, align: Align.Right),
-              flexi.FlexigridColumn(columnName: "", header: "Action", format: @<text><a href="javascript:deleteCat(@item.Id)">Delete</a></text>, canSort: false, headerWidth: 100, align: Align.Right)
+                  flexi.FlexigridColumn<Category>(columnNameExpression: x => x.Id, header: "Id", format: @<text>@item.Id</text>, canSort: true, headerWidth: 100),
+                  flexi.FlexigridColumn<Category>(columnName: "Name", header: "Name", format: @<text>@item.Name</text>, canSort: true, headerWidth: 100),
+                  flexi.FlexigridColumn<Category>(columnName: "ShortDescription", header: "Short Description", format: @<text>@item.ShortDescription</text>, canSort: true, headerWidth: 300, align: Align.Right),
+                  flexi.FlexigridColumn<Category>(columnName: "", header: "Action", format: @<text><a href="javascript:deleteCat(@item.Id)">Delete</a></text>, canSort: false, headerWidth: 100, align: Align.Center)
           ),
   flexigridSearchSettings: flexi.SearchSettings (
                       url: Url.Action(MVC.FlexigridTest.SearchCategories()),

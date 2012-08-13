@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -43,6 +44,52 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
       var flexigridColumn = new FlexigridColumn(columnPrototype, headerWidth, align, valign);
 
       return flexigridColumn;
+    }
+
+    public FlexigridColumn FlexigridColumn<T>(string columnName = null, string header = null, Func<T, object> format = null, string style = null, bool canSort = true, int headerWidth = 100, Align align = Align.Left, VAlign valign = VAlign.Middle) where T : class
+    {
+      Func<dynamic, object> dynFmt = x => "Format not specified";
+
+      if (format != null)
+      {
+        dynFmt = x =>
+        {
+          var t = x as T;
+
+          if (t == null)
+          {
+            var d = x as DynamicObject;
+            if (d != null)
+            {
+              try
+              {
+                var val = d.GetPropertyValue("Value");
+                t = val as T;
+              }
+              catch (Exception e)
+              {
+                return "Conversion Error.(" + e.Message + ")";
+              }
+            }
+          }
+
+          if (t != null)
+          {
+            return format(t);
+          }
+
+          return "Conversion Error.";
+        };
+      }
+
+      return this.FlexigridColumn(columnName, header, dynFmt, style, canSort, headerWidth, align, valign);
+    }
+
+    public FlexigridColumn FlexigridColumn<T>(Expression<Func<T, object>> columnNameExpression, string header = null, Func<T, object> format = null, string style = null, bool canSort = true, int headerWidth = 100, Align align = Align.Left, VAlign valign = VAlign.Middle) where T : class
+    {
+      var columnName = columnNameExpression.GetPropertyInfo().Name;
+
+      return this.FlexigridColumn(columnName, header, format, style, canSort, headerWidth, align, valign);
     }
 
     public IHtmlString GetFlexigridHtml(FlexigridHtmlOptions flexigridHtmlOptions)

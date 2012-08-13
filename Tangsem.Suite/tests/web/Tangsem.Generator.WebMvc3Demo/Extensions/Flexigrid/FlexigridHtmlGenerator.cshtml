@@ -48,7 +48,6 @@
 
 <script language="javascript" type="text/javascript">
   $(function () {
-    
     @{
       var i = 0;
       foreach (var col in options.Columns)
@@ -183,9 +182,7 @@
         qtypeSel.val('@(currentQtype)');
       </text>}
     }
-
-
-
+    
     @if (options.FooterFormat != null)
     {
       var newFooter = string.Format("<tfoot><tr><td colspan=\"{0}\">{1}</td></tr></tfoot>"
