@@ -12,26 +12,26 @@ using Tangsem.Generator.WebMvc3Demo.ViewModels;
 
 namespace Tangsem.Generator.WebMvc3Demo.Controllers
 {
-  public partial class CategoryController : RepositoryController
+  public partial class FlexigridTestController : RepositoryController
   {
-    public CategoryController(IMyRepository repository)
+    public FlexigridTestController(IMyRepository repository)
       : base(repository)
     {
     }
 
     [HttpGet]
-    public virtual ActionResult ListCategories(CategoryViewModel vm)
+    public virtual ActionResult SearchCategories(string qtype, string q)
     {
-      var qry = vm.GetQueryable(this.Repository.Categories).ActiveOnly();////.Where(x => !x.Active.HasValue || x.Active.Value);
-      ////vm.Categories = qry.ToList();
+      var vm = new CategoryViewModel();
+      var qry = vm.GetQueryable(qtype, q, this.Repository.Categories).ActiveOnly();
       vm.Categories = qry;
       Debug.WriteLine("#####" + this.Request.RawUrl);
       if (this.Request.IsAjaxRequest())
       {
-        return this.PartialView(MVC.Category.Views.CatsGrid, vm.Categories);
+        return this.PartialView(MVC.FlexigridTest.Views._Flexigrid, vm.Categories);
       }
 
-      return this.View(vm);
+      return this.View(MVC.FlexigridTest.Views.Index, vm);
     }
 
     [HttpPost]

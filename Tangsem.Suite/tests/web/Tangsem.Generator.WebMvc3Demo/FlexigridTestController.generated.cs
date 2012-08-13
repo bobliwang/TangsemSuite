@@ -21,9 +21,9 @@ using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
 namespace Tangsem.Generator.WebMvc3Demo.Controllers {
-    public partial class CategoryController {
+    public partial class FlexigridTestController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected CategoryController(Dummy d) { }
+        protected FlexigridTestController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
@@ -39,8 +39,8 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult ListCategories() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.ListCategories);
+        public System.Web.Mvc.ActionResult SearchCategories() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SearchCategories);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -54,38 +54,39 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public CategoryController Actions { get { return MVC.Category; } }
+        public FlexigridTestController Actions { get { return MVC.FlexigridTest; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Category";
+        public readonly string Name = "FlexigridTest";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Category";
+        public const string NameConst = "FlexigridTest";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string ListCategories = "ListCategories";
+            public readonly string SearchCategories = "SearchCategories";
             public readonly string DeleteCategory = "DeleteCategory";
             public readonly string Autocomplete = "Autocomplete";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
-            public const string ListCategories = "ListCategories";
+            public const string SearchCategories = "SearchCategories";
             public const string DeleteCategory = "DeleteCategory";
             public const string Autocomplete = "Autocomplete";
         }
 
 
-        static readonly ActionParamsClass_ListCategories s_params_ListCategories = new ActionParamsClass_ListCategories();
+        static readonly ActionParamsClass_SearchCategories s_params_SearchCategories = new ActionParamsClass_SearchCategories();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_ListCategories ListCategoriesParams { get { return s_params_ListCategories; } }
+        public ActionParamsClass_SearchCategories SearchCategoriesParams { get { return s_params_SearchCategories; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_ListCategories {
-            public readonly string vm = "vm";
+        public class ActionParamsClass_SearchCategories {
+            public readonly string qtype = "qtype";
+            public readonly string q = "q";
         }
         static readonly ActionParamsClass_DeleteCategory s_params_DeleteCategory = new ActionParamsClass_DeleteCategory();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -106,18 +107,19 @@ namespace Tangsem.Generator.WebMvc3Demo.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string CatsGrid = "~/Views/Category/CatsGrid.cshtml";
-            public readonly string ListCategories = "~/Views/Category/ListCategories.cshtml";
+            public readonly string _Flexigrid = "~/Views/FlexigridTest/_Flexigrid.cshtml";
+            public readonly string Index = "~/Views/FlexigridTest/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_CategoryController: Tangsem.Generator.WebMvc3Demo.Controllers.CategoryController {
-        public T4MVC_CategoryController() : base(Dummy.Instance) { }
+    public class T4MVC_FlexigridTestController: Tangsem.Generator.WebMvc3Demo.Controllers.FlexigridTestController {
+        public T4MVC_FlexigridTestController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult ListCategories(Tangsem.Generator.WebMvc3Demo.ViewModels.CategoryViewModel vm) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ListCategories);
-            callInfo.RouteValueDictionary.Add("vm", vm);
+        public override System.Web.Mvc.ActionResult SearchCategories(string qtype, string q) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SearchCategories);
+            callInfo.RouteValueDictionary.Add("qtype", qtype);
+            callInfo.RouteValueDictionary.Add("q", q);
             return callInfo;
         }
 

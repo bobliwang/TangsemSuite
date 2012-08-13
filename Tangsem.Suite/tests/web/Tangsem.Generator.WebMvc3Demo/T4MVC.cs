@@ -26,6 +26,7 @@ public static class MVC {
     public static Tangsem.Generator.WebMvc3Demo.Controllers.AccountController Account = new Tangsem.Generator.WebMvc3Demo.Controllers.T4MVC_AccountController();
     public static Tangsem.Generator.WebMvc3Demo.Controllers.CategoryController Category = new Tangsem.Generator.WebMvc3Demo.Controllers.T4MVC_CategoryController();
     public static Tangsem.Generator.WebMvc3Demo.Controllers.CountryController Country = new Tangsem.Generator.WebMvc3Demo.Controllers.T4MVC_CountryController();
+    public static Tangsem.Generator.WebMvc3Demo.Controllers.FlexigridTestController FlexigridTest = new Tangsem.Generator.WebMvc3Demo.Controllers.T4MVC_FlexigridTestController();
     public static Tangsem.Generator.WebMvc3Demo.Controllers.HomeController Home = new Tangsem.Generator.WebMvc3Demo.Controllers.T4MVC_HomeController();
     public static Tangsem.Generator.WebMvc3Demo.Controllers.StateController State = new Tangsem.Generator.WebMvc3Demo.Controllers.T4MVC_StateController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
@@ -372,6 +373,7 @@ namespace Links {
                           
             public static readonly string flexigrid_ori_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/flexigrid.ori.min.js") ? Url("flexigrid.ori.min.js") : Url("flexigrid.ori.js");
                           
+            public static readonly string flexigrid_override_css = Url("flexigrid_override.css");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class Images {
                 private const string URLPATH = "~/Content/flexigrid/Images";

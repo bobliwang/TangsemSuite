@@ -1,0 +1,41 @@
+﻿@using System.Web.Script.Serialization
+@using Tangsem.Generator.WebMvc3Demo.ViewModels
+@using Tangsem.Generator.WebMvc3Demo.Extensions
+
+@model CategoryViewModel
+         
+@{
+  ViewBag.Title = "Categories - Flexigrid Test";
+}
+
+<h2>Flexigrid Test</h2>
+
+<h3>Categories</h3>
+
+<div id="myGrid">
+  @Html.Partial(MVC.FlexigridTest.Views._Flexigrid, this.Model.Categories)
+</div>
+
+<script language="javascript" type="text/javascript">  // --  --
+  
+
+  function deleteCat(id) {
+    $.ajax(
+      {
+        url: '@Url.Action(MVC.FlexigridTest.DeleteCategory())',
+        type: "post",
+        dataType: "json",
+        data: { id: id },
+        success: function (data) {
+          $('#myGrid').load(document.location.href);
+
+          try {
+            $.jGrowl("Deleted:" + data.deleted, { header: 'Message', position: "bottom-right" });
+          } catch (e) {
+            alert(e);
+          }
+        }
+      }
+    );
+  }
+</script>

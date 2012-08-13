@@ -10,17 +10,18 @@
 
 @{
   var grid = this.FlexigridWrapper.WebGrid;
-  
+
   var options = this.FlexigridHtmlOptions;
-  
+
   var tableId = ((object)options.HtmlAttributes).GetPropertyValue("id") as string;
-  
+
   if (tableId == null)
   {
     throw new Exception("TableId is required in HtmlAttributes!");
   }
 
   var containerId = this.FlexigridWrapper.ContainerId;
+  var request = this.FlexigridWrapper.WebPageBase.Request;
 }
 
 @grid.GetHtml(
@@ -53,13 +54,29 @@
       foreach (var col in options.Columns)
       {<text>
         $('#@(tableId) th:nth-child(@(++i))').attr('width', @(col.HeaderWidth));
+        $('#@(tableId) th:nth-child(@(i))').attr('align', '@(col.Align.ToString().ToLower())');
+        $('#@(tableId) th:nth-child(@(i))').attr('valign', '@(col.VAlign.ToString().ToLower())');
       </text>}
+
+      var columns = options.Columns.ToList();
+      var sortedColumn = columns.FirstOrDefault(x => x.ColumnName == this.FlexigridWrapper.SortBy);
+      var colIndex = 0;
+      if (sortedColumn != null)
+      {
+        colIndex = columns.IndexOf(sortedColumn) + 1;
+        <text>$('#@(tableId) th:nth-child(@(colIndex))').addClass('sorted')</text>
+      }
     }
     
+    
+    $('#@(tableId) th').css('background-color', 'transparent');
+    $('#@(tableId) th').css('color', '#000');    
+    $('#@(tableId) th a').css('color', '#000');    
+    $('#@(tableId) th a').css('text-decoration', 'none');
+    @*$('#@(tableId) th').css('font-weight', 'bold');*@
     $('#@(tableId) tfoot').remove();
     
-    @* Search Items *@
-    @{var searchSettings = options.SearchSettings;}
+    @{var searchSettings = options.FlexigridSearchSettings;}
     $('#@(tableId)').flexigrid({
       width:     @(options.FlexiWidth),
       height:    @(options.FlexiHeight),
@@ -72,14 +89,37 @@
       @(options.IsUsingSearchSettings ? "," + searchSettings.SearchItemsJson : string.Empty)@*render search items*@
     });
     
+    var ths = $('#@(containerId) .hDivBox th');
+    ths.each(function(idx) {
+      var self = $(this);
+      self.find('div').click(
+        function(){
+          $.pjax({url: self.find('a').attr('href'), container:'#@(containerId)'});
+          return false;// prevent the link to issue another query.
+        }
+      );
+    });
+    
     @{
+      if (sortedColumn != null)
+      {
+        var sortDir = this.FlexigridWrapper.SortDir;
+        var sortDirClass = "DESC".Equals(sortDir, StringComparison.CurrentCultureIgnoreCase) ? "sdesc" : "sasc";
+
+        <text>
+          var sortedDiv = $('#@(containerId) .hDivBox th:nth-child(@(colIndex)) div');
+          sortedDiv.addClass('@(sortDirClass)');
+        </text>  
+      }
+
       var pageUrlTemplate = this.FlexigridWrapper.FirstPageUrl;
     }
-
+    
     $('#@(containerId) .pcontrol input').val(@(grid.PageIndex + 1));
     $('#@(containerId) .pcontrol span').html('@(grid.PageCount)');
     $('#@(containerId) .pPageStat').html('Displaying @(grid.PageIndex * grid.RowsPerPage + 1) to @(Math.Min((grid.PageIndex+1) * grid.RowsPerPage, grid.TotalRowCount)) of @(grid.TotalRowCount) items.');
     
+    @* goPage function *@
     var goPage = function() {
       var template = '@(pageUrlTemplate)';
       var url = template.replace('@(grid.PageFieldName)=1', '@(grid.PageFieldName)=' + $('.pcontrol input').val());
@@ -106,7 +146,8 @@
     $('#@(containerId) .pNext').click(function(){$.pjax({url:'@(this.FlexigridWrapper.NextPageUrl)', container:'#@(containerId)'});});
     
     @*Search Box - Use pjax to do search here..*@
-    @if(options.IsUsingSearchSettings){
+    @if (options.IsUsingSearchSettings)
+    {
     <text>
       var searchBox = $('#@(containerId) input[name="q"]');
       var qtypeSel = $('#@(containerId) select[name="qtype"]');
@@ -116,13 +157,21 @@
           var charCode = e.which || e.keyCode;
           if (charCode == 13) {
             @*once it is return key..*@
-            $.pjax({url:'@(options.SearchSettings.Url)', container:'#@(containerId)', data: {'@(searchSettings.SearchFieldParamName)': qtypeSel.val(), '@(searchSettings.SearchValueParamName)': searchBox.val()}});
+            $.pjax({url:'@(options.FlexigridSearchSettings.Url)', container:'#@(containerId)', data: {'@(searchSettings.SearchFieldParamName)': qtypeSel.val(), '@(searchSettings.SearchValueParamName)': searchBox.val()}});
           }
         });  
       }
     </text>
-      var currentQtype = this.FlexigridWrapper.WebPageBase.Request[searchSettings.SearchFieldParamName];
-      var currentQ = this.FlexigridWrapper.WebPageBase.Request[searchSettings.SearchValueParamName];
+      var currentQ = request[searchSettings.SearchValueParamName];
+      var currentQtype = request[searchSettings.SearchFieldParamName];
+      if (string.IsNullOrEmpty(currentQtype))
+      {
+        var defaultSearchItem = searchSettings.SearchItems.LastOrDefault(x => x.IsDefault);
+        if (defaultSearchItem != null)
+        {
+          currentQtype = defaultSearchItem.Name;
+        }
+      }
 
       if (!string.IsNullOrEmpty(currentQ))
       {<text>
@@ -144,7 +193,7 @@
       newFooter = newFooter.Replace("'", "\\'").Replace(Environment.NewLine, "");
 
       <text>
-      $('#@(tableId)').append('" + newFooter + "');
+      $('#@(tableId)').append('" + @(newFooter) + "');
       </text>
     }
     

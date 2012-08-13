@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Web;
 using System.Web.Helpers;
@@ -36,10 +37,10 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
       this.WebPageBase = webPage;
     }
 
-    public FlexigridColumn FlexigridColumn(string columnName = null, string header = null, Func<dynamic, object> format = null, string style = null, bool canSort = true, int headerWidth = 100)
+    public FlexigridColumn FlexigridColumn(string columnName = null, string header = null, Func<dynamic, object> format = null, string style = null, bool canSort = true, int headerWidth = 100, Align align = Align.Left, VAlign valign = VAlign.Middle)
     {
       var columnPrototype = this.WebGrid.Column(columnName, header, format, style, canSort);
-      var flexigridColumn = new FlexigridColumn(columnPrototype, headerWidth);
+      var flexigridColumn = new FlexigridColumn(columnPrototype, headerWidth, align, valign);
 
       return flexigridColumn;
     }
@@ -48,7 +49,27 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
     {
       var gen = new FlexigridHtmlGenerator { FlexigridHtmlOptions = flexigridHtmlOptions, FlexigridWrapper = this };
 
-      return new HtmlString(gen.TransformText());
+      return new HtmlString(gen.TransformText().Trim());
+    }
+
+    public FlexigridSearchSettings SearchSettings(string url, IEnumerable<FlexigridSearchItem> searchItems = null, string searchFieldParamName = "qtype", string searchValueParamName = "q")
+    {
+      return new FlexigridSearchSettings(url, searchItems, searchFieldParamName, searchValueParamName);
+    }
+
+    public FlexigridSearchItem SearchItem(string display, string name, bool isDefault = false)
+    {
+      return new FlexigridSearchItem { Display = display, Name = name, IsDefault = isDefault };
+    }
+
+    public IEnumerable<FlexigridSearchItem> SearchItems(params FlexigridSearchItem[] searchItems)
+    {
+      return searchItems;
+    }
+
+    public FlexigridSearchItem SearchItem<T>(string display, Expression<Func<T, object>> expression, bool isDefault = false)
+    {
+      return new FlexigridSearchItem { Display = display, Name = expression.GetPropertyInfo().Name, IsDefault = isDefault };
     }
 
     public IHtmlString GetFlexigridHtml(
@@ -75,9 +96,9 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
       int numericLinksCount = 5,
       dynamic htmlAttributes = null,
       Func<dynamic, object> footerFormat = null,
-      SearchSettings searchSettings = null)
+      FlexigridSearchSettings flexigridSearchSettings = null)
     {
-      var options = new FlexigridHtmlOptions { FlexiWidth = flexiWidth, FlexiHeight = flexiHeight, Title = title, TableStyle = tableStyle, HeaderStyle = headerStyle, FooterStyle = footerStyle, RowStyle = rowStyle, AlternatingRowStyle = alternatingRowStyle, SelectedRowStyle = selectedRowStyle, Caption = caption, DisplayHeader = displayHeader, FillEmptyRows = fillEmptyRows, EmptyRowCellValue = emptyRowCellValue, Columns = columns, Exclusions = exclusions, Mode = mode, FirstText = firstText, PreviousText = previousText, NextText = nextText, LastText = lastText, NumericLinksCount = numericLinksCount, HtmlAttributes = htmlAttributes, FooterFormat = footerFormat, SearchSettings = searchSettings };
+      var options = new FlexigridHtmlOptions { FlexiWidth = flexiWidth, FlexiHeight = flexiHeight, Title = title, TableStyle = tableStyle, HeaderStyle = headerStyle, FooterStyle = footerStyle, RowStyle = rowStyle, AlternatingRowStyle = alternatingRowStyle, SelectedRowStyle = selectedRowStyle, Caption = caption, DisplayHeader = displayHeader, FillEmptyRows = fillEmptyRows, EmptyRowCellValue = emptyRowCellValue, Columns = columns, Exclusions = exclusions, Mode = mode, FirstText = firstText, PreviousText = previousText, NextText = nextText, LastText = lastText, NumericLinksCount = numericLinksCount, HtmlAttributes = htmlAttributes, FooterFormat = footerFormat, FlexigridSearchSettings = flexigridSearchSettings };
 
       return this.GetFlexigridHtml(options);
     }
@@ -183,6 +204,22 @@ namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
         }
 
         return this.WebGrid.GetPageUrl(this.NextPageIndex);
+      }
+    }
+
+    public string SortBy
+    {
+      get
+      {
+        return this.WebPageBase.Request[this.WebGrid.SortFieldName];
+      }
+    }
+
+    public string SortDir
+    {
+      get
+      {
+        return this.WebPageBase.Request[this.WebGrid.SortDirectionFieldName];
       }
     }
   }

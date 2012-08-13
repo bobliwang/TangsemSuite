@@ -104,6 +104,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\FlexigridTestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RepositoryController.cs" />
     <Compile Include="Controllers\StateController.cs" />
@@ -120,8 +121,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FlexigridHtmlGenerator.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Extensions\Flexigrid\SearchSettings.cs" />
+    <Compile Include="Extensions\Flexigrid\FlexigridSearchSettings.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
+    <Compile Include="FlexigridTestController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -153,6 +157,7 @@
     <Content Include="Content\flexigrid\flexigrid.css" />
     <Content Include="Content\flexigrid\flexigrid.js" />
     <Content Include="Content\flexigrid\flexigrid.ori.js" />
+    <Content Include="Content\flexigrid\flexigrid_override.css" />
     <Content Include="Content\flexigrid\Images\._fhbg.gif" />
     <Content Include="Content\flexigrid\Images\._wbg.gif" />
     <Content Include="Content\flexigrid\Images\accept.png" />
@@ -386,6 +391,8 @@
     <Content Include="Views\State\Add.cshtml" />
     <Content Include="Views\Category\ListCategories.cshtml" />
     <Content Include="Views\Category\CatsGrid.cshtml" />
+    <Content Include="Views\FlexigridTest\Index.cshtml" />
+    <Content Include="Views\FlexigridTest\_Flexigrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

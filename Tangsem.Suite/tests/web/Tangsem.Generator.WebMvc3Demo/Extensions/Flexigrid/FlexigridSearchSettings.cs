@@ -5,9 +5,9 @@ using System.Web;
 
 namespace Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
 {
-  public class SearchSettings
+  public class FlexigridSearchSettings
   {
-    public SearchSettings(string url, IEnumerable<FlexigridSearchItem> searchItems = null, string searchFieldParamName = "qtype", string searchValueParamName = "q")
+    public FlexigridSearchSettings(string url, IEnumerable<FlexigridSearchItem> searchItems = null, string searchFieldParamName = "qtype", string searchValueParamName = "q")
     {
       this.Url = url;
       this.SearchItems = searchItems ?? new FlexigridSearchItem[0];

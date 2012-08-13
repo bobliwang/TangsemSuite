@@ -33,7 +33,10 @@ namespace Tangsem.Generator.WebMvc3Demo.ViewModels
 
     public IQueryable<Category> GetQueryable(string qtype, string q, IQueryable<Category> qry)
     {
-      qry = qry.Where(qtype + ".Contains(@0)", q);
+      if (!string.IsNullOrEmpty(qtype) && !string.IsNullOrEmpty(q))
+      {
+        qry = qry.Where(qtype + ".Contains(@0)", q);
+      }
 
       return qry;
     }

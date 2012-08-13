@@ -1,0 +1,37 @@
+﻿@using System.Dynamic
+@using System.Linq.Expressions
+@using System.Web.Script.Serialization
+@using Tangsem.Common.Extensions
+@using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities
+@using Tangsem.Generator.WebMvc3Demo.Extensions.Flexigrid
+@using Tangsem.Generator.WebMvc3Demo.ViewModels
+@using Tangsem.Generator.WebMvc3Demo.Extensions
+@using Tangsem.Web.Mvc.Extensions
+
+@model IQueryable<Category>
+
+@{
+  var flexi = new FlexigridWrapper("myGrid");
+  flexi.Bind(this, this.Model);
+}
+
+@flexi.GetFlexigridHtml(
+  flexiWidth: 655,
+  flexiHeight: 270,
+  title: "Categories",
+  
+  columns: flexi.Columns(
+              flexi.FlexigridColumn(columnName: "Id", header: "Id", format: @<text>@item.Id</text>, canSort: true, headerWidth: 100),
+              flexi.FlexigridColumn(columnName: "Name", header: "Name", format: @<text>@item.Name</text>, canSort: true, headerWidth: 100),
+              flexi.FlexigridColumn(columnName: "ShortDescription", header: "Short Description", format: @<text>@item.ShortDescription</text>, canSort: true, headerWidth: 300, align: Align.Right),
+              flexi.FlexigridColumn(columnName: "", header: "Action", format: @<text><a href="javascript:deleteCat(@item.Id)">Delete</a></text>, canSort: false, headerWidth: 100, align: Align.Right)
+          ),
+  flexigridSearchSettings: flexi.SearchSettings (
+                      url: Url.Action(MVC.FlexigridTest.SearchCategories()),
+                      searchItems: flexi.SearchItems(
+                                          flexi.SearchItem<Category>("Name", x => x.Name),
+                                          flexi.SearchItem<Category>("Short Description", x => x.ShortDescription, true)
+                                   )
+                    ),
+  htmlAttributes: new { id = "table_Flexigrid_categories"}
+)
