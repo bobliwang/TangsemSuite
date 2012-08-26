@@ -25,6 +25,8 @@ namespace Tangsem.Generator.NHibernateTest
   {
     public const int CurrentUserId = 5;
 
+    private int _a = 0;
+
     [TestMethod]
     public void Test_ShowStatesUnderCountries()
     {
