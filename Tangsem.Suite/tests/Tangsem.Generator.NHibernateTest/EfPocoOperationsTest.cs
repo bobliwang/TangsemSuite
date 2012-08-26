@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,13 @@ namespace Tangsem.Generator.NHibernateTest
     [TestMethod]
     public void Test_ShowStatesUnderCountries()
     {
+
+      var sw = Stopwatch.StartNew();
+
       using (var repo = this.CreateRepository())
       {
+        Console.WriteLine("1 Time used:" + sw.Elapsed.TotalSeconds + " secs");
+
         var countries = repo.Countries.ActiveOnly().Include(c => c.States).ToList();
 
         foreach (var country in countries)
@@ -40,6 +46,8 @@ namespace Tangsem.Generator.NHibernateTest
             Console.WriteLine("\t" + state.Name);
           }
         }
+
+        Console.WriteLine("2 Time used:" + sw.Elapsed.TotalSeconds + " secs");
       }
     }
 
