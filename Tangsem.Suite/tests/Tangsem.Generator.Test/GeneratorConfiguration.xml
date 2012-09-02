@@ -6,7 +6,7 @@
 						ConnectionString="Data Source=(local);Initial Catalog=TangsemGeneratorNHibernateTest;Integrated Security=True"
 						MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
 						OpenOutputDirAfterGeneration="true"
-            OrmFramework="EntityFramework">
+            OrmFramework="EF">
 		
 	<!-- MetadataBuilder: className[;assemblyName]  -->
 	<IgnoredTable>Sysdiagrams</IgnoredTable>

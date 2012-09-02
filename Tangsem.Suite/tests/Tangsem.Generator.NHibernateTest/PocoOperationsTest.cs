@@ -1,7 +1,8 @@
-﻿/*
+﻿
 using System;
 using System.Configuration;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,9 @@ using NHibernate.Linq;
 
 using Tangsem.Common.Entities;
 using Tangsem.Common.Extensions.Linq;
-using Tangsem.EF.Mappings;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories;
+using Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories.NHibernate;
 using Tangsem.NHibernate.Interceptors;
 
 namespace Tangsem.Generator.NHibernateTest
@@ -43,9 +44,12 @@ namespace Tangsem.Generator.NHibernateTest
     [TestMethod]
     public void Test_ShowStatesUnderCountries()
     {
+
+      var sw = Stopwatch.StartNew();
       using (var repo = this.CreateRepository())
       {
-        var countries = repo.Countries.FetchMany(c => c.States).ToList();
+        Console.WriteLine("1 Time used:" + sw.Elapsed.TotalSeconds + " secs");
+        var countries = repo.Countries.ActiveOnly().FetchMany(c => c.States).ToList();
 
         foreach (var country in countries)
         {
@@ -56,6 +60,8 @@ namespace Tangsem.Generator.NHibernateTest
             Console.WriteLine("\t" + state.Name);
           }
         }
+
+        Console.WriteLine("2 Time used:" + sw.Elapsed.TotalSeconds + " secs");
       }
     }
 
@@ -312,8 +318,8 @@ namespace Tangsem.Generator.NHibernateTest
       var session = this.SessionFactory.OpenSession(ai);
       //return new MyRepository { CurrentSession = session };
 
-      var dbContext = new MyDbContext(this.GetConnString());
-      return new MyRepository { CurrentDbContext = dbContext };
+      //var dbContext = new MyDbContext(this.GetConnString());
+      return new MyRepository { CurrentSession = session };
     }
 
 
@@ -342,4 +348,3 @@ namespace Tangsem.Generator.NHibernateTest
 
   }
 }
-*/

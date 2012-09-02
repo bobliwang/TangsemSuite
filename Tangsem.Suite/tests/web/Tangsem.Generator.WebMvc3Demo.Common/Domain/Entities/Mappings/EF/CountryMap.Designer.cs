@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 using Tangsem.EF.Mappings;
 /* http://msdn.microsoft.com/en-us/library/hh295843(v=vs.103) */
-namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
+namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings.EF
 {
   /// <summary>
   /// The mapping configuration for Country.

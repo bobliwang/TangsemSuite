@@ -61,15 +61,20 @@
     <Compile Include="Domain\Entities\DTOs\CountryDTO.Designer.cs" />
     <Compile Include="Domain\Entities\DTOs\StateDTO.Designer.cs" />
     <Compile Include="Domain\Entities\DTOs\VStateDTO.Designer.cs" />
-    <Compile Include="Domain\Entities\Mappings\CategoryMap.Designer.cs" />
-    <Compile Include="Domain\Entities\Mappings\CountryMap.Designer.cs" />
-    <Compile Include="Domain\Entities\Mappings\StateMap.Designer.cs" />
-    <Compile Include="Domain\Entities\Mappings\VStateMap.Designer.cs" />
+    <Compile Include="Domain\Entities\Mappings\EF\CategoryMap.Designer.cs" />
+    <Compile Include="Domain\Entities\Mappings\EF\CountryMap.Designer.cs" />
+    <Compile Include="Domain\Entities\Mappings\EF\StateMap.Designer.cs" />
+    <Compile Include="Domain\Entities\Mappings\EF\VStateMap.Designer.cs" />
+    <Compile Include="Domain\Entities\Mappings\NHibernate\CategoryMap.Designer.cs" />
+    <Compile Include="Domain\Entities\Mappings\NHibernate\CountryMap.Designer.cs" />
+    <Compile Include="Domain\Entities\Mappings\NHibernate\StateMap.Designer.cs" />
+    <Compile Include="Domain\Entities\Mappings\NHibernate\VStateMap.Designer.cs" />
     <Compile Include="Domain\Entities\State.Designer.cs" />
     <Compile Include="Domain\Entities\VState.Designer.cs" />
+    <Compile Include="Domain\Repositories\EF\MyRepository.Designer.cs" />
     <Compile Include="Domain\Repositories\IMyRepository.Designer.cs" />
     <Compile Include="Domain\Repositories\MyDbContext.cs" />
-    <Compile Include="Domain\Repositories\MyRepository.Designer.cs" />
+    <Compile Include="Domain\Repositories\NHibernate\MyRepository.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +99,7 @@
       <Name>Tangsem.NHibernate</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

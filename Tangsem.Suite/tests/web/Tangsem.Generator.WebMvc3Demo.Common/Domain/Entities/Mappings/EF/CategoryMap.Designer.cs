@@ -7,17 +7,17 @@ using System.Data.Entity;
 
 using Tangsem.EF.Mappings;
 /* http://msdn.microsoft.com/en-us/library/hh295843(v=vs.103) */
-namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
+namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings.EF
 {
   /// <summary>
-  /// The mapping configuration for State.
+  /// The mapping configuration for Category.
   /// </summary>
-  public partial class StateMap : ClassMap<State>
+  public partial class CategoryMap : ClassMap<Category>
   {
     /// <summary>
     /// The constructor.
     /// </summary>
-    public StateMap() : base()
+    public CategoryMap() : base()
     {
     }
     
@@ -26,7 +26,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
     /// </summary>
     protected override void MapTable(DbModelBuilder modelBuilder)
     {
-      this.EntityTypeConfiguration.ToTable("State");
+      this.EntityTypeConfiguration.ToTable("Category");
     }
 
     /// <summary>
@@ -51,6 +51,18 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
              .Property(x => x.Name)
              .HasColumnName("Name").IsRequired();      
          this.EntityTypeConfiguration
+             .Property(x => x.ShortDescription)
+             .HasColumnName("ShortDescription");      
+         this.EntityTypeConfiguration
+             .Property(x => x.Description)
+             .HasColumnName("Description");      
+         this.EntityTypeConfiguration
+             .Property(x => x.ParentId)
+             .HasColumnName("ParentId");      
+         this.EntityTypeConfiguration
+             .Property(x => x.KeyWords)
+             .HasColumnName("KeyWords");      
+         this.EntityTypeConfiguration
              .Property(x => x.CreatedById)
              .HasColumnName("CreatedById");      
          this.EntityTypeConfiguration
@@ -72,12 +84,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
     /// </summary>
     protected override void MapRelationships(DbModelBuilder modelBuilder)
     {
-      
-        this.EntityTypeConfiguration
-            .HasOptional(x => x.Country)
-        .WithMany(x => x.States)
-        .Map(m => m.MapKey("CountryId"));
-      
+
     }
   }
 }

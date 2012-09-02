@@ -8,6 +8,7 @@ using System.Data.Entity;
 using Tangsem.EF.Mappings;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings;
+using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings.EF;
 
 namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories
 {
@@ -15,7 +16,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories
   {
     public MyDbContext(string nameOrConnectionString)
       : base(nameOrConnectionString)
-    {
+    { 
     }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)

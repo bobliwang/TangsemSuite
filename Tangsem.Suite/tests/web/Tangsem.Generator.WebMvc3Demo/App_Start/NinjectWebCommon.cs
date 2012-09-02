@@ -1,6 +1,8 @@
 using System.Configuration;
 
 using AutoMapper;
+
+using Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories.NHibernate;
 using Tangsem.Generator.WebMvc3Demo.Extensions;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -97,9 +99,9 @@ namespace Tangsem.Generator.WebMvc3Demo.App_Start
       kernel.Bind<IMyRepository>()
             .To<MyRepository>()
             .InRequestScope()
-        //.WithPropertyValue("CurrentSession", ctx => SessionFactory.OpenSession())
+            .WithPropertyValue(x => x.CurrentSession, ctx => SessionFactory.OpenSession())
             .WithPropertyValue(x => x.CurrentUserId, ctx => 1)
-            .WithPropertyValue(x => x.CurrentDbContext, ctx => new MyDbContext(GetConnString()))
+            //.WithPropertyValue(x => x.CurrentDbContext, ctx => new MyDbContext(GetConnString()))
             .OnActivation<MyRepository>((ctx, repo) => repo.BeginTransaction())
             .OnDeactivation<MyRepository>((ctx, repo) => repo.Close());
 

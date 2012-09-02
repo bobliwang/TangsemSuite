@@ -28,12 +28,12 @@ namespace Tangsem.Web.Mvc.Extensions
       {
         qry = qry.OrderBy(sortExpression);
       }
-      else
-      {
-        // Always make an IOrderedQueryable<T>, for the sake of LINQ to Entities. The Skip()/Take() in LINQ to Entities requires IOrderedQueryable<T>. Idiot!!!
-        // Better to check if the current linq provider is NHibernate. If so, we may skip this shit.
-        qry = qry.OrderBy("1");
-      }
+      //else
+      //{
+      //  // Always make an IOrderedQueryable<T>, for the sake of LINQ to Entities. The Skip()/Take() in LINQ to Entities requires IOrderedQueryable<T>. Idiot!!!
+      //  // Better to check if the current linq provider is NHibernate. If so, we may skip this shit.
+      //  qry = qry.OrderBy("1");
+      //}
 
       qry = qry.Skip(page * webGrid.RowsPerPage).Take(webGrid.RowsPerPage);
       webGrid.Bind(qry.ToList(), autoSortAndPage: false, rowCount: rowsCount);

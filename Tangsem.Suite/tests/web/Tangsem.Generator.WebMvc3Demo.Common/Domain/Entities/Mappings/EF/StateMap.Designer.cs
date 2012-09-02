@@ -7,17 +7,17 @@ using System.Data.Entity;
 
 using Tangsem.EF.Mappings;
 /* http://msdn.microsoft.com/en-us/library/hh295843(v=vs.103) */
-namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
+namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings.EF
 {
   /// <summary>
-  /// The mapping configuration for VState.
+  /// The mapping configuration for State.
   /// </summary>
-  public partial class VStateMap : ClassMap<VState>
+  public partial class StateMap : ClassMap<State>
   {
     /// <summary>
     /// The constructor.
     /// </summary>
-    public VStateMap() : base()
+    public StateMap() : base()
     {
     }
     
@@ -26,7 +26,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
     /// </summary>
     protected override void MapTable(DbModelBuilder modelBuilder)
     {
-      this.EntityTypeConfiguration.ToTable("v_State");
+      this.EntityTypeConfiguration.ToTable("State");
     }
 
     /// <summary>
@@ -34,7 +34,12 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
     /// </summary>
     protected override void MapId(DbModelBuilder modelBuilder)
     {
-    }
+
+        this.EntityTypeConfiguration
+            .HasKey(x => x.Id)
+            .Property(x => x.Id)
+            .HasColumnName("Id");
+        }
     
     /// <summary>
     /// Map the Basic Columns.
@@ -43,17 +48,8 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
     {
 
          this.EntityTypeConfiguration
-             .Property(x => x.RowNum)
-             .HasColumnName("RowNum");      
-         this.EntityTypeConfiguration
-             .Property(x => x.Id)
-             .HasColumnName("Id").IsRequired();      
-         this.EntityTypeConfiguration
              .Property(x => x.Name)
              .HasColumnName("Name").IsRequired();      
-         this.EntityTypeConfiguration
-             .Property(x => x.CountryId)
-             .HasColumnName("CountryId");      
          this.EntityTypeConfiguration
              .Property(x => x.CreatedById)
              .HasColumnName("CreatedById");      
@@ -69,15 +65,6 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
          this.EntityTypeConfiguration
              .Property(x => x.Active)
              .HasColumnName("Active");      
-         this.EntityTypeConfiguration
-             .Property(x => x.CountryName)
-             .HasColumnName("CountryName");      
-         this.EntityTypeConfiguration
-             .Property(x => x.CountryCode)
-             .HasColumnName("CountryCode");      
-         this.EntityTypeConfiguration
-             .Property(x => x.Continent)
-             .HasColumnName("Continent");      
     }
     
     /// <summary>
@@ -85,7 +72,12 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
     /// </summary>
     protected override void MapRelationships(DbModelBuilder modelBuilder)
     {
-
+      
+        this.EntityTypeConfiguration
+            .HasOptional(x => x.Country)
+        .WithMany(x => x.States)
+        .Map(m => m.MapKey("CountryId"));
+      
     }
   }
 }

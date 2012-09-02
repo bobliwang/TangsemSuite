@@ -16,7 +16,7 @@ using Tangsem.EF.Mappings;
 
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories;
-using Tangsem.NHibernate.Interceptors;
+using Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories.EF;
 
 namespace Tangsem.Generator.NHibernateTest
 {
@@ -301,9 +301,6 @@ namespace Tangsem.Generator.NHibernateTest
     /// <returns>The repository.</returns>
     private IMyRepository CreateRepository()
     {
-      var ai = new AuditingInterceptor { CurrentUserId = CurrentUserId };
-      //return new MyRepository { CurrentSession = session };
-
       var dbContext = new MyDbContext(this.GetConnString());
       return new MyRepository { CurrentDbContext = dbContext, CurrentUserId = 1 };
     }

@@ -132,7 +132,7 @@ namespace Tangsem.Generator.Settings
     {
       get
       {
-        return Path.Combine(this.EntitiesDirPath, "Mappings");
+        return Path.Combine(this.EntitiesDirPath, "Mappings", this.OrmType.AsNamespacePart());
       }
     }
 
@@ -148,13 +148,24 @@ namespace Tangsem.Generator.Settings
     }
 
     /// <summary>
+    /// Gets IRepositoriesDirPath.
+    /// </summary>
+    public string IRepositoriesDirPath
+    {
+      get
+      {
+        return Path.Combine(this.DomainDirPath, "Repositories");
+      }
+    }
+
+    /// <summary>
     /// Gets RepositoriesDirPath.
     /// </summary>
     public string RepositoriesDirPath
     {
       get
       {
-        return Path.Combine(this.DomainDirPath, "Repositories");
+        return Path.Combine(this.DomainDirPath, "Repositories", this.OrmType.AsNamespacePart());
       }
     }
 
@@ -198,7 +209,7 @@ namespace Tangsem.Generator.Settings
     {
       get
       {
-        return this.EntityNamespace + ".Mappings";
+        return this.EntityNamespace + ".Mappings." + this.OrmType.AsNamespacePart();
       }
     }
 
@@ -271,6 +282,9 @@ namespace Tangsem.Generator.Settings
 
       // create dto dir if it doesn't exist.
       this.CreateDirIfNotExists(this.DTODirPath);
+
+      // create interface repositories dir if it doesn't exist.
+      this.CreateDirIfNotExists(this.IRepositoriesDirPath);
 
       // create repositories dir if it doesn't exist.
       this.CreateDirIfNotExists(this.RepositoriesDirPath);

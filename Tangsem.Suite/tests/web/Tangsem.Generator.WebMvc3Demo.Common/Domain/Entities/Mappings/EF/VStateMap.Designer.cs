@@ -7,17 +7,17 @@ using System.Data.Entity;
 
 using Tangsem.EF.Mappings;
 /* http://msdn.microsoft.com/en-us/library/hh295843(v=vs.103) */
-namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
+namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings.EF
 {
   /// <summary>
-  /// The mapping configuration for Category.
+  /// The mapping configuration for VState.
   /// </summary>
-  public partial class CategoryMap : ClassMap<Category>
+  public partial class VStateMap : ClassMap<VState>
   {
     /// <summary>
     /// The constructor.
     /// </summary>
-    public CategoryMap() : base()
+    public VStateMap() : base()
     {
     }
     
@@ -26,7 +26,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
     /// </summary>
     protected override void MapTable(DbModelBuilder modelBuilder)
     {
-      this.EntityTypeConfiguration.ToTable("Category");
+      this.EntityTypeConfiguration.ToTable("v_State");
     }
 
     /// <summary>
@@ -34,12 +34,7 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
     /// </summary>
     protected override void MapId(DbModelBuilder modelBuilder)
     {
-
-        this.EntityTypeConfiguration
-            .HasKey(x => x.Id)
-            .Property(x => x.Id)
-            .HasColumnName("Id");
-        }
+    }
     
     /// <summary>
     /// Map the Basic Columns.
@@ -48,20 +43,17 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
     {
 
          this.EntityTypeConfiguration
+             .Property(x => x.RowNum)
+             .HasColumnName("RowNum");      
+         this.EntityTypeConfiguration
+             .Property(x => x.Id)
+             .HasColumnName("Id").IsRequired();      
+         this.EntityTypeConfiguration
              .Property(x => x.Name)
              .HasColumnName("Name").IsRequired();      
          this.EntityTypeConfiguration
-             .Property(x => x.ShortDescription)
-             .HasColumnName("ShortDescription");      
-         this.EntityTypeConfiguration
-             .Property(x => x.Description)
-             .HasColumnName("Description");      
-         this.EntityTypeConfiguration
-             .Property(x => x.ParentId)
-             .HasColumnName("ParentId");      
-         this.EntityTypeConfiguration
-             .Property(x => x.KeyWords)
-             .HasColumnName("KeyWords");      
+             .Property(x => x.CountryId)
+             .HasColumnName("CountryId");      
          this.EntityTypeConfiguration
              .Property(x => x.CreatedById)
              .HasColumnName("CreatedById");      
@@ -77,6 +69,15 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities.Mappings
          this.EntityTypeConfiguration
              .Property(x => x.Active)
              .HasColumnName("Active");      
+         this.EntityTypeConfiguration
+             .Property(x => x.CountryName)
+             .HasColumnName("CountryName");      
+         this.EntityTypeConfiguration
+             .Property(x => x.CountryCode)
+             .HasColumnName("CountryCode");      
+         this.EntityTypeConfiguration
+             .Property(x => x.Continent)
+             .HasColumnName("Continent");      
     }
     
     /// <summary>

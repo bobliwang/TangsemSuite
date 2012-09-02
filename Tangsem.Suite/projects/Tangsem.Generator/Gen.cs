@@ -76,14 +76,14 @@ namespace Tangsem.Generator
 
       template = new Repository_Designer { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
       code = template.TransformText().Trim();
-      path = this.GeneratorConfiguration.RepositoriesDirPath + "/" + this.GeneratorConfiguration.RepositoryName +
+      path = this.GeneratorConfiguration.IRepositoriesDirPath + "/" + this.GeneratorConfiguration.OrmType.AsNamespacePart() +  "/" + this.GeneratorConfiguration.RepositoryName +
              ".Designer.cs";
       File.WriteAllText(path, code);
       this.Log("Saved", path);
 
       template = new IRepository_Designer { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
       code = template.TransformText().Trim();
-      path = this.GeneratorConfiguration.RepositoriesDirPath + "/I" + this.GeneratorConfiguration.RepositoryName +
+      path = this.GeneratorConfiguration.IRepositoriesDirPath + "/I" + this.GeneratorConfiguration.RepositoryName +
              ".Designer.cs";
       File.WriteAllText(path, code);
       this.Log("Saved", path);

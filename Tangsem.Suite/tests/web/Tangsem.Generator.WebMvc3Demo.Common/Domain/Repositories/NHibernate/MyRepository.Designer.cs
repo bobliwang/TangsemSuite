@@ -6,44 +6,17 @@ using System.Linq;
 using System.Linq.Expressions;
 
 using Tangsem.Data.Domain;
-using Tangsem.EF.Domain;
-
+using Tangsem.NHibernate.Domain;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
 
-namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories
-{
+namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories.NHibernate
+{ 
   /// <summary>
   /// The MyRepository class.
   /// </summary>
   public partial class MyRepository : RepositoryBase, IMyRepository
   {
 
-    
-    /// <summary>
-    /// The IQueryable for VStates.
-    /// </summary>
-    public virtual IQueryable<VState> VStates
-    {
-      get
-      {
-        return this.GetEntities<VState>();
-      }
-    }
-
-    
-    
-    /// <summary>
-    /// The IQueryable for Categories.
-    /// </summary>
-    public virtual IQueryable<Category> Categories
-    {
-      get
-      {
-        return this.GetEntities<Category>();
-      }
-    }
-
-    
     
     /// <summary>
     /// The IQueryable for Countries.
@@ -69,51 +42,35 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories
       }
     }
 
+    
+    
+    /// <summary>
+    /// The IQueryable for VStates.
+    /// </summary>
+    public virtual IQueryable<VState> VStates
+    {
+      get
+      {
+        return this.GetEntities<VState>();
+      }
+    }
+
+    
+    
+    /// <summary>
+    /// The IQueryable for Categories.
+    /// </summary>
+    public virtual IQueryable<Category> Categories
+    {
+      get
+      {
+        return this.GetEntities<Category>();
+      }
+    }
+
         
     
 
-    
-    /// <summary>
-    /// Get Category by primary key.
-    /// </summary>
-    public virtual Category LookupCategoryById(int id)
-    {
-      return this.LookupById<Category>(id);
-    }
-    
-    /// <summary>
-    /// Delete Category by primary key.
-    /// </summary>
-    public virtual Category DeleteCategoryById(int id)
-    {
-      return this.DeleteById<Category>(id);
-    }
-    
-    /// <summary>
-    /// Save a new Category instance.
-    /// </summary>
-    public virtual Category SaveCategory(Category category)
-    {
-      return this.Save<Category>(category);
-    }
-    
-    /// <summary>
-    /// Update an existing Category instance.
-    /// </summary>
-    public virtual Category UpdateCategory(Category category)
-    {
-      return this.Update<Category>(category);
-    }
-    
-    /// <summary>
-    /// Save or update an existing Category instance.
-    /// </summary>
-    public virtual Category SaveOrUpdateCategory(Category category)
-    {
-      return this.SaveOrUpdate<Category>(category);
-    }
-
-    
     
     /// <summary>
     /// Get Country by primary key.
@@ -195,6 +152,48 @@ namespace Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories
     public virtual State SaveOrUpdateState(State state)
     {
       return this.SaveOrUpdate<State>(state);
+    }
+
+    
+    
+    /// <summary>
+    /// Get Category by primary key.
+    /// </summary>
+    public virtual Category LookupCategoryById(int id)
+    {
+      return this.LookupById<Category>(id);
+    }
+    
+    /// <summary>
+    /// Delete Category by primary key.
+    /// </summary>
+    public virtual Category DeleteCategoryById(int id)
+    {
+      return this.DeleteById<Category>(id);
+    }
+    
+    /// <summary>
+    /// Save a new Category instance.
+    /// </summary>
+    public virtual Category SaveCategory(Category category)
+    {
+      return this.Save<Category>(category);
+    }
+    
+    /// <summary>
+    /// Update an existing Category instance.
+    /// </summary>
+    public virtual Category UpdateCategory(Category category)
+    {
+      return this.Update<Category>(category);
+    }
+    
+    /// <summary>
+    /// Save or update an existing Category instance.
+    /// </summary>
+    public virtual Category SaveOrUpdateCategory(Category category)
+    {
+      return this.SaveOrUpdate<Category>(category);
     }
 
     

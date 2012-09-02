@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Gen.cs" />
     <Compile Include="Settings\GeneratorConfiguration.cs" />
+    <Compile Include="Settings\OrmTypeExtensions.cs" />
     <Compile Include="Settings\OrmTypes.cs" />
     <Compile Include="Templates\Entities\Poco.DTO.Designer.generated.cs">
       <AutoGen>True</AutoGen>
