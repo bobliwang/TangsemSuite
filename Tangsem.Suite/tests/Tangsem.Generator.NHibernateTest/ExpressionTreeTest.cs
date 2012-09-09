@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using Tangsem.Common.Extensions;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
 
-namespace Tangsem.Generator.Test
+namespace Tangsem.Generator.NHibernateTest
 {
   [TestClass]
   public class ExpressionTreeTest
