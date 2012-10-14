@@ -152,6 +152,11 @@
     <Compile Include="ViewModels\Comparators.cs" />
     <Compile Include="ViewModels\StateQry.cs" />
     <Compile Include="ViewModels\StateViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelMappings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModelMappings.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\flexigrid\flexigrid.css" />
@@ -397,6 +402,10 @@
     <Content Include="Views\Category\CatsGrid.cshtml" />
     <Content Include="Views\FlexigridTest\Index.cshtml" />
     <Content Include="Views\FlexigridTest\_Flexigrid.cshtml" />
+    <None Include="ViewModels\ViewModelMappings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ViewModelMappings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

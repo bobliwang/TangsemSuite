@@ -1,0 +1,114 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".Designer.cs" #>
+
+<#@ assembly name="System" #> 
+<#@ assembly name="System.Data" #> 
+<#@ assembly name="System.Core" #> 
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ assembly name="Microsoft.CSharp" #>
+
+<#@ assembly name="D:\GitRepos\tangsem.suite\Tangsem.Suite\tests\web\Tangsem.Generator.WebMvc3Demo\bin\Tangsem.Common.dll" #>
+<#@ assembly name="D:\GitRepos\tangsem.suite\Tangsem.Suite\tests\web\Tangsem.Generator.WebMvc3Demo\bin\Tangsem.Generator.WebMvc3Demo.Common.dll" #>
+<#@ assembly name="D:\GitRepos\tangsem.suite\Tangsem.Suite\tests\web\Tangsem.Generator.WebMvc3Demo\bin\Tangsem.Generator.WebMvc3Demo.dll" #>
+
+<#@ import namespace="System" #> 
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.IO" #>  
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml" #> 
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Reflection" #>
+
+<#@ import namespace="Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities" #>
+<#@ import namespace="Tangsem.Generator.WebMvc3Demo.ViewModels" #>
+
+<#
+  var mappingConfig = new MappingConfig();
+  mappingConfig.TypeMappings.Add(new TypeMapping { ViewModelType = typeof(StateViewModel),  EntityType = typeof(State) } );
+  //mappingConfig.IsFakeGeneration = true;
+  mappingConfig.IsFakeGeneration = false;
+#>
+
+using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Reflection;
+
+public static class ViewModelMappingsExt
+{
+<#  
+foreach(var typeMapping in mappingConfig.TypeMappings)
+{
+    var propertyInfos = IntersectionPropertyInfos(typeMapping.ViewModelType, typeMapping.EntityType);
+#>
+  public static <#= typeMapping.EntityType.FullName#> To<#= typeMapping.EntityType.Name#>(this <#= typeMapping.ViewModelType.FullName#> <#= LowerFirst(typeMapping.ViewModelType.Name)#>)
+  {
+    var entity = new <#= typeMapping.EntityType.FullName#>();
+    
+    <#= LowerFirst(typeMapping.ViewModelType.Name)#>.MapTo<#= typeMapping.EntityType.Name#>(entity);
+
+    return entity;
+  }
+
+  public static void MapTo<#= typeMapping.EntityType.Name#>(this <#= typeMapping.ViewModelType.FullName#> <#= LowerFirst(typeMapping.ViewModelType.Name)#>, <#= typeMapping.EntityType.FullName#> entity)
+  { 
+<#  foreach(var p in propertyInfos){#>
+    <#= mappingConfig.IsFakeGeneration ? @"//// " : string.Empty #>entity.<#= p.Name#> = <#= LowerFirst(typeMapping.ViewModelType.Name)#>.<#= p.Name#>;
+<#  }#>
+  }
+<#
+}
+#>
+}
+
+<#
+  var contents = this.GenerationEnvironment.ToString().Trim();
+
+  this.GenerationEnvironment.Clear();
+  this.GenerationEnvironment.Append(contents);
+#><#+
+
+  public class TypeMapping
+  {
+    public Type ViewModelType { get; set; }
+
+    public Type EntityType { get; set; }
+  }
+
+  public class MappingConfig
+  {
+    public MappingConfig()
+    {
+      this.TypeMappings = new List<TypeMapping>();
+    }
+    
+    public bool IsFakeGeneration { get; set;}
+
+    public List<TypeMapping> TypeMappings { get; set; }
+  }
+
+  public List<PropertyInfo> IntersectionPropertyInfos(Type a, Type b)
+  {
+    var propertyFilter = BindingFlags.Instance | BindingFlags.Public;
+    var propertiesFromA = a.GetProperties(propertyFilter);
+    var propertiesFromB = b.GetProperties(propertyFilter);
+    
+    return propertiesFromA.Where(x => propertiesFromB.Any(y => y.Name == x.Name)).ToList();
+  }
+
+  public string LowerFirst(string str){
+    if (string.IsNullOrEmpty(str)){
+      return str;
+    }
+    
+    if (str.Length == 1){
+      return str.ToLower();
+    }
+
+    return str.Substring(0,1).ToLower() + str.Substring(1);
+  }
+#>
