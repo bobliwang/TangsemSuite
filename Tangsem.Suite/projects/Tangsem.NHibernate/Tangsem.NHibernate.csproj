@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extenstions\IQueryableExtensions.cs" />
     <Compile Include="Interceptors\AuditingInterceptor.cs" />
     <Compile Include="Service\NhEntityServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
