@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <GeneratorConfiguration	
-						ProjectName="Tangsem.Generator.WebMvc3Demo.Common"
+						ProjectName="SalesRecordsImportService.Data"
 						OutputDir=""
 						RepositoryName ="MyRepository"
-						ConnectionString="Data Source=(local);Initial Catalog=TangsemGeneratorNHibernateTest;Integrated Security=True"
+						ConnectionString="Data Source=(local);Initial Catalog=SaleRecordDb;Integrated Security=True"
 						MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
 						OpenOutputDirAfterGeneration="true"
-            OrmFramework="EF">
+            OrmFramework="NHibernate">
 		
 	<!-- MetadataBuilder: className[;assemblyName]  -->
 	<IgnoredTable>Sysdiagrams</IgnoredTable>
