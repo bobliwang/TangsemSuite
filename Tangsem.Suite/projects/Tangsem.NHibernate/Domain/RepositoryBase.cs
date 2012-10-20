@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
@@ -189,6 +190,20 @@ namespace Tangsem.NHibernate.Domain
       }
 
       this.Transaction = this.CurrentSession.BeginTransaction();
+    }
+
+    /// <summary>
+    /// Start a transaction at isolationLevel.
+    /// </summary>
+    /// <param name="isolationLevel">The IsolationLevel.</param>
+    public void BeginTransaction(IsolationLevel isolationLevel)
+    {
+      if (this.Transaction != null && this.Transaction.IsActive)
+      {
+        throw new Exception("There is already an existing active transaction!");
+      }
+
+      this.Transaction = this.CurrentSession.BeginTransaction(isolationLevel);
     }
 
     /// <summary>
