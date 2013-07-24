@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -88,6 +89,12 @@ namespace Tangsem.Data.Domain
     /// Start a transaction.
     /// </summary>
     void BeginTransaction();
+
+    /// <summary>
+    /// Start a transaction at isolationLevel.
+    /// </summary>
+    /// <param name="isolationLevel">The IsolationLevel.</param>
+    void BeginTransaction(IsolationLevel isolationLevel);
 
     /// <summary>
     /// Gets or sets current user id.

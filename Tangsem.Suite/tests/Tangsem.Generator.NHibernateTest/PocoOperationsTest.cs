@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Configuration;
-using System.Data.Entity;
 using System.Diagnostics;
 using System.Text;
 using System.Collections.Generic;
@@ -21,6 +20,7 @@ using Tangsem.Common.Extensions.Linq;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories.NHibernate;
+using Tangsem.NHibernate.Extenstions;
 using Tangsem.NHibernate.Interceptors;
 
 namespace Tangsem.Generator.NHibernateTest
@@ -49,7 +49,7 @@ namespace Tangsem.Generator.NHibernateTest
       using (var repo = this.CreateRepository())
       {
         Console.WriteLine("1 Time used:" + sw.Elapsed.TotalSeconds + " secs");
-        var countries = repo.Countries.ActiveOnly().FetchMany(c => c.States).ToList();
+        var countries = repo.Countries.ActiveOnly().Include(c => c.States).ToList();
 
         foreach (var country in countries)
         {

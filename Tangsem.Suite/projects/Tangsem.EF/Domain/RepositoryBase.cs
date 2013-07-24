@@ -9,6 +9,8 @@ using System.Transactions;
 using Tangsem.Common.Entities;
 using Tangsem.Data.Domain;
 
+using IsolationLevel = System.Data.IsolationLevel;
+
 namespace Tangsem.EF.Domain
 {
   /// <summary>
@@ -208,6 +210,15 @@ namespace Tangsem.EF.Domain
     /// Start a transaction.
     /// </summary>
     public virtual void BeginTransaction()
+    {
+      // do nothing.
+    }
+
+    /// <summary>
+    /// Start a transaction at isolationLevel.
+    /// </summary>
+    /// <param name="isolationLevel">The IsolationLevel.</param>
+    public void BeginTransaction(IsolationLevel isolationLevel)
     {
       // do nothing.
     }
