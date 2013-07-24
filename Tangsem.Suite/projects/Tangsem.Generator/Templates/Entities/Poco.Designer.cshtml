@@ -1,6 +1,7 @@
 ﻿@* Generator: Template *@
 @inherits SingleTableMetadataTemplate
 
+@using System.Linq
 @using Tangsem.Generator.Metadata
 @using Tangsem.Generator.Settings
 @using Tangsem.Generator.Templates;
@@ -18,7 +19,7 @@ namespace @Configuration.EntityNamespace
 {
 	public partial class @(TableMetadata.EntityName)@(TableMetadata.IsAuditableEntity ? @" : IAuditableEntity" : string.Empty)
 	{
-		@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey))
+		@foreach (var col in @TableMetadata.Columns.Where(c => (!c.IsOutgoingRefKey || !Configuration.GenRelationship)))
 		{<text>
 		/// <summary>
 		/// The property name '@col.PropertyName'. It matches the property to column '@col.ColumnName'.
@@ -31,8 +32,9 @@ namespace @Configuration.EntityNamespace
 		public static readonly Expression<Func<@TableMetadata.EntityName, object>> Expr_@(col.PropertyName) = x => x.@(col.PropertyName);
 		</text>}
 		
-		
-		@foreach (var reference in this.TableMetadata.OutgoingReferences)
+		@if (Configuration.GenRelationship)
+		{
+    foreach (var reference in this.TableMetadata.OutgoingReferences)
 		{<text>
 		/// <summary>
 		/// The property name '@(reference.ParentPropertyName)'. It is for the reference '@(reference.Name)'.
@@ -44,6 +46,9 @@ namespace @Configuration.EntityNamespace
 		/// </summary>
 		public static readonly Expression<Func<@(this.TableMetadata.EntityName), object>> Expr_@(reference.ParentPropertyName) = x => x.@(reference.ParentPropertyName);
 		</text>}
+		  
+		}
+    
 		
 		
 		/// <summary>
@@ -61,7 +66,7 @@ namespace @Configuration.EntityNamespace
 
 		#region "Basic Columns"
 
-		@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey))
+		@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey || !Configuration.GenRelationship))
 		{<text>
 		/// <summary>
 		/// Property @col.PropertyName mapping to @(TableMetadata.Name).@(col.ColumnName)
@@ -72,20 +77,21 @@ namespace @Configuration.EntityNamespace
 		#endregion
 		
 		#region "Outgoing References"
-		
-		@foreach (var reference in @TableMetadata.OutgoingReferences)
+		@if (Configuration.GenRelationship)
+		{
+    foreach (var reference in @TableMetadata.OutgoingReferences)
 		{<text>
 		/// <summary>
 		/// Gets or sets reference to @(reference.ParentPropertyName). ReferenceName: @(reference.Name).
 		/// </summary>
 		public virtual @(reference.ParentTableMetadata.EntityName) @(reference.ParentPropertyName) { get; set; }
 		</text>}
-		
+    }
 		#endregion
 		
 		#region "Incoming References"
-		
-		@foreach (var reference in this.TableMetadata.IncomingReferences)
+@if (Configuration.GenRelationship) { 
+		foreach (var reference in this.TableMetadata.IncomingReferences)
 		{<text>
 		@{ var childObjParamName = reference.ChildTableMetadata.EntityName.Substring(0, 1).ToLower() + reference.ChildTableMetadata.EntityName.Substring(1); }
 		/// <summary>
@@ -105,7 +111,7 @@ namespace @Configuration.EntityNamespace
 			this.@(reference.ChildListPropertyName).Add(@(childObjParamName));
 		}
 		</text>}
-
+}
 		#endregion
 		
 

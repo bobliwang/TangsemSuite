@@ -1,13 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <GeneratorConfiguration	
-						ProjectName="Tangsem.Generator.WebMvc3Demo.Common"
-						OutputDir=""
-						RepositoryName ="MyRepository"
-						ConnectionString="Data Source=(local);Initial Catalog=TangsemGeneratorNHibernateTest;Integrated Security=True"
-						MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
-						OpenOutputDirAfterGeneration="true"
-            OrmFramework="EF">
-		
-	<!-- MetadataBuilder: className[;assemblyName]  -->
-	<IgnoredTable>Sysdiagrams</IgnoredTable>
+            ProjectName="Ebay.NopCommerce.DataIntegration"
+            OutputDir=""
+            RepositoryName ="ENDIRepository"
+            ConnectionString="Data Source=(local);Initial Catalog=nopCommerce300;Integrated Security=True"
+            MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
+            OpenOutputDirAfterGeneration="true"
+            OrmFramework="NHibernate"
+            GenRelationship="false">
+    
+  <!-- MetadataBuilder: className[;assemblyName]  -->
+  <IgnoredTable>Sysdiagrams</IgnoredTable>
+
+
+  <IncludeTable>Product</IncludeTable>
+  <IncludeTable>ProductVariant</IncludeTable>
+  <IncludeTable>Category</IncludeTable>
+
 </GeneratorConfiguration>

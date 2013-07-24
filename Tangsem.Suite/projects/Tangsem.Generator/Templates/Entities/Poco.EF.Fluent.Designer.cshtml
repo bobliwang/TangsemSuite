@@ -1,6 +1,7 @@
 ﻿@* Generator: Template *@
 @inherits SingleTableMetadataTemplate
         
+@using System.Linq
 @using Tangsem.Generator.Metadata
 @using Tangsem.Generator.Settings
 @using Tangsem.Generator.Templates;
@@ -55,7 +56,7 @@ namespace @(Configuration.MappingNamespace)
     /// </summary>
     protected override void MapBasicColumns(DbModelBuilder modelBuilder)
     {
-      @foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey && !c.IsPrimaryKey))
+      @foreach (var col in @TableMetadata.Columns.Where(c => (!c.IsOutgoingRefKey || !Configuration.GenRelationship) && !c.IsPrimaryKey))
       {<text>
          this.EntityTypeConfiguration
              .Property(x => x.@(col.PropertyName))
@@ -69,16 +70,18 @@ namespace @(Configuration.MappingNamespace)
     /// </summary>
     protected override void MapRelationships(DbModelBuilder modelBuilder)
     {
-      @foreach (var reference in this.TableMetadata.OutgoingReferences)
-      {
-        var optional = reference.ColumnPairs[0].ChildColumnMetadata.Nullable;
-      <text>
-        this.EntityTypeConfiguration
-            .Has@(optional ? "Optional" : "Required")(x => x.@(reference.ParentPropertyName))
-        .WithMany(x => x.@(reference.ChildListPropertyName))
-        .Map(m => m.MapKey("@(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName)"));
-      </text>}
-
+      @if (Configuration.GenRelationship) {
+        foreach (var reference in this.TableMetadata.OutgoingReferences)
+        {
+          var optional = reference.ColumnPairs[0].ChildColumnMetadata.Nullable;
+        <text>
+          this.EntityTypeConfiguration
+              .Has@(optional ? "Optional" : "Required")(x => x.@(reference.ParentPropertyName))
+          .WithMany(x => x.@(reference.ChildListPropertyName))
+          .Map(m => m.MapKey("@(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName)"));
+        </text>
+        }
+      }
     }
   }
 }

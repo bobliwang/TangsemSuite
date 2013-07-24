@@ -1,6 +1,7 @@
 ﻿@* Generator: Template *@
 @inherits SingleTableMetadataTemplate
 			  
+@using System.Linq
 @using Tangsem.Generator.Metadata
 @using Tangsem.Generator.Settings
 @using Tangsem.Generator.Templates;
@@ -38,11 +39,13 @@ namespace @(Configuration.MappingNamespace)
 			// basic columns mapping
 			this.MapBasicColumns();
 			
-			// outgoing references mapping
+      @if (Configuration.GenRelationship) {<text>
+      // outgoing references mapping
 			this.MapOutgoingReferences();
 			
 			// incoming references mapping
-			this.MapIncomingReferences();
+      this.MapIncomingReferences();
+      </text>}
 		}
 		
 		/// <summary>
@@ -70,15 +73,17 @@ namespace @(Configuration.MappingNamespace)
 		/// </summary>
 		private void MapBasicColumns()
 		{
-			@foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey && !c.IsPrimaryKey))
+			@foreach (var col in @TableMetadata.Columns.Where(c => (!c.IsOutgoingRefKey || !Configuration.GenRelationship ) && !c.IsPrimaryKey))
 			{<text>
 			this.Map(x => x.@(col.PropertyName))
                 .Column("@(col.ColumnName)")@if (col.Nullable) {<text>;</text>}else{<text>.Not.Nullable();</text>}
 			</text>}
 
 		}
+
+    @if (Configuration.GenRelationship) {<text>
 		
-		/// <summary>
+    /// <summary>
 		/// Map the Outgoing References.
 		/// </summary>
 		private void MapOutgoingReferences()
@@ -107,5 +112,6 @@ namespace @(Configuration.MappingNamespace)
 			</text>}
 
 		}
+    </text>}
 	}
 }

@@ -17,7 +17,7 @@ namespace Tangsem.Generator.Settings
     {
       var xmlSer = new XmlSerializer(typeof(GeneratorConfiguration));
 
-      using (var stream = File.OpenRead("GeneratorConfiguration.xml"))
+      using (var stream = File.OpenRead(filePath))
       {
         var instance = (GeneratorConfiguration)xmlSer.Deserialize(stream);
         instance.Init();
@@ -25,6 +25,9 @@ namespace Tangsem.Generator.Settings
         return instance;
       }
     }
+
+    [XmlAttribute]
+    public bool GenRelationship { get; set; }
 
     /// <summary>
     /// Gets or sets ProjectName.
@@ -91,6 +94,9 @@ namespace Tangsem.Generator.Settings
     /// </summary>
     [XmlElement("IgnoredTable")]
     public List<string> IgnoredTables { get; set; }
+
+    [XmlElement("IncludeTable")]
+    public List<string> IncludeTables { get; set; }
 
     /// <summary>
     /// Project dir path. This property is depending on OutputDir and ProjectName.

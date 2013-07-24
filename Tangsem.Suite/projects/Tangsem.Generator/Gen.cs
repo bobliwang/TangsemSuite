@@ -49,6 +49,7 @@ namespace Tangsem.Generator
                   .CachedTableMetadata
                   .Values
                   .Where(x => !this.GeneratorConfiguration.IgnoredTables.Any(y => x.Name.Equals(y, StringComparison.CurrentCultureIgnoreCase)))
+                  .Where(x => this.GeneratorConfiguration.IncludeTables == null || !this.GeneratorConfiguration.IncludeTables.Any() || this.GeneratorConfiguration.IncludeTables.Any(it => it.Equals(x.Name, StringComparison.InvariantCultureIgnoreCase)))
                   .ToList();
       var pairs = string.Join(",", tableMetadatas.Select(x => string.Format("[{0}:{1}]", x.Name, x.EntityName)));
       this.Log("List of Metadata to generate code from", pairs);
