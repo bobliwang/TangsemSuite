@@ -243,74 +243,104 @@ WriteLiteral("\t\t  \r\n\t\t}\r\n\t\t\r\n\t\t/// <summary>\r\n\t\t/// Map the Ba
             
             #line default
             #line hidden
-WriteLiteral("\r\n\t\t\tthis.Map(x => x.");
+WriteLiteral("\r\n       // ");
 
 
             
             #line 78 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
-               Write(col.PropertyName);
+      Write(col.ColumnName);
 
             
             #line default
             #line hidden
-WriteLiteral(")\r\n                .Column(\"");
+WriteLiteral("\r\n\t\t   this.Map(x => x.");
 
 
             
             #line 79 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
-                     Write(col.ColumnName);
+                 Write(col.PropertyName);
 
             
             #line default
             #line hidden
-
-            
-            #line 79 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
-                                          WriteLiteral("\")");
-
-            
-            #line default
-            #line hidden
-            
-            #line 79 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
-                                             if (col.Nullable) {
-            
-            #line default
-            #line hidden
-WriteLiteral(";");
+WriteLiteral(").Column(\"");
 
 
             
             #line 79 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
-                                                                              }else{
-            
-            #line default
-            #line hidden
-WriteLiteral(".Not.Nullable();");
-
-
-            
-            #line 79 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
-                                                                                                                 }
+                                              Write(col.ColumnName);
 
             
             #line default
             #line hidden
-WriteLiteral("\t\t\t");
+WriteLiteral("\")\r\n");
 
 
             
             #line 80 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
-          }
+ 			   if (col.ClrType == typeof(string)) {
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+WriteLiteral(".Length(");
+
+
+            
+            #line 80 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+                                                      Write(col.ColumnSize > 0 ? col.ColumnSize.ToString() : "int.MaxValue");
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\t\t}\r\n\r\n");
+WriteLiteral(")");
+
+WriteLiteral(" ");
 
 
             
-            #line 84 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 80 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+                                                                                                                                     }
+
+            
+            #line default
+            #line hidden
+
+            
+            #line 81 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+ 			   if (!col.Nullable) {
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+WriteLiteral(".Not.Nullable()");
+
+WriteLiteral(" ");
+
+
+            
+            #line 81 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+                                                         }
+            
+            #line default
+            #line hidden
+WriteLiteral(";\r\n\r\n\t\t\t ");
+
+
+            
+            #line 83 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+           }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\t\t}\r\n\r\n");
+
+
+            
+            #line 86 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
      if (Configuration.GenRelationship) {
             
             #line default
@@ -320,7 +350,7 @@ WriteLiteral("\r\n\t\t\r\n    /// <summary>\r\n\t\t/// Map the Outgoing Referenc
 
 
             
-            #line 91 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 93 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
  			foreach (var reference in this.TableMetadata.OutgoingReferences)
 			{
             
@@ -330,7 +360,7 @@ WriteLiteral("\r\n\t\t\tthis.References<");
 
 
             
-            #line 93 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 95 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
                Write(reference.ParentTableMetadata.EntityName);
 
             
@@ -340,7 +370,7 @@ WriteLiteral(">(x => x.");
 
 
             
-            #line 93 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 95 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
                                                                    Write(reference.ParentPropertyName);
 
             
@@ -350,7 +380,7 @@ WriteLiteral(")\r\n                .Fetch.Join()\r\n                .Column(\"")
 
 
             
-            #line 95 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 97 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
                      Write(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName);
 
             
@@ -358,14 +388,14 @@ WriteLiteral(")\r\n                .Fetch.Join()\r\n                .Column(\"")
             #line hidden
 
             
-            #line 95 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 97 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
                                                                                    WriteLiteral("\")");
 
             
             #line default
             #line hidden
             
-            #line 95 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 97 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
                                                                                       if (reference.ColumnPairs[0].ChildColumnMetadata.Nullable){
             
             #line default
@@ -374,7 +404,7 @@ WriteLiteral(";");
 
 
             
-            #line 95 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 97 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
                                                                                                                                                                }else{
             
             #line default
@@ -383,7 +413,7 @@ WriteLiteral(".Not.Nullable();");
 
 
             
-            #line 95 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 97 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
                                                                                                                                                                                                   }
 
             
@@ -393,7 +423,7 @@ WriteLiteral("\t\t\t");
 
 
             
-            #line 96 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 98 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
           }
 
             
@@ -404,7 +434,7 @@ WriteLiteral("\r\n\t\t}\r\n\t\t\r\n\t\t/// <summary>\r\n\t\t/// Map the Incoming
 
 
             
-            #line 105 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 107 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
  			foreach (var reference in this.TableMetadata.IncomingReferences)
 			{
             
@@ -414,7 +444,7 @@ WriteLiteral("\r\n\t\t\tthis.HasMany<");
 
 
             
-            #line 107 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 109 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
             Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -424,7 +454,7 @@ WriteLiteral(">(x => x.");
 
 
             
-            #line 107 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 109 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
                                                                Write(reference.ChildListPropertyName);
 
             
@@ -434,7 +464,7 @@ WriteLiteral(")\r\n\t\t\t\t.KeyColumn(\"");
 
 
             
-            #line 108 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 110 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
             Write(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName);
 
             
@@ -445,7 +475,7 @@ WriteLiteral("\")\r\n                .Inverse()\r\n                .LazyLoad()\r
 
 
             
-            #line 112 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 114 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
           }
 
             
@@ -455,7 +485,7 @@ WriteLiteral("\r\n\t\t}\r\n    ");
 
 
             
-            #line 115 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
+            #line 117 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
            }
 
             

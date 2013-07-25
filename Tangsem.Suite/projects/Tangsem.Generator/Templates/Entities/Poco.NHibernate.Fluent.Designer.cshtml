@@ -75,10 +75,12 @@ namespace @(Configuration.MappingNamespace)
 		{
 			@foreach (var col in @TableMetadata.Columns.Where(c => (!c.IsOutgoingRefKey || !Configuration.GenRelationship ) && !c.IsPrimaryKey))
 			{<text>
-			this.Map(x => x.@(col.PropertyName))
-                .Column("@(col.ColumnName)")@if (col.Nullable) {<text>;</text>}else{<text>.Not.Nullable();</text>}
-			</text>}
+       // @(col.ColumnName)
+		   this.Map(x => x.@(col.PropertyName)).Column("@(col.ColumnName)")
+			   @if (col.ClrType == typeof(string)) { <text>.Length(@(col.ColumnSize > 0 ? col.ColumnSize.ToString() : "int.MaxValue"))</text> }
+			   @if (!col.Nullable) { <text>.Not.Nullable()</text> };
 
+			 </text>}
 		}
 
     @if (Configuration.GenRelationship) {<text>

@@ -55,12 +55,14 @@ namespace @Configuration.EntityNamespace
 		/// The default constructor for @(TableMetadata.EntityName) class.
 		/// </summary>
 		public @(TableMetadata.EntityName)()
-		{
-			@foreach (var reference in this.TableMetadata.IncomingReferences)
-			{<text>
-			this.@(reference.ChildListPropertyName) = new List<@(reference.ChildTableMetadata.EntityName)>();
-			</text>}
-
+    {
+      @if (Configuration.GenRelationship)
+      {
+			  foreach (var reference in this.TableMetadata.IncomingReferences)
+			  {<text>
+			  this.@(reference.ChildListPropertyName) = new List<@(reference.ChildTableMetadata.EntityName)>();
+			  </text>}
+      }
 		}
 
 
