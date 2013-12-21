@@ -27,7 +27,7 @@ namespace Tangsem.Generator.Test
     [TestMethod]
     public void TestGeneration()
     {
-      var gen = new Gen(GeneratorConfiguration.FromFile(@"D:\GitRepos\tangsem.suite\Tangsem.Suite\tests\Tangsem.Generator.Test\bin\Debug\GeneratorConfiguration.xml"));
+      var gen = new Gen(GeneratorConfiguration.FromFile(@"C:\Users\liwang\Documents\gitrepo\tangsem.suite\Tangsem.Suite\tests\Tangsem.Generator.Test\BDF.xml"));
 
       gen.Run();
     }
