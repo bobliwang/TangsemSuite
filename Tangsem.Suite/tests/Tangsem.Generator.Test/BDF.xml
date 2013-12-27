@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<GeneratorConfiguration	
+            ProjectName="Mvc4Learn.Common"
+            OutputDir=""
+            RepositoryName ="ReosRepository"
+            ConnectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=BeiersdorfREOS;Integrated Security=True"
+            MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
+            OpenOutputDirAfterGeneration="true"
+            OrmFramework="NHibernate"
+            GenRelationship="false">
+    
+  <!-- MetadataBuilder: className[;assemblyName]  -->
+  <IgnoredTable>Sysdiagrams</IgnoredTable>
+
+  <IncludeTable>AccessAreas</IncludeTable>
+  <IncludeTable>AccessGroupAreas</IncludeTable>
+  <IncludeTable>AccessGroups</IncludeTable>
+  <IncludeTable>AccountBays</IncludeTable>
+  <IncludeTable>AccountExtds</IncludeTable>
+  <IncludeTable>AccountHistories</IncludeTable>
+  <IncludeTable>AccountNotes</IncludeTable>
+  <IncludeTable>AccountProducts</IncludeTable>
+  <IncludeTable>Accounts</IncludeTable>
+  <IncludeTable>AccountSubCategories</IncludeTable>
+  <IncludeTable>Assets</IncludeTable>
+  <IncludeTable>CallActivities</IncludeTable>
+  <IncludeTable>CallActivityAdhocs</IncludeTable>
+  <IncludeTable>CallActivityUsers</IncludeTable>
+  <IncludeTable>CallCycleItems</IncludeTable>
+  <IncludeTable>CallCycles</IncludeTable>
+  <IncludeTable>CallPreferences</IncludeTable>
+  <IncludeTable>Calls</IncludeTable>
+  <IncludeTable>ChangesetMergeCheckLogs</IncludeTable>
+  <IncludeTable>ClientLogs</IncludeTable>
+  <IncludeTable>CompetitorActivities</IncludeTable>
+  <IncludeTable>Contacts</IncludeTable>
+  <IncludeTable>Countries</IncludeTable>
+  <IncludeTable>DeviceDeltaRemedyScripts</IncludeTable>
+  <IncludeTable>DistCallProducts</IncludeTable>
+  <IncludeTable>DistCallProducts_Temp</IncludeTable>
+  <IncludeTable>DistCallSubCategories</IncludeTable>
+  <IncludeTable>DistributorAccountProducts</IncludeTable>
+  <IncludeTable>DistributorAccounts</IncludeTable>
+  <IncludeTable>Distributors</IncludeTable>
+  <IncludeTable>EmailStates</IncludeTable>
+  <IncludeTable>ExtdCategories</IncludeTable>
+  <IncludeTable>ExtdColumns</IncludeTable>
+  <IncludeTable>ExtdColumns_Backup</IncludeTable>
+  <IncludeTable>ExtdObjects</IncludeTable>
+  <IncludeTable>ExtdSubCategories</IncludeTable>
+  <IncludeTable>FiaExtds</IncludeTable>
+  <IncludeTable>Fias</IncludeTable>
+  <IncludeTable>IdentityRanges</IncludeTable>
+  <IncludeTable>IdentityRangesHistories</IncludeTable>
+  <IncludeTable>Logs</IncludeTable>
+  <IncludeTable>Lookups</IncludeTable>
+  <IncludeTable>News</IncludeTable>
+  <IncludeTable>NewsUsers</IncludeTable>
+  <IncludeTable>ObjectiveAccountExtds</IncludeTable>
+  <IncludeTable>ObjectiveAccounts</IncludeTable>
+  <IncludeTable>ObjectiveLines</IncludeTable>
+  <IncludeTable>Objectives</IncludeTable>
+  <IncludeTable>ObjectiveUploadedStores</IncludeTable>
+  <IncludeTable>OrderItems</IncludeTable>
+  <IncludeTable>Orders</IncludeTable>
+  <IncludeTable>OshHazards</IncludeTable>
+  <IncludeTable>OshIncidents</IncludeTable>
+  <IncludeTable>OshRiskMatrixes</IncludeTable>
+  <IncludeTable>Pages</IncludeTable>
+  <IncludeTable>PayrollLeaves</IncludeTable>
+  <IncludeTable>PayrollOdometers</IncludeTable>
+  <IncludeTable>Payrolls</IncludeTable>
+  <IncludeTable>PayrollTimesheets</IncludeTable>
+  <IncludeTable>Photos</IncludeTable>
+  <IncludeTable>PhotoStatusHistories</IncludeTable>
+  <IncludeTable>ProductDistributions</IncludeTable>
+  <IncludeTable>Products</IncludeTable>
+  <IncludeTable>RelayBookings</IncludeTable>
+  <IncludeTable>ReplDeletes</IncludeTable>
+  <IncludeTable>ReplicatedTables</IncludeTable>
+  <IncludeTable>ReplInserts</IncludeTable>
+  <IncludeTable>ReplSettings</IncludeTable>
+  <IncludeTable>ReplUpdatedColumns</IncludeTable>
+  <IncludeTable>ReplUpdates</IncludeTable>
+  <IncludeTable>Settings</IncludeTable>
+  <IncludeTable>States</IncludeTable>
+  <IncludeTable>StoreWalkExtds</IncludeTable>
+  <IncludeTable>StoreWalks</IncludeTable>
+  <IncludeTable>SurveyAccounts</IncludeTable>
+  <IncludeTable>SurveyAnswers</IncludeTable>
+  <IncludeTable>SurveyLines</IncludeTable>
+  <IncludeTable>SurveyQuestions</IncludeTable>
+  <IncludeTable>SurveyResultAnswers</IncludeTable>
+  <IncludeTable>SurveyResults</IncludeTable>
+  <IncludeTable>Surveys</IncludeTable>
+  <IncludeTable>SurveyUploadedStores</IncludeTable>
+  <IncludeTable>SyncPhases</IncludeTable>
+  <IncludeTable>SyncSessionErrors</IncludeTable>
+  <IncludeTable>SyncSessionFiles</IncludeTable>
+  <IncludeTable>SyncSessionItems</IncludeTable>
+  <IncludeTable>SyncSessions</IncludeTable>
+  <IncludeTable>SyncSessionStatuses</IncludeTable>
+  <IncludeTable>SyncStatuses</IncludeTable>
+  <IncludeTable>SyncUserSubscriptions</IncludeTable>
+  <IncludeTable>ToDos</IncludeTable>
+  <IncludeTable>UserAccounts</IncludeTable>
+  <IncludeTable>UserLines</IncludeTable>
+  <IncludeTable>Users</IncludeTable>
+  
+  
+
+</GeneratorConfiguration>
