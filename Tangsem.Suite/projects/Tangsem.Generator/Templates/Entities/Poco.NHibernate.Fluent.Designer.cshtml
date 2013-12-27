@@ -78,7 +78,8 @@ namespace @(Configuration.MappingNamespace)
        // @(col.ColumnName)
 		   this.Map(x => x.@(col.PropertyName)).Column("@(col.ColumnName)")
 			   @if (col.ClrType == typeof(string)) { <text>.Length(@(col.ColumnSize > 0 ? col.ColumnSize.ToString() : "int.MaxValue"))</text> }
-			   @if (!col.Nullable) { <text>.Not.Nullable()</text> };
+			   @if (!col.Nullable) { <text>.Not.Nullable()</text>}
+         @if (col.ReadOnly){ <text>.ReadOnly()</text>};
 
 			 </text>}
 		}

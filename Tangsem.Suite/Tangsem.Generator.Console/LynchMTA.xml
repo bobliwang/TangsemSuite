@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<GeneratorConfiguration	
+            ProjectName="Mvc4Learn.Common"
+            OutputDir=""
+            RepositoryName ="ReosRepository"
+            ConnectionString="Data Source=(local)\R2;Initial Catalog=LynchMTA;Integrated Security=True"
+            MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
+            OpenOutputDirAfterGeneration="true"
+            OrmFramework="NHibernate"
+            GenRelationship="false">
+    
+  <!-- MetadataBuilder: className[;assemblyName]  -->
+  <IgnoredTable>Sysdiagrams</IgnoredTable>
+
+  <IncludeTable>News</IncludeTable>
+  <IncludeTable>Users</IncludeTable>
+  
+  <!--<IncludeTable>ProductVariant</IncludeTable>-->
+  <!--<IncludeTable>Category</IncludeTable>
+  <IncludeTable>Product_Category_Mapping</IncludeTable>
+  <IncludeTable>UrlRecord</IncludeTable>-->
+  
+
+</GeneratorConfiguration>

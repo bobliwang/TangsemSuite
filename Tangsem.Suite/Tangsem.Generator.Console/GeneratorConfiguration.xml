@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<GeneratorConfiguration	
+            ProjectName="Ebay.NopCommerce.DataIntegration"
+            OutputDir=""
+            RepositoryName ="ENDIRepository"
+            ConnectionString="Data Source=(local);Initial Catalog=nopCommerce310;Integrated Security=True"
+            MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
+            OpenOutputDirAfterGeneration="true"
+            OrmFramework="NHibernate"
+            GenRelationship="false">
+    
+  <!-- MetadataBuilder: className[;assemblyName]  -->
+  <IgnoredTable>Sysdiagrams</IgnoredTable>
+
+  <IncludeTable>Product</IncludeTable>
+  <!--<IncludeTable>ProductVariant</IncludeTable>-->
+  <IncludeTable>Category</IncludeTable>
+  <IncludeTable>Product_Category_Mapping</IncludeTable>
+  <IncludeTable>UrlRecord</IncludeTable>
+  
+
+</GeneratorConfiguration>
