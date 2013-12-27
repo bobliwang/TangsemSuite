@@ -45,6 +45,18 @@ namespace Tangsem.Generator.Metadata
       }
     }
 
+    
+    /// <summary>
+    /// Gets or sets a value indicating whether ReadOnly.
+    /// </summary>
+    public bool ReadOnly
+    {
+      get
+      {
+        return this.ColumnName == "RowVersion" || this.IsComputed;
+      }
+    }
+
     /// <summary>
     /// Gets or sets the table metadata.
     /// </summary>
@@ -61,14 +73,14 @@ namespace Tangsem.Generator.Metadata
     public bool IsAutoIncrement { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether ReadOnly.
-    /// </summary>
-    public bool ReadOnly { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether Nullable.
     /// </summary>
     public bool Nullable { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether IsAutoIncrement.
+    /// </summary>
+    public bool IsComputed { get; set; }
 
     /// <summary>
     /// Gets or sets ColumnSize.
@@ -134,6 +146,8 @@ namespace Tangsem.Generator.Metadata
       this.IsAutoIncrement = rc.IsAutoIncrement;
       this.Nullable = rc.Nullable;
       this.DataType = rc.DataType;
+      this.IsComputed = rc.IsComputed;
+
       this.PropertyName = rc.ColumnName.ToPropertyName();
 
       return this;

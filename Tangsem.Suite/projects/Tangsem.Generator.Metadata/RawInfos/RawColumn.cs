@@ -25,6 +25,12 @@ namespace Tangsem.Generator.Metadata.RawInfos
     /// <summary>
     /// Gets or sets a value indicating whether IsAutoIncrement.
     /// </summary>
+    [PropertyColumn("IsComputed")]
+    public bool IsComputed { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether IsAutoIncrement.
+    /// </summary>
     [PropertyColumn("IsAutoIncrement")]
     public bool IsAutoIncrement { get; set; }
 

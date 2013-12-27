@@ -17,7 +17,10 @@ namespace Tangsem.Common.Extensions
       "series",
       "fish",
       "sheep",
-      "deer"
+      "deer",
+      "news",
+      "vnews",
+      "v_news",
     };
 
     private static readonly IDictionary<string, string> Singularizations =
