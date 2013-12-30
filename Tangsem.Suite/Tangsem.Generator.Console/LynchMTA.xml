@@ -3,7 +3,7 @@
             ProjectName="Mvc4Learn.Common"
             OutputDir=""
             RepositoryName ="ReosRepository"
-            ConnectionString="Data Source=(local)\R2;Initial Catalog=BeiersdorfREOS;Integrated Security=True"
+            ConnectionString="Data Source=AIRLOOM-LEE\R2;Initial Catalog=BeiersdorfREOS;User=sa;Password=sa"
             MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
             OpenOutputDirAfterGeneration="true"
             OrmFramework="NHibernate"
