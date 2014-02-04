@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <GeneratorConfiguration	
-            ProjectName="Mvc4Learn.Common"
+            ProjectName="AirloomMTAWebApp.Revamp.Common"
             OutputDir=""
             RepositoryName ="ReosRepository"
-            ConnectionString="Data Source=AIRLOOM-LEE\R2;Initial Catalog=BeiersdorfREOS;User=sa;Password=sa"
+            ConnectionString="Data Source=(local)\SQLExpress;Initial Catalog=BeiersdorfREOS;Integrated Security=True"
             MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
             OpenOutputDirAfterGeneration="true"
             OrmFramework="NHibernate"
@@ -15,6 +15,16 @@
   <IncludeTable>News</IncludeTable>
   <IncludeTable>Users</IncludeTable>
   <IncludeTable>v_News</IncludeTable>
+
+  <IncludeTable>Countries</IncludeTable>
+
+  <IncludeTable>States</IncludeTable>
+
+  <IncludeTable>Lookups</IncludeTable>
+
+  <IncludeTable>Products</IncludeTable>
+  
+  <IncludeTable>Campaigns</IncludeTable>
   
   <!--<IncludeTable>ProductVariant</IncludeTable>-->
   <!--<IncludeTable>Category</IncludeTable>
@@ -23,3 +33,6 @@
   
 
 </GeneratorConfiguration>
+
+
+<!--ConnectionString="Data Source=AIRLOOM-LEE\R2;Initial Catalog=BeiersdorfREOS;User=sa;Password=sa"-->
