@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <GeneratorConfiguration	
-            ProjectName="Mvc4Learn.Common"
+            ProjectName="AirloomMTAWebApp.Revamp.Common"
             OutputDir=""
             RepositoryName ="ReosRepository"
-            ConnectionString="Data Source=AIRLOOM-LEE\R2;Initial Catalog=BeiersdorfREOS;User=sa;Password=sa"
+            ConnectionString="Data Source=(local)\SQLExpress;Initial Catalog=BeiersdorfREOS;Integrated Security=True"
             MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
             OpenOutputDirAfterGeneration="true"
             OrmFramework="NHibernate"
@@ -15,11 +15,44 @@
   <IncludeTable>News</IncludeTable>
   <IncludeTable>Users</IncludeTable>
   <IncludeTable>v_News</IncludeTable>
+
+  <IncludeTable>Countries</IncludeTable>
+
+  <IncludeTable>States</IncludeTable>
+
+  <IncludeTable>Lookups</IncludeTable>
+
+  <IncludeTable>Products</IncludeTable>
+
+  <IncludeTable>Accounts</IncludeTable>
+  <IncludeTable>Campaigns</IncludeTable>
   
-  <!--<IncludeTable>ProductVariant</IncludeTable>-->
-  <!--<IncludeTable>Category</IncludeTable>
-  <IncludeTable>Product_Category_Mapping</IncludeTable>
-  <IncludeTable>UrlRecord</IncludeTable>-->
-  
+  <IncludeTable>Objectives</IncludeTable>
+  <IncludeTable>ObjectiveAccounts</IncludeTable>
+  <IncludeTable>ObjectiveAccountExtds</IncludeTable>
+  <IncludeTable>ObjectiveLines</IncludeTable>
+  <IncludeTable>ObjectiveUploadedStores</IncludeTable>
+  <IncludeTable>v_ObjectiveUploadedStores</IncludeTable>
+  <IncludeTable>v_UploadedCampaignStoreCodes</IncludeTable>
+
+
+
+  <IncludeTable>SurveyAccounts</IncludeTable>
+  <IncludeTable>SurveyAnswers</IncludeTable>
+  <IncludeTable>SurveyLines</IncludeTable>
+  <IncludeTable>SurveyQuestions</IncludeTable>
+  <IncludeTable>Surveys</IncludeTable>
+  <IncludeTable>SurveyUploadedStores</IncludeTable>
+  <IncludeTable>v_SurveyQuestionAnswers</IncludeTable>
+  <IncludeTable>v_SurveyUploadedStores</IncludeTable>
+
+
+  <IncludeTable>CallActivities</IncludeTable>
+  <IncludeTable>CallActivityUsers</IncludeTable>
+  <IncludeTable>v_CallActivities_Subjects</IncludeTable>
+  <IncludeTable>v_CallActivityUsers_Statuses</IncludeTable>
 
 </GeneratorConfiguration>
+
+
+<!--ConnectionString="Data Source=AIRLOOM-LEE\R2;Initial Catalog=BeiersdorfREOS;User=sa;Password=sa"-->

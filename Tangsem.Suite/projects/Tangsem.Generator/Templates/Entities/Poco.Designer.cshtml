@@ -19,6 +19,9 @@ using Newtonsoft.Json;
 
 namespace @Configuration.EntityNamespace
 {
+  /// <summary>
+  /// This entity maps to '@(TableMetadata.Name)'.
+  /// </summary>
   public partial class @(TableMetadata.EntityName)@(TableMetadata.IsAuditableEntity ? @" : IAuditableEntity" : string.Empty)
   {
     @foreach (var col in @TableMetadata.Columns.Where(c => (!c.IsOutgoingRefKey || !Configuration.GenRelationship)))

@@ -26,7 +26,7 @@ namespace @(Configuration.RepositoryNamespace)
 		{<text>
 		
 		/// <summary>
-		/// The IQueryable for @(tableMetadata.EntityName.Pluralize()).
+		/// Maps to database table/view @(tableMetadata.Name). The IQueryable for @(tableMetadata.EntityName.Pluralize()).
 		/// </summary>
 		IQueryable<@(tableMetadata.EntityName)> @(tableMetadata.EntityName.Pluralize()) { get; }
 
