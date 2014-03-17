@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<GeneratorConfiguration	
+            ProjectName="AirloomMTAWebApp.Revamp.Common.SyncDB"
+            OutputDir=""
+            RepositoryName ="ReosSyncRepository"
+            ConnectionString="Data Source=Airloom-Lee\R2;Initial Catalog=ArnottsMTASync;User ID=sa;Password=sa"
+            MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
+            OpenOutputDirAfterGeneration="true"
+            OrmFramework="NHibernate"
+            GenRelationship="false">
+    
+  <!-- MetadataBuilder: className[;assemblyName]  -->
+  <IgnoredTable>Sysdiagrams</IgnoredTable>
+
+  <IncludeTable>v_DM_Countries</IncludeTable>
+  <IncludeTable>v_DM_Products</IncludeTable>
+  <IncludeTable>v_DM_States</IncludeTable>
+  <IncludeTable>v_DM_StoresFull</IncludeTable>
+  <IncludeTable>v_DM_Users</IncludeTable>
+  <IncludeTable>v_DM_Users_SyncSubExt</IncludeTable>
+  
+</GeneratorConfiguration>
+
+
+<!--ConnectionString="Data Source=AIRLOOM-LEE\R2;Initial Catalog=BeiersdorfREOS;User=sa;Password=sa"-->

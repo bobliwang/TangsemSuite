@@ -12,7 +12,7 @@ namespace Tangsem.Generator.Console
   {
     static void Main(string[] args)
     {
-      var path = @"LynchMTA.xml";
+      var path = @"MTASync.xml";
 
       if (args != null && args.Length > 1)
       {

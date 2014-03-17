@@ -96,10 +96,8 @@ namespace Tangsem.Generator.Metadata.Builder
                      ,[Nullable] = CAST(CASE WHEN col.IS_NULLABLE = 'YES' THEN 1 ELSE 0 END AS BIT)
                      ,[DataType] = col.DATA_TYPE
                      ,[ColumnSize] = ISNULL(col.CHARACTER_MAXIMUM_LENGTH, 0)
-                     ,[IsAutoIncrement] = CAST(COLUMNPROPERTY(OBJECT_ID(col.TABLE_NAME), col.COLUMN_NAME,
-                                         'IsIdentity') AS BIT)
-                     ,[IsComputed] = CAST(COLUMNPROPERTY(OBJECT_ID(col.TABLE_NAME), col.COLUMN_NAME,
-                                         'IsComputed') AS BIT)
+                     ,[IsAutoIncrement] = ISNULL(CAST(COLUMNPROPERTY(OBJECT_ID(col.TABLE_NAME), col.COLUMN_NAME,'IsIdentity') AS BIT), 0)
+                     ,[IsComputed] = ISNULL(CAST(COLUMNPROPERTY(OBJECT_ID(col.TABLE_NAME), col.COLUMN_NAME, 'IsComputed') AS BIT), 0)
                      ,[IsPrimaryKey] = CAST((CASE WHEN pk.TABLE_NAME IS NULL Then 0 ELSE 1 END) AS BIT)
               FROM INFORMATION_SCHEMA.COLUMNS AS col
 			  LEFT JOIN PrimaryKeys pk ON pk.TABLE_NAME = col.TABLE_NAME AND pk.COLUMN_NAME = col.COLUMN_NAME              

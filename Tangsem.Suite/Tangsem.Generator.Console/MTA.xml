@@ -3,7 +3,7 @@
             ProjectName="AirloomMTAWebApp.Revamp.Common"
             OutputDir=""
             RepositoryName ="ReosRepository"
-            ConnectionString="Data Source=(local)\SQLExpress;Initial Catalog=BeiersdorfREOS;Integrated Security=True"
+            ConnectionString="Data Source=Airloom-Lee\R2;Initial Catalog=ArnottsMTA;User ID=sa;Password=sa"
             MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
             OpenOutputDirAfterGeneration="true"
             OrmFramework="NHibernate"
@@ -52,6 +52,16 @@
   <IncludeTable>v_CallActivities_Subjects</IncludeTable>
   <IncludeTable>v_CallActivityUsers_Statuses</IncludeTable>
 
+
+  <IncludeTable>CallCycles</IncludeTable>
+  <IncludeTable>CallCycleItems</IncludeTable>
+  <IncludeTable>v_CallCycleItems</IncludeTable>
+
+  <IncludeTable>v_UserCallCycles</IncludeTable>
+
+  <IncludeTable>Payrolls</IncludeTable>
+  <IncludeTable>PayrollTimesheets</IncludeTable>
+  <IncludeTable>PayrollOdometers</IncludeTable>
 </GeneratorConfiguration>
 
 
