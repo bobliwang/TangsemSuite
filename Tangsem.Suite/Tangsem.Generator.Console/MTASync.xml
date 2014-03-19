@@ -12,13 +12,20 @@
   <!-- MetadataBuilder: className[;assemblyName]  -->
   <IgnoredTable>Sysdiagrams</IgnoredTable>
 
+  <IncludeTable>User_TMLatest</IncludeTable>
+  <IncludeTable>User_SSRLatest</IncludeTable>
+  <IncludeTable>DM_StoreUserChangeLogs</IncludeTable>
+  <IncludeTable>StoresLatest</IncludeTable>
+
   <IncludeTable>v_DM_Countries</IncludeTable>
   <IncludeTable>v_DM_Products</IncludeTable>
   <IncludeTable>v_DM_States</IncludeTable>
   <IncludeTable>v_DM_StoresFull</IncludeTable>
   <IncludeTable>v_DM_Users</IncludeTable>
   <IncludeTable>v_DM_Users_SyncSubExt</IncludeTable>
+
   
+
 </GeneratorConfiguration>
 
 
