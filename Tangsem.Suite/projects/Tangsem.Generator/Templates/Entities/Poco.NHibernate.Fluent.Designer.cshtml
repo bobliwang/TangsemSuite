@@ -53,7 +53,7 @@ namespace @(Configuration.MappingNamespace)
 		/// </summary>
 		private void MapId()
 		{
-			@if(TableMetadata.PrimaryKeys.Any())
+			@if (TableMetadata.PrimaryKeys.Any(x => x.IsAutoIncrement))
 			{<text>
 			this.Id(x => x.@(TableMetadata.PrimaryKeys[0].PropertyName))
 				.Column("@(TableMetadata.PrimaryKeys[0].ColumnName)")
