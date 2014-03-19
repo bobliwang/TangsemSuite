@@ -48,6 +48,9 @@
     <Compile Include="Entities\IAuditableEntity.cs" />
     <Compile Include="Entities\AuditableEntity.cs" />
     <Compile Include="Entities\AuditableEntityExtensions.cs" />
+    <Compile Include="Entities\Reos\IReosAuditableEntity.cs" />
+    <Compile Include="Entities\Reos\IReosIntegratedEntity.cs" />
+    <Compile Include="Entities\Reos\IReosReplicatedEntity.cs" />
     <Compile Include="Extensions\Linq\ClassFactory.cs" />
     <Compile Include="Extensions\Linq\DynamicClass.cs" />
     <Compile Include="Extensions\Linq\DynamicExpression.cs" />

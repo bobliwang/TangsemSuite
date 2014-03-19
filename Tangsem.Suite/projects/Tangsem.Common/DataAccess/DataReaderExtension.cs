@@ -22,7 +22,13 @@ namespace Tangsem.Common.DataAccess
 
         foreach (var col in columns)
         {
-          col.PropertyInfo.SetValue(obj, dataReader[col.ColumnName], null);
+          var val = dataReader[col.ColumnName];
+          if (val == System.DBNull.Value)
+          {
+            val = null;
+          }
+
+          col.PropertyInfo.SetValue(obj, val, null);
         }
 
         list.Add(obj);

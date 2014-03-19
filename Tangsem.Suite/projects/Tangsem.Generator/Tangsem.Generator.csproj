@@ -50,6 +50,11 @@
     <Compile Include="Settings\GeneratorConfiguration.cs" />
     <Compile Include="Settings\OrmTypeExtensions.cs" />
     <Compile Include="Settings\OrmTypes.cs" />
+    <Compile Include="Templates\Entities\Poco.Designer.Reos.generated.cs">
+      <DependentUpon>Poco.Designer.Reos.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Entities\Poco.DTO.Designer.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -86,6 +91,10 @@
     <Compile Include="Templates\TemplateBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\Entities\Poco.Designer.Reos.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Poco.Designer.Reos.generated.cs</LastGenOutput>
+    </None>
     <None Include="Templates\Entities\Poco.EF.Fluent.Designer.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Poco.EF.Fluent.Designer.generated.cs</LastGenOutput>

@@ -51,5 +51,8 @@ namespace Tangsem.Generator.Metadata.RawInfos
     /// </summary>
     [PropertyColumn("DataType")]
     public string DataType { get; set; }
+
+    [PropertyColumn("DefaultValueExpr")]
+    public string DefaultValueExpr { get; set; }
   }
 }

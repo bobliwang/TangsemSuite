@@ -1,0 +1,146 @@
+﻿@* Generator: Template *@
+@inherits SingleTableMetadataTemplate
+
+@using System.Linq
+@using Common.Extensions
+@using Tangsem.Generator.Metadata
+@using Tangsem.Generator.Settings
+@using Tangsem.Generator.Templates;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
+
+using Tangsem.Common.Entities.Reos;
+using Newtonsoft.Json;
+
+namespace @Configuration.EntityNamespace
+{
+  /// <summary>
+  /// This entity maps to '@(TableMetadata.Name)'.
+  /// </summary>
+  public partial class @(TableMetadata.EntityName)@(TableMetadata.PocoExtensionsForReos)
+  {
+    @foreach (var col in @TableMetadata.Columns.Where(c => (!c.IsOutgoingRefKey || !Configuration.GenRelationship)))
+    {<text>
+    /// <summary>
+    /// The property name '@col.PropertyName'. It matches the property to column '@col.ColumnName'.
+    /// </summary>
+    public static readonly string Prop_@(col.PropertyName) = "@col.PropertyName";
+    
+    /// <summary>
+    /// The lamda expression for @col.PropertyName.
+    /// </summary>
+    public static readonly Expression<Func<@TableMetadata.EntityName, object>> Expr_@(col.PropertyName) = x => x.@(col.PropertyName);
+    </text>}
+    
+    @if (Configuration.GenRelationship)
+    {
+    foreach (var reference in this.TableMetadata.OutgoingReferences)
+    {<text>
+    /// <summary>
+    /// The property name '@(reference.ParentPropertyName)'. It is for the reference '@(reference.Name)'.
+    /// </summary>
+    public static readonly string Prop_@(reference.ParentPropertyName)  = "@(reference.ParentPropertyName)";
+
+    /// <summary>
+    /// The lamda expression for @(reference.ParentPropertyName).
+    /// </summary>
+    public static readonly Expression<Func<@(this.TableMetadata.EntityName), object>> Expr_@(reference.ParentPropertyName) = x => x.@(reference.ParentPropertyName);
+    </text>}
+      
+    }
+    
+    
+    
+    /// <summary>
+    /// The default constructor for @(TableMetadata.EntityName) class.
+    /// </summary>
+    public @(TableMetadata.EntityName)()
+    {
+      @if (Configuration.GenRelationship)
+      {
+        foreach (var reference in this.TableMetadata.IncomingReferences)
+        {<text>
+        this.@(reference.ChildListPropertyName) = new List<@(reference.ChildTableMetadata.EntityName)>();
+        </text>}
+      }
+      
+      @if (TableMetadata.IsReosAuditableEntity)
+      {
+        <text>
+        var now = DateTime.Now;
+        this.CreatedDate = now;
+        this.ModifiedDate = now;
+        this.Active = true;
+        </text>
+      }
+      
+      @if (TableMetadata.IsReosReplicatedEntity)
+      {
+        <text>
+        this.Replicated = true;
+        this.Rowguid = Guid.NewGuid();
+        </text>
+      }
+
+    }
+
+
+    #region "Basic Columns"
+
+    @foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey || !Configuration.GenRelationship))
+    {<text>
+    /// <summary>
+    /// Property @col.PropertyName mapping to @(TableMetadata.Name).@(col.ColumnName)
+    /// </summary>
+    [JsonProperty("@(col.PropertyName.LowerFirst())")]   
+    public virtual @col.CSharpTypeAsString @col.PropertyName { get; set; }
+    </text>}
+    
+    #endregion
+    
+    #region "Outgoing References"
+    @if (Configuration.GenRelationship)
+    {
+    foreach (var reference in @TableMetadata.OutgoingReferences)
+    {<text>
+    /// <summary>
+    /// Gets or sets reference to @(reference.ParentPropertyName). ReferenceName: @(reference.Name).
+    /// </summary>
+    public virtual @(reference.ParentTableMetadata.EntityName) @(reference.ParentPropertyName) { get; set; }
+    </text>}
+    }
+    #endregion
+    
+    #region "Incoming References"
+@if (Configuration.GenRelationship) { 
+    foreach (var reference in this.TableMetadata.IncomingReferences)
+    {<text>
+    @{ var childObjParamName = reference.ChildTableMetadata.EntityName.Substring(0, 1).ToLower() + reference.ChildTableMetadata.EntityName.Substring(1); }
+    /// <summary>
+    /// Field for the child list of Ref: @(reference.Name).
+    /// </summary>
+    public virtual IList<@(reference.ChildTableMetadata.EntityName)> @(reference.ChildListPropertyName) { get; set; }
+    
+    /// <summary>
+    /// Add @(reference.ChildTableMetadata.EntityName) entity to @(reference.ChildListPropertyName).
+    /// </summary>
+    /// <param name="@(childObjParamName)">
+    ///	The @(reference.ChildTableMetadata.EntityName) entity.
+    /// </param>
+    public virtual void AddTo@(reference.ChildListPropertyName)(@(reference.ChildTableMetadata.EntityName) @(childObjParamName))
+    {
+      @(childObjParamName).@(reference.ParentPropertyName) = this;
+      this.@(reference.ChildListPropertyName).Add(@(childObjParamName));
+    }
+    </text>}
+}
+    #endregion
+    
+
+  }
+}

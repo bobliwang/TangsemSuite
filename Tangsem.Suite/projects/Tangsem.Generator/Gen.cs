@@ -94,7 +94,7 @@ namespace Tangsem.Generator
     {
       foreach (var tableMetadata in tableMetadatas)
       {
-        var pocoTemplate = new Poco_Designer { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
+        var pocoTemplate = new Poco_Designer_Reos { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
 
         var entityCode = pocoTemplate.TransformText().Trim();
         var entityDesignerFilePath = this.GeneratorConfiguration.EntitiesDirPath + "/" + tableMetadata.EntityName + ".Designer.cs";

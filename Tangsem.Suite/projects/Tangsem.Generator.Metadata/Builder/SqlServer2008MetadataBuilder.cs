@@ -79,7 +79,7 @@ namespace Tangsem.Generator.Metadata.Builder
       get
       {
         return
-		  @"
+      @"
               WITH PrimaryKeys
               AS
               (
@@ -99,6 +99,7 @@ namespace Tangsem.Generator.Metadata.Builder
                      ,[IsAutoIncrement] = ISNULL(CAST(COLUMNPROPERTY(OBJECT_ID(col.TABLE_NAME), col.COLUMN_NAME,'IsIdentity') AS BIT), 0)
                      ,[IsComputed] = ISNULL(CAST(COLUMNPROPERTY(OBJECT_ID(col.TABLE_NAME), col.COLUMN_NAME, 'IsComputed') AS BIT), 0)
                      ,[IsPrimaryKey] = CAST((CASE WHEN pk.TABLE_NAME IS NULL Then 0 ELSE 1 END) AS BIT)
+                     ,[DefaultValueExpr] = col.[COLUMN_DEFAULT]
               FROM INFORMATION_SCHEMA.COLUMNS AS col
 			  LEFT JOIN PrimaryKeys pk ON pk.TABLE_NAME = col.TABLE_NAME AND pk.COLUMN_NAME = col.COLUMN_NAME              
               WHERE (@TableName IS NULL OR col.TABLE_NAME = @TableName)

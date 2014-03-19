@@ -10,8 +10,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 using Tangsem.Common.Entities;
+using Tangsem.Common.Entities.Reos;
 
 namespace Tangsem.Generator.Metadata
 {
@@ -20,19 +22,18 @@ namespace Tangsem.Generator.Metadata
   /// </summary>
   public class TableMetadata : ColumnsContainer
   {
-    private static PropertyInfo[] _auditingPropertyInfos;
+    public static readonly PropertyInfo[] AuditingPropertyInfos;
+    public static readonly PropertyInfo[] ReosAuditingPropertyInfos;
+    public static readonly PropertyInfo[] ReosReplicatedPropertyInfos;
+    public static readonly PropertyInfo[] ReosIntegratedPropertyInfos;
+
 
     static TableMetadata()
     {
-      _auditingPropertyInfos = typeof(IAuditableEntity).GetProperties();
-    }
-
-    public static PropertyInfo[] AuditingPropertyInfos
-    {
-      get
-      {
-        return _auditingPropertyInfos;
-      }
+      AuditingPropertyInfos = typeof(IAuditableEntity).GetProperties();
+      ReosAuditingPropertyInfos = typeof(IReosAuditableEntity).GetProperties();
+      ReosReplicatedPropertyInfos = typeof(IReosReplicatedEntity).GetProperties();
+      ReosIntegratedPropertyInfos = typeof(IReosIntegratedEntity).GetProperties();
     }
 
     public TableMetadata()
@@ -105,26 +106,66 @@ namespace Tangsem.Generator.Metadata
     {
       get
       {
-        foreach (var p in AuditingPropertyInfos)
-        {
-          var flag = false;
-          foreach (var c in this.Columns)
-          {
-            if (c.PropertyName == p.Name)
-            {
-              flag = true;
-              break;
-            }
-          }
-
-          if (!flag)
-          {
-            return false;
-          }
-        }
-
-        return true;
+        return AuditingPropertyInfos.All(p => this.Columns.Any(c => c.PropertyName == p.Name));
       }
     }
+
+    public bool IsReosAuditableEntity
+    {
+      get
+      {
+        var val = ReosAuditingPropertyInfos.All(p => this.Columns.Any(c => c.PropertyName == p.Name));
+        return val;
+      }
+    }
+
+    public bool IsReosReplicatedEntity
+    {
+      get
+      {
+        var val = ReosReplicatedPropertyInfos.All(p => this.Columns.Any(c => c.PropertyName == p.Name));
+        return val;
+      }
+    }
+
+    public bool IsReosIntegratedEntity
+    {
+      get
+      {
+        var val = ReosIntegratedPropertyInfos.All(p => this.Columns.Any(c => c.PropertyName == p.Name));
+        return val;
+      }
+    }
+
+    public string PocoExtensionsForReos
+    {
+      get
+      {
+        var lst = new List<string>();
+
+        if (this.IsReosAuditableEntity)
+        {
+          lst.Add(typeof(IReosAuditableEntity).Name);
+        }
+
+        if (this.IsReosReplicatedEntity)
+        {
+          lst.Add(typeof(IReosReplicatedEntity).Name);
+        }
+
+        if (this.IsReosIntegratedEntity)
+        {
+          lst.Add(typeof(IReosIntegratedEntity).Name);
+        }
+
+        if (lst.Any())
+        {
+          return " : " + string.Join(", ", lst);  
+        }
+
+        return string.Empty;
+      }
+    }
+    
   }
 }

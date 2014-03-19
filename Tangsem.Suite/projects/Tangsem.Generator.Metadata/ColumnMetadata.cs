@@ -94,6 +94,24 @@ namespace Tangsem.Generator.Metadata
 
     public Type ClrType { get; set; }
 
+    public string DefaultValueExpr { get; set; }
+
+    public string DefaultValue
+    {
+      get
+      {
+        if (this.TableMetadata.IsReosReplicatedEntity)
+        {
+          if ("Replicated".Equals(this.PropertyName))
+          {
+            return (this.DefaultValueExpr != null && this.DefaultValueExpr.Contains("1")).ToString().ToLower();
+          }
+        }
+
+        return null;
+      }
+    }
+
     public string CSharpTypeAsString
     {
       get
@@ -147,6 +165,7 @@ namespace Tangsem.Generator.Metadata
       this.Nullable = rc.Nullable;
       this.DataType = rc.DataType;
       this.IsComputed = rc.IsComputed;
+      this.DefaultValueExpr = rc.DefaultValueExpr;
 
       this.PropertyName = rc.ColumnName.ToPropertyName();
 
