@@ -14,6 +14,7 @@
 
   <IncludeTable>News</IncludeTable>
   <IncludeTable>Users</IncludeTable>
+  <IncludeTable>NewsUsers</IncludeTable>
   <IncludeTable>v_News</IncludeTable>
 
   <IncludeTable>Countries</IncludeTable>
