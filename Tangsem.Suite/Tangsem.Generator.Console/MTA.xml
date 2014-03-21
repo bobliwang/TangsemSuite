@@ -63,6 +63,10 @@
   <IncludeTable>Payrolls</IncludeTable>
   <IncludeTable>PayrollTimesheets</IncludeTable>
   <IncludeTable>PayrollOdometers</IncludeTable>
+
+  <IncludeTable>v_Photos</IncludeTable>
+  <IncludeTable>Tags</IncludeTable>
+  <IncludeTable>PhotoTags</IncludeTable>
 </GeneratorConfiguration>
 
 
