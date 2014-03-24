@@ -67,6 +67,7 @@
   <IncludeTable>v_Photos</IncludeTable>
   <IncludeTable>Tags</IncludeTable>
   <IncludeTable>PhotoTags</IncludeTable>
+  <IncludeTable>Photos</IncludeTable>
 </GeneratorConfiguration>
 
 
