@@ -12,6 +12,8 @@
   <!-- MetadataBuilder: className[;assemblyName]  -->
   <IgnoredTable>Sysdiagrams</IgnoredTable>
 
+  <IncludeTable>AccessGroups</IncludeTable>
+  
   <IncludeTable>News</IncludeTable>
   <IncludeTable>Users</IncludeTable>
   <IncludeTable>NewsUsers</IncludeTable>
