@@ -72,6 +72,21 @@
   <IncludeTable>Photos</IncludeTable>
 
   <IncludeTable>v_Users</IncludeTable>
+
+  <IncludeTable>v_Users_RoleDefs</IncludeTable>
+  <IncludeTable>v_Roles</IncludeTable>
+  
+  <IncludeTable>ResourcePermissions</IncludeTable>
+  <IncludeTable>ResourcePermissionRoleMaps</IncludeTable>
+
+  <IncludeTable>v_Resources</IncludeTable>
+  <IncludeTable>v_Permissions</IncludeTable>
+  <IncludeTable>v_ResourcePermissions_OptionalMappings</IncludeTable>
+  <IncludeTable>v_RoleResourcePermissions_OptionalMappings</IncludeTable>
+  
+  
+  
+
 </GeneratorConfiguration>
 
 

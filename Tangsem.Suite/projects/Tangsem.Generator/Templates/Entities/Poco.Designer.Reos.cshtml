@@ -15,7 +15,6 @@ using System.Linq;
 using System.Linq.Expressions;
 
 using Tangsem.Common.Entities.Reos;
-using Newtonsoft.Json;
 
 namespace @Configuration.EntityNamespace
 {
@@ -23,39 +22,7 @@ namespace @Configuration.EntityNamespace
   /// This entity maps to '@(TableMetadata.Name)'.
   /// </summary>
   public partial class @(TableMetadata.EntityName)@(TableMetadata.PocoExtensionsForReos)
-  {
-    @foreach (var col in @TableMetadata.Columns.Where(c => (!c.IsOutgoingRefKey || !Configuration.GenRelationship)))
-    {<text>
-    /// <summary>
-    /// The property name '@col.PropertyName'. It matches the property to column '@col.ColumnName'.
-    /// </summary>
-    public static readonly string Prop_@(col.PropertyName) = "@col.PropertyName";
-    
-    /// <summary>
-    /// The lamda expression for @col.PropertyName.
-    /// </summary>
-    public static readonly Expression<Func<@TableMetadata.EntityName, object>> Expr_@(col.PropertyName) = x => x.@(col.PropertyName);
-    </text>}
-    
-    @if (Configuration.GenRelationship)
-    {
-    foreach (var reference in this.TableMetadata.OutgoingReferences)
-    {<text>
-    /// <summary>
-    /// The property name '@(reference.ParentPropertyName)'. It is for the reference '@(reference.Name)'.
-    /// </summary>
-    public static readonly string Prop_@(reference.ParentPropertyName)  = "@(reference.ParentPropertyName)";
-
-    /// <summary>
-    /// The lamda expression for @(reference.ParentPropertyName).
-    /// </summary>
-    public static readonly Expression<Func<@(this.TableMetadata.EntityName), object>> Expr_@(reference.ParentPropertyName) = x => x.@(reference.ParentPropertyName);
-    </text>}
-      
-    }
-    
-    
-    
+  { 
     /// <summary>
     /// The default constructor for @(TableMetadata.EntityName) class.
     /// </summary>
@@ -86,9 +53,11 @@ namespace @Configuration.EntityNamespace
         this.Rowguid = Guid.NewGuid();
         </text>
       }
-
+      
+      this.Init();
     }
 
+    partial void Init();
 
     #region "Basic Columns"
 
@@ -97,7 +66,6 @@ namespace @Configuration.EntityNamespace
     /// <summary>
     /// Property @col.PropertyName mapping to @(TableMetadata.Name).@(col.ColumnName)
     /// </summary>
-    [JsonProperty("@(col.PropertyName.LowerFirst())")]   
     public virtual @col.CSharpTypeAsString @col.PropertyName { get; set; }
     </text>}
     

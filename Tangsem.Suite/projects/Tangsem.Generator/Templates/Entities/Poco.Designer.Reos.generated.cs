@@ -66,11 +66,11 @@ WriteLiteral("\r\n");
 
 WriteLiteral("\r\nusing System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\nus" +
 "ing System.Text;\r\nusing System.Linq;\r\nusing System.Linq.Expressions;\r\n\r\nusing Ta" +
-"ngsem.Common.Entities.Reos;\r\nusing Newtonsoft.Json;\r\n\r\nnamespace ");
+"ngsem.Common.Entities.Reos;\r\n\r\nnamespace ");
 
 
             
-            #line 20 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 19 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
      Write(Configuration.EntityNamespace);
 
             
@@ -80,7 +80,7 @@ WriteLiteral("\r\n{\r\n  /// <summary>\r\n  /// This entity maps to \'");
 
 
             
-            #line 23 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 22 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                        Write(TableMetadata.Name);
 
             
@@ -90,7 +90,7 @@ WriteLiteral("\'.\r\n  /// </summary>\r\n  public partial class ");
 
 
             
-            #line 25 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 24 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                    Write(TableMetadata.EntityName);
 
             
@@ -98,221 +98,17 @@ WriteLiteral("\'.\r\n  /// </summary>\r\n  public partial class ");
             #line hidden
 
             
-            #line 25 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 24 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                               Write(TableMetadata.PocoExtensionsForReos);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n  {\r\n");
+WriteLiteral("\r\n  { \r\n    /// <summary>\r\n    /// The default constructor for ");
 
 
             
             #line 27 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-     foreach (var col in @TableMetadata.Columns.Where(c => (!c.IsOutgoingRefKey || !Configuration.GenRelationship)))
-    {
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n    /// <summary>\r\n    /// The property name \'");
-
-
-            
-            #line 30 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                      Write(col.PropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\'. It matches the property to column \'");
-
-
-            
-            #line 30 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                                                             Write(col.ColumnName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\'.\r\n    /// </summary>\r\n    public static readonly string Prop_");
-
-
-            
-            #line 32 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                   Write(col.PropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" = \"");
-
-
-            
-            #line 32 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                                         Write(col.PropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\";\r\n    \r\n    /// <summary>\r\n    /// The lamda expression for ");
-
-
-            
-            #line 35 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                            Write(col.PropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(".\r\n    /// </summary>\r\n    public static readonly Expression<Func<");
-
-
-            
-            #line 37 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                      Write(TableMetadata.EntityName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(", object>> Expr_");
-
-
-            
-            #line 37 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                                                                Write(col.PropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" = x => x.");
-
-
-            
-            #line 37 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                                                                                             Write(col.PropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(";\r\n    ");
-
-
-            
-            #line 38 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-           }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    \r\n");
-
-
-            
-            #line 40 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-     if (Configuration.GenRelationship)
-    {
-    foreach (var reference in this.TableMetadata.OutgoingReferences)
-    {
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n    /// <summary>\r\n    /// The property name \'");
-
-
-            
-            #line 45 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                       Write(reference.ParentPropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\'. It is for the reference \'");
-
-
-            
-            #line 45 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                                                                  Write(reference.Name);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\'.\r\n    /// </summary>\r\n    public static readonly string Prop_");
-
-
-            
-            #line 47 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                   Write(reference.ParentPropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("  = \"");
-
-
-            
-            #line 47 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                                                       Write(reference.ParentPropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\";\r\n\r\n    /// <summary>\r\n    /// The lamda expression for ");
-
-
-            
-            #line 50 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                             Write(reference.ParentPropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(".\r\n    /// </summary>\r\n    public static readonly Expression<Func<");
-
-
-            
-            #line 52 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                       Write(this.TableMetadata.EntityName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(", object>> Expr_");
-
-
-            
-            #line 52 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                                                                       Write(reference.ParentPropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" = x => x.");
-
-
-            
-            #line 52 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-                                                                                                                                Write(reference.ParentPropertyName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(";\r\n    ");
-
-
-            
-            #line 53 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-           }
-      
-    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    \r\n    \r\n    \r\n    /// <summary>\r\n    /// The default constructor for ");
-
-
-            
-            #line 60 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                 Write(TableMetadata.EntityName);
 
             
@@ -322,7 +118,7 @@ WriteLiteral(" class.\r\n    /// </summary>\r\n    public ");
 
 
             
-            #line 62 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 29 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
        Write(TableMetadata.EntityName);
 
             
@@ -332,7 +128,7 @@ WriteLiteral("()\r\n    {\r\n");
 
 
             
-            #line 64 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 31 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
        if (Configuration.GenRelationship)
       {
         foreach (var reference in this.TableMetadata.IncomingReferences)
@@ -344,7 +140,7 @@ WriteLiteral("\r\n        this.");
 
 
             
-            #line 68 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 35 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
          Write(reference.ChildListPropertyName);
 
             
@@ -354,7 +150,7 @@ WriteLiteral(" = new List<");
 
 
             
-            #line 68 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 35 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                                        Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -364,7 +160,7 @@ WriteLiteral(">();\r\n        ");
 
 
             
-            #line 69 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 36 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                }
       }
 
@@ -375,7 +171,7 @@ WriteLiteral("      \r\n");
 
 
             
-            #line 72 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 39 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
        if (TableMetadata.IsReosAuditableEntity)
       {
 
@@ -391,7 +187,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 80 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 47 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
       }
 
             
@@ -401,7 +197,7 @@ WriteLiteral("      \r\n");
 
 
             
-            #line 82 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 49 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
        if (TableMetadata.IsReosReplicatedEntity)
       {
 
@@ -417,17 +213,18 @@ WriteLiteral("\r\n");
 
 
             
-            #line 88 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 55 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
       }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    }\r\n\r\n\r\n    #region \"Basic Columns\"\r\n\r\n");
+WriteLiteral("      \r\n      this.Init();\r\n    }\r\n\r\n    partial void Init();\r\n\r\n    #region \"Bas" +
+"ic Columns\"\r\n\r\n");
 
 
             
-            #line 95 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 64 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
      foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey || !Configuration.GenRelationship))
     {
             
@@ -437,7 +234,7 @@ WriteLiteral("\r\n    /// <summary>\r\n    /// Property ");
 
 
             
-            #line 98 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 67 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
             Write(col.PropertyName);
 
             
@@ -447,7 +244,7 @@ WriteLiteral(" mapping to ");
 
 
             
-            #line 98 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 67 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                           Write(TableMetadata.Name);
 
             
@@ -457,27 +254,17 @@ WriteLiteral(".");
 
 
             
-            #line 98 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 67 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                                                 Write(col.ColumnName);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    /// </summary>\r\n    [JsonProperty(\"");
+WriteLiteral("\r\n    /// </summary>\r\n    public virtual ");
 
 
             
-            #line 100 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
-               Write(col.PropertyName.LowerFirst());
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\")]   \r\n    public virtual ");
-
-
-            
-            #line 101 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 69 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
               Write(col.CSharpTypeAsString);
 
             
@@ -487,7 +274,7 @@ WriteLiteral(" ");
 
 
             
-            #line 101 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 69 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                       Write(col.PropertyName);
 
             
@@ -497,7 +284,7 @@ WriteLiteral(" { get; set; }\r\n    ");
 
 
             
-            #line 102 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 70 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
            }
 
             
@@ -507,7 +294,7 @@ WriteLiteral("    \r\n    #endregion\r\n    \r\n    #region \"Outgoing Reference
 
 
             
-            #line 107 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 75 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
      if (Configuration.GenRelationship)
     {
     foreach (var reference in @TableMetadata.OutgoingReferences)
@@ -519,7 +306,7 @@ WriteLiteral("\r\n    /// <summary>\r\n    /// Gets or sets reference to ");
 
 
             
-            #line 112 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 80 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                               Write(reference.ParentPropertyName);
 
             
@@ -529,7 +316,7 @@ WriteLiteral(". ReferenceName: ");
 
 
             
-            #line 112 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 80 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                                                               Write(reference.Name);
 
             
@@ -539,7 +326,7 @@ WriteLiteral(".\r\n    /// </summary>\r\n    public virtual ");
 
 
             
-            #line 114 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 82 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                Write(reference.ParentTableMetadata.EntityName);
 
             
@@ -549,7 +336,7 @@ WriteLiteral(" ");
 
 
             
-            #line 114 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 82 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                                            Write(reference.ParentPropertyName);
 
             
@@ -559,7 +346,7 @@ WriteLiteral(" { get; set; }\r\n    ");
 
 
             
-            #line 115 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 83 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
            }
     }
 
@@ -570,7 +357,7 @@ WriteLiteral("    #endregion\r\n    \r\n    #region \"Incoming References\"\r\n"
 
 
             
-            #line 120 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 88 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
  if (Configuration.GenRelationship) { 
     foreach (var reference in this.TableMetadata.IncomingReferences)
     {
@@ -581,7 +368,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 123 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 91 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
        var childObjParamName = reference.ChildTableMetadata.EntityName.Substring(0, 1).ToLower() + reference.ChildTableMetadata.EntityName.Substring(1); 
 
             
@@ -591,7 +378,7 @@ WriteLiteral("    /// <summary>\r\n    /// Field for the child list of Ref: ");
 
 
             
-            #line 125 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 93 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                      Write(reference.Name);
 
             
@@ -601,7 +388,7 @@ WriteLiteral(".\r\n    /// </summary>\r\n    public virtual IList<");
 
 
             
-            #line 127 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 95 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                      Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -611,7 +398,7 @@ WriteLiteral("> ");
 
 
             
-            #line 127 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 95 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                                                  Write(reference.ChildListPropertyName);
 
             
@@ -621,7 +408,7 @@ WriteLiteral(" { get; set; }\r\n    \r\n    /// <summary>\r\n    /// Add ");
 
 
             
-            #line 130 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 98 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
         Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -631,7 +418,7 @@ WriteLiteral(" entity to ");
 
 
             
-            #line 130 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 98 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                                              Write(reference.ChildListPropertyName);
 
             
@@ -641,7 +428,7 @@ WriteLiteral(".\r\n    /// </summary>\r\n    /// <param name=\"");
 
 
             
-            #line 132 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 100 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                  Write(childObjParamName);
 
             
@@ -651,7 +438,7 @@ WriteLiteral("\">\r\n    ///\tThe ");
 
 
             
-            #line 133 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 101 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
         Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -661,7 +448,7 @@ WriteLiteral(" entity.\r\n    /// </param>\r\n    public virtual void AddTo");
 
 
             
-            #line 135 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 103 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                          Write(reference.ChildListPropertyName);
 
             
@@ -671,7 +458,7 @@ WriteLiteral("(");
 
 
             
-            #line 135 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 103 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                                             Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -681,7 +468,7 @@ WriteLiteral(" ");
 
 
             
-            #line 135 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 103 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                                                                                        Write(childObjParamName);
 
             
@@ -691,7 +478,7 @@ WriteLiteral(")\r\n    {\r\n      ");
 
 
             
-            #line 137 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 105 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
   Write(childObjParamName);
 
             
@@ -701,7 +488,7 @@ WriteLiteral(".");
 
 
             
-            #line 137 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 105 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                        Write(reference.ParentPropertyName);
 
             
@@ -711,7 +498,7 @@ WriteLiteral(" = this;\r\n      this.");
 
 
             
-            #line 138 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 106 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
        Write(reference.ChildListPropertyName);
 
             
@@ -721,7 +508,7 @@ WriteLiteral(".Add(");
 
 
             
-            #line 138 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 106 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
                                               Write(childObjParamName);
 
             
@@ -731,7 +518,7 @@ WriteLiteral(");\r\n    }\r\n    ");
 
 
             
-            #line 140 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
+            #line 108 "..\..\Templates\Entities\Poco.Designer.Reos.cshtml"
            }
 }
 
