@@ -72,6 +72,8 @@
   <IncludeTable>Photos</IncludeTable>
 
   <IncludeTable>v_Users</IncludeTable>
+  
+  <IncludeTable>v_Users_Merged</IncludeTable>
 
   <IncludeTable>v_Users_RoleDefs</IncludeTable>
   <IncludeTable>v_Roles</IncludeTable>
