@@ -24,7 +24,7 @@
   <IncludeTable>v_DM_Users</IncludeTable>
   <IncludeTable>v_DM_Users_SyncSubExt</IncludeTable>
 
-  
+  <IncludeTable>v_Users_Merged</IncludeTable>
 
 </GeneratorConfiguration>
 
