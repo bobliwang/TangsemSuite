@@ -26,6 +26,27 @@
 
   <IncludeTable>v_Users_Merged</IncludeTable>
 
+  <IncludeTable>ErrorLogs</IncludeTable>
+  <IncludeTable>Jobs</IncludeTable>
+  
+  <IncludeTable>v_SyncObjects</IncludeTable>
+  
+  <IncludeTable>v_Jobs</IncludeTable>
+
+  <IncludeTable>v_DM_Products</IncludeTable>
+
+  <IncludeTable>ProductCategoriesLatest</IncludeTable>
+  <IncludeTable>ProductSubCategoriesLatest</IncludeTable>
+  <IncludeTable>ProductGroupsLatest</IncludeTable>
+  <IncludeTable>ProductSortCode1Latest</IncludeTable>
+  <IncludeTable>ProductSortCode2Latest</IncludeTable>
+  <IncludeTable>ProductSortCode3Latest</IncludeTable>
+  
+  <IncludeTable>v_DM_ProductSubCategoriesLatest</IncludeTable>
+  <IncludeTable>v_DM_ProductGroupsLatest</IncludeTable>
+  
+
+
 </GeneratorConfiguration>
 
 
