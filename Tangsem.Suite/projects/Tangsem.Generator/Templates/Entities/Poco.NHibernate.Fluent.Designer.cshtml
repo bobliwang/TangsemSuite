@@ -61,10 +61,33 @@ namespace @(Configuration.MappingNamespace)
 				.Native();
 			</text>}
 			else
-			{<text>
-			this.Id(x => x.@(TableMetadata.Columns[0].PropertyName))
-				.Column("@(TableMetadata.Columns[0].ColumnName)");	
-			</text>}
+			{
+        if (TableMetadata.Columns.Count == 1)
+        {
+         <text>
+			     this.Id(x => x.@(TableMetadata.Columns[0].PropertyName))
+			     .Column("@(TableMetadata.Columns[0].ColumnName)");	
+			   </text>
+        }
+        else
+        {
+          <text>this.CompositeId()</text>
+          foreach (var col in this.TableMetadata.PrimaryKeys)
+          {
+            <text>.KeyProperty(x => x.@(col.PropertyName))</text>
+          }<text>;</text>
+          
+          foreach (var col in this.TableMetadata.PrimaryKeys)
+          {<text>
+           // @(col.ColumnName)
+		       this.Map(x => x.@(col.PropertyName)).Column("@(col.ColumnName)")
+			       @if (col.ClrType == typeof(string)) { <text>.Length(@(col.ColumnSize > 0 ? col.ColumnSize.ToString() : "int.MaxValue"))</text> }
+			       @if (!col.Nullable) { <text>.Not.Nullable()</text>}
+             @if (col.ReadOnly){ <text>.ReadOnly()</text>};
+
+			     </text>}
+        }
+      }
 		  
 		}
 		

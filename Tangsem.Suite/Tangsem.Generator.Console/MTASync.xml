@@ -42,8 +42,19 @@
   <IncludeTable>ProductSortCode2Latest</IncludeTable>
   <IncludeTable>ProductSortCode3Latest</IncludeTable>
   
+  <IncludeTable>Distributor_ProductLatest</IncludeTable>
+  <IncludeTable>Product_MinorAccountGroupLatest</IncludeTable>
+  <IncludeTable>Product_DistributionLatest</IncludeTable>
+  
+  <IncludeTable>ProductsLatest</IncludeTable>
+  
+  
+  
   <IncludeTable>v_DM_ProductSubCategoriesLatest</IncludeTable>
   <IncludeTable>v_DM_ProductGroupsLatest</IncludeTable>
+  
+  <IncludeTable>v_DM_ProductRangings</IncludeTable>
+  <IncludeTable>v_DM_DistributorProducts</IncludeTable>
   
 
 
