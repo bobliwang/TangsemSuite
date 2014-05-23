@@ -47,14 +47,34 @@
   <IncludeTable>Product_DistributionLatest</IncludeTable>
   
   <IncludeTable>ProductsLatest</IncludeTable>
+  <IncludeTable>ProductConditionsLatest</IncludeTable>
+  <IncludeTable>DistributorLatest</IncludeTable>
+  <IncludeTable>MinorAccountGroupsLatest</IncludeTable>
+  <IncludeTable>AccountGroupsLatest</IncludeTable>
   
+  <IncludeTable>Store_QtyLatest</IncludeTable>
+  <IncludeTable>Distributor_StoreLatest</IncludeTable>
   
+  <IncludeTable>v_DM_StoreBays</IncludeTable>
+  <IncludeTable>v_DM_DistributorStores</IncludeTable>
   
+
   <IncludeTable>v_DM_ProductSubCategoriesLatest</IncludeTable>
   <IncludeTable>v_DM_ProductGroupsLatest</IncludeTable>
   
   <IncludeTable>v_DM_ProductRangings</IncludeTable>
   <IncludeTable>v_DM_DistributorProducts</IncludeTable>
+  
+  
+  <IncludeTable>Store_FrequencyLatest</IncludeTable>
+  <IncludeTable>Store_GradeLatest</IncludeTable>
+  <IncludeTable>Store_ProfileLatest</IncludeTable>
+  <IncludeTable>Store_Region2Latest</IncludeTable>
+  <IncludeTable>Store_StatusLatest</IncludeTable>
+  <IncludeTable>Store_StoreClassLatest</IncludeTable>
+  <IncludeTable>Store_TerritoryLatest</IncludeTable>
+  <IncludeTable>Store_ZoneLatest</IncludeTable>
+  
   
 
 

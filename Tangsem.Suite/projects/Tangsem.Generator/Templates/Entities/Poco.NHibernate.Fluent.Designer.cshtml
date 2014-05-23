@@ -75,18 +75,8 @@ namespace @(Configuration.MappingNamespace)
         <text>this.CompositeId()</text>
         foreach (var col in this.TableMetadata.PrimaryKeys)
         {
-          <text>.KeyProperty(x => x.@(col.PropertyName))</text>
+          <text>.KeyProperty(x => x.@(col.PropertyName), "@(col.ColumnName)")</text>
         }<text>;</text>
-          
-        foreach (var col in this.TableMetadata.PrimaryKeys)
-        {<text>
-          // @(col.ColumnName)
-		      this.Map(x => x.@(col.PropertyName)).Column("@(col.ColumnName)")
-			      @if (col.ClrType == typeof(string)) { <text>.Length(@(col.ColumnSize > 0 ? col.ColumnSize.ToString() : "int.MaxValue"))</text> }
-			      @if (!col.Nullable) { <text>.Not.Nullable()</text>}
-            @if (col.ReadOnly){ <text>.ReadOnly()</text>};
-
-			    </text>}
       }
 		  
 		}
