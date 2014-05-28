@@ -28,6 +28,9 @@
   <IncludeTable>Products</IncludeTable>
 
   <IncludeTable>Accounts</IncludeTable>
+  <IncludeTable>DistributorAccounts</IncludeTable>
+  <IncludeTable>DistributorAccountProducts</IncludeTable>
+  <IncludeTable>AccountProducts</IncludeTable>
   <IncludeTable>Campaigns</IncludeTable>
   
   <IncludeTable>Objectives</IncludeTable>
