@@ -110,5 +110,9 @@ namespace @Configuration.EntityNamespace
     #endregion
     
 
+    @foreach (var col in @TableMetadata.Columns.Where(x => x.ColumnSize > 0))
+    {<text>
+      public static readonly int @(col.PropertyName)_MaxLenth = @(col.ColumnSize);
+    </text>}
   }
 }
