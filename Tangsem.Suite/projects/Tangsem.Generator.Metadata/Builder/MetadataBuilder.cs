@@ -99,7 +99,8 @@ namespace Tangsem.Generator.Metadata.Builder
       {
         Name = tableName,
         EntityName = tableName.ToEntityName(),
-        IsView = this.Cache.RawTables.Single(rt => rt.Table == tableName).IsView
+        IsView = this.Cache.RawTables.Single(rt => rt.Table == tableName).IsView,
+        Schema = this.Cache.RawTables.Single(rt => rt.Table == tableName).Schema
       };
 
       // put newly created table metadata into cache.

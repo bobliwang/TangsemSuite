@@ -114,7 +114,8 @@ namespace Tangsem.Generator.Metadata.Builder
       {
         return @"SELECT
                   [Table] = TABLE_NAME
-                  , [IsView] = CAST( CASE WHEN TABLE_TYPE = 'VIEW' THEN 1 ELSE 0 END AS BIT)  
+                  , [IsView] = CAST( CASE WHEN TABLE_TYPE = 'VIEW' THEN 1 ELSE 0 END AS BIT)
+                  , [Schema] = TABLE_SCHEMA
                   FROM INFORMATION_SCHEMA.TABLES";
       }
     }

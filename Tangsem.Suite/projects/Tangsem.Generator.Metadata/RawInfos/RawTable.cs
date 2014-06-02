@@ -14,5 +14,8 @@ namespace Tangsem.Generator.Metadata.RawInfos
 
     [PropertyColumn("IsView")]
     public bool IsView { get; set; }
+
+    [PropertyColumn("Schema")]
+    public string Schema { get; set; }
   }
 }

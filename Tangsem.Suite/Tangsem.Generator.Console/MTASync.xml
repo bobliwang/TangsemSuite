@@ -74,6 +74,10 @@
   <IncludeTable>Store_StoreClassLatest</IncludeTable>
   <IncludeTable>Store_TerritoryLatest</IncludeTable>
   <IncludeTable>Store_ZoneLatest</IncludeTable>
+
+
+  <IncludeTable>Modules</IncludeTable>
+  <IncludeTable>ModuleObjectMaps</IncludeTable>
   
   
 

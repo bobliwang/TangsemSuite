@@ -43,6 +43,8 @@ namespace Tangsem.Generator.Metadata
       this.Keys = new List<UniqueKeyMetadata>();
     }
 
+    public string Schema { get; set; }
+
     /// <summary>
     /// Gets or sets the table name.
     /// </summary>

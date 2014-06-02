@@ -25,7 +25,11 @@ namespace @(Configuration.MappingNamespace)
 		/// The constructor.
 		/// </summary>
 		public @(TableMetadata.EntityName)Map()
-		{
+    {@if (TableMetadata.Schema != "dbo")
+      {<text>
+      this.Schema("@(TableMetadata.Schema)");
+      </text>}
+
 			this.Table("@(TableMetadata.Name)");
 			
 			@if(TableMetadata.IsView)
