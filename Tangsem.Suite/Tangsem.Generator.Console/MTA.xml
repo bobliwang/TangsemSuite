@@ -88,8 +88,8 @@
   <IncludeTable>v_Permissions</IncludeTable>
   <IncludeTable>v_ResourcePermissions_OptionalMappings</IncludeTable>
   <IncludeTable>v_RoleResourcePermissions_OptionalMappings</IncludeTable>
-  
-  
+
+  <IncludeTable>v_RoleLicenseUsages</IncludeTable>  
   
 
 </GeneratorConfiguration>
