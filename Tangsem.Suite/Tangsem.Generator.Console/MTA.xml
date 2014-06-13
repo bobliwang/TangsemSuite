@@ -91,6 +91,11 @@
 
   <IncludeTable>v_RoleLicenseUsages</IncludeTable>  
   
+  <IncludeTable>UserPasswordReminders</IncludeTable>
+  <IncludeTable>FailedPasswordAttempts</IncludeTable>
+  
+  <IncludeTable>Settings</IncludeTable>
+  
 
 </GeneratorConfiguration>
 
