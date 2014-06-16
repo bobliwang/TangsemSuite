@@ -3,7 +3,7 @@
             ProjectName="AirloomMTAWebApp.Revamp.Common"
             OutputDir=""
             RepositoryName ="ReosRepository"
-            ConnectionString="Data Source=Airloom-Lee\R2;Initial Catalog=ArnottsMTA;User ID=sa;Password=sa"
+            ConnectionString="Data Source=(local)\SQLExpress;Initial Catalog=TEST2012_REOS;Integrated Security=True"
             MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
             OpenOutputDirAfterGeneration="true"
             OrmFramework="NHibernate"
