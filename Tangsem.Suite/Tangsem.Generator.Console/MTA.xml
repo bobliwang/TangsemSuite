@@ -3,7 +3,7 @@
             ProjectName="AirloomMTAWebApp.Revamp.Common"
             OutputDir=""
             RepositoryName ="ReosRepository"
-            ConnectionString="Data Source=(local)\SQLExpress;Initial Catalog=TEST2012_REOS;Integrated Security=True"
+            ConnectionString="Data Source=(local)\SQLExpress;Initial Catalog=REOS;Integrated Security=True"
             MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
             OpenOutputDirAfterGeneration="true"
             OrmFramework="NHibernate"
@@ -93,8 +93,14 @@
   
   <IncludeTable>UserPasswordReminders</IncludeTable>
   <IncludeTable>FailedPasswordAttempts</IncludeTable>
+
+  <IncludeTable>ReportRoleMaps</IncludeTable>
+  <IncludeTable>v_Reports</IncludeTable>
+  <IncludeTable>v_ReportRoleMaps</IncludeTable>
   
   <IncludeTable>Settings</IncludeTable>
+  
+  
   
 
 </GeneratorConfiguration>
