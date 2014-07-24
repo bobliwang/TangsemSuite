@@ -99,9 +99,10 @@
   <IncludeTable>v_ReportRoleMaps</IncludeTable>
   
   <IncludeTable>Settings</IncludeTable>
+
+  <IncludeTable>v_ReportRole_OptionalMaps</IncludeTable>
   
-  
-  
+
 
 </GeneratorConfiguration>
 
