@@ -1,4 +1,4 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ output extension=".Designer.cs" #>
 
 <#@ assembly name="System" #> 
@@ -8,9 +8,9 @@
 <#@ assembly name="System.Xml.Linq" #>
 <#@ assembly name="Microsoft.CSharp" #>
 
-<#@ assembly name="D:\GitRepos\tangsem.suite\Tangsem.Suite\tests\web\Tangsem.Generator.WebMvc3Demo\bin\Tangsem.Common.dll" #>
-<#@ assembly name="D:\GitRepos\tangsem.suite\Tangsem.Suite\tests\web\Tangsem.Generator.WebMvc3Demo\bin\Tangsem.Generator.WebMvc3Demo.Common.dll" #>
-<#@ assembly name="D:\GitRepos\tangsem.suite\Tangsem.Suite\tests\web\Tangsem.Generator.WebMvc3Demo\bin\Tangsem.Generator.WebMvc3Demo.dll" #>
+<#@ assembly name="$(ProjectDir)\bin\Tangsem.Common.dll" #>
+<#@ assembly name="$(ProjectDir)\bin\Tangsem.Generator.WebMvc3Demo.Common.dll" #>
+<#@ assembly name="$(ProjectDir)\bin\Tangsem.Generator.WebMvc3Demo.dll" #>
 
 <#@ import namespace="System" #> 
 <#@ import namespace="System.Collections.Generic" #>
