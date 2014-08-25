@@ -22,9 +22,14 @@ namespace Tangsem.Generator.Settings
         var instance = (GeneratorConfiguration)xmlSer.Deserialize(stream);
         instance.Init();
 
+        instance.ConfigFilePath = filePath;
+
         return instance;
       }
     }
+
+    [XmlIgnore]
+    public string ConfigFilePath { get; private set; }
 
     [XmlAttribute]
     public bool GenRelationship { get; set; }
@@ -271,7 +276,7 @@ namespace Tangsem.Generator.Settings
 
       if (string.IsNullOrEmpty(this.OutputDir))
       {
-        this.OutputDir = Path.GetTempPath();
+        this.OutputDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
       }
 
       // convert to absolute path.

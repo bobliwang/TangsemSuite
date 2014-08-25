@@ -88,6 +88,10 @@ namespace Tangsem.Generator
              ".Designer.cs";
       File.WriteAllText(path, code);
       this.Log("Saved", path);
+
+      path = this.GeneratorConfiguration.IRepositoriesDirPath + "/" + this.GeneratorConfiguration.RepositoryName + ".xml";
+      File.WriteAllText(path, File.ReadAllText(this.GeneratorConfiguration.ConfigFilePath));
+      this.Log("Saved", path);
     }
 
     private void GenerateForSingleMetadataTemplate(List<TableMetadata> tableMetadatas)
