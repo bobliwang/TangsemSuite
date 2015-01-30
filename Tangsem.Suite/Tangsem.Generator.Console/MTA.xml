@@ -3,7 +3,7 @@
             ProjectName="AirloomMTAWebApp.Revamp.Common"
             OutputDir=""
             RepositoryName ="ReosRepository"
-            ConnectionString="Data Source=(local);Initial Catalog=REOS;Integrated Security=True"
+            ConnectionString="Data Source=(local);Initial Catalog=DEV22_REOS;Integrated Security=True"
             MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
             OpenOutputDirAfterGeneration="true"
             OrmFramework="NHibernate"
@@ -99,10 +99,17 @@
   <IncludeTable>v_ReportRoleMaps</IncludeTable>
   
   <IncludeTable>Settings</IncludeTable>
-
-  <IncludeTable>v_ReportRole_OptionalMaps</IncludeTable>
   
+	<IncludeTable>v_ReportRole_OptionalMaps</IncludeTable>
+  
+  <IncludeTable>v_CDAProducts</IncludeTable>
 
+  <IncludeTable>CDAs</IncludeTable>
+
+	<IncludeTable>v_Products</IncludeTable>
+  
+  <IncludeTable>ImageSettings</IncludeTable>
+  <IncludeTable>ReplSettings</IncludeTable>
 
 </GeneratorConfiguration>
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 using Tangsem.Common.DataAccess;
@@ -35,6 +36,40 @@ namespace Tangsem.Common.Extensions
       }
 
       return list;
+    }
+
+    public static List<T> MapTo<T>(this DataTable dataTable, params Tuple<Expression<Func<T, object>>, string>[] maps)
+    {
+      var list = new List<T>();
+
+      var propertyColumnMaps = maps.Select(x => new { PropertyInfo = x.Item1.GetPropertyInfo(), ColumnName = x.Item2 })
+          .Where(x => x.PropertyInfo.CanWrite)
+          .ToArray();
+
+      foreach (DataRow row in dataTable.Rows)
+      {
+        var t = Activator.CreateInstance<T>();
+
+        foreach (var map in propertyColumnMaps)
+        {
+          var val = row[map.ColumnName];
+          if (val == DBNull.Value)
+          {
+            val = null;
+          }
+
+          map.PropertyInfo.SetValue(t, val, null);
+        }
+
+        list.Add(t);
+      }
+
+      return list;
+    }
+
+    public static Tuple<Expression<Func<T, object>>, string> MapToProperty<T>(this string columnName, Expression<Func<T, object>> expr)
+    {
+      return new Tuple<Expression<Func<T, object>>, string>(expr, columnName);
     }
 
     public static List<T> MapTo<T>(this DataTable dataTable)

@@ -3,7 +3,7 @@
             ProjectName="AirloomMTAWebApp.Revamp.Common.SyncDB"
             OutputDir=""
             RepositoryName ="ReosSyncRepository"
-            ConnectionString="Data Source=(local)\SQLExpress;Initial Catalog=TEST2012_REOSSync;Integrated Security=True"
+            ConnectionString="Data Source=(local);Initial Catalog=DEV22_REOSSync;Integrated Security=True"
             MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
             OpenOutputDirAfterGeneration="true"
             OrmFramework="NHibernate"
