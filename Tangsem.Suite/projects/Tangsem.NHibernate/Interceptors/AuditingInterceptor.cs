@@ -43,7 +43,7 @@ namespace Tangsem.NHibernate.Interceptors
         {
           if (PN_CreatedTime == propertyNames[i])
           {
-            state[i] = DateTime.Now;
+            state[i] = DateTime.UtcNow;
           }
           else if (PN_CreatedById == propertyNames[i])
           {
@@ -69,7 +69,7 @@ namespace Tangsem.NHibernate.Interceptors
         {
           if (PN_ModifiedTime == propertyNames[i])
           {
-            currentState[i] = DateTime.Now;
+              currentState[i] = DateTime.UtcNow;
           }
           else if (PN_ModifiedById == propertyNames[i])
           {

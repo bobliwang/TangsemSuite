@@ -12,7 +12,7 @@ namespace Tangsem.Generator.Console
   {
     static void Main(string[] args)
     {
-      var path = @"MTASync.xml";
+        var path = @"O365Tasks.xml";
       //var path = @"MTA.xml";
 
       if (args != null && args.Length > 1)

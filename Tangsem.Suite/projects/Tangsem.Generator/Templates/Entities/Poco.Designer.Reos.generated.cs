@@ -180,7 +180,7 @@ WriteLiteral("      \r\n");
             #line hidden
 WriteLiteral("        ");
 
-WriteLiteral("\r\n        var now = DateTime.Now;\r\n        this.CreatedDate = now;\r\n        this." +
+WriteLiteral("\r\n        var now = DateTime.UtcNow;\r\n        this.CreatedDate = now;\r\n        this." +
 "ModifiedDate = now;\r\n        this.Active = true;\r\n        ");
 
 WriteLiteral("\r\n");

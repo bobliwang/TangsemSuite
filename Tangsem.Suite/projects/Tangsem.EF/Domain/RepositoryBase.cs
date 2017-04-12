@@ -176,7 +176,7 @@ namespace Tangsem.EF.Domain
           if (entry.State == EntityState.Added)
           {
             ae.CreatedById = this.CurrentUserId;
-            ae.CreatedTime = DateTime.Now;
+            ae.CreatedTime = DateTime.UtcNow;
 
             if (!ae.Active.HasValue)
             {
@@ -186,7 +186,7 @@ namespace Tangsem.EF.Domain
           else if (entry.State == EntityState.Modified)
           {
             ae.ModifiedById = this.CurrentUserId;
-            ae.ModifiedTime = DateTime.Now;
+            ae.ModifiedTime = DateTime.UtcNow;
           }
         }
       }

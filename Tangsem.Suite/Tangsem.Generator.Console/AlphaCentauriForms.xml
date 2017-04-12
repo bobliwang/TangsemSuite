@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<GeneratorConfiguration	
+            ProjectName="SharePointO365.WebHooks.POC.Common"
+            OutputDir=""
+            RepositoryName ="TaskRepository"
+            ConnectionString="Data Source=(local)\SQLExpress2014;Initial Catalog=O365Tasks;Integrated Security=True"
+            MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
+            OpenOutputDirAfterGeneration="true"
+            OrmFramework="NHibernate"
+            GenRelationship="false">
+    
+  <!-- MetadataBuilder: className[;assemblyName]  -->
+  <IgnoredTable>Sysdiagrams</IgnoredTable>
+
+    <IncludeTable>WorkflowInfo</IncludeTable>
+    <IncludeTable>TaskInfo</IncludeTable>
+    <IncludeTable>TaskForm</IncludeTable>
+    <IncludeTable>ChangeTokenHistory</IncludeTable>
+    <IncludeTable>WebhookInfo</IncludeTable>
+  
+
+</GeneratorConfiguration>
+
+
+<!--ConnectionString="Data Source=AIRLOOM-LEE\R2;Initial Catalog=BeiersdorfREOS;User=sa;Password=sa"-->

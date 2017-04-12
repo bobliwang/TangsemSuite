@@ -39,7 +39,7 @@ namespace @Configuration.EntityNamespace
       @if (TableMetadata.IsReosAuditableEntity)
       {
         <text>
-        var now = DateTime.Now;
+        var now = DateTime.UtcNow;
         this.CreatedDate = now;
         this.ModifiedDate = now;
         this.Active = true;
