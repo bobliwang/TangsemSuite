@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <GeneratorConfiguration	
-            ProjectName="TMobility.Common"
+            ProjectName="TMobi.Common"
             OutputDir=""
             RepositoryName ="TMobiRepository"
             ConnectionString="Data Source=.\SQLExpress;Initial Catalog=tmobi-express;Integrated Security=True"
@@ -17,7 +17,8 @@
     <IncludeTable>TaskForm</IncludeTable>
     <IncludeTable>ChangeTokenHistory</IncludeTable>
     <IncludeTable>WebhookInfo</IncludeTable>-->
-  
+
+    <!--<IncludeTable>Store</IncludeTable>-->
 
 </GeneratorConfiguration>
 

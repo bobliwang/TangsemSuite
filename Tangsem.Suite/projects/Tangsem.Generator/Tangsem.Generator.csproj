@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Templates\AspNetCore\PlaceHolder.txt" />
     <Content Include="Templates\MVC\Controllers\PlaceHolder.txt" />
     <Content Include="Templates\MVC\Models\PlaceHolder.txt" />
     <Content Include="Templates\MVC\Views\PlaceHolder.txt" />

@@ -98,7 +98,9 @@ namespace Tangsem.Generator
     {
       foreach (var tableMetadata in tableMetadatas)
       {
-        var pocoTemplate = new PocoReosTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
+        ////var pocoTemplate = new PocoReosTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
+        
+        var pocoTemplate = new PocoTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
 
         var entityCode = pocoTemplate.TransformText().Trim();
         var entityDesignerFilePath = this.GeneratorConfiguration.EntitiesDirPath + "/" + tableMetadata.EntityName + ".Designer.cs";
@@ -121,9 +123,6 @@ namespace Tangsem.Generator
           File.WriteAllText(entityMappingDesignerFilePath, mappingCode);
           this.Log("Saved", entityMappingDesignerFilePath);
         }
-
-
-
 
         var dtoTemplate = new PocoDTOTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
         var dtoCode = dtoTemplate.TransformText().Trim();
