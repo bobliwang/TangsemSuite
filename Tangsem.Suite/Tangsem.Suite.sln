@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "projects", "projects", "{E389CD07-467E-4882-A43A-CC82DEF974C0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{E389CD07-467E-4882-A43A-CC82DEF974C0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{66C189EB-AE87-4484-B935-09DA217537B8}"
 	ProjectSection(SolutionItems) = preProject
