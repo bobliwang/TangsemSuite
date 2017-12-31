@@ -75,14 +75,14 @@ namespace Tangsem.Generator
       string path;
       RazorTemplateBase template = null;
 
-      template = new Repository_Designer { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
+      template = new RepositoryClassTemplate { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
       code = template.TransformText().Trim();
       path = this.GeneratorConfiguration.IRepositoriesDirPath + "/" + this.GeneratorConfiguration.OrmType.AsNamespacePart() +  "/" + this.GeneratorConfiguration.RepositoryName +
              ".Designer.cs";
       File.WriteAllText(path, code);
       this.Log("Saved", path);
 
-      template = new IRepository_Designer { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
+      template = new RepositoryInterfaceTemplate { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
       code = template.TransformText().Trim();
       path = this.GeneratorConfiguration.IRepositoriesDirPath + "/I" + this.GeneratorConfiguration.RepositoryName +
              ".Designer.cs";
@@ -98,7 +98,7 @@ namespace Tangsem.Generator
     {
       foreach (var tableMetadata in tableMetadatas)
       {
-        var pocoTemplate = new Poco_Designer_Reos { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
+        var pocoTemplate = new PocoReosTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
 
         var entityCode = pocoTemplate.TransformText().Trim();
         var entityDesignerFilePath = this.GeneratorConfiguration.EntitiesDirPath + "/" + tableMetadata.EntityName + ".Designer.cs";
@@ -107,7 +107,7 @@ namespace Tangsem.Generator
 
         if (this.GeneratorConfiguration.OrmType == OrmTypes.NHibernate)
         {
-          var mappingTemplate = new Poco_NHibernate_Fluent_Designer { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
+          var mappingTemplate = new NHibernateFluentTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
           var mappingCode = mappingTemplate.TransformText().Trim();
           var entityMappingDesignerFilePath = this.GeneratorConfiguration.MappingDirPath + "/" + tableMetadata.EntityName + "Map.Designer.cs";
           File.WriteAllText(entityMappingDesignerFilePath, mappingCode);
@@ -115,7 +115,7 @@ namespace Tangsem.Generator
         }
         else
         {
-          var mappingTemplate = new Poco_EF_Fluent_Designer { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
+          var mappingTemplate = new EntityFxFluentTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
           var mappingCode = mappingTemplate.TransformText().Trim();
           var entityMappingDesignerFilePath = this.GeneratorConfiguration.MappingDirPath + "/" + tableMetadata.EntityName + "Map.Designer.cs";
           File.WriteAllText(entityMappingDesignerFilePath, mappingCode);
@@ -125,7 +125,7 @@ namespace Tangsem.Generator
 
 
 
-        var dtoTemplate = new Poco_DTO_Designer { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
+        var dtoTemplate = new PocoDTOTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
         var dtoCode = dtoTemplate.TransformText().Trim();
         var dtoDesignerFilePath = this.GeneratorConfiguration.DTODirPath + "/" + tableMetadata.EntityName + "DTO.Designer.cs";
         File.WriteAllText(dtoDesignerFilePath, dtoCode);
