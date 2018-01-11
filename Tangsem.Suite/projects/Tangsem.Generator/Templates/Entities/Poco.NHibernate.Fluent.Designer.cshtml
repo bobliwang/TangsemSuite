@@ -30,7 +30,7 @@ namespace @(Configuration.MappingNamespace)
       this.Schema("@(TableMetadata.Schema)");
       </text>}
 
-			this.Table("@(TableMetadata.Name)");
+			this.Table("[@(TableMetadata.Name)]");
 			
 			@if(TableMetadata.IsView)
 			{<text>

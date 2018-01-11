@@ -144,17 +144,17 @@ WriteLiteral("\");\r\n      ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n\t\t\tthis.Table(\"");
+WriteLiteral("\r\n\t\t\tthis.Table(\"[");
 
 
             
             #line 33 "..\..\Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml"
-           Write(TableMetadata.Name);
+            Write(TableMetadata.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("\");\r\n\t\t\t\r\n");
+WriteLiteral("]\");\r\n\t\t\t\r\n");
 
 
             
