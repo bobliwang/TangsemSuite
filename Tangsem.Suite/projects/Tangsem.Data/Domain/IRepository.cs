@@ -100,5 +100,9 @@ namespace Tangsem.Data.Domain
     /// Gets or sets current user id.
     /// </summary>
     int? CurrentUserId { get; set; }
+
+    void Refresh<T>(T entity) where T : class;
+
+    void Clear();
   }
 }
