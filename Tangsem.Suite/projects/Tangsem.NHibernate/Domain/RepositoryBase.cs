@@ -216,6 +216,14 @@ namespace Tangsem.NHibernate.Domain
       this.CurrentSession.Clear();
     }
 
+    public bool IsInTransaction
+    {
+      get
+      {
+        return this.Transaction != null && this.Transaction.IsActive;
+      }
+    }
+
     /// <summary>
     /// Gets or sets current user id.
     /// </summary>

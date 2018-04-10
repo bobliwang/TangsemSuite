@@ -44,6 +44,14 @@ namespace Tangsem.EF.Domain
     /// </summary>
     public DbContext CurrentDbContext { get; set; }
 
+    public bool IsInTransaction
+    {
+      get
+      {
+        return false;
+      }
+    }
+
     public void Dispose()
     {
       this.Dispose(true);

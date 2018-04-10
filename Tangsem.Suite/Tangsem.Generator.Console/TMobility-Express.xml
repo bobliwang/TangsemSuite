@@ -3,7 +3,7 @@
             ProjectName="TMobi.Common"
             OutputDir=""
             RepositoryName ="TMobiRepository"
-            ConnectionString="Data Source=.\SQLExpress;Initial Catalog=tmobi-express;Integrated Security=True"
+            ConnectionString="Data Source=.\SQLExpress;Initial Catalog=tmobi-dev;Integrated Security=True"
             MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
             OpenOutputDirAfterGeneration="true"
             OrmFramework="NHibernate"

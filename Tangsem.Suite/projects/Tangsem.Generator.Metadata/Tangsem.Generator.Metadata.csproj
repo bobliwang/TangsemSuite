@@ -52,12 +52,13 @@
     <Compile Include="ColumnPair.cs" />
     <Compile Include="ColumnsContainer.cs" />
     <Compile Include="DbTypeMapper.cs" />
+    <Compile Include="RawInfos\ExtraColumnMeta.cs" />
     <Compile Include="RawInfos\RawColumn.cs" />
     <Compile Include="RawInfos\RawKey.cs" />
     <Compile Include="RawInfos\RawInfoCache.cs" />
     <Compile Include="RawInfos\RawReference.cs" />
     <Compile Include="RawInfos\RawTable.cs" />
-    <Compile Include="RawInfos\ReferenceMeta.cs" />
+    <Compile Include="RawInfos\ExtraReferenceMeta.cs" />
     <Compile Include="UniqueKeyMetadata.cs" />
     <Compile Include="Builder\MetadataBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

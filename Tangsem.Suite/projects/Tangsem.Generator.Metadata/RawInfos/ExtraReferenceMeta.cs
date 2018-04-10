@@ -1,6 +1,6 @@
 ﻿namespace Tangsem.Generator.Metadata.RawInfos
 {
-    public class ReferenceMeta
+    public class ExtraReferenceMeta
     {
         public HandleMany Many { get; set; }
     }

@@ -104,5 +104,7 @@ namespace Tangsem.Data.Domain
     void Refresh<T>(T entity) where T : class;
 
     void Clear();
+
+    bool IsInTransaction { get; }
   }
 }

@@ -22,6 +22,6 @@ namespace Tangsem.Generator.Metadata.RawInfos
         [PropertyColumn("RawComment")]
         public string RawComment { get; set; }
 
-        public dynamic CommentObject { get; set; }
+        public dynamic ExtraMetadata { get; set; }
     }
 }

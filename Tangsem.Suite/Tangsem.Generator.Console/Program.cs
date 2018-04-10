@@ -12,16 +12,15 @@ namespace Tangsem.Generator.Console
   {
     static void Main(string[] args)
     {
-        var path = @"TMobility-Express.xml";
-      //var path = @"MTA.xml";
+      var path = @"TMobility-Express.xml";
 
-      if (args != null && args.Length > 1)
+      if (args != null && args.Length > 0)
       {
         path = args[0];
       }
 
       var gen = new Gen(GeneratorConfiguration.FromFile(path));
-      gen.Run();  
+      gen.Run();
     }
   }
 }

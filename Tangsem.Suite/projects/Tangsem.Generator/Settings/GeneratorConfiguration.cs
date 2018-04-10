@@ -276,7 +276,7 @@ namespace Tangsem.Generator.Settings
 
       if (string.IsNullOrEmpty(this.OutputDir))
       {
-        this.OutputDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        this.OutputDir = Path.Combine(Path.GetTempPath(), "TangsemCodeGen", $"{this.ProjectName}_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}");
       }
 
       // convert to absolute path.
