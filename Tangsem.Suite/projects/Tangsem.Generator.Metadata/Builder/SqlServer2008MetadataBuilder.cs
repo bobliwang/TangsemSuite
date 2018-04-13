@@ -34,11 +34,20 @@ namespace Tangsem.Generator.Metadata.Builder
                      col.TABLE_NAME [ChildTable],
                      col.COLUMN_NAME [ChildColumn],
                      pk.TABLE_NAME [ParentTable],
-                     pk.COLUMN_NAME [ParentColumn]
+                     pk.COLUMN_NAME [ParentColumn],
+                     RawComment = meta.Value
                 FROM 
                      INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE col
                      JOIN INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS ref ON col.CONSTRAINT_NAME = ref.CONSTRAINT_NAME
                      JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE pk ON pk.CONSTRAINT_NAME = ref.UNIQUE_CONSTRAINT_NAME
+                     OUTER APPLY (
+						SELECT
+                        TOP 1 *
+                        FROM
+                        fn_listextendedproperty(NULL, 'schema', 'dbo', 'table', col.TABLE_NAME, 'CONSTRAINT', default)
+                        WHERE col.CONSTRAINT_NAME collate SQL_Latin1_General_CP1_CI_AS
+                            = objname collate SQL_Latin1_General_CP1_CI_AS 
+					 ) AS meta
                 WHERE
                      col.TABLE_NAME = @TableName OR pk.TABLE_NAME = @TableName OR @TableName IS NULL";
       }
@@ -100,8 +109,16 @@ namespace Tangsem.Generator.Metadata.Builder
                      ,[IsComputed] = ISNULL(CAST(COLUMNPROPERTY(OBJECT_ID(col.TABLE_NAME), col.COLUMN_NAME, 'IsComputed') AS BIT), 0)
                      ,[IsPrimaryKey] = CAST((CASE WHEN pk.TABLE_NAME IS NULL Then 0 ELSE 1 END) AS BIT)
                      ,[DefaultValueExpr] = col.[COLUMN_DEFAULT]
+                     ,[Description] = meta.value
               FROM INFORMATION_SCHEMA.COLUMNS AS col
-			  LEFT JOIN PrimaryKeys pk ON pk.TABLE_NAME = col.TABLE_NAME AND pk.COLUMN_NAME = col.COLUMN_NAME              
+			        LEFT JOIN PrimaryKeys pk ON pk.TABLE_NAME = col.TABLE_NAME AND pk.COLUMN_NAME = col.COLUMN_NAME              
+              OUTER APPLY (
+						    SELECT
+                            TOP 1 *
+                            FROM
+                            fn_listextendedproperty(NULL, 'schema', 'dbo', 'table', col.TABLE_NAME, 'column', col.COLUMN_NAME)
+						                WHERE name = 'MS_Description'
+					    ) AS meta
               WHERE (@TableName IS NULL OR col.TABLE_NAME = @TableName)
               ORDER BY col.TABLE_NAME, col.ORDINAL_POSITION";
       }

@@ -14,6 +14,8 @@ using System.Linq;
 
 using FluentNHibernate.Mapping;
 
+using Tangsem.NHibernate.UserTypes;
+
 namespace @(Configuration.MappingNamespace)
 {
 	/// <summary>
@@ -92,11 +94,24 @@ namespace @(Configuration.MappingNamespace)
 		{
 			@foreach (var col in @TableMetadata.Columns.Where(c => (!c.IsOutgoingRefKey || !Configuration.GenRelationship ) && !c.IsPrimaryKey))
 			{<text>
-       // @(col.ColumnName)
-		   this.Map(x => x.@(col.PropertyName)).Column("@(col.ColumnName)")
-			   @if (col.ClrType == typeof(string)) { <text>.Length(@(col.ColumnSize > 0 ? col.ColumnSize.ToString() : "int.MaxValue"))</text> }
-			   @if (!col.Nullable) { <text>.Not.Nullable()</text>}
+			   
+			   // @(col.ColumnName)
+       @if(col.ExtraColumnMeta == null || string.IsNullOrWhiteSpace(col.ExtraColumnMeta.JsonType))
+       {<text>
+         
+         this.Map(x => x.@(col.PropertyName)).Column("@(col.ColumnName)")
+
+         @if (col.ClrType == typeof(string)) { <text>.Length(@(col.ColumnSize > 0 ? col.ColumnSize.ToString() : "int.MaxValue"))</text> }
+         @if (!col.Nullable) { <text>.Not.Nullable()</text>}
          @if (col.ReadOnly){ <text>.ReadOnly()</text>};
+        </text>}
+       else
+       {
+         <text>
+         this.Map(x => x.@(col.PropertyName)).Column("@(col.ColumnName)").CustomType<JsonType<@col.ExtraColumnMeta.JsonType>>()
+         @if (!col.Nullable) { <text>.Not.Nullable()</text>}
+         @if (col.ReadOnly){ <text>.ReadOnly()</text>};
+        </text>}
 
 			 </text>}
 		}

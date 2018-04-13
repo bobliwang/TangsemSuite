@@ -69,11 +69,19 @@ namespace @Configuration.EntityNamespace
         </text>}
       }
     }
-
+  
+    @foreach (var col in @TableMetadata.Columns.Where(c => (c.ExtraColumnMeta != null && !string.IsNullOrWhiteSpace(c.ExtraColumnMeta.JsonType)) && (!c.IsOutgoingRefKey || !Configuration.GenRelationship)))
+    {<text>
+    /// <summary>
+    /// Property @col.PropertyName mapping to @(TableMetadata.Name).@(col.ColumnName). JSON COLUMN!
+    /// </summary>
+    [JsonProperty("@(col.PropertyName.LowerFirst())")]   
+    public virtual @col.ExtraColumnMeta.JsonType @col.PropertyName { get; set; }
+    </text>}
 
     #region "Basic Columns"
 
-    @foreach (var col in @TableMetadata.Columns.Where(c => !c.IsOutgoingRefKey || !Configuration.GenRelationship))
+    @foreach (var col in @TableMetadata.Columns.Where(c => (c.ExtraColumnMeta == null || string.IsNullOrWhiteSpace(c.ExtraColumnMeta.JsonType)) && (!c.IsOutgoingRefKey || !Configuration.GenRelationship)))
     {<text>
     /// <summary>
     /// Property @col.PropertyName mapping to @(TableMetadata.Name).@(col.ColumnName)
@@ -81,7 +89,7 @@ namespace @Configuration.EntityNamespace
     [JsonProperty("@(col.PropertyName.LowerFirst())")]   
     public virtual @col.CSharpTypeAsString @col.PropertyName { get; set; }
     </text>}
-    
+
     #endregion
     
     #region "Outgoing References"

@@ -98,7 +98,7 @@ WriteLiteral("DTO()\r\n\t\t{\r\n\t\t}\r\n\r\n");
 
             
             #line 26 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
- 		foreach (var col in @TableMetadata.Columns)
+ 		foreach (var col in @TableMetadata.Columns.Where(c => c.ExtraColumnMeta == null || string.IsNullOrWhiteSpace(c.ExtraColumnMeta.JsonType)))
 		{
             
             #line default
@@ -159,6 +159,76 @@ WriteLiteral(" { get; set; }\r\n\t\t");
             
             #line 32 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
          }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+
+            
+            #line 34 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+     foreach (var col in @TableMetadata.Columns.Where(c => c.ExtraColumnMeta != null && !string.IsNullOrWhiteSpace(c.ExtraColumnMeta.JsonType)))
+    {
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n    /// <summary>\r\n    /// Property ");
+
+
+            
+            #line 37 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+            Write(col.PropertyName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" mapping to ");
+
+
+            
+            #line 37 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+                                          Write(TableMetadata.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(".");
+
+
+            
+            #line 37 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+                                                                Write(col.ColumnName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(". JSON Object!\r\n    /// </summary>\r\n    public virtual ");
+
+
+            
+            #line 39 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+              Write(col.ExtraColumnMeta.JsonType);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+
+            
+            #line 39 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+                                            Write(col.PropertyName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" { get; set; }\r\n    ");
+
+
+            
+            #line 40 "..\..\Templates\Entities\Poco.DTO.Designer.cshtml"
+           }
 
             
             #line default

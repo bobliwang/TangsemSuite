@@ -23,13 +23,21 @@ namespace @(Configuration.DTONamespace)
 		{
 		}
 
-		@foreach (var col in @TableMetadata.Columns)
+		@foreach (var col in @TableMetadata.Columns.Where(c => c.ExtraColumnMeta == null || string.IsNullOrWhiteSpace(c.ExtraColumnMeta.JsonType)))
 		{<text>
 		/// <summary>
 		/// Property @col.PropertyName mapping to @(TableMetadata.Name).@(col.ColumnName)
 		/// </summary>
 		public virtual @col.CSharpTypeAsString @col.PropertyName { get; set; }
 		</text>}
+
+    @foreach (var col in @TableMetadata.Columns.Where(c => c.ExtraColumnMeta != null && !string.IsNullOrWhiteSpace(c.ExtraColumnMeta.JsonType)))
+    {<text>
+    /// <summary>
+    /// Property @col.PropertyName mapping to @(TableMetadata.Name).@(col.ColumnName). JSON Object!
+    /// </summary>
+    public virtual @col.ExtraColumnMeta.JsonType @col.PropertyName { get; set; }
+    </text>}
 
 	}
 }

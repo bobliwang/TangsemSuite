@@ -206,6 +206,24 @@ namespace Tangsem.NHibernate.Domain
       this.Transaction = this.CurrentSession.BeginTransaction(isolationLevel);
     }
 
+    public void Refresh<T>(T entity) where T : class
+    {
+      this.CurrentSession.Refresh(entity);
+    }
+
+    public void Clear()
+    {
+      this.CurrentSession.Clear();
+    }
+
+    public bool IsInTransaction
+    {
+      get
+      {
+        return this.Transaction != null && this.Transaction.IsActive;
+      }
+    }
+
     /// <summary>
     /// Gets or sets current user id.
     /// </summary>

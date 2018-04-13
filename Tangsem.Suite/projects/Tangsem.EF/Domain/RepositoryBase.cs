@@ -44,6 +44,14 @@ namespace Tangsem.EF.Domain
     /// </summary>
     public DbContext CurrentDbContext { get; set; }
 
+    public bool IsInTransaction
+    {
+      get
+      {
+        return false;
+      }
+    }
+
     public void Dispose()
     {
       this.Dispose(true);
@@ -227,6 +235,25 @@ namespace Tangsem.EF.Domain
     /// Gets or sets current user id.
     /// </summary>
     public int? CurrentUserId { get; set; }
+
+    public void Refresh<T>(T entity) where T : class
+    {
+      this.CurrentDbContext.Entry(entity).Reload();
+    }
+
+    public void Clear()
+    {
+      // https://stackoverflow.com/questions/27423059/how-do-i-clear-tracked-entities-in-entity-framework
+      var changedEntriesCopy = this.CurrentDbContext.ChangeTracker.Entries()
+        .Where(e => e.State == EntityState.Added ||
+                    e.State == EntityState.Modified ||
+                    e.State == EntityState.Deleted).ToList();
+
+      foreach (var entity in changedEntriesCopy)
+      {
+        this.CurrentDbContext.Entry(entity.Entity).State = EntityState.Detached;
+      }
+    }
 
     protected virtual void Dispose(bool disposing)
     {

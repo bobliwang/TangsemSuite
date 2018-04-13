@@ -218,5 +218,7 @@ namespace Tangsem.Generator.Metadata
         return TableMetadata.AuditingPropertyInfos.ToList().Any(x => x.Name == this.PropertyName);
       }
     }
+
+    public ExtraColumnMeta ExtraColumnMeta { get; set; }
   }
 }

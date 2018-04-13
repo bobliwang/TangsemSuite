@@ -34,6 +34,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,11 +52,13 @@
     <Compile Include="ColumnPair.cs" />
     <Compile Include="ColumnsContainer.cs" />
     <Compile Include="DbTypeMapper.cs" />
+    <Compile Include="RawInfos\ExtraColumnMeta.cs" />
     <Compile Include="RawInfos\RawColumn.cs" />
     <Compile Include="RawInfos\RawKey.cs" />
     <Compile Include="RawInfos\RawInfoCache.cs" />
     <Compile Include="RawInfos\RawReference.cs" />
     <Compile Include="RawInfos\RawTable.cs" />
+    <Compile Include="RawInfos\ExtraReferenceMeta.cs" />
     <Compile Include="UniqueKeyMetadata.cs" />
     <Compile Include="Builder\MetadataBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +80,9 @@
       <Project>{A5DAFCC5-6AC6-4805-B7CA-A351084654CA}</Project>
       <Name>Tangsem.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
