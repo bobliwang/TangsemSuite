@@ -111,12 +111,13 @@ namespace Tangsem.Generator.Metadata.Builder
                      ,[DefaultValueExpr] = col.[COLUMN_DEFAULT]
                      ,[Description] = meta.value
               FROM INFORMATION_SCHEMA.COLUMNS AS col
-			        LEFT JOIN PrimaryKeys pk ON pk.TABLE_NAME = col.TABLE_NAME AND pk.COLUMN_NAME = col.COLUMN_NAME              
+              INNER JOIN INFORMATION_SCHEMA.TABLES AS tbl ON col.TABLE_NAME = tbl.TABLE_NAME
+			        LEFT JOIN PrimaryKeys pk ON pk.TABLE_NAME = col.TABLE_NAME AND pk.COLUMN_NAME = col.COLUMN_NAME
               OUTER APPLY (
 						    SELECT
                             TOP 1 *
                             FROM
-                            fn_listextendedproperty(NULL, 'schema', 'dbo', 'table', col.TABLE_NAME, 'column', col.COLUMN_NAME)
+                            fn_listextendedproperty(NULL, 'schema', 'dbo', CASE WHEN tbl.TABLE_TYPE = 'BASE TABLE' THEN 'table' ELSE 'view' END, col.TABLE_NAME, 'column', col.COLUMN_NAME)
 						                WHERE name = 'MS_Description'
 					    ) AS meta
               WHERE (@TableName IS NULL OR col.TABLE_NAME = @TableName)
