@@ -12,6 +12,7 @@ using NHibernate.Type;
 using Tangsem.Common.Entities;
 using Tangsem.Common.Entities.Reos;
 using Tangsem.Common.Extensions;
+using Tangsem.Data.Domain;
 
 namespace Tangsem.NHibernate.Interceptors
 {
@@ -110,7 +111,19 @@ namespace Tangsem.NHibernate.Interceptors
         private static readonly string PN_ModifiedById = Expr_ModifiedById.GetPropertyInfo().Name;
         private static readonly string PN_Active = Expr_Active.GetPropertyInfo().Name;
 
-        public int? CurrentUserId { get; set; }
+
+        public IDataContext DataContext { get; set; }
+
+        public AuditingInterceptor()
+        {
+        }
+
+        public AuditingInterceptor(IDataContext dataContext)
+        {
+            this.DataContext = dataContext;
+        }
+
+        public int? CurrentUserId => this.DataContext?.CurrentUserId;
 
         public override bool OnSave(object entity, object id, object[] state, string[] propertyNames, IType[] types)
         {

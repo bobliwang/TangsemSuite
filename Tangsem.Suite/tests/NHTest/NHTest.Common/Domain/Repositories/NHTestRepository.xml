@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<GeneratorConfiguration	
+            ProjectName="NHTest.Common"
+            OutputDir=""
+            RepositoryName ="NHTestRepository"
+            ConnectionString="Data Source=.\SQLExpress;Initial Catalog=test;Integrated Security=True"
+            MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
+            OpenOutputDirAfterGeneration="true"
+            OrmFramework="NHibernate"
+            GenRelationship="true">
+    
+  <!-- MetadataBuilder: className[;assemblyName]  -->
+  <IgnoredTable>Sysdiagrams</IgnoredTable>
+
+    <!--<IncludeTable>WorkflowInfo</IncludeTable>
+    <IncludeTable>TaskInfo</IncludeTable>
+    <IncludeTable>TaskForm</IncludeTable>
+    <IncludeTable>ChangeTokenHistory</IncludeTable>
+    <IncludeTable>WebhookInfo</IncludeTable>-->
+
+    <!--<IncludeTable>Store</IncludeTable>-->
+
+</GeneratorConfiguration>
+
+
+<!--ConnectionString="Data Source=AIRLOOM-LEE\R2;Initial Catalog=BeiersdorfREOS;User=sa;Password=sa"-->

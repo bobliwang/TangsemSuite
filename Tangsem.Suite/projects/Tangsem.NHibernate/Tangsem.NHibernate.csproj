@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extenstions\IQueryableExtensions.cs" />
+    <Compile Include="Extenstions\LinqFunctionExtensions.cs" />
     <Compile Include="Interceptors\AuditingInterceptor.cs" />
     <Compile Include="Service\NhEntityServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

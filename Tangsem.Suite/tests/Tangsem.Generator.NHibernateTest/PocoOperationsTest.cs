@@ -17,6 +17,7 @@ using NHibernate.Linq;
 
 using Tangsem.Common.Entities;
 using Tangsem.Common.Extensions.Linq;
+using Tangsem.Data.Domain;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Entities;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories;
 using Tangsem.Generator.WebMvc3Demo.Common.Domain.Repositories.NHibernate;
@@ -25,6 +26,11 @@ using Tangsem.NHibernate.Interceptors;
 
 namespace Tangsem.Generator.NHibernateTest
 {
+  public class DummyWorkContext: IDataContext
+  {
+    public int CurrentUserId { get; set; }
+  }
+
   [TestClass]
   public class PocoOperationsTest
   {
@@ -314,7 +320,7 @@ namespace Tangsem.Generator.NHibernateTest
     /// <returns>The repository.</returns>
     private IMyRepository CreateRepository()
     {
-      var ai = new AuditingInterceptor { CurrentUserId = CurrentUserId };
+      var ai = new AuditingInterceptor();
       var session = this.SessionFactory.OpenSession(ai);
       //return new MyRepository { CurrentSession = session };
 

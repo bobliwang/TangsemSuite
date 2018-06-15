@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\IDataContext.cs" />
     <Compile Include="Domain\IRepository.cs" />
     <Compile Include="Domain\RepositoryContext.cs" />
     <Compile Include="Service\EntityServiceBase.cs" />
