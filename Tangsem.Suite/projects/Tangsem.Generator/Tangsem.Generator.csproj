@@ -53,6 +53,17 @@
     <Compile Include="Settings\GeneratorConfiguration.cs" />
     <Compile Include="Settings\OrmTypeExtensions.cs" />
     <Compile Include="Settings\OrmTypes.cs" />
+    <Compile Include="Templates\Angular\ApiService.generated.cs">
+      <DependentUpon>ApiService.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Angular\Model.generated.cs">
+      <DependentUpon>Model.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Angular\ModelTemplate.cs" />
     <Compile Include="Templates\Entities\EntityFxFluentTemplate.cs" />
     <Compile Include="Templates\Entities\NHibernateFluentTemplate.cs" />
     <Compile Include="Templates\Entities\Poco.Designer.Reos.generated.cs">
@@ -100,6 +111,14 @@
     <Compile Include="Templates\TemplateBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\Angular\ApiService.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ApiService.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Angular\Model.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Model.generated.cs</LastGenOutput>
+    </None>
     <None Include="Templates\Entities\Poco.Designer.Reos.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Poco.Designer.Reos.generated.cs</LastGenOutput>

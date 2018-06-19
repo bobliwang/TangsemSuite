@@ -10,6 +10,7 @@ using RazorGenerator.Templating;
 using Tangsem.Generator.Metadata;
 using Tangsem.Generator.Metadata.Builder;
 using Tangsem.Generator.Settings;
+using Tangsem.Generator.Templates.Angular;
 using Tangsem.Generator.Templates.Entities;
 using Tangsem.Generator.Templates.Repositories;
 
@@ -92,6 +93,8 @@ namespace Tangsem.Generator
       path = this.GeneratorConfiguration.IRepositoriesDirPath + "/" + this.GeneratorConfiguration.RepositoryName + ".xml";
       File.WriteAllText(path, File.ReadAllText(this.GeneratorConfiguration.ConfigFilePath));
       this.Log("Saved", path);
+
+      this.NgGenMultiple(tableMetadatas);
     }
 
     private void GenerateForSingleMetadataTemplate(List<TableMetadata> tableMetadatas)
@@ -129,7 +132,33 @@ namespace Tangsem.Generator
         var dtoDesignerFilePath = this.GeneratorConfiguration.DTODirPath + "/" + tableMetadata.EntityName + "DTO.Designer.cs";
         File.WriteAllText(dtoDesignerFilePath, dtoCode);
         this.Log("Saved", dtoDesignerFilePath);
+
+
+
+        this.NgGenSingle(tableMetadata);
       }
+    }
+
+    private void NgGenSingle(TableMetadata tableMetadata)
+    {
+      var angularModelTemplate =
+        new ModelTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
+      var angularModelCode = angularModelTemplate.TransformText().Trim();
+      var angularModelDesignerFilePath =
+        this.GeneratorConfiguration.NgModelsFolder + "/" + tableMetadata.EntityName + "Model.ts";
+      File.WriteAllText(angularModelDesignerFilePath, angularModelCode);
+      this.Log("Saved", angularModelDesignerFilePath);
+    }
+
+    private void NgGenMultiple(List<TableMetadata> tableMetadatas)
+    {
+      RazorTemplateBase template = null;
+
+      template = new ApiServiceTemplate { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
+      var code = template.TransformText().Trim();
+     var  path = this.GeneratorConfiguration.NgServicesFolder + "/api.service.ts";
+      File.WriteAllText(path, code);
+      this.Log("Saved", path);
     }
 
     private void Log(string title, string message = "")

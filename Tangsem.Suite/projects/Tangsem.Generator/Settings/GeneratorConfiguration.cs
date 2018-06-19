@@ -158,6 +158,47 @@ namespace Tangsem.Generator.Settings
       }
     }
 
+    public string NgAppFolder
+    {
+      get
+      {
+        return Path.Combine(this.OutputDir, "ng-app");
+      }
+    }
+
+    /// <summary>
+    /// Gets DTODirPath.
+    /// </summary>
+    public string NgModelsFolder
+    {
+      get
+      {
+        return Path.Combine(this.NgAppFolder, "models");
+      }
+    }
+
+    /// <summary>
+    /// Gets DTODirPath.
+    /// </summary>
+    public string NgServicesFolder
+    {
+      get
+      {
+        return Path.Combine(this.NgAppFolder, "services");
+      }
+    }
+
+    /// <summary>
+    /// Gets DTODirPath.
+    /// </summary>
+    public string NgComponentsFolder
+    {
+      get
+      {
+        return Path.Combine(this.NgAppFolder, "autogen-components");
+      }
+    }
+
     /// <summary>
     /// Gets IRepositoriesDirPath.
     /// </summary>
@@ -293,12 +334,19 @@ namespace Tangsem.Generator.Settings
 
       // create dto dir if it doesn't exist.
       this.CreateDirIfNotExists(this.DTODirPath);
-
+      
       // create interface repositories dir if it doesn't exist.
       this.CreateDirIfNotExists(this.IRepositoriesDirPath);
 
       // create repositories dir if it doesn't exist.
       this.CreateDirIfNotExists(this.RepositoriesDirPath);
+
+
+      // Angular Related
+      this.CreateDirIfNotExists(this.NgAppFolder);
+      this.CreateDirIfNotExists(this.NgModelsFolder);
+      this.CreateDirIfNotExists(this.NgComponentsFolder);
+      this.CreateDirIfNotExists(this.NgServicesFolder);
     }
 
     /// <summary>
