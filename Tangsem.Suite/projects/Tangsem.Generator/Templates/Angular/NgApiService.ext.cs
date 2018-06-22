@@ -7,12 +7,19 @@ namespace Tangsem.Generator.Templates.Angular
 {
   public partial class NgApiService: IMultipleTableMetadataTemplate
   {
-    public NgApiService()
+    public NgApiService(GeneratorConfiguration configuration, List<TableMetadata> tableMetadatas)
     {
+      this.Configuration = configuration;
+      this.TableMetadatas = tableMetadatas;
     }
 
     public List<TableMetadata> TableMetadatas { get; set; }
 
     public GeneratorConfiguration Configuration { get; set; }
+
+    public string GetPathToSave(GeneratorConfiguration genConfig)
+    {
+      return this.Configuration.NgServicesFolder + "/api.service.ts";
+    }
   }
 }

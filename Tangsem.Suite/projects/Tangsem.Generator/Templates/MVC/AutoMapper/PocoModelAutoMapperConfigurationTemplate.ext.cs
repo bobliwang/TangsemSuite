@@ -15,6 +15,12 @@ namespace Tangsem.Generator.Templates.MVC.AutoMapper
 
     public GeneratorConfiguration Configuration { get; set; }
 
+
     public List<TableMetadata> TableMetadatas { get; set; }
+    
+    public string GetPathToSave(GeneratorConfiguration genConfig)
+    {
+      return this.Configuration.AutoMappingConfigsDirPath + "/AutoMapperProfile.Designer.cs";
+    }
   }
 }

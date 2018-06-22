@@ -5,14 +5,19 @@ namespace Tangsem.Generator.Templates.MVC.AutoMapper
 {
   public partial class PocoModelAutoMapperProfileTemplate : ISingleTableMetadataTemplate
   {
+    public PocoModelAutoMapperProfileTemplate(GeneratorConfiguration configuration, TableMetadata tableMetadata)
+    {
+      this.Configuration = configuration;
+      this.TableMetadata = tableMetadata;
+    }
+
     public TableMetadata TableMetadata { get; set; }
 
     public GeneratorConfiguration Configuration { get; set; }
 
-    public PocoModelAutoMapperProfileTemplate(TableMetadata tableMetadata, GeneratorConfiguration configuration)
+    public string GetPathToSave(GeneratorConfiguration genConfig)
     {
-      this.TableMetadata = tableMetadata;
-      this.Configuration = configuration;
+      return this.Configuration.AutoMappingConfigsDirPath + "/" + this.TableMetadata.EntityName + "MapperProfile.Designer.cs";
     }
   }
 }

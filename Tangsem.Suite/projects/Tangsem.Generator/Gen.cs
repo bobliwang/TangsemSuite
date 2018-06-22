@@ -14,6 +14,7 @@ using Tangsem.Generator.Templates;
 using Tangsem.Generator.Templates.Angular;
 using Tangsem.Generator.Templates.Entities;
 using Tangsem.Generator.Templates.MVC.AutoMapper;
+using Tangsem.Generator.Templates.MVC.Controllers;
 using Tangsem.Generator.Templates.Repositories;
 
 namespace Tangsem.Generator
@@ -52,8 +53,12 @@ namespace Tangsem.Generator
                   .CachedTableMetadata
                   .Values
                   .Where(x => !this.GeneratorConfiguration.IgnoredTables.Any(y => x.Name.Equals(y, StringComparison.CurrentCultureIgnoreCase)))
-                  .Where(x => this.GeneratorConfiguration.IncludeTables == null || !this.GeneratorConfiguration.IncludeTables.Any() || this.GeneratorConfiguration.IncludeTables.Any(it => it.Equals(x.Name, StringComparison.InvariantCultureIgnoreCase)))
+                  .Where(x => this.GeneratorConfiguration.IncludeTables == null
+                              || !this.GeneratorConfiguration.IncludeTables.Any()
+                              || this.GeneratorConfiguration.IncludeTables.Any(it => it.Equals(x.Name, StringComparison.InvariantCultureIgnoreCase)))
                   .ToList();
+
+
       var pairs = string.Join(",", tableMetadatas.Select(x => string.Format("[{0}:{1}]", x.Name, x.EntityName)));
       this.Log("List of Metadata to generate code from", pairs);
 
@@ -67,116 +72,80 @@ namespace Tangsem.Generator
 
       if (this.GeneratorConfiguration.OpenOutputDirAfterGeneration)
       {
-        Log("Openning Directory", this.GeneratorConfiguration.ProjectDirPath);
+        this.Log("Openning Directory", this.GeneratorConfiguration.ProjectDirPath);
         Process.Start(this.GeneratorConfiguration.ProjectDirPath);
       }
     }
 
     private void GenerateForMultipleMetadataTemplates(List<TableMetadata> tableMetadatas)
     {
-      string code;
-      string path;
-      RazorTemplateBase template = null;
+      var templates = new ITemplateBase[]
+      {
+        new RepositoryClassTemplate(this.GeneratorConfiguration, tableMetadatas),
+        new RepositoryInterfaceTemplate(this.GeneratorConfiguration, tableMetadatas),
 
-      template = new RepositoryClassTemplate { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
-      code = template.TransformText().Trim();
-      path = this.GeneratorConfiguration.IRepositoriesDirPath + "/" + this.GeneratorConfiguration.OrmType.AsNamespacePart() +  "/" + this.GeneratorConfiguration.RepositoryName +
-             ".Designer.cs";
-      File.WriteAllText(path, code);
-      this.Log("Saved", path);
+        new NgApiService (this.GeneratorConfiguration, tableMetadatas ),
+        new NgModels(this.GeneratorConfiguration, tableMetadatas ),
+        new PocoModelAutoMapperConfigurationTemplate(this.GeneratorConfiguration, tableMetadatas),
+      };
 
-      template = new RepositoryInterfaceTemplate { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
-      code = template.TransformText().Trim();
-      path = this.GeneratorConfiguration.IRepositoriesDirPath + "/I" + this.GeneratorConfiguration.RepositoryName +
-             ".Designer.cs";
-      File.WriteAllText(path, code);
-      this.Log("Saved", path);
+      this.ExecuteTemplates(templates);
 
-      path = this.GeneratorConfiguration.IRepositoriesDirPath + "/" + this.GeneratorConfiguration.RepositoryName + ".xml";
-      File.WriteAllText(path, File.ReadAllText(this.GeneratorConfiguration.ConfigFilePath));
-      this.Log("Saved", path);
 
-      this.NgGenMultiple(tableMetadatas);
+      this.SaveConfigFile();
     }
 
     private void GenerateForSingleMetadataTemplate(List<TableMetadata> tableMetadatas)
     {
       foreach (var tableMetadata in tableMetadatas)
       {
-        ////var pocoTemplate = new PocoReosTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
-        
-        var pocoTemplate = new PocoTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
-
-        var entityCode = pocoTemplate.TransformText().Trim();
-        var entityDesignerFilePath = this.GeneratorConfiguration.EntitiesDirPath + "/" + tableMetadata.EntityName + ".Designer.cs";
-        File.WriteAllText(entityDesignerFilePath, entityCode);
-        this.Log("Saved", entityDesignerFilePath);
-
-        if (this.GeneratorConfiguration.OrmType == OrmTypes.NHibernate)
+        var templates = new ITemplateBase[]
         {
-          var mappingTemplate = new NHibernateFluentTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
-          var mappingCode = mappingTemplate.TransformText().Trim();
-          var entityMappingDesignerFilePath = this.GeneratorConfiguration.MappingDirPath + "/" + tableMetadata.EntityName + "Map.Designer.cs";
-          File.WriteAllText(entityMappingDesignerFilePath, mappingCode);
-          this.Log("Saved", entityMappingDesignerFilePath);
-        }
-        else
-        {
-          var mappingTemplate = new EntityFxFluentTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
-          var mappingCode = mappingTemplate.TransformText().Trim();
-          var entityMappingDesignerFilePath = this.GeneratorConfiguration.MappingDirPath + "/" + tableMetadata.EntityName + "Map.Designer.cs";
-          File.WriteAllText(entityMappingDesignerFilePath, mappingCode);
-          this.Log("Saved", entityMappingDesignerFilePath);
-        }
+          // Poco Entity
+          new PocoTemplate(this.GeneratorConfiguration, tableMetadata),
 
-        var dtoTemplate = new PocoDTOTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
-        var dtoCode = dtoTemplate.TransformText().Trim();
-        var dtoDesignerFilePath = this.GeneratorConfiguration.DTODirPath + "/" + tableMetadata.EntityName + "DTO.Designer.cs";
-        File.WriteAllText(dtoDesignerFilePath, dtoCode);
-        this.Log("Saved", dtoDesignerFilePath);
+          // Entity Mapping
+          this.GeneratorConfiguration.OrmType == OrmTypes.NHibernate ?
+            (ITemplateBase) new NHibernateFluentTemplate(this.GeneratorConfiguration, tableMetadata)
+            : new EntityFxFluentTemplate(this.GeneratorConfiguration, tableMetadata),
 
+          // PocoDTO
+          new PocoDTOTemplate(this.GeneratorConfiguration, tableMetadata),
 
+          new PocoModelAutoMapperProfileTemplate(this.GeneratorConfiguration, tableMetadata),
 
-        this.NgGenSingle(tableMetadata);
+          new ApiControllerTemplate(this.GeneratorConfiguration, tableMetadata)
+        };
+
+        this.ExecuteTemplates(templates);
       }
     }
 
-    private void NgGenSingle(TableMetadata tableMetadata)
+    private void ExecuteTemplates(ITemplateBase[] templates)
     {
-      var template = new PocoModelAutoMapperProfileTemplate(tableMetadata, this.GeneratorConfiguration);
-      var outputCode = template.TransformText().Trim();
+      foreach (var template in templates)
+      {
+        var code = template.TransformText().Trim();
+        var path = template.GetPathToSave(this.GeneratorConfiguration);
 
-      var autoMapperPath = this.GeneratorConfiguration.AutoMappingConfigsDirPath + "/" + tableMetadata.EntityName + "MapperProfile.Designer.cs";
-      File.WriteAllText(autoMapperPath, outputCode);
-      this.Log("Saved", autoMapperPath);
+        var file = new FileInfo(path);
+        if (!file.Directory.Exists)
+        {
+          Directory.CreateDirectory(file.Directory.FullName);
+        }
 
+        File.WriteAllText(path, code);
+        this.Log("Saved", path);
+      }
     }
 
-    private void NgGenMultiple(List<TableMetadata> tableMetadatas)
+    private void SaveConfigFile()
     {
-      NgApiService servicesTemlate = new NgApiService { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
-      var code = servicesTemlate.TransformText().Trim();
-     var  path = this.GeneratorConfiguration.NgServicesFolder + "/api.service.ts";
-      File.WriteAllText(path, code);
-      this.Log("Saved", path);
-
-
-      var modelsTemplate =
-        new NgModels { TableMetadatas = tableMetadatas, Configuration = this.GeneratorConfiguration };
-
-      var angularModelCode = modelsTemplate.TransformText().Trim();
-      var angularModelDesignerFilePath =
-        this.GeneratorConfiguration.NgModelsFolder + "/models.ts";
-      File.WriteAllText(angularModelDesignerFilePath, angularModelCode);
-      this.Log("Saved", angularModelDesignerFilePath);
-
-      var autoMapperConfigurationGen = new PocoModelAutoMapperConfigurationTemplate(this.GeneratorConfiguration, tableMetadatas);
-      var outputCode = autoMapperConfigurationGen.TransformText().Trim();
-
-      var autoMapperPath = this.GeneratorConfiguration.AutoMappingConfigsDirPath + "/AutoMapperProfile.Designer.cs";
-      File.WriteAllText(autoMapperPath, outputCode);
-      this.Log("Saved", autoMapperPath);
-
+      // save the generator config xml too.
+      var configPath = this.GeneratorConfiguration.IRepositoriesDirPath + "/" + this.GeneratorConfiguration.RepositoryName
+                       + ".xml";
+      File.WriteAllText(configPath, File.ReadAllText(this.GeneratorConfiguration.ConfigFilePath));
+      this.Log("Saved", configPath);
     }
 
     private void Log(string title, string message = "")

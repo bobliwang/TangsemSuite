@@ -1,0 +1,83 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Tangsem.Common.Extensions" #>
+ 
+
+<#
+	var tableMetadata = this.TableMetadata;
+#>
+
+public partial class <#= tableMetadata.EntityName #>ApiController : Controller
+{
+	private I<#= Configuration.RepositoryName #> _repository = null;
+
+	public <#= tableMetadata.EntityName #>ApiController(I<#= Configuration.RepositoryName #> repository)
+	{
+		_repository = repository;
+	}
+
+	[HttpGet("_api/repo/<#=tableMetadata.EntityName#>")]
+	public IActionResult Get<#=tableMetadata.EntityName#>List(<#=tableMetadata.EntityName#>SearchModel model) {
+
+		var dataList = _repo.<#= tableMetadata.EntityName.Pluralize() #>.ToList();
+
+		return this.OK(dataList);
+	}
+     
+	[HttpGet("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
+	public IActionResult Get<#=tableMetadata.EntityName#>ById(int id) {
+		var entity = _repo.Lookup<#= tableMetadata.EntityName #>ById(id);
+
+		return this.OK(entity);
+	}
+
+	[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
+	[TransactionFilter]
+	public IActionResult Update<#=tableMetadata.EntityName#>(int id, <#=tableMetadata.EntityName#>DTO model) {
+		var entity = _repo.Lookup<#= tableMetadata.EntityName #>ById(id);
+
+		if (entity == null)
+		{
+			return this.NotFound($"<#=tableMetadata.EntityName#> is not found by id {id}");
+		}
+
+		_mapper.Map(model, entity);
+		_repo.Update<#=tableMetadata.EntityName#>(entity);
+
+		return this.OK();
+	}
+     
+	[HttpPost("_api/repo/<#=tableMetadata.EntityName#>")]
+	[TransactionFilter]
+	public IActionResult Create<#=tableMetadata.EntityName#>(<#=tableMetadata.EntityName#>DTO model) {
+		_mapper.Map<<#=tableMetadata.EntityName#>>(model, entity);
+		_repo.Save<#=tableMetadata.EntityName#>(entity);
+
+		return this.OK();
+	}
+
+	[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}/delete")]
+	[TransactionFilter]
+	public IActionResult Delete<#=tableMetadata.EntityName#>(int id, bool isHardDelete) {
+		var entity = _repo.Lookup<#= tableMetadata.EntityName #>ById(id);
+
+		if (entity == null)
+		{
+			return this.NotFound($"<#=tableMetadata.EntityName#> is not found by id {id}");
+		}
+
+		if (isHardDelete) {
+			_repo.Delete<#=tableMetadata.EntityName#>ById(id);			
+		}
+		else
+		{
+			entity.Active = false;
+			_repo.Update<#=tableMetadata.EntityName#>(entity);
+		}
+
+		return this.OK();
+	}
+}

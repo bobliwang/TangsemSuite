@@ -338,32 +338,6 @@ namespace Tangsem.Generator.Settings
 
       // convert to absolute path.
       this.OutputDir = new DirectoryInfo(this.OutputDir).FullName;
-
-      // create project dir if it doesn't exist.
-      this.CreateDirIfNotExists(this.ProjectDirPath);
-
-      // create entities dir if it doesn't exist.
-      this.CreateDirIfNotExists(this.EntitiesDirPath);
-
-      // create mapping dir if it doesn't exist.
-      this.CreateDirIfNotExists(this.MappingDirPath);
-      this.CreateDirIfNotExists(this.AutoMappingConfigsDirPath);
-
-      // create dto dir if it doesn't exist.
-      this.CreateDirIfNotExists(this.DTODirPath);
-      
-      // create interface repositories dir if it doesn't exist.
-      this.CreateDirIfNotExists(this.IRepositoriesDirPath);
-
-      // create repositories dir if it doesn't exist.
-      this.CreateDirIfNotExists(this.RepositoriesDirPath);
-
-
-      // Angular Related
-      this.CreateDirIfNotExists(this.NgAppFolder);
-      this.CreateDirIfNotExists(this.NgModelsFolder);
-      this.CreateDirIfNotExists(this.NgComponentsFolder);
-      this.CreateDirIfNotExists(this.NgServicesFolder);
     }
 
     /// <summary>
@@ -407,18 +381,6 @@ namespace Tangsem.Generator.Settings
       var builder = constructorInfo.Invoke(new[] { this.ConnectionString }) as MetadataBuilder;
 
       return builder;
-    }
-
-    /// <summary>
-    /// Create the dir if it doesn't exist.
-    /// </summary>
-    /// <param name="entityDir"></param>
-    private void CreateDirIfNotExists(string entityDir)
-    {
-      if (!Directory.Exists(entityDir))
-      {
-        Directory.CreateDirectory(entityDir);
-      }
     }
   }
 }

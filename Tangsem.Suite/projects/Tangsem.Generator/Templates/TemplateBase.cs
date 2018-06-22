@@ -14,6 +14,8 @@ namespace Tangsem.Generator.Templates
     GeneratorConfiguration Configuration { get; set; }
 
     string TransformText();
+
+    string GetPathToSave(GeneratorConfiguration genConfig);
   }
 
 	/// <summary>
@@ -25,5 +27,10 @@ namespace Tangsem.Generator.Templates
 		/// The generator configuration instance.
 		/// </summary>
 		public virtual GeneratorConfiguration Configuration { get; set; }
-	}
+
+    public virtual string GetPathToSave(GeneratorConfiguration genConfig)
+    {
+      throw new NotImplementedException();
+    }
+  }
 }
