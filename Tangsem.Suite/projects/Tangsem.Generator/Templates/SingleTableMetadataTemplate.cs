@@ -10,11 +10,16 @@ using Tangsem.Generator.Settings;
 
 namespace Tangsem.Generator.Templates
 {
-	/// <summary>
-	/// The OneFilePerTableMetadataTemplate class.
-	/// </summary>
-	public class SingleTableMetadataTemplate : TemplateBase
-	{
+  public interface ISingleTableMetadataTemplate: ITemplateBase
+  {
+    TableMetadata TableMetadata { get; set; }
+  }
+
+  /// <summary>
+  /// The OneFilePerTableMetadataTemplate class.
+  /// </summary>
+  public class SingleTableMetadataTemplate : TemplateBase, ISingleTableMetadataTemplate
+  {
 		/// <summary>
 		/// The table metadata.
 		/// </summary>

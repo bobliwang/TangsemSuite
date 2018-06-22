@@ -118,14 +118,38 @@ namespace Tangsem.Generator.Metadata
       {
         var provider = CodeDomProvider.CreateProvider("CSharp");
         var typeOutput = provider.GetTypeOutput(new CodeTypeReference(this.ClrType));
-
-
+        
         if (this.Nullable && this.ClrType.IsValueType)
         {
           return typeOutput + "?";
         }
 
         return typeOutput;
+      }
+    }
+
+    public string TsTypeAsString
+    {
+      get
+      {
+        if (this.IsJsonType)
+        {
+          return this.JsonType.EndsWith("[]") ? "any[]" : "any";
+        }
+
+        var numberTypes = new[] { typeof(int), typeof(double), typeof(decimal), typeof(float) };
+
+        if (numberTypes.Contains(this.ClrType))
+        {
+          return "number";
+        }
+
+        if (typeof(string) == this.ClrType || typeof(DateTime) == this.ClrType)
+        {
+          return "string";
+        }
+
+        return this.ClrType.Name.Lf();
       }
     }
 
@@ -220,5 +244,10 @@ namespace Tangsem.Generator.Metadata
     }
 
     public ExtraColumnMeta ExtraColumnMeta { get; set; }
+
+    public bool IsJsonType => this.ExtraColumnMeta != null && !string.IsNullOrWhiteSpace(this.ExtraColumnMeta.JsonType);
+
+
+    public string JsonType => this.ExtraColumnMeta?.JsonType;
   }
 }

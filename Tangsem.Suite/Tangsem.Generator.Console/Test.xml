@@ -7,6 +7,7 @@
             MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
             OpenOutputDirAfterGeneration="true"
             OrmFramework="NHibernate"
+            UseTimestampInOutputFolder="false"
             GenRelationship="true">
     
   <!-- MetadataBuilder: className[;assemblyName]  -->

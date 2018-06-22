@@ -53,17 +53,18 @@
     <Compile Include="Settings\GeneratorConfiguration.cs" />
     <Compile Include="Settings\OrmTypeExtensions.cs" />
     <Compile Include="Settings\OrmTypes.cs" />
-    <Compile Include="Templates\Angular\ApiService.generated.cs">
-      <DependentUpon>ApiService.cshtml</DependentUpon>
+    <Compile Include="Templates\Angular\NgModels.ext.cs" />
+    <Compile Include="Templates\Angular\NgApiService.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>NgApiService.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Angular\Model.generated.cs">
-      <DependentUpon>Model.cshtml</DependentUpon>
+    <Compile Include="Templates\Angular\NgApiService.ext.cs" />
+    <Compile Include="Templates\Angular\NgModels.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>NgModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Angular\ModelTemplate.cs" />
     <Compile Include="Templates\Entities\EntityFxFluentTemplate.cs" />
     <Compile Include="Templates\Entities\NHibernateFluentTemplate.cs" />
     <Compile Include="Templates\Entities\Poco.Designer.Reos.generated.cs">
@@ -96,6 +97,18 @@
     <Compile Include="Templates\Entities\PocoReosTemplate.cs" />
     <Compile Include="Templates\Entities\PocoTemplate.cs" />
     <Compile Include="Templates\MultipleTableMetadataTemplate.cs" />
+    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.cs">
+      <DependentUpon>PocoModelAutoMapperConfigurationTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.ext.cs" />
+    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PocoModelAutoMapperProfileTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.ext.cs" />
     <Compile Include="Templates\Repositories\IRepository.Designer.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -111,14 +124,6 @@
     <Compile Include="Templates\TemplateBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\Angular\ApiService.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>ApiService.generated.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Angular\Model.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Model.generated.cs</LastGenOutput>
-    </None>
     <None Include="Templates\Entities\Poco.Designer.Reos.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Poco.Designer.Reos.generated.cs</LastGenOutput>
@@ -159,13 +164,31 @@
       <Name>Tangsem.Generator.Metadata</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Templates\AspNetCore\PlaceHolder.txt" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Angular\NgApiService.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgApiService.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Angular\NgModels.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgModels.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PocoModelAutoMapperConfigurationTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PocoModelAutoMapperProfileTemplate.cs</LastGenOutput>
+    </Content>
     <Content Include="Templates\MVC\Controllers\PlaceHolder.txt" />
     <Content Include="Templates\MVC\Models\PlaceHolder.txt" />
     <Content Include="Templates\MVC\Views\PlaceHolder.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

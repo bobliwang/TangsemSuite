@@ -27,6 +27,7 @@ namespace Tangsem.Common.Extensions
       new Dictionary<string, string>
     {
       // Start with the rarest cases, and move to the most common
+      {"pos", @"pos"},
       {"people", "person"},
       {"oxen", "ox"},
       {"children", "child"},
@@ -85,6 +86,16 @@ namespace Tangsem.Common.Extensions
     }
 
 
+    public static string Lf(this string name)
+    {
+      return name.LowerFirst();
+    }
+
+    public static string Uf(this string name)
+    {
+      return name.UpperFirst();
+    }
+
     private static string FromNameInDb(string nameInDb)
     {
       // if nameInDb letters are all in lower case or upper case
@@ -104,14 +115,13 @@ namespace Tangsem.Common.Extensions
       }
     }
 
-
     public static string Singularize(this string word)
     {
       if (!Unpluralizables.Contains(word.ToLowerInvariant()))
       {
         foreach (var singularization in Singularizations)
         {
-          if (Regex.IsMatch(word, singularization.Key))
+          if (Regex.IsMatch(word, singularization.Key, RegexOptions.IgnoreCase))
           {
             return Regex.Replace(word, singularization.Key, singularization.Value);
           }
@@ -204,5 +214,7 @@ namespace Tangsem.Common.Extensions
     {
       return string.IsNullOrWhiteSpace(str);
     }
+
+    
   }
 }

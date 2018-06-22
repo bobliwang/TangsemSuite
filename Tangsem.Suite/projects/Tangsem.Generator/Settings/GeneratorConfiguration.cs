@@ -34,6 +34,9 @@ namespace Tangsem.Generator.Settings
     [XmlAttribute]
     public bool GenRelationship { get; set; }
 
+    [XmlAttribute]
+    public bool UseTimestampInOutputFolder { get; set; }
+
     /// <summary>
     /// Gets or sets ProjectName.
     /// </summary>
@@ -144,6 +147,14 @@ namespace Tangsem.Generator.Settings
       get
       {
         return Path.Combine(this.EntitiesDirPath, "Mappings", this.OrmType.AsNamespacePart());
+      }
+    }
+
+    public string AutoMappingConfigsDirPath
+    {
+      get
+      {
+        return Path.Combine(this.EntitiesDirPath, "Mappings", "AutoMapper");
       }
     }
 
@@ -317,7 +328,12 @@ namespace Tangsem.Generator.Settings
 
       if (string.IsNullOrEmpty(this.OutputDir))
       {
-        this.OutputDir = Path.Combine(Path.GetTempPath(), "TangsemCodeGen", $"{this.ProjectName}_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}");
+        this.OutputDir = Path.Combine(Path.GetTempPath(), "TangsemCodeGen", $"{this.ProjectName}");
+
+        if (this.UseTimestampInOutputFolder)
+        {
+          this.OutputDir += $"_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}";
+        }
       }
 
       // convert to absolute path.
@@ -331,6 +347,7 @@ namespace Tangsem.Generator.Settings
 
       // create mapping dir if it doesn't exist.
       this.CreateDirIfNotExists(this.MappingDirPath);
+      this.CreateDirIfNotExists(this.AutoMappingConfigsDirPath);
 
       // create dto dir if it doesn't exist.
       this.CreateDirIfNotExists(this.DTODirPath);

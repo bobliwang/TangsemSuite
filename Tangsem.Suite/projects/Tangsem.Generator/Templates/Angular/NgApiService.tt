@@ -1,0 +1,47 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#@ import namespace="Tangsem.Common.Extensions" #>
+<#@ import namespace="Tangsem.Generator.Templates" #>
+<#@ import namespace="Tangsem.Generator.Settings" #>
+
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import * as models from '../models/models';
+
+export class <#=Configuration.RepositoryName#>ApiService {
+
+    construct(private httpClient: HttpClient) {
+    }
+
+
+<# foreach (var tableMetadata in this.TableMetadatas) { #>
+
+     
+     public get<#=tableMetadata.EntityName#>List(): Observable<models.<#=tableMetadata.TsModelName#>[]> {
+        return this.httpClient.get<<#=tableMetadata.EntityName#>[]>(`_api/repo/<#=tableMetadata.EntityName#>`);
+     }
+     
+     public get<#=tableMetadata.EntityName#>ById(id: number | string): Observable<models.<#=tableMetadata.TsModelName#>> {
+        return this.httpClient.get<<#=tableMetadata.EntityName#>>(`_api/repo/<#=tableMetadata.EntityName#>/${id}`);
+     }
+     
+     public update<#=tableMetadata.EntityName#>(id: number | string, model: models.<#=tableMetadata.TsModelName#>): Observable<any> {
+        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>/${id}`, model);
+     }
+     
+     public create<#=tableMetadata.EntityName#>(id: number | string, model: models.<#=tableMetadata.TsModelName#>): Observable<models.<#=tableMetadata.TsModelName#>> {
+        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>`, model);
+     }
+
+	 public delete<#=tableMetadata.EntityName#>(id: number | string): Observable<any> {
+        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>/delete/${id}`, model);
+     }
+
+
+ <# } #>
+
+}

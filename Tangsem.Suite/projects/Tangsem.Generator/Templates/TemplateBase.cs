@@ -9,11 +9,18 @@ using Tangsem.Generator.Settings;
 
 namespace Tangsem.Generator.Templates
 {
+  public interface ITemplateBase
+  {
+    GeneratorConfiguration Configuration { get; set; }
+
+    string TransformText();
+  }
+
 	/// <summary>
 	/// The TemplateBase class.
 	/// </summary>
-	public abstract class TemplateBase : RazorTemplateBase
-	{
+	public abstract class TemplateBase : RazorTemplateBase, ITemplateBase
+  {
 		/// <summary>
 		/// The generator configuration instance.
 		/// </summary>

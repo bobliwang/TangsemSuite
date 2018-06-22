@@ -10,11 +10,17 @@ using Tangsem.Generator.Settings;
 
 namespace Tangsem.Generator.Templates
 {
-	/// <summary>
-	/// The MultipleTableMetadataTemplate class.
-	/// </summary>
-	public class MultipleTableMetadataTemplate : TemplateBase
-	{
+  public interface IMultipleTableMetadataTemplate : ITemplateBase
+  {
+    List<TableMetadata> TableMetadatas { get; set; }
+  }
+
+
+  /// <summary>
+  /// The MultipleTableMetadataTemplate class.
+  /// </summary>
+  public class MultipleTableMetadataTemplate : TemplateBase, IMultipleTableMetadataTemplate
+  {
 		/// <summary>
 		/// The list of TableMetadatas.
 		/// </summary>

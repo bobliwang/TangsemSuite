@@ -10,8 +10,10 @@ using RazorGenerator.Templating;
 using Tangsem.Generator.Metadata;
 using Tangsem.Generator.Metadata.Builder;
 using Tangsem.Generator.Settings;
+using Tangsem.Generator.Templates;
 using Tangsem.Generator.Templates.Angular;
 using Tangsem.Generator.Templates.Entities;
+using Tangsem.Generator.Templates.MVC.AutoMapper;
 using Tangsem.Generator.Templates.Repositories;
 
 namespace Tangsem.Generator
@@ -141,24 +143,40 @@ namespace Tangsem.Generator
 
     private void NgGenSingle(TableMetadata tableMetadata)
     {
-      var angularModelTemplate =
-        new ModelTemplate { TableMetadata = tableMetadata, Configuration = this.GeneratorConfiguration };
-      var angularModelCode = angularModelTemplate.TransformText().Trim();
-      var angularModelDesignerFilePath =
-        this.GeneratorConfiguration.NgModelsFolder + "/" + tableMetadata.EntityName + "Model.ts";
-      File.WriteAllText(angularModelDesignerFilePath, angularModelCode);
-      this.Log("Saved", angularModelDesignerFilePath);
+      var template = new PocoModelAutoMapperProfileTemplate(tableMetadata, this.GeneratorConfiguration);
+      var outputCode = template.TransformText().Trim();
+
+      var autoMapperPath = this.GeneratorConfiguration.AutoMappingConfigsDirPath + "/" + tableMetadata.EntityName + "MapperProfile.Designer.cs";
+      File.WriteAllText(autoMapperPath, outputCode);
+      this.Log("Saved", autoMapperPath);
+
     }
 
     private void NgGenMultiple(List<TableMetadata> tableMetadatas)
     {
-      RazorTemplateBase template = null;
-
-      template = new ApiServiceTemplate { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
-      var code = template.TransformText().Trim();
+      NgApiService servicesTemlate = new NgApiService { Configuration = this.GeneratorConfiguration, TableMetadatas = tableMetadatas };
+      var code = servicesTemlate.TransformText().Trim();
      var  path = this.GeneratorConfiguration.NgServicesFolder + "/api.service.ts";
       File.WriteAllText(path, code);
       this.Log("Saved", path);
+
+
+      var modelsTemplate =
+        new NgModels { TableMetadatas = tableMetadatas, Configuration = this.GeneratorConfiguration };
+
+      var angularModelCode = modelsTemplate.TransformText().Trim();
+      var angularModelDesignerFilePath =
+        this.GeneratorConfiguration.NgModelsFolder + "/models.ts";
+      File.WriteAllText(angularModelDesignerFilePath, angularModelCode);
+      this.Log("Saved", angularModelDesignerFilePath);
+
+      var autoMapperConfigurationGen = new PocoModelAutoMapperConfigurationTemplate(this.GeneratorConfiguration, tableMetadatas);
+      var outputCode = autoMapperConfigurationGen.TransformText().Trim();
+
+      var autoMapperPath = this.GeneratorConfiguration.AutoMappingConfigsDirPath + "/AutoMapperProfile.Designer.cs";
+      File.WriteAllText(autoMapperPath, outputCode);
+      this.Log("Saved", autoMapperPath);
+
     }
 
     private void Log(string title, string message = "")
