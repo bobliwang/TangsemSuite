@@ -616,57 +616,57 @@ Write(entity.EntityName);
             
             #line default
             #line hidden
-WriteLiteral("     ----\r\n  ------------------------------\r\n  ALTER TABLE ");
+WriteLiteral("     ----\r\n  ------------------------------\r\n  ALTER TABLE [");
 
 
             
             #line 104 "..\..\Templates\Repositories\Repository.Designer.cshtml"
-         Write(entity.Name);
+          Write(entity.Name);
 
             
             #line default
             #line hidden
-WriteLiteral(" ADD CreatedById INT NULL\r\n  GO\r\n  ALTER TABLE ");
+WriteLiteral("] ADD CreatedById INT NULL\r\n  GO\r\n  ALTER TABLE [");
 
 
             
             #line 106 "..\..\Templates\Repositories\Repository.Designer.cshtml"
-         Write(entity.Name);
+          Write(entity.Name);
 
             
             #line default
             #line hidden
-WriteLiteral(" ADD ModifiedById INT NULL\r\n  GO\r\n  ALTER TABLE ");
+WriteLiteral("] ADD ModifiedById INT NULL\r\n  GO\r\n  ALTER TABLE [");
 
 
             
             #line 108 "..\..\Templates\Repositories\Repository.Designer.cshtml"
-         Write(entity.Name);
+          Write(entity.Name);
 
             
             #line default
             #line hidden
-WriteLiteral(" ADD CreatedTime DATETIME NULL\r\n  GO\r\n  ALTER TABLE ");
+WriteLiteral("] ADD CreatedTime DATETIME NULL\r\n  GO\r\n  ALTER TABLE [");
 
 
             
             #line 110 "..\..\Templates\Repositories\Repository.Designer.cshtml"
-         Write(entity.Name);
+          Write(entity.Name);
 
             
             #line default
             #line hidden
-WriteLiteral(" ADD ModifiedTime DATETIME NULL\r\n  GO\r\n  ALTER TABLE ");
+WriteLiteral("] ADD ModifiedTime DATETIME NULL\r\n  GO\r\n  ALTER TABLE [");
 
 
             
             #line 112 "..\..\Templates\Repositories\Repository.Designer.cshtml"
-         Write(entity.Name);
+          Write(entity.Name);
 
             
             #line default
             #line hidden
-WriteLiteral(" ADD Active BIT NULL\r\n  GO\r\n         \r\n       \r\n  ");
+WriteLiteral("] ADD Active BIT NULL\r\n  GO\r\n         \r\n       \r\n  ");
 
 
             

@@ -128,6 +128,22 @@ namespace Tangsem.Generator.Metadata
       }
     }
 
+    public string NullableCSharpTypeAsString
+    {
+      get
+      {
+        var provider = CodeDomProvider.CreateProvider("CSharp");
+        var typeOutput = provider.GetTypeOutput(new CodeTypeReference(this.ClrType));
+
+        if (this.ClrType.IsValueType)
+        {
+          return typeOutput + "?";
+        }
+
+        return typeOutput;
+      }
+    }
+
     public string TsTypeAsString
     {
       get

@@ -101,15 +101,15 @@ namespace @(Configuration.RepositoryNamespace).@(Configuration.OrmType.AsNamespa
   ------------------------------
   -- @entity.EntityName     ----
   ------------------------------
-  ALTER TABLE @entity.Name ADD CreatedById INT NULL
+  ALTER TABLE [@entity.Name] ADD CreatedById INT NULL
   GO
-  ALTER TABLE @entity.Name ADD ModifiedById INT NULL
+  ALTER TABLE [@entity.Name] ADD ModifiedById INT NULL
   GO
-  ALTER TABLE @entity.Name ADD CreatedTime DATETIME NULL
+  ALTER TABLE [@entity.Name] ADD CreatedTime DATETIME NULL
   GO
-  ALTER TABLE @entity.Name ADD ModifiedTime DATETIME NULL
+  ALTER TABLE [@entity.Name] ADD ModifiedTime DATETIME NULL
   GO
-  ALTER TABLE @entity.Name ADD Active BIT NULL
+  ALTER TABLE [@entity.Name] ADD Active BIT NULL
   GO
          
        

@@ -14,9 +14,12 @@ public partial class <#= tableMetadata.EntityName #>ApiController : Controller
 {
 	private I<#= Configuration.RepositoryName #> _repository = null;
 
-	public <#= tableMetadata.EntityName #>ApiController(I<#= Configuration.RepositoryName #> repository)
+	private IMapper _mapper = null;
+
+	public <#= tableMetadata.EntityName #>ApiController(I<#= Configuration.RepositoryName #> repository, IMapper mapper)
 	{
 		_repository = repository;
+		_mapper = mapper;
 	}
 
 	[HttpGet("_api/repo/<#=tableMetadata.EntityName#>")]
@@ -36,7 +39,7 @@ public partial class <#= tableMetadata.EntityName #>ApiController : Controller
 
 	[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
 	[TransactionFilter]
-	public IActionResult Update<#=tableMetadata.EntityName#>(int id, <#=tableMetadata.EntityName#>DTO model) {
+	public IActionResult Update<#=tableMetadata.EntityName#>(int id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
 		var entity = _repo.Lookup<#= tableMetadata.EntityName #>ById(id);
 
 		if (entity == null)
@@ -52,8 +55,10 @@ public partial class <#= tableMetadata.EntityName #>ApiController : Controller
      
 	[HttpPost("_api/repo/<#=tableMetadata.EntityName#>")]
 	[TransactionFilter]
-	public IActionResult Create<#=tableMetadata.EntityName#>(<#=tableMetadata.EntityName#>DTO model) {
-		_mapper.Map<<#=tableMetadata.EntityName#>>(model, entity);
+	public IActionResult Create<#=tableMetadata.EntityName#>([FromBody] <#=tableMetadata.EntityName#>DTO model) {
+		var entity = new <#=tableMetadata.EntityName#>();
+
+		_mapper.Map(model, entity);
 		_repo.Save<#=tableMetadata.EntityName#>(entity);
 
 		return this.OK();
@@ -79,5 +84,27 @@ public partial class <#= tableMetadata.EntityName #>ApiController : Controller
 		}
 
 		return this.OK();
+	}
+
+	protected IQueryable<<#=tableMetadata.EntityName#>> FilterBySearchParams(IQueryable<#=tableMetadata.EntityName#> qry, <#=tableMetadata.EntityName#>SearchModel filterModel)
+	{
+		var filteredQry = qry; 
+		
+		<# foreach (var col in tableMetadata.Columns) { #>
+
+		if (filterModel.<#= col.PropertyName #> != null)
+		{
+		<# if (col.ClrType == typeof(string)) { #>
+			
+			filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #>.Contains(filterModel.<#= col.PropertyName #>));
+		<# } else { #>
+			
+			filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #> == filterModel.<#= col.PropertyName #>);
+		<# } #>
+
+		}
+		<# } #>
+
+		return filteredQry;
 	}
 }

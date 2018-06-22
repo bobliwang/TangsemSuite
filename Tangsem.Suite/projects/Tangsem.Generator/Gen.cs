@@ -15,6 +15,7 @@ using Tangsem.Generator.Templates.Angular;
 using Tangsem.Generator.Templates.Entities;
 using Tangsem.Generator.Templates.MVC.AutoMapper;
 using Tangsem.Generator.Templates.MVC.Controllers;
+using Tangsem.Generator.Templates.MVC.ViewModels;
 using Tangsem.Generator.Templates.Repositories;
 
 namespace Tangsem.Generator
@@ -111,10 +112,9 @@ namespace Tangsem.Generator
 
           // PocoDTO
           new PocoDTOTemplate(this.GeneratorConfiguration, tableMetadata),
-
           new PocoModelAutoMapperProfileTemplate(this.GeneratorConfiguration, tableMetadata),
-
-          new ApiControllerTemplate(this.GeneratorConfiguration, tableMetadata)
+          new ApiControllerTemplate(this.GeneratorConfiguration, tableMetadata),
+          new SearchParamTemplate(this.GeneratorConfiguration, tableMetadata)
         };
 
         this.ExecuteTemplates(templates);

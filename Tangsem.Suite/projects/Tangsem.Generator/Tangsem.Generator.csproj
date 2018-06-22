@@ -115,6 +115,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Templates\MVC\Controllers\ApiControllerTemplate.ext.cs" />
+    <Compile Include="Templates\MVC\ViewModels\SearchParamTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchParamTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MVC\ViewModels\SearchParamTemplate.ext.cs" />
     <Compile Include="Templates\Repositories\IRepository.Designer.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -194,6 +200,10 @@
     <Content Include="Templates\MVC\Controllers\ApiControllerTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ApiControllerTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\MVC\ViewModels\SearchParamTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SearchParamTemplate.cs</LastGenOutput>
     </Content>
     <Content Include="Templates\MVC\Models\PlaceHolder.txt" />
     <Content Include="Templates\MVC\Views\PlaceHolder.txt" />
