@@ -14,8 +14,23 @@
 
 <# foreach(var col in this.TableMetadata.Columns) { #>
 
-	<input type="text" [(ngModel)]="filterModel.<#= col.PropertyName.Lf() #>"/>
+	<input type="<#= getInputType(col.CSharpTypeAsString) #>" [(ngModel)]="filterModel.<#= col.PropertyName.Lf() #>"/>
 
 <# } #>
 
 <div>
+
+<div>
+	<button (click)="search()" mat-button>
+		<mat-icon>
+			search
+		</mat-icon>
+		Search
+	</button>
+</div>
+
+<#+
+	string getInputType(string clrTypeAsString) {
+		return "text";
+	}
+#>

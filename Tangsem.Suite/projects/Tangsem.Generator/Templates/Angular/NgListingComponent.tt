@@ -21,7 +21,7 @@ export class <#= this.TableMetadata.EntityName #>ListingComponent {
 
 	public <#= this.TableMetadata.EntityName.Lf() #>List: <#= this.TableMetadata.TsModelName #>[];
 
-	public displayedColumns = [ <#= string.Join(", ", this.TableMetadata.Columns.Select(col => $"'{col.PropertyName.Lf()}'")) #> ];
+	public displayedColumns = [ <#= string.Join(", ", this.TableMetadata.Columns.Select(col => $"'{col.PropertyName.Lf()}'")) #>, "actions" ];
 
 
 	public resultsLength = 0;

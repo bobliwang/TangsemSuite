@@ -30,78 +30,78 @@ namespace Tangsem.Generator.Templates.Angular
         public virtual string TransformText()
         {
             this.Write("\r\n");
-            this.Write("\r\n\r\n\r\n\r\n");
+            this.Write("\r\n\r\nexport interface SearchResultModel<T> {\r\n\tpageIndex: number;\r\n\r\n    pageSize:" +
+                    " number;\r\n\r\n    rowsCount: number;\r\n\r\n\tpagedData: T[];\r\n}\r\n\r\n\r\n");
             
-            #line 12 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 21 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  foreach (var tableMetadata in this.TableMetadatas) { 
             
             #line default
             #line hidden
             this.Write("\r\nexport interface ");
             
-            #line 14 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 23 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
             
             #line default
             #line hidden
             this.Write(" {\r\n\r\n     \r\n");
             
-            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 26 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  foreach (var col in tableMetadata.Columns) { 
             
             #line default
             #line hidden
             this.Write("\r\n\t");
             
-            #line 19 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 28 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  if (col.IsJsonType) { 
             
             #line default
             #line hidden
             this.Write("\r\n\t/**\r\n\t * ");
             
-            #line 22 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 31 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.JsonType));
             
             #line default
             #line hidden
             this.Write("\r\n\t */\r\n\t");
             
-            #line 24 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 33 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t");
             
-            #line 25 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("?: ");
             
-            #line 25 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.TsTypeAsString));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n");
             
-            #line 27 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 36 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n}\r\n\r\n");
             
-            #line 31 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 40 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n\r\nexport interface SearchResultModel<T> {\r\n\tpageIndex: number;\r\n\r\n    pageSize:" +
-                    " number;\r\n\r\n    rowsCount: number;\r\n\r\n\tpagedData: T[];\r\n}");
+            this.Write("\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -29,44 +29,87 @@ namespace Tangsem.Generator.Templates.Angular
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n<table mat-table [dataSource]=\"dataSource\">\r\n\r\n");
+            this.Write("\r\n<!-- FILTER -->\r\n<");
             
-            #line 10 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 9 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("-filter [filterModel]=\"filterModel\"></");
+            
+            #line 9 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("-filter>\r\n\r\n\r\n<button mat-button (click)=\"add()\">\r\n\t<mat-icon>\r\n\t\tadd\r\n\t</mat-ico" +
+                    "n>\r\n\tNew\r\n</button>\r\n\r\n<!-- TABLE -->\r\n<table mat-table [dataSource]=\"dataSource" +
+                    "\" matSort matSortActive=\"id\" matSortDisableClear matSortDirection=\"desc\">\r\n\r\n");
+            
+            #line 22 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
  foreach(var col in this.TableMetadata.Columns) { 
             
             #line default
             #line hidden
             this.Write("\t<ng-container matColumnDef=\"");
             
-            #line 11 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 23 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("\">\r\n\t\t<th mat-header-cell *matHeaderCellDef>\r\n\t\t\t");
             
-            #line 13 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 25 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t</th>\r\n\t\t<td mat-cell *matCellDef=\"let rowData\">\r\n\t\t\t{{rowData.");
             
-            #line 16 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 28 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("}}\r\n\t\t</td>\r\n\t</ng-container>\r\n");
             
-            #line 19 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 31 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n\r\n\t<tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n\t<tr mat-row *" +
-                    "matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n</table>\r\n\r\n<mat-paginato" +
-                    "r [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>");
+            this.Write(@"
+
+	<ng-container matColumnDef=""actions"">
+		<th mat-header-cell *matHeaderCellDef>
+		
+		</th>
+
+		<td mat-cell *matCellDef=""let rowData"">
+			<button mat-button (click)=""edit(rowData)"">
+				<mat-icon>
+					edit
+				</mat-icon>
+				Edit
+			</button>
+
+			<button mat-button (click)=""delete(rowData)"">
+				<mat-icon>
+					delete
+				</mat-icon>
+				Delete
+			</button>
+		</td>
+	</ng-container>
+
+
+	<tr mat-header-row *matHeaderRowDef=""displayedColumns""></tr>
+	<tr mat-row *matRowDef=""let row; columns: displayedColumns;""></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]=""[5, 10, 20]"" showFirstLastButtons></mat-paginator>");
             return this.GenerationEnvironment.ToString();
         }
     }

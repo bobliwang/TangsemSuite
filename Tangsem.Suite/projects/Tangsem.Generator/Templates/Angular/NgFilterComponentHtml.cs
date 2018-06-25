@@ -37,7 +37,14 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("\r\n\t<input type=\"text\" [(ngModel)]=\"filterModel.");
+            this.Write("\r\n\t<input type=\"");
+            
+            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(getInputType(col.CSharpTypeAsString)));
+            
+            #line default
+            #line hidden
+            this.Write("\" [(ngModel)]=\"filterModel.");
             
             #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
@@ -51,9 +58,20 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("\r\n<div>");
+            this.Write("\r\n<div>\r\n\r\n<div>\r\n\t<button (click)=\"search()\" mat-button>\r\n\t\t<mat-icon>\r\n\t\t\tsearc" +
+                    "h\r\n\t\t</mat-icon>\r\n\t\tSearch\r\n\t</button>\r\n</div>\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
+        
+        #line 32 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+
+	string getInputType(string clrTypeAsString) {
+		return "text";
+	}
+
+        
+        #line default
+        #line hidden
     }
     
     #line default

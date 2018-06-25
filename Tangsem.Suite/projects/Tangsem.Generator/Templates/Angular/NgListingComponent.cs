@@ -81,9 +81,9 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
             
             #line default
             #line hidden
-            this.Write(" ];\r\n\r\n\r\n\tpublic resultsLength = 0;\r\n\tpublic isLoadingResults = true;\r\n\r\n\r\n\t@View" +
-                    "Child(MatPaginator) paginator: MatPaginator;\r\n\t@ViewChild(MatSort) sort: MatSort" +
-                    ";\r\n\r\n\tconstructor(private repoApi: ");
+            this.Write(", \"actions\" ];\r\n\r\n\r\n\tpublic resultsLength = 0;\r\n\tpublic isLoadingResults = true;\r" +
+                    "\n\r\n\r\n\t@ViewChild(MatPaginator) paginator: MatPaginator;\r\n\t@ViewChild(MatSort) so" +
+                    "rt: MatSort;\r\n\r\n\tconstructor(private repoApi: ");
             
             #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));

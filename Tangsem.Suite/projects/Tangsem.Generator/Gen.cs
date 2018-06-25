@@ -120,7 +120,10 @@ namespace Tangsem.Generator
           new NgListingComponent(this.GeneratorConfiguration, tableMetadata),
           new NgListingComponentHtml(this.GeneratorConfiguration, tableMetadata),
           new NgFilterComponent(this.GeneratorConfiguration, tableMetadata),
-          new NgFilterComponentHtml(this.GeneratorConfiguration, tableMetadata)
+          new NgFilterComponentHtml(this.GeneratorConfiguration, tableMetadata),
+
+          new NgEditorComponent(this.GeneratorConfiguration, tableMetadata),
+          new NgEditorComponentHtml(this.GeneratorConfiguration, tableMetadata),
         };
 
         this.ExecuteTemplates(templates);

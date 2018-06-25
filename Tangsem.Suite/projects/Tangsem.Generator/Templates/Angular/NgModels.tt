@@ -7,6 +7,15 @@
 <#@ import namespace="Tangsem.Common.Extensions" #>
 
 
+export interface SearchResultModel<T> {
+	pageIndex: number;
+
+    pageSize: number;
+
+    rowsCount: number;
+
+	pagedData: T[];
+}
 
 
 <# foreach (var tableMetadata in this.TableMetadatas) { #>
@@ -30,13 +39,3 @@ export interface <#= tableMetadata.TsModelName #> {
 
 <# } #>
 
-
-export interface SearchResultModel<T> {
-	pageIndex: number;
-
-    pageSize: number;
-
-    rowsCount: number;
-
-	pagedData: T[];
-}

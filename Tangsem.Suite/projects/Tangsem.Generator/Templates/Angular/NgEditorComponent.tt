@@ -1,0 +1,78 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, MatSort} from '@angular/material';
+import {merge, Observable, of as observableOf} from 'rxjs';
+import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+
+
+@Component({
+  selector: '<#= this.TableMetadata.EntityName #>-editor',
+  templateUrl: '<#= this.TableMetadata.EntityName #>-editor.html',
+})
+export class <#= this.TableMetadata.EntityName #>EditorComponent {
+	
+	@Input()
+	public model: <#= this.TableMetadata.TsModelName #>;
+
+	@Input()
+	public mode: 'create' | 'view' | 'edit' = 'view';
+
+	
+	constructor(
+		private router: NgRouter,
+		private snackBar: MatSnackBar,
+		private repoApi: <#=Configuration.RepositoryName#>ApiService) {
+	
+	}
+
+	public ngOnInit() {
+		this.model = this.model || {};
+	}
+
+	public save() {
+		if (this.mode === 'create') {
+			this.create();
+		} else if (this.mode === 'edit') {
+			this.update();
+		}
+	}
+
+	public cancel() {
+		this.router.navigate(['listing']);
+	}
+
+	protected create() {
+
+		this.repoApi.create(this.model).subscribe(result => {
+			if (result && result.id) {
+				this.model.id = result.id;
+			}
+
+			this.snackBar.open('created successfully', null, { duration: 1000 });
+			this.router.navigate(['listing']);
+		}, err => {
+			this.snackBar.open('failed to create', null { duration: 3000 });
+		});
+	}
+
+	protected update() {
+
+		this.repoApi.update(this.model).subscribe(result => {
+			if (result && result.id) {
+				this.model.id = result.id;
+			}
+
+			this.snackBar.open('updated successfully', null, { duration: 1000 });
+			this.router.navigate(['listing']);
+		}, err => {
+			this.snackBar.open('failed to updade', null, { duration: 3000 });
+		});
+	}
+
+}

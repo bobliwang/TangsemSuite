@@ -42,14 +42,14 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
   selector: '");
             
             #line 18 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-filter\',\r\n  templateUrl: \'");
             
             #line 19 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden

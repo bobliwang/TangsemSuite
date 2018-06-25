@@ -1,0 +1,40 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Tangsem.Common.Extensions" #>
+
+<div class="editor-ctn">
+
+
+<# foreach(var col in this.TableMetadata.Columns) { #>
+
+	<label>
+		<#= col.PropertyName #>
+	</label>
+	<input type="<#= getInputType(col.CSharpTypeAsString) #>"
+		[(ngModel)]="filterModel.<#= col.PropertyName.Lf() #>"/>
+
+<# } #>
+
+<div>
+
+
+<div class="actions-bar">
+	<button mat-button (click)="save()">
+		Save
+	<button>
+
+	<button mat-button (click)="cancel()">
+		Cancel
+	<button>
+</div>
+
+
+<#+
+	string getInputType(string clrTypeAsString) {
+		return "text";
+	}
+#>
+

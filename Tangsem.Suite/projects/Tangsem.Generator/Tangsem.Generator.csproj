@@ -53,6 +53,28 @@
     <Compile Include="Settings\GeneratorConfiguration.cs" />
     <Compile Include="Settings\OrmTypeExtensions.cs" />
     <Compile Include="Settings\OrmTypes.cs" />
+    <Compile Include="Templates\Angular\NgApiService.ext.cs">
+      <DependentUpon>NgApiService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Angular\NgEditorComponent.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NgEditorComponent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Angular\NgEditorComponent.ext.cs">
+      <DependentUpon>NgEditorComponent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Angular\NgEditorComponentHtml.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NgEditorComponentHtml.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Angular\NgEditorComponentHtml.ext.cs">
+      <DependentUpon>NgEditorComponentHtml.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Angular\NgFilterComponent.ext.cs">
+      <DependentUpon>NgFilterComponent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Angular\NgFilterComponentHtml.cs">
       <DependentUpon>NgFilterComponentHtml.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -63,30 +85,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NgFilterComponent.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Angular\NgFilterComponent.ext.cs" />
-    <Compile Include="Templates\Angular\NgFilterComponentHtml.ext.cs" />
+    <Compile Include="Templates\Angular\NgFilterComponentHtml.ext.cs">
+      <DependentUpon>NgFilterComponentHtml.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Angular\NgListingComponent.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NgListingComponent.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Angular\NgListingComponent.ext.cs" />
+    <Compile Include="Templates\Angular\NgListingComponent.ext.cs">
+      <DependentUpon>NgListingComponent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Angular\NgListingComponentHtml.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NgListingComponentHtml.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Angular\NgListingComponentHtml.ext.cs" />
-    <Compile Include="Templates\Angular\NgModels.ext.cs" />
+    <Compile Include="Templates\Angular\NgListingComponentHtml.ext.cs">
+      <DependentUpon>NgListingComponentHtml.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Angular\NgApiService.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NgApiService.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Angular\NgApiService.ext.cs" />
     <Compile Include="Templates\Angular\NgModels.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>NgModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Angular\NgModels.ext.cs">
       <DependentUpon>NgModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Templates\Entities\EntityFxFluentTemplate.cs" />
@@ -126,25 +154,33 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.ext.cs" />
+    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.ext.cs">
+      <DependentUpon>PocoModelAutoMapperConfigurationTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PocoModelAutoMapperProfileTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.ext.cs" />
+    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.ext.cs">
+      <DependentUpon>PocoModelAutoMapperProfileTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\MVC\Controllers\ApiControllerTemplate.cs">
       <DependentUpon>ApiControllerTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\MVC\Controllers\ApiControllerTemplate.ext.cs" />
+    <Compile Include="Templates\MVC\Controllers\ApiControllerTemplate.ext.cs">
+      <DependentUpon>ApiControllerTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\MVC\ViewModels\SearchParamTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchParamTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\MVC\ViewModels\SearchParamTemplate.ext.cs" />
+    <Compile Include="Templates\MVC\ViewModels\SearchParamTemplate.ext.cs">
+      <DependentUpon>SearchParamTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Repositories\IRepository.Designer.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -207,6 +243,14 @@
     <Content Include="Templates\Angular\NgApiService.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NgApiService.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Angular\NgEditorComponent.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgEditorComponent.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Angular\NgEditorComponentHtml.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgEditorComponentHtml.cs</LastGenOutput>
     </Content>
     <Content Include="Templates\Angular\NgFilterComponentHtml.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
