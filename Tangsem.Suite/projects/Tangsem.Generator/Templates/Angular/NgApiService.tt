@@ -21,7 +21,30 @@ export class <#=Configuration.RepositoryName#>ApiService {
 <# foreach (var tableMetadata in this.TableMetadatas) { #>
 
      
-     public get<#=tableMetadata.EntityName#>List(filterModel: <#= tableMetadata.EntityName #>SearchParams): Observable<models.SearchResultModel<models.<#=tableMetadata.TsModelName#>>> {
+     public get<#=tableMetadata.EntityName#>List(filterModel: models.<#= tableMetadata.EntityName #>SearchParams): Observable<models.SearchResultModel<models.<#=tableMetadata.TsModelName#>>> {
+		const searchParams = this.populate<#=tableMetadata.EntityName#>SearchParams(filterModel);
+
+        return this.httpClient.get<models.SearchResultModel<models.<#=tableMetadata.TsModelName#>>>(`_api/repo/<#=tableMetadata.EntityName#>`, { params: searchParams });
+     }
+     
+     public get<#=tableMetadata.EntityName#>ById(id: number | string): Observable<models.<#=tableMetadata.TsModelName#>> {
+        return this.httpClient.get<models.<#=tableMetadata.TsModelName#>>(`_api/repo/<#=tableMetadata.EntityName#>/${id}`);
+     }
+     
+     public update<#=tableMetadata.EntityName#>(id: number | string, model: models.<#=tableMetadata.TsModelName#>): Observable<any> {
+        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>/${id}`, model);
+     }
+     
+     public create<#=tableMetadata.EntityName#>(id: number | string, model: models.<#=tableMetadata.TsModelName#>): Observable<models.<#=tableMetadata.TsModelName#>> {
+        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>`, model);
+     }
+
+	 public delete<#=tableMetadata.EntityName#>(id: number | string): Observable<any> {
+        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>/delete/${id}`);
+     }
+
+	 protected populate<#=tableMetadata.EntityName#>SearchParams(filterModel: models.<#= tableMetadata.EntityName #>SearchParams): HttpParams {
+		
 
 		let params = new HttpParams();
 
@@ -42,24 +65,8 @@ export class <#=Configuration.RepositoryName#>ApiService {
 
 		}
 
-        return this.httpClient.get<models.SearchResultModel<models.<#=tableMetadata.TsModelName#>>>(`_api/repo/<#=tableMetadata.EntityName#>`, { params: params });
-     }
-     
-     public get<#=tableMetadata.EntityName#>ById(id: number | string): Observable<models.<#=tableMetadata.TsModelName#>> {
-        return this.httpClient.get<<#=tableMetadata.EntityName#>>(`_api/repo/<#=tableMetadata.EntityName#>/${id}`);
-     }
-     
-     public update<#=tableMetadata.EntityName#>(id: number | string, model: models.<#=tableMetadata.TsModelName#>): Observable<any> {
-        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>/${id}`, model);
-     }
-     
-     public create<#=tableMetadata.EntityName#>(id: number | string, model: models.<#=tableMetadata.TsModelName#>): Observable<models.<#=tableMetadata.TsModelName#>> {
-        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>`, model);
-     }
-
-	 public delete<#=tableMetadata.EntityName#>(id: number | string): Observable<any> {
-        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>/delete/${id}`);
-     }
+		return params;
+	 }
 
 
  <# } #>

@@ -73,7 +73,19 @@ namespace Tangsem.Generator.Templates.Angular
         #line 35 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
 
 	string getInputType(string clrTypeAsString) {
-		return "text";
+		switch(clrTypeAsString) {
+			case "int":
+			case "decimal":
+			case "float":
+			case "double":
+			case "int?":
+			case "decimal?":
+			case "float?":
+			case "double?":
+				return "number";
+			default:
+				return "text";
+		}
 	}
 
         

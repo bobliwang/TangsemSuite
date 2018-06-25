@@ -55,7 +55,7 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("List(filterModel: ");
+            this.Write("List(filterModel: models.");
             
             #line 24 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
@@ -69,7 +69,136 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write(@">> {
+            this.Write(">> {\r\n\t\tconst searchParams = this.populate");
+            
+            #line 25 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SearchParams(filterModel);\r\n\r\n        return this.httpClient.get<models.SearchRes" +
+                    "ultModel<models.");
+            
+            #line 27 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
+            
+            #line default
+            #line hidden
+            this.Write(">>(`_api/repo/");
+            
+            #line 27 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("`, { params: searchParams });\r\n     }\r\n     \r\n     public get");
+            
+            #line 30 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("ById(id: number | string): Observable<models.");
+            
+            #line 30 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
+            
+            #line default
+            #line hidden
+            this.Write("> {\r\n        return this.httpClient.get<models.");
+            
+            #line 31 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
+            
+            #line default
+            #line hidden
+            this.Write(">(`_api/repo/");
+            
+            #line 31 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("/${id}`);\r\n     }\r\n     \r\n     public update");
+            
+            #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("(id: number | string, model: models.");
+            
+            #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
+            
+            #line default
+            #line hidden
+            this.Write("): Observable<any> {\r\n        return this.httpClient.post<any>(`_api/repo/");
+            
+            #line 35 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("/${id}`, model);\r\n     }\r\n     \r\n     public create");
+            
+            #line 38 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("(id: number | string, model: models.");
+            
+            #line 38 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
+            
+            #line default
+            #line hidden
+            this.Write("): Observable<models.");
+            
+            #line 38 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
+            
+            #line default
+            #line hidden
+            this.Write("> {\r\n        return this.httpClient.post<any>(`_api/repo/");
+            
+            #line 39 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("`, model);\r\n     }\r\n\r\n\t public delete");
+            
+            #line 42 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("(id: number | string): Observable<any> {\r\n        return this.httpClient.post<any" +
+                    ">(`_api/repo/");
+            
+            #line 43 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("/delete/${id}`);\r\n     }\r\n\r\n\t protected populate");
+            
+            #line 46 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SearchParams(filterModel: models.");
+            
+            #line 46 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write(@"SearchParams): HttpParams {
+		
 
 		let params = new HttpParams();
 
@@ -81,148 +210,42 @@ namespace Tangsem.Generator.Templates.Angular
 
 			");
             
-            #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            #line 57 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
  foreach (var col in tableMetadata.Columns) { 
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\tif (filterModel.");
             
-            #line 36 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            #line 59 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t{\r\n\t\t\t\tparams = params.set(\'");
             
-            #line 38 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            #line 61 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("\', filterModel.");
             
-            #line 38 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            #line 61 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write(".toString());\r\n\r\n\t\t\t}\r\n\t\t\t");
             
-            #line 41 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            #line 64 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t}\r\n\r\n        return this.httpClient.get<models.SearchResultModel<models.");
+            this.Write("\r\n\t\t}\r\n\r\n\t\treturn params;\r\n\t }\r\n\r\n\r\n ");
             
-            #line 45 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
-            
-            #line default
-            #line hidden
-            this.Write(">>(`_api/repo/");
-            
-            #line 45 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("`, { params: params });\r\n     }\r\n     \r\n     public get");
-            
-            #line 48 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("ById(id: number | string): Observable<models.");
-            
-            #line 48 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
-            
-            #line default
-            #line hidden
-            this.Write("> {\r\n        return this.httpClient.get<");
-            
-            #line 49 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
-            
-            #line default
-            #line hidden
-            this.Write(">(`_api/repo/");
-            
-            #line 49 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("/${id}`);\r\n     }\r\n     \r\n     public update");
-            
-            #line 52 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("(id: number | string, model: models.");
-            
-            #line 52 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
-            
-            #line default
-            #line hidden
-            this.Write("): Observable<any> {\r\n        return this.httpClient.post<any>(`_api/repo/");
-            
-            #line 53 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("/${id}`, model);\r\n     }\r\n     \r\n     public create");
-            
-            #line 56 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("(id: number | string, model: models.");
-            
-            #line 56 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
-            
-            #line default
-            #line hidden
-            this.Write("): Observable<models.");
-            
-            #line 56 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
-            
-            #line default
-            #line hidden
-            this.Write("> {\r\n        return this.httpClient.post<any>(`_api/repo/");
-            
-            #line 57 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("`, model);\r\n     }\r\n\r\n\t public delete");
-            
-            #line 60 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("(id: number | string): Observable<any> {\r\n        return this.httpClient.post<any" +
-                    ">(`_api/repo/");
-            
-            #line 61 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("/delete/${id}`);\r\n     }\r\n\r\n\r\n ");
-            
-            #line 65 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            #line 72 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
  } 
             
             #line default
