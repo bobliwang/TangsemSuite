@@ -101,7 +101,7 @@ namespace Tangsem.Generator
     {
       foreach (var tableMetadata in tableMetadatas)
       {
-        var templates = new ITemplateBase[]
+        var templates = new []
         {
           // Poco Entity
           new PocoTemplate(this.GeneratorConfiguration, tableMetadata),
@@ -152,8 +152,7 @@ namespace Tangsem.Generator
     private void SaveConfigFile()
     {
       // save the generator config xml too.
-      var configPath = this.GeneratorConfiguration.IRepositoriesDirPath + "/" + this.GeneratorConfiguration.RepositoryName
-                       + ".xml";
+      var configPath = $"{this.GeneratorConfiguration.IRepositoriesDirPath}/{this.GeneratorConfiguration.RepositoryName}.xml";
       File.WriteAllText(configPath, File.ReadAllText(this.GeneratorConfiguration.ConfigFilePath));
       this.Log("Saved", configPath);
     }
