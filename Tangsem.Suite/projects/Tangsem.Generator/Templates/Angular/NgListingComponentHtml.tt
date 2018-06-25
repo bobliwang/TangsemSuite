@@ -1,0 +1,26 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Tangsem.Common.Extensions" #>
+
+<table mat-table [dataSource]="dataSource">
+
+<# foreach(var col in this.TableMetadata.Columns) { #>
+	<ng-container matColumnDef="<#= col.PropertyName.Lf() #>">
+		<th mat-header-cell *matHeaderCellDef>
+			<#= col.PropertyName #>
+		</th>
+		<td mat-cell *matCellDef="let rowData">
+			{{rowData.<#= col.PropertyName.Lf() #>}}
+		</td>
+	</ng-container>
+<# } #>
+
+
+	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

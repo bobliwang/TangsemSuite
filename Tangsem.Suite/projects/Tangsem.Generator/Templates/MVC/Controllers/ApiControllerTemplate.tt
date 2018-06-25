@@ -94,17 +94,22 @@ public partial class <#= tableMetadata.EntityName #>ApiController : Controller
 
 		if (filterModel.<#= col.PropertyName #> != null)
 		{
-		<# if (col.ClrType == typeof(string)) { #>
+		<# if (col.OutgoingReference == null) { #>
+			<# if (col.ClrType == typeof(string)) { #>
 			
-			filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #>.Contains(filterModel.<#= col.PropertyName #>));
+				filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #>.Contains(filterModel.<#= col.PropertyName #>));
+			<# } else { #>
+			
+				filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #> == filterModel.<#= col.PropertyName #>);
+			<# } #>
 		<# } else { #>
-			
-			filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #> == filterModel.<#= col.PropertyName #>);
+				// OutgoingReference
+				filteredQry = filteredQry.Where(x => x.<#= col.OutgoingReference.ParentPropertyName #>.Id == filterModel.<#= col.PropertyName #>);
 		<# } #>
 
 		}
 		<# } #>
 
-		return filteredQry;
+		return filteredQry.SortBy(filterModel).SkipAndTake(filterModel);
 	}
 }

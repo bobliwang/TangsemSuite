@@ -114,7 +114,13 @@ namespace Tangsem.Generator
           new PocoDTOTemplate(this.GeneratorConfiguration, tableMetadata),
           new PocoModelAutoMapperProfileTemplate(this.GeneratorConfiguration, tableMetadata),
           new ApiControllerTemplate(this.GeneratorConfiguration, tableMetadata),
-          new SearchParamTemplate(this.GeneratorConfiguration, tableMetadata)
+          new SearchParamTemplate(this.GeneratorConfiguration, tableMetadata),
+
+          // ng listing
+          new NgListingComponent(this.GeneratorConfiguration, tableMetadata),
+          new NgListingComponentHtml(this.GeneratorConfiguration, tableMetadata),
+          new NgFilterComponent(this.GeneratorConfiguration, tableMetadata),
+          new NgFilterComponentHtml(this.GeneratorConfiguration, tableMetadata)
         };
 
         this.ExecuteTemplates(templates);

@@ -42,7 +42,7 @@ namespace Tangsem.Generator.Templates.MVC.AutoMapper
             
             #line default
             #line hidden
-            this.Write("MappingProfile ()\r\n     {\r\n         CreateMap<");
+            this.Write("MappingProfile ()\r\n     {\r\n         var mapping = this.CreateMap<");
             
             #line 12 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
@@ -56,8 +56,29 @@ namespace Tangsem.Generator.Templates.MVC.AutoMapper
             
             #line default
             #line hidden
-            this.Write("Dto>().ReverseMap();\r\n\r\n\t\t// TODO: To generate code that ignores auditable column" +
-                    "s as createdById, modifiedById ...\r\n     }\r\n }");
+            this.Write("Dto>();\r\n\r\n\t\t\r\n\r\n\t\t// TODO: To generate code that ignores auditable columns as cr" +
+                    "eatedById, modifiedById ...\r\n\t\t");
+            
+            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ if( this.TableMetadata.IsAuditableEntity) { 
+            
+            #line default
+            #line hidden
+            this.Write(@"
+			mapping.ForMember(x => x.CreatedById, opts => opts.Ignore()); 
+			mapping.ForMember(x => x.ModifiedById, opts => opts.Ignore());
+			mapping.ForMember(x => x.CreatedTime, opts => opts.Ignore());
+			mapping.ForMember(x => x.ModifiedTime, opts => opts.Ignore());
+			mapping.ForMember(x => x.Active, opts => opts.Ignore());
+
+		");
+            
+            #line 25 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\tmapping.ReverseMap();\r\n     }\r\n }");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -100,6 +100,8 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
+            this.Write("\r\n\r\nexport interface SearchResultModel<T> {\r\n\tpageIndex: number;\r\n\r\n    pageSize:" +
+                    " number;\r\n\r\n    rowsCount: number;\r\n\r\n\tpagedData: T[];\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

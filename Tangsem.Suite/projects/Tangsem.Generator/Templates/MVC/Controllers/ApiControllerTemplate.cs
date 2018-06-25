@@ -274,60 +274,95 @@ namespace Tangsem.Generator.Templates.MVC.Controllers
             this.Write(" != null)\r\n\t\t{\r\n\t\t");
             
             #line 97 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+ if (col.OutgoingReference == null) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t");
+            
+            #line 98 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
  if (col.ClrType == typeof(string)) { 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\r\n\t\t\tfilteredQry = filteredQry.Where(x => x.");
+            this.Write("\t\t\t\r\n\t\t\t\tfilteredQry = filteredQry.Where(x => x.");
             
-            #line 99 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 100 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write(".Contains(filterModel.");
             
-            #line 99 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 100 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
-            this.Write("));\r\n\t\t");
+            this.Write("));\r\n\t\t\t");
             
-            #line 100 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 101 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\r\n\t\t\tfilteredQry = filteredQry.Where(x => x.");
+            this.Write("\t\t\t\r\n\t\t\t\tfilteredQry = filteredQry.Where(x => x.");
             
-            #line 102 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 103 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write(" == filterModel.");
             
-            #line 102 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 103 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n\t\t\t");
+            
+            #line 104 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t");
+            
+            #line 105 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t// OutgoingReference\r\n\t\t\t\tfilteredQry = filteredQry.Where(x => x.");
+            
+            #line 107 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.OutgoingReference.ParentPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(".Id == filterModel.");
+            
+            #line 107 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write(");\r\n\t\t");
             
-            #line 103 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 108 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n\t\t}\r\n\t\t");
             
-            #line 106 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 111 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\treturn filteredQry;\r\n\t}\r\n}");
+            this.Write("\r\n\t\treturn filteredQry.SortBy(filterModel).SkipAndTake(filterModel);\r\n\t}\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

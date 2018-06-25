@@ -53,6 +53,30 @@
     <Compile Include="Settings\GeneratorConfiguration.cs" />
     <Compile Include="Settings\OrmTypeExtensions.cs" />
     <Compile Include="Settings\OrmTypes.cs" />
+    <Compile Include="Templates\Angular\NgFilterComponentHtml.cs">
+      <DependentUpon>NgFilterComponentHtml.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Angular\NgFilterComponent.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NgFilterComponent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Angular\NgFilterComponent.ext.cs" />
+    <Compile Include="Templates\Angular\NgFilterComponentHtml.ext.cs" />
+    <Compile Include="Templates\Angular\NgListingComponent.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NgListingComponent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Angular\NgListingComponent.ext.cs" />
+    <Compile Include="Templates\Angular\NgListingComponentHtml.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NgListingComponentHtml.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Angular\NgListingComponentHtml.ext.cs" />
     <Compile Include="Templates\Angular\NgModels.ext.cs" />
     <Compile Include="Templates\Angular\NgApiService.cs">
       <AutoGen>True</AutoGen>
@@ -183,6 +207,22 @@
     <Content Include="Templates\Angular\NgApiService.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NgApiService.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Angular\NgFilterComponentHtml.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgFilterComponentHtml.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Angular\NgFilterComponent.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgFilterComponent.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Angular\NgListingComponent.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgListingComponent.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Angular\NgListingComponentHtml.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgListingComponentHtml.cs</LastGenOutput>
     </Content>
     <Content Include="Templates\Angular\NgModels.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

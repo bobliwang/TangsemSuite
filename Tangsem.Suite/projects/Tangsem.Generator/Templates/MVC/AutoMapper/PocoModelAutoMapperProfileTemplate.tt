@@ -9,8 +9,20 @@ public partial class <#= this.TableMetadata.EntityName #>MappingProfile : Profil
  {
      public <#= this.TableMetadata.EntityName #>MappingProfile ()
      {
-         CreateMap<<#= this.TableMetadata.EntityName #>, <#= this.TableMetadata.EntityName #>Dto>().ReverseMap();
+         var mapping = this.CreateMap<<#= this.TableMetadata.EntityName #>, <#= this.TableMetadata.EntityName #>Dto>();
+
+		
 
 		// TODO: To generate code that ignores auditable columns as createdById, modifiedById ...
+		<# if( this.TableMetadata.IsAuditableEntity) { #>
+
+			mapping.ForMember(x => x.CreatedById, opts => opts.Ignore()); 
+			mapping.ForMember(x => x.ModifiedById, opts => opts.Ignore());
+			mapping.ForMember(x => x.CreatedTime, opts => opts.Ignore());
+			mapping.ForMember(x => x.ModifiedTime, opts => opts.Ignore());
+			mapping.ForMember(x => x.Active, opts => opts.Ignore());
+
+		<# } #>
+		mapping.ReverseMap();
      }
  }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+
+using Tangsem.Common.Extensions.Linq;
 
 namespace Tangsem.Data
 {
@@ -24,6 +27,25 @@ namespace Tangsem.Data
     /// Gets or sets whether sorting by descending order.
     /// </summary>
     public bool IsDescending { get; set; }
+  }
+
+  public static class QryExtensions
+  {
+    public static IQueryable<T> SortBy<T>(IQueryable<T> qry, SortByModel sortByModel)
+    {
+      if (string.IsNullOrWhiteSpace(sortByModel.SortFieldName))
+      {
+        return qry;
+      }
+
+      return qry.OrderBy(sortByModel.SortFieldName, sortByModel.Direction);
+    }
+
+
+    public static IQueryable<T> SkipAndTake<T>(IQueryable<T> qry, SearchParamsBase searchParam)
+    {
+      return qry.Skip(searchParam.PageIndex * searchParam.PageSize).Take(searchParam.PageSize);
+    }
   }
 
   ////internal class Person
