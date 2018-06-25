@@ -53,6 +53,11 @@
     <Compile Include="Settings\GeneratorConfiguration.cs" />
     <Compile Include="Settings\OrmTypeExtensions.cs" />
     <Compile Include="Settings\OrmTypes.cs" />
+    <Compile Include="Templates\Angular\NgModule.cs">
+      <DependentUpon>NgModule.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Angular\NgApiService.ext.cs">
       <DependentUpon>NgApiService.tt</DependentUpon>
     </Compile>
@@ -116,6 +121,9 @@
     </Compile>
     <Compile Include="Templates\Angular\NgModels.ext.cs">
       <DependentUpon>NgModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Angular\NgModule.ext.cs">
+      <DependentUpon>NgModule.tt</DependentUpon>
     </Compile>
     <Compile Include="Templates\Entities\EntityFxFluentTemplate.cs" />
     <Compile Include="Templates\Entities\NHibernateFluentTemplate.cs" />
@@ -240,6 +248,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Templates\Angular\NgModule.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgModule.cs</LastGenOutput>
+    </Content>
     <Content Include="Templates\Angular\NgApiService.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NgApiService.cs</LastGenOutput>

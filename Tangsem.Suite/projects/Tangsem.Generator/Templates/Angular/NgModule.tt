@@ -1,0 +1,43 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#@ import namespace="Tangsem.Common.Extensions" #>
+<#@ import namespace="Tangsem.Generator.Templates" #>
+<#@ import namespace="Tangsem.Generator.Settings" #>
+
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import * as models from '../models/models';
+
+import { CommonModule } from '@angular/common';
+// modules
+import { ErrorHandler, ModuleWithProviders, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { MatStepperModule, MatTabsModule } from '@angular/material';
+
+@NgModule({
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+	],
+	declarations: [
+		<# foreach (var tableMetadata in this.TableMetadatas) { #>
+
+			<#= tableMetadata.EntityName #>FilterComponent,
+			<#= tableMetadata.EntityName #>EditorComponent,
+			<#= tableMetadata.EntityName #>ListingComponent,
+
+		<# } #>
+	],
+	
+	providers: [
+		<#=Configuration.RepositoryName#>ApiService
+	]
+
+})
+export class <#=Configuration.RepositoryName#>Module {
+}
