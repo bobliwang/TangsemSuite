@@ -34,8 +34,8 @@ namespace Tangsem.Generator.Templates.Angular
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSort, MatSnackBar, MatPaginator } from '@angular/material';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import {catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
 import { ");
             
@@ -104,15 +104,19 @@ import { ");
             
             #line default
             #line hidden
-            this.Write(@"SearchParams;
-
-	public ngOnInit() {
-		
-		this.filter	= this.filter || {};
+            this.Write("SearchParams;\r\n\r\n\tpublic ngOnInit() {\r\n\t\t\r\n\t\tthis.filter\t= this.filter || <models" +
+                    ".");
+            
+            #line 49 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write(@"SearchParams> {};
 
 		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-		merge(this.sort.sortChange, this.paginator.page).pipe(
+		Observable.merge(this.sort.sortChange, this.paginator.page).pipe(
 			startWith({}),
 			switchMap(() => {
 			  this.isLoadingResults = true;
@@ -135,15 +139,15 @@ import { ");
 			map(data => {
 			  // Flip flag to show that loading has finished.
 			  this.isLoadingResults = false;
-			  this.resultsLength = data.total_count;
+			  this.resultsLength = data.rowsCount;
 
-			  return data.items;
+			  return data.pagedData;
 			}),
 			catchError(() => {
 			  this.isLoadingResults = false;
 			  // Catch if the GitHub API has reached its rate limit. Return empty data.
 
-			  return observableOf([]);
+			  return Observable.of([]);
 			})
 		  ).subscribe(data => this.");
             

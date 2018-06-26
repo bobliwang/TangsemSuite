@@ -7,8 +7,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import * as models from '../../models/models';
 
 import { <#=Configuration.RepositoryName#>ApiService } from '../../services/api.service';

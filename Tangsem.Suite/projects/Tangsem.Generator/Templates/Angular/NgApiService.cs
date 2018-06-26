@@ -183,7 +183,7 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("/delete/${id}`);\r\n     }\r\n\r\n\t protected populate");
+            this.Write("/delete/${id}`, {});\r\n     }\r\n\r\n\t protected populate");
             
             #line 46 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));

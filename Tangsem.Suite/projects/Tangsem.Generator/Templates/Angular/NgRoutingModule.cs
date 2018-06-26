@@ -96,42 +96,42 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("\t{ \'");
+            this.Write("\t{ path: \'");
             
             #line 22 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgRoutingModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
-            this.Write("/{:id}/{:action}\': ");
+            this.Write("/:id/:action\', component: ");
             
             #line 22 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgRoutingModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("EditorComponent },\r\n\t{ \'");
+            this.Write("EditorComponent },\r\n\t{ path: \'");
             
             #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgRoutingModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
-            this.Write("/listing\': ");
+            this.Write("/listing\', component: ");
             
             #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgRoutingModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("ListingComponent },\r\n\t{ \'");
+            this.Write("ListingComponent },\r\n\t{ path: \'");
             
             #line 24 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgRoutingModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
-            this.Write("/create\': ");
+            this.Write("/create\', component: ");
             
             #line 24 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgRoutingModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));

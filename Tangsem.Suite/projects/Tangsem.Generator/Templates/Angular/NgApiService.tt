@@ -40,7 +40,7 @@ export class <#=Configuration.RepositoryName#>ApiService {
      }
 
 	 public delete<#=tableMetadata.EntityName#>(id: number | string): Observable<any> {
-        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>/delete/${id}`);
+        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>/delete/${id}`, {});
      }
 
 	 protected populate<#=tableMetadata.EntityName#>SearchParams(filterModel: models.<#= tableMetadata.EntityName #>SearchParams): HttpParams {

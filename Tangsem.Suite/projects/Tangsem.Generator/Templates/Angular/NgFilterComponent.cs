@@ -34,7 +34,7 @@ namespace Tangsem.Generator.Templates.Angular
 
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
-import { merge, Observable, of as observableOf } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import * as models from '../../models/models';
 
@@ -76,8 +76,15 @@ import * as models from '../../models/models';
             #line default
             #line hidden
             this.Write("SearchParams>();\r\n\r\n\tpublic ngOnInit() {\r\n\t\tthis.filterModel = this.filterModel |" +
-                    "| {};\r\n\t}\r\n\r\n\tpublic search() {\r\n\t\tthis.onSearch.emit(this.filterModel);\r\n\t}\r\n\r\n" +
-                    "}");
+                    "| <models.");
+            
+            #line 30 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SearchParams> {};\r\n\t}\r\n\r\n\tpublic search() {\r\n\t\tthis.onSearch.emit(this.filterMode" +
+                    "l);\r\n\t}\r\n\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

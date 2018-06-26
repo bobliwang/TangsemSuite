@@ -10,7 +10,7 @@
 
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
-import { merge, Observable, of as observableOf } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import * as models from '../../models/models';
 
@@ -27,7 +27,7 @@ export class <#= this.TableMetadata.EntityName #>FilterComponent {
 	public onSearch = new EventEmitter<models.<#= this.TableMetadata.EntityName #>SearchParams>();
 
 	public ngOnInit() {
-		this.filterModel = this.filterModel || {};
+		this.filterModel = this.filterModel || <models.<#= this.TableMetadata.EntityName #>SearchParams> {};
 	}
 
 	public search() {

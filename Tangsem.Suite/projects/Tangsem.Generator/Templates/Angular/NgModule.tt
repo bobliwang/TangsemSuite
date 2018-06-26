@@ -16,7 +16,18 @@ import { CommonModule } from '@angular/common';
 import { ErrorHandler, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatStepperModule, MatTabsModule, MatFormFieldModule, MatSelectModule } from '@angular/material';
+import {
+	MatStepperModule,
+	MatTabsModule,
+	MatFormFieldModule,
+	MatSelectModule,
+	MatTableModule,
+	MatSortModule,
+	MatButtonModule,
+	MatInputModule,
+	MatAutocompleteModule,
+	MatCheckboxModule
+} from '@angular/material';
 import { <#=Configuration.RepositoryName#>ApiService } from './services/api.service';
 
 /************ AUTO GEN COMPONENTS **************/
@@ -35,7 +46,13 @@ import { <#= tableMetadata.EntityName #>EditorComponent } from './components/<#=
 		MatStepperModule,
 		MatTabsModule,
 		MatFormFieldModule,
-		MatSelectModule
+		MatSelectModule,
+		MatTableModule,
+		MatSortModule,
+		MatButtonModule,
+		MatInputModule,
+		MatAutocompleteModule,
+		MatCheckboxModule
 	],
 	declarations: [
 		<# foreach (var tableMetadata in this.TableMetadatas) { #>
@@ -56,7 +73,13 @@ import { <#= tableMetadata.EntityName #>EditorComponent } from './components/<#=
 		MatStepperModule,
 		MatTabsModule,
 		MatFormFieldModule,
-		MatSelectModule
+		MatSelectModule,
+		MatTableModule,
+		MatSortModule,
+		MatButtonModule,
+		MatInputModule,
+		MatAutocompleteModule,
+		MatCheckboxModule
 	]
 
 })

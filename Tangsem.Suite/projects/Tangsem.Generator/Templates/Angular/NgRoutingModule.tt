@@ -19,9 +19,9 @@ import { <#= tableMetadata.EntityName #>EditorComponent } from './components/<#=
 export const routes: Routes = [
 
 <# foreach (var tableMetadata in this.TableMetadatas) { #>
-	{ '<#= tableMetadata.EntityName.Lf() #>/{:id}/{:action}': <#= tableMetadata.EntityName #>EditorComponent },
-	{ '<#= tableMetadata.EntityName.Lf() #>/listing': <#= tableMetadata.EntityName #>ListingComponent },
-	{ '<#= tableMetadata.EntityName.Lf() #>/create': <#= tableMetadata.EntityName #>EditorComponent },
+	{ path: '<#= tableMetadata.EntityName.Lf() #>/:id/:action', component: <#= tableMetadata.EntityName #>EditorComponent },
+	{ path: '<#= tableMetadata.EntityName.Lf() #>/listing', component: <#= tableMetadata.EntityName #>ListingComponent },
+	{ path: '<#= tableMetadata.EntityName.Lf() #>/create', component: <#= tableMetadata.EntityName #>EditorComponent },
 
 <# } #>
 
