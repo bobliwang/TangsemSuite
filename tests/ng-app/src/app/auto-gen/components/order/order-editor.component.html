@@ -1,0 +1,79 @@
+<div class="editor-ctn">
+
+
+
+	<label>
+		Id
+	</label>
+	<input type="number"
+		[(ngModel)]="filterModel.id"/>
+
+
+	<label>
+		CustomerName
+	</label>
+	<input type="text"
+		[(ngModel)]="filterModel.customerName"/>
+
+
+	<label>
+		ProductId
+	</label>
+	<input type="number"
+		[(ngModel)]="filterModel.productId"/>
+
+
+	<label>
+		OrderTotal
+	</label>
+	<input type="number"
+		[(ngModel)]="filterModel.orderTotal"/>
+
+
+	<label>
+		CreatedById
+	</label>
+	<input type="number"
+		[(ngModel)]="filterModel.createdById"/>
+
+
+	<label>
+		ModifiedById
+	</label>
+	<input type="number"
+		[(ngModel)]="filterModel.modifiedById"/>
+
+
+	<label>
+		CreatedTime
+	</label>
+	<input type="text"
+		[(ngModel)]="filterModel.createdTime"/>
+
+
+	<label>
+		ModifiedTime
+	</label>
+	<input type="text"
+		[(ngModel)]="filterModel.modifiedTime"/>
+
+
+	<label>
+		Active
+	</label>
+	<input type="text"
+		[(ngModel)]="filterModel.active"/>
+
+
+<div>
+
+
+<div class="actions-bar">
+	<button mat-button (click)="save()">
+		Save
+	<button>
+
+	<button mat-button (click)="cancel()">
+		Cancel
+	<button>
+</div>

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="2.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="NHibernate" Version="5.0.3" />
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Tangsem.Common">
+      <HintPath>..\libs\Tangsem.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Tangsem.Data">
+      <HintPath>..\libs\Tangsem.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Tangsem.NHibernate">
+      <HintPath>..\libs\Tangsem.NHibernate.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

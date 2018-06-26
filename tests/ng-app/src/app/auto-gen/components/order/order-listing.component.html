@@ -1,0 +1,117 @@
+<!-- FILTER -->
+<order-filter [filterModel]="filterModel" (onSearch)="search($event)">
+</order-filter>
+
+
+<button mat-button (click)="add()">
+	<mat-icon>
+		add
+	</mat-icon>
+	New
+</button>
+
+<!-- TABLE -->
+<table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDisableClear matSortDirection="desc">
+
+	<ng-container matColumnDef="id">
+		<th mat-header-cell *matHeaderCellDef>
+			Id
+		</th>
+		<td mat-cell *matCellDef="let rowData">
+			{{rowData.id}}
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="customerName">
+		<th mat-header-cell *matHeaderCellDef>
+			CustomerName
+		</th>
+		<td mat-cell *matCellDef="let rowData">
+			{{rowData.customerName}}
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="productId">
+		<th mat-header-cell *matHeaderCellDef>
+			ProductId
+		</th>
+		<td mat-cell *matCellDef="let rowData">
+			{{rowData.productId}}
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="orderTotal">
+		<th mat-header-cell *matHeaderCellDef>
+			OrderTotal
+		</th>
+		<td mat-cell *matCellDef="let rowData">
+			{{rowData.orderTotal}}
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="createdById">
+		<th mat-header-cell *matHeaderCellDef>
+			CreatedById
+		</th>
+		<td mat-cell *matCellDef="let rowData">
+			{{rowData.createdById}}
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="modifiedById">
+		<th mat-header-cell *matHeaderCellDef>
+			ModifiedById
+		</th>
+		<td mat-cell *matCellDef="let rowData">
+			{{rowData.modifiedById}}
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="createdTime">
+		<th mat-header-cell *matHeaderCellDef>
+			CreatedTime
+		</th>
+		<td mat-cell *matCellDef="let rowData">
+			{{rowData.createdTime}}
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="modifiedTime">
+		<th mat-header-cell *matHeaderCellDef>
+			ModifiedTime
+		</th>
+		<td mat-cell *matCellDef="let rowData">
+			{{rowData.modifiedTime}}
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="active">
+		<th mat-header-cell *matHeaderCellDef>
+			Active
+		</th>
+		<td mat-cell *matCellDef="let rowData">
+			{{rowData.active}}
+		</td>
+	</ng-container>
+
+
+	<ng-container matColumnDef="actions">
+		<th mat-header-cell *matHeaderCellDef>
+		
+		</th>
+
+		<td mat-cell *matCellDef="let rowData">
+			<button mat-button (click)="edit(rowData)">
+				<mat-icon>
+					edit
+				</mat-icon>
+				Edit
+			</button>
+
+			<button mat-button (click)="delete(rowData)">
+				<mat-icon>
+					delete
+				</mat-icon>
+				Delete
+			</button>
+		</td>
+	</ng-container>
+
+
+	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

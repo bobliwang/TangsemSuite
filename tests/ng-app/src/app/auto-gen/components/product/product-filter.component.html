@@ -1,0 +1,41 @@
+<div class="filter-ctn">
+
+
+
+	<input type="number" [(ngModel)]="filterModel.id"/>
+
+
+	<input type="text" [(ngModel)]="filterModel.name"/>
+
+
+	<input type="number" [(ngModel)]="filterModel.unitPrice"/>
+
+
+	<input type="text" [(ngModel)]="filterModel.specsJson"/>
+
+
+	<input type="number" [(ngModel)]="filterModel.createdById"/>
+
+
+	<input type="text" [(ngModel)]="filterModel.createdTime"/>
+
+
+	<input type="number" [(ngModel)]="filterModel.modifiedById"/>
+
+
+	<input type="text" [(ngModel)]="filterModel.modifiedTime"/>
+
+
+	<input type="text" [(ngModel)]="filterModel.active"/>
+
+
+<div>
+
+<div>
+	<button (click)="search()" mat-button>
+		<mat-icon>
+			search
+		</mat-icon>
+		Search
+	</button>
+</div>
