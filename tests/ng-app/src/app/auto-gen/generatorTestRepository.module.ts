@@ -18,7 +18,8 @@ import {
 	MatAutocompleteModule,
 	MatCheckboxModule,
 	MatIconModule,
-	MatTableDataSource
+	MatTableDataSource,
+	MatPaginatorModule
 } from '@angular/material';
 import { GeneratorTestRepositoryApiService } from './services/api.service';
 
@@ -34,6 +35,8 @@ import { OrderEditorComponent } from './components/order/order-editor.component'
 import { PosFilterComponent } from './components/pos/pos-filter.component';
 import { PosListingComponent } from './components/pos/pos-listing.component';
 import { PosEditorComponent } from './components/pos/pos-editor.component';
+import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-routing.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -42,6 +45,7 @@ import { PosEditorComponent } from './components/pos/pos-editor.component';
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule,
+		GeneratorTestRepositoryRoutingModule,
 
 		MatIconModule,
 		MatStepperModule,
@@ -53,7 +57,9 @@ import { PosEditorComponent } from './components/pos/pos-editor.component';
 		MatButtonModule,
 		MatInputModule,
 		MatAutocompleteModule,
-		MatCheckboxModule,	
+		MatCheckboxModule,
+		MatPaginatorModule
+
 	],
 	declarations: [
 		
@@ -94,7 +100,23 @@ import { PosEditorComponent } from './components/pos/pos-editor.component';
 		MatButtonModule,
 		MatInputModule,
 		MatAutocompleteModule,
-		MatCheckboxModule
+		MatCheckboxModule,
+		MatPaginatorModule,
+		GeneratorTestRepositoryRoutingModule,
+		
+		ProductFilterComponent,
+		ProductEditorComponent,
+		ProductListingComponent,
+
+		
+		OrderFilterComponent,
+		OrderEditorComponent,
+		OrderListingComponent,
+
+		
+		PosFilterComponent,
+		PosEditorComponent,
+		PosListingComponent,
 	]
 
 })
