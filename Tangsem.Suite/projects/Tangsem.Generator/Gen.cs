@@ -88,7 +88,8 @@ namespace Tangsem.Generator
         new NgApiService (this.GeneratorConfiguration, tableMetadatas ),
         new NgModels(this.GeneratorConfiguration, tableMetadatas ),
         new PocoModelAutoMapperConfigurationTemplate(this.GeneratorConfiguration, tableMetadatas),
-        new NgModule(this.GeneratorConfiguration, tableMetadatas)
+        new NgModule(this.GeneratorConfiguration, tableMetadatas),
+        new NgRoutingModule(this.GeneratorConfiguration, tableMetadatas)
       };
 
       this.ExecuteTemplates(templates);

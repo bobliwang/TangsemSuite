@@ -1,0 +1,41 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#@ import namespace="Tangsem.Common.Extensions" #>
+<#@ import namespace="Tangsem.Generator.Templates" #>
+<#@ import namespace="Tangsem.Generator.Settings" #>
+
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+
+<# foreach (var tableMetadata in this.TableMetadatas) { #>
+
+import { <#= tableMetadata.EntityName #>ListingComponent } from './components/<#= tableMetadata.EntityName.Lf() #>/<#= tableMetadata.EntityName.Lf() #>-listing.component';
+import { <#= tableMetadata.EntityName #>EditorComponent } from './components/<#= tableMetadata.EntityName.Lf() #>/<#= tableMetadata.EntityName.Lf() #>-editor.component';
+
+<# } #>
+
+export const routes: Routes = [
+
+<# foreach (var tableMetadata in this.TableMetadatas) { #>
+	{ '<#= tableMetadata.EntityName.Lf() #>/{:id}/{:action}': <#= tableMetadata.EntityName #>EditorComponent },
+	{ '<#= tableMetadata.EntityName.Lf() #>/listing': <#= tableMetadata.EntityName #>ListingComponent },
+	{ '<#= tableMetadata.EntityName.Lf() #>/create': <#= tableMetadata.EntityName #>EditorComponent },
+
+<# } #>
+
+]
+
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  declarations: [
+  ],
+  exports: [RouterModule]
+})
+export class <#= Configuration.RepositoryName #>RoutingModule {
+}

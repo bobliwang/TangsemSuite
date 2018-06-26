@@ -23,7 +23,7 @@ namespace Tangsem.Generator.Templates.Angular
     {
       return Path.Combine(
         this.Configuration.NgAppFolder,
-        this.Configuration.RepositoryName.Lf() + "-module.ts"
+        this.Configuration.RepositoryName.Lf() + ".module.ts"
       );
     }
   }
