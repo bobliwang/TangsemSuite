@@ -53,6 +53,11 @@
     <Compile Include="Settings\GeneratorConfiguration.cs" />
     <Compile Include="Settings\OrmTypeExtensions.cs" />
     <Compile Include="Settings\OrmTypes.cs" />
+    <Compile Include="Templates\Angular\NgEditorComponent.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NgEditorComponent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Angular\NgRoutingModule.cs">
       <DependentUpon>NgRoutingModule.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -65,11 +70,6 @@
     </Compile>
     <Compile Include="Templates\Angular\NgApiService.ext.cs">
       <DependentUpon>NgApiService.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgEditorComponent.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NgEditorComponent.tt</DependentUpon>
     </Compile>
     <Compile Include="Templates\Angular\NgEditorComponent.ext.cs">
       <DependentUpon>NgEditorComponent.tt</DependentUpon>

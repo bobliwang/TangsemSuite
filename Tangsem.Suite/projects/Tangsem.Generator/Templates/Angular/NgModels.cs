@@ -19,7 +19,7 @@ namespace Tangsem.Generator.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class NgModels : NgModelsBase
     {
@@ -30,73 +30,111 @@ namespace Tangsem.Generator.Templates.Angular
         public virtual string TransformText()
         {
             this.Write("\r\n");
-            this.Write("\r\n\r\nexport interface SearchResultModel<T> {\r\n\tpageIndex: number;\r\n\r\n    pageSize:" +
-                    " number;\r\n\r\n    rowsCount: number;\r\n\r\n\tpagedData: T[];\r\n}\r\n\r\n\r\n");
+            this.Write(@"
+export type EditorMode = 'create' | 'view' | 'edit';
+
+export interface SearchResultModel<T> {
+	pageIndex: number;
+
+    pageSize: number;
+
+    rowsCount: number;
+
+	pagedData: T[];
+}
+
+export interface SearchParams {
+
+	pageIndex: number;
+
+    pageSize: number;
+
+	sortFieldName: string;
+
+	direction: string;
+}
+
+
+");
             
-            #line 21 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 33 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  foreach (var tableMetadata in this.TableMetadatas) { 
             
             #line default
             #line hidden
             this.Write("\r\nexport interface ");
             
-            #line 23 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 35 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
             
             #line default
             #line hidden
             this.Write(" {\r\n\r\n     \r\n");
             
-            #line 26 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 38 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  foreach (var col in tableMetadata.Columns) { 
             
             #line default
             #line hidden
             this.Write("\r\n\t");
             
-            #line 28 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 40 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  if (col.IsJsonType) { 
             
             #line default
             #line hidden
             this.Write("\r\n\t/**\r\n\t * ");
             
-            #line 31 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 43 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.JsonType));
             
             #line default
             #line hidden
             this.Write("\r\n\t */\r\n\t");
             
-            #line 33 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 45 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t");
             
-            #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 46 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("?: ");
             
-            #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 46 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.TsTypeAsString));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n");
             
-            #line 36 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 48 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n}\r\n\r\n");
+            this.Write("\r\n}\r\n\r\nexport interface ");
             
-            #line 40 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            #line 52 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SearchParams extends ");
+            
+            #line 52 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));
+            
+            #line default
+            #line hidden
+            this.Write(", SearchParams  {\r\n}\r\n\r\n");
+            
+            #line 55 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModels.tt"
  } 
             
             #line default

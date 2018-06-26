@@ -14,7 +14,7 @@ import * as models from '../models/models';
 
 export class <#=Configuration.RepositoryName#>ApiService {
 
-    construct(protected httpClient: HttpClient) {
+    constructor(protected httpClient: HttpClient) {
     }
 
 
@@ -35,7 +35,7 @@ export class <#=Configuration.RepositoryName#>ApiService {
         return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>/${id}`, model);
      }
      
-     public create<#=tableMetadata.EntityName#>(id: number | string, model: models.<#=tableMetadata.TsModelName#>): Observable<models.<#=tableMetadata.TsModelName#>> {
+     public create<#=tableMetadata.EntityName#>(model: models.<#=tableMetadata.TsModelName#>): Observable<models.<#=tableMetadata.TsModelName#>> {
         return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>`, model);
      }
 

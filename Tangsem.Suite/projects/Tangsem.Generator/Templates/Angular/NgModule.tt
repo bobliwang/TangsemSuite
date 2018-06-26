@@ -10,32 +10,53 @@
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import * as models from '../models/models';
+import * as models from './models/models';
 
 import { CommonModule } from '@angular/common';
-// modules
 import { ErrorHandler, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatStepperModule, MatTabsModule } from '@angular/material';
+import { MatStepperModule, MatTabsModule, MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { <#=Configuration.RepositoryName#>ApiService } from './services/api.service';
+
+/************ AUTO GEN COMPONENTS **************/
+<# foreach (var tableMetadata in this.TableMetadatas) { #>
+import { <#= tableMetadata.EntityName #>FilterComponent } from './components/<#= tableMetadata.EntityName.Lf() #>/<#= tableMetadata.EntityName.Lf() #>-filter.component';
+import { <#= tableMetadata.EntityName #>ListingComponent } from './components/<#= tableMetadata.EntityName.Lf() #>/<#= tableMetadata.EntityName.Lf() #>-listing.component';
+import { <#= tableMetadata.EntityName #>EditorComponent } from './components/<#= tableMetadata.EntityName.Lf() #>/<#= tableMetadata.EntityName.Lf() #>-editor.component';
+
+<# } #>
 
 @NgModule({
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
+
+		MatStepperModule,
+		MatTabsModule,
+		MatFormFieldModule,
+		MatSelectModule
 	],
 	declarations: [
 		<# foreach (var tableMetadata in this.TableMetadatas) { #>
 
-			<#= tableMetadata.EntityName #>FilterComponent,
-			<#= tableMetadata.EntityName #>EditorComponent,
-			<#= tableMetadata.EntityName #>ListingComponent,
+		<#= tableMetadata.EntityName #>FilterComponent,
+		<#= tableMetadata.EntityName #>EditorComponent,
+		<#= tableMetadata.EntityName #>ListingComponent,
 
 		<# } #>
+
 	],
 	
 	providers: [
 		<#=Configuration.RepositoryName#>ApiService
+	],
+
+	exports: [
+		MatStepperModule,
+		MatTabsModule,
+		MatFormFieldModule,
+		MatSelectModule
 	]
 
 })

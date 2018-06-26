@@ -18,7 +18,7 @@ namespace Tangsem.Generator.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class NgEditorComponent : NgEditorComponentBase
     {
@@ -29,47 +29,52 @@ namespace Tangsem.Generator.Templates.Angular
         public virtual string TransformText()
         {
             this.Write(@"
-import {HttpClient} from '@angular/common/http';
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort} from '@angular/material';
-import {merge, Observable, of as observableOf} from 'rxjs';
-import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import * as models from '../../models/models';
 
-
-@Component({
-  selector: '");
+import { ");
             
-            #line 15 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 14 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
+            
+            #line default
+            #line hidden
+            this.Write("ApiService } from \'../../services/api.service\';\r\n\r\n@Component({\r\n  selector: \'");
+            
+            #line 17 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("-editor\',\r\n  templateUrl: \'");
             
-            #line 16 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 18 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("-editor.html\',\r\n})\r\nexport class ");
             
-            #line 18 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 20 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("EditorComponent {\r\n\t\r\n\t@Input()\r\n\tpublic model: ");
+            this.Write("EditorComponent {\r\n\t\r\n\t@Input()\r\n\tpublic model: models.");
             
-            #line 21 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.TsModelName));
             
             #line default
             #line hidden
-            this.Write(";\r\n\r\n\t@Input()\r\n\tpublic mode: \'create\' | \'view\' | \'edit\' = \'view\';\r\n\r\n\t\r\n\tconstru" +
-                    "ctor(\r\n\t\tprivate router: NgRouter,\r\n\t\tprivate snackBar: MatSnackBar,\r\n\t\tprivate " +
-                    "repoApi: ");
+            this.Write(";\r\n\r\n\t@Input()\r\n\tpublic mode: models.EditorMode = \'view\';\r\n\r\n\t\r\n\tconstructor(\r\n\t\t" +
+                    "private router: Router,\r\n\t\tprivate snackBar: MatSnackBar,\r\n\t\tprivate repoApi: ");
             
-            #line 30 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 32 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
@@ -96,7 +101,14 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 
 	protected create() {
 
-		this.repoApi.create(this.model).subscribe(result => {
+		this.repoApi.create");
+            
+            #line 54 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write(@"(this.model).subscribe(result => {
 			if (result && result.id) {
 				this.model.id = result.id;
 			}
@@ -104,13 +116,20 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 			this.snackBar.open('created successfully', null, { duration: 1000 });
 			this.router.navigate(['listing']);
 		}, err => {
-			this.snackBar.open('failed to create', null { duration: 3000 });
+			this.snackBar.open('failed to create', null, { duration: 3000 });
 		});
 	}
 
 	protected update() {
 
-		this.repoApi.update(this.model).subscribe(result => {
+		this.repoApi.update");
+            
+            #line 68 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write(@"(this.model.id, this.model).subscribe(result => {
 			if (result && result.id) {
 				this.model.id = result.id;
 			}

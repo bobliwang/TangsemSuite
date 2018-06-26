@@ -4,12 +4,14 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 
-import {HttpClient} from '@angular/common/http';
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort} from '@angular/material';
-import {merge, Observable, of as observableOf} from 'rxjs';
-import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import * as models from '../../models/models';
 
+import { <#=Configuration.RepositoryName#>ApiService } from '../../services/api.service';
 
 @Component({
   selector: '<#= this.TableMetadata.EntityName #>-editor',
@@ -18,14 +20,14 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 export class <#= this.TableMetadata.EntityName #>EditorComponent {
 	
 	@Input()
-	public model: <#= this.TableMetadata.TsModelName #>;
+	public model: models.<#= this.TableMetadata.TsModelName #>;
 
 	@Input()
-	public mode: 'create' | 'view' | 'edit' = 'view';
+	public mode: models.EditorMode = 'view';
 
 	
 	constructor(
-		private router: NgRouter,
+		private router: Router,
 		private snackBar: MatSnackBar,
 		private repoApi: <#=Configuration.RepositoryName#>ApiService) {
 	
@@ -49,7 +51,7 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent {
 
 	protected create() {
 
-		this.repoApi.create(this.model).subscribe(result => {
+		this.repoApi.create<#= this.TableMetadata.EntityName #>(this.model).subscribe(result => {
 			if (result && result.id) {
 				this.model.id = result.id;
 			}
@@ -57,13 +59,13 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent {
 			this.snackBar.open('created successfully', null, { duration: 1000 });
 			this.router.navigate(['listing']);
 		}, err => {
-			this.snackBar.open('failed to create', null { duration: 3000 });
+			this.snackBar.open('failed to create', null, { duration: 3000 });
 		});
 	}
 
 	protected update() {
 
-		this.repoApi.update(this.model).subscribe(result => {
+		this.repoApi.update<#= this.TableMetadata.EntityName #>(this.model.id, this.model).subscribe(result => {
 			if (result && result.id) {
 				this.model.id = result.id;
 			}

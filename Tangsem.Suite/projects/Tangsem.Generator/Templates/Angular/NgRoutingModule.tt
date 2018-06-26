@@ -10,10 +10,7 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-
 <# foreach (var tableMetadata in this.TableMetadatas) { #>
-
 import { <#= tableMetadata.EntityName #>ListingComponent } from './components/<#= tableMetadata.EntityName.Lf() #>/<#= tableMetadata.EntityName.Lf() #>-listing.component';
 import { <#= tableMetadata.EntityName #>EditorComponent } from './components/<#= tableMetadata.EntityName.Lf() #>/<#= tableMetadata.EntityName.Lf() #>-editor.component';
 

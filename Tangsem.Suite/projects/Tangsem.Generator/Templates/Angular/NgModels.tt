@@ -6,6 +6,7 @@
 
 <#@ import namespace="Tangsem.Common.Extensions" #>
 
+export type EditorMode = 'create' | 'view' | 'edit';
 
 export interface SearchResultModel<T> {
 	pageIndex: number;
@@ -15,6 +16,17 @@ export interface SearchResultModel<T> {
     rowsCount: number;
 
 	pagedData: T[];
+}
+
+export interface SearchParams {
+
+	pageIndex: number;
+
+    pageSize: number;
+
+	sortFieldName: string;
+
+	direction: string;
 }
 
 
@@ -35,6 +47,9 @@ export interface <#= tableMetadata.TsModelName #> {
 
 <# } #>
 
+}
+
+export interface <#= tableMetadata.EntityName #>SearchParams extends <#= tableMetadata.TsModelName #>, SearchParams  {
 }
 
 <# } #>

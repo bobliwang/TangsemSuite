@@ -19,7 +19,7 @@ namespace Tangsem.Generator.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class NgFilterComponent : NgFilterComponentBase
     {
@@ -31,43 +31,53 @@ namespace Tangsem.Generator.Templates.Angular
         {
             this.Write("\r\n\r\n");
             this.Write(@"
-import {HttpClient} from '@angular/common/http';
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort} from '@angular/material';
-import {merge, Observable, of as observableOf} from 'rxjs';
-import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { MatPaginator, MatSort } from '@angular/material';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import * as models from '../../models/models';
 
 @Component({
   selector: '");
             
-            #line 18 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            #line 18 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-filter\',\r\n  templateUrl: \'");
             
-            #line 19 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            #line 19 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-filter.html\',\r\n})\r\nexport class ");
             
-            #line 21 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("FilterComponent {\r\n\t\r\n\t@Input()\r\n\tpublic filterModel: ");
+            this.Write("FilterComponent {\r\n\t\r\n\t@Input()\r\n\tpublic filterModel: models.");
             
-            #line 24 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.TsModelName));
+            #line 24 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write(";\r\n\r\n\tpublic ngOnInit() {\r\n\t\tthis.filterModel = this.filterModel || {};\r\n\t}\r\n\r\n}");
+            this.Write("SearchParams;\r\n\r\n\t@Output(\'onSearch\')\r\n\tpublic onSearch = new EventEmitter<models" +
+                    ".");
+            
+            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SearchParams>();\r\n\r\n\tpublic ngOnInit() {\r\n\t\tthis.filterModel = this.filterModel |" +
+                    "| {};\r\n\t}\r\n\r\n\tpublic search() {\r\n\t\tthis.onSearch.emit(this.filterModel);\r\n\t}\r\n\r\n" +
+                    "}");
             return this.GenerationEnvironment.ToString();
         }
     }
