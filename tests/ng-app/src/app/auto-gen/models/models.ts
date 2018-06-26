@@ -38,7 +38,7 @@ export interface ProductModel {
 
 	
 	/**
-	 * TestApp.Common.Domain.ViewModels.ProductSpec[]
+	 * GeneratorTest.Common.Domain.ViewModels.ProductSpec[]
 	 */
 		specsJson?: any[];
 

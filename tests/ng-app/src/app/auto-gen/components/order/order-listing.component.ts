@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSort, MatSnackBar, MatPaginator } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
 import { GeneratorTestRepositoryApiService } from '../../services/api.service';
@@ -9,8 +9,8 @@ import * as models from '../../models/models'
 
 
 @Component({
-  selector: 'Order-listing',
-  templateUrl: 'Order-listing.html',
+  selector: 'order-listing',
+  templateUrl: 'order-listing.component.html',
 })
 export class OrderListingComponent {
 

@@ -4,6 +4,8 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 
+<#@ import namespace="Tangsem.Common.Extensions" #>
+
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
@@ -12,8 +14,8 @@ import * as models from '../../models/models';
 import { <#=Configuration.RepositoryName#>ApiService } from '../../services/api.service';
 
 @Component({
-  selector: '<#= this.TableMetadata.EntityName #>-editor',
-  templateUrl: '<#= this.TableMetadata.EntityName #>-editor.html',
+  selector: '<#= this.TableMetadata.EntityName.Lf() #>-editor',
+  templateUrl: '<#= this.TableMetadata.EntityName.Lf() #>-editor.component.html',
 })
 export class <#= this.TableMetadata.EntityName #>EditorComponent {
 	

@@ -12,6 +12,7 @@ namespace Tangsem.Generator.Templates.Angular
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
+    using Tangsem.Common.Extensions;
     using System;
     
     /// <summary>
@@ -28,40 +29,41 @@ namespace Tangsem.Generator.Templates.Angular
         /// </summary>
         public virtual string TransformText()
         {
+            this.Write("\r\n");
             this.Write("\r\nimport { Router } from \'@angular/router\';\r\nimport { Component, OnInit, ViewChil" +
                     "d, Input } from \'@angular/core\';\r\nimport { MatPaginator, MatSort, MatSnackBar } " +
                     "from \'@angular/material\';\r\nimport * as models from \'../../models/models\';\r\n\r\nimp" +
                     "ort { ");
             
-            #line 12 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 14 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
             #line hidden
             this.Write("ApiService } from \'../../services/api.service\';\r\n\r\n@Component({\r\n  selector: \'");
             
-            #line 15 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            #line 17 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-editor\',\r\n  templateUrl: \'");
             
-            #line 16 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            #line 18 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
-            this.Write("-editor.html\',\r\n})\r\nexport class ");
+            this.Write("-editor.component.html\',\r\n})\r\nexport class ");
             
-            #line 18 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 20 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("EditorComponent {\r\n\t\r\n\t@Input()\r\n\tpublic model: models.");
             
-            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.TsModelName));
             
             #line default
@@ -69,7 +71,7 @@ namespace Tangsem.Generator.Templates.Angular
             this.Write(";\r\n\r\n\t@Input()\r\n\tpublic mode: models.EditorMode = \'view\';\r\n\r\n\t\r\n\tconstructor(\r\n\t\t" +
                     "private router: Router,\r\n\t\tprivate snackBar: MatSnackBar,\r\n\t\tprivate repoApi: ");
             
-            #line 30 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 32 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
@@ -98,7 +100,7 @@ namespace Tangsem.Generator.Templates.Angular
 
 		this.repoApi.create");
             
-            #line 52 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 54 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -119,7 +121,7 @@ namespace Tangsem.Generator.Templates.Angular
 
 		this.repoApi.update");
             
-            #line 66 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 68 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default

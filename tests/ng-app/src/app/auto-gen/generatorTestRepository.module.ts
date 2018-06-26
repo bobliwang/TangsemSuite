@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import * as models from './models/models';
 
@@ -16,7 +16,9 @@ import {
 	MatButtonModule,
 	MatInputModule,
 	MatAutocompleteModule,
-	MatCheckboxModule
+	MatCheckboxModule,
+	MatIconModule,
+	MatTableDataSource
 } from '@angular/material';
 import { GeneratorTestRepositoryApiService } from './services/api.service';
 
@@ -37,8 +39,11 @@ import { PosEditorComponent } from './components/pos/pos-editor.component';
 @NgModule({
 	imports: [
 		CommonModule,
+		FormsModule,
 		ReactiveFormsModule,
+		HttpClientModule,
 
+		MatIconModule,
 		MatStepperModule,
 		MatTabsModule,
 		MatFormFieldModule,
@@ -48,7 +53,7 @@ import { PosEditorComponent } from './components/pos/pos-editor.component';
 		MatButtonModule,
 		MatInputModule,
 		MatAutocompleteModule,
-		MatCheckboxModule
+		MatCheckboxModule,	
 	],
 	declarations: [
 		
@@ -74,6 +79,12 @@ import { PosEditorComponent } from './components/pos/pos-editor.component';
 	],
 
 	exports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpClientModule,
+
+		MatIconModule,
 		MatStepperModule,
 		MatTabsModule,
 		MatFormFieldModule,

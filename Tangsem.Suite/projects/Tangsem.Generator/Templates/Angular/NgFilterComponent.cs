@@ -53,7 +53,7 @@ import * as models from '../../models/models';
             
             #line default
             #line hidden
-            this.Write("-filter.html\',\r\n})\r\nexport class ");
+            this.Write("-filter.component.html\',\r\n})\r\nexport class ");
             
             #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));

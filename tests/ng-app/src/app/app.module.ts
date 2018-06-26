@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { GeneratorTestRepositoryModule } from './auto-gen/generatorTestRepository.module';
+import { GeneratorTestRepositoryApiService } from './auto-gen/services/api.service';
 
 
 @NgModule({
@@ -10,9 +12,18 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    GeneratorTestRepositoryModule
+  ],
+  exports: [
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private apiService: GeneratorTestRepositoryApiService) {
+    
+  }
+}

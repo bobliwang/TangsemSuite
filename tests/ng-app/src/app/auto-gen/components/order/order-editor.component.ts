@@ -6,8 +6,8 @@ import * as models from '../../models/models';
 import { GeneratorTestRepositoryApiService } from '../../services/api.service';
 
 @Component({
-  selector: 'Order-editor',
-  templateUrl: 'Order-editor.html',
+  selector: 'order-editor',
+  templateUrl: 'order-editor.component.html',
 })
 export class OrderEditorComponent {
 	

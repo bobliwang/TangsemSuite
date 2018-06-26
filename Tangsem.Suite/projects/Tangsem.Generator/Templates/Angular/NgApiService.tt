@@ -8,14 +8,26 @@
 <#@ import namespace="Tangsem.Generator.Templates" #>
 <#@ import namespace="Tangsem.Generator.Settings" #>
 
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import * as models from '../models/models';
 
+@Injectable()
 export class <#=Configuration.RepositoryName#>ApiService {
+
+	private _apiBaseUrl = '';
 
     constructor(protected httpClient: HttpClient) {
     }
+
+	public setApiBaseUrl(val: string) {
+		this._apiBaseUrl = val;
+	}
+
+	public url(path: string) {
+		return `${this._apiBaseUrl}/${path}`;
+	}	
 
 
 <# foreach (var tableMetadata in this.TableMetadatas) { #>
@@ -24,23 +36,23 @@ export class <#=Configuration.RepositoryName#>ApiService {
      public get<#=tableMetadata.EntityName#>List(filterModel: models.<#= tableMetadata.EntityName #>SearchParams): Observable<models.SearchResultModel<models.<#=tableMetadata.TsModelName#>>> {
 		const searchParams = this.populate<#=tableMetadata.EntityName#>SearchParams(filterModel);
 
-        return this.httpClient.get<models.SearchResultModel<models.<#=tableMetadata.TsModelName#>>>(`_api/repo/<#=tableMetadata.EntityName#>`, { params: searchParams });
+        return this.httpClient.get<models.SearchResultModel<models.<#=tableMetadata.TsModelName#>>>(this.url(`_api/repo/<#=tableMetadata.EntityName#>`), { params: searchParams });
      }
      
      public get<#=tableMetadata.EntityName#>ById(id: number | string): Observable<models.<#=tableMetadata.TsModelName#>> {
-        return this.httpClient.get<models.<#=tableMetadata.TsModelName#>>(`_api/repo/<#=tableMetadata.EntityName#>/${id}`);
+        return this.httpClient.get<models.<#=tableMetadata.TsModelName#>>(this.url(`_api/repo/<#=tableMetadata.EntityName#>/${id}`));
      }
      
      public update<#=tableMetadata.EntityName#>(id: number | string, model: models.<#=tableMetadata.TsModelName#>): Observable<any> {
-        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>/${id}`, model);
+        return this.httpClient.post<any>(this.url(`_api/repo/<#=tableMetadata.EntityName#>/${id}`), model);
      }
      
      public create<#=tableMetadata.EntityName#>(model: models.<#=tableMetadata.TsModelName#>): Observable<models.<#=tableMetadata.TsModelName#>> {
-        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>`, model);
+        return this.httpClient.post<any>(this.url(`_api/repo/<#=tableMetadata.EntityName#>`), model);
      }
 
 	 public delete<#=tableMetadata.EntityName#>(id: number | string): Observable<any> {
-        return this.httpClient.post<any>(`_api/repo/<#=tableMetadata.EntityName#>/delete/${id}`, {});
+        return this.httpClient.post<any>(this.url(`_api/repo/<#=tableMetadata.EntityName#>/delete/${id}`), {});
      }
 
 	 protected populate<#=tableMetadata.EntityName#>SearchParams(filterModel: models.<#= tableMetadata.EntityName #>SearchParams): HttpParams {

@@ -6,8 +6,8 @@ import * as models from '../../models/models';
 import { GeneratorTestRepositoryApiService } from '../../services/api.service';
 
 @Component({
-  selector: 'Product-editor',
-  templateUrl: 'Product-editor.html',
+  selector: 'product-editor',
+  templateUrl: 'product-editor.component.html',
 })
 export class ProductEditorComponent {
 	

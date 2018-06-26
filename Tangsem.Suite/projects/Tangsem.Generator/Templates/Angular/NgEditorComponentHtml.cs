@@ -19,7 +19,7 @@ namespace Tangsem.Generator.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class NgEditorComponentHtml : NgEditorComponentHtmlBase
     {
@@ -31,46 +31,46 @@ namespace Tangsem.Generator.Templates.Angular
         {
             this.Write("\r\n<div class=\"editor-ctn\">\r\n\r\n\r\n");
             
-            #line 11 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 11 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
  foreach(var col in this.TableMetadata.Columns) { 
             
             #line default
             #line hidden
             this.Write("\r\n\t<label>\r\n\t\t");
             
-            #line 14 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 14 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write("\r\n\t</label>\r\n\t<input type=\"");
             
-            #line 16 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 16 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(getInputType(col.CSharpTypeAsString)));
             
             #line default
             #line hidden
             this.Write("\"\r\n\t\t[(ngModel)]=\"filterModel.");
             
-            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 17 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("\"/>\r\n\r\n");
             
-            #line 19 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 19 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n<div>\r\n\r\n\r\n<div class=\"actions-bar\">\r\n\t<button mat-button (click)=\"save()\">\r\n\t\t" +
-                    "Save\r\n\t<button>\r\n\r\n\t<button mat-button (click)=\"cancel()\">\r\n\t\tCancel\r\n\t<button>\r" +
-                    "\n</div>\r\n\r\n\r\n");
+            this.Write("\r\n</div>\r\n\r\n\r\n<div class=\"actions-bar\">\r\n\t<button mat-button (click)=\"save()\">\r\n\t" +
+                    "\tSave\r\n\t</button>\r\n\r\n\t<button mat-button (click)=\"cancel()\">\r\n\t\tCancel\r\n\t</butto" +
+                    "n>\r\n</div>\r\n\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 35 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+        #line 35 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
 
 	string getInputType(string clrTypeAsString) {
 		switch(clrTypeAsString) {

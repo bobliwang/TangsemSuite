@@ -1,11 +1,23 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import * as models from '../models/models';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class GeneratorTestRepositoryApiService {
+
+	private _apiBaseUrl = '';
 
     constructor(protected httpClient: HttpClient) {
     }
+
+	public setApiBaseUrl(val: string) {
+		this._apiBaseUrl = val;
+	}
+
+	public url(path: string) {
+		return `${this._apiBaseUrl}/${path}`;
+	}	
 
 
 
@@ -13,23 +25,23 @@ export class GeneratorTestRepositoryApiService {
      public getProductList(filterModel: models.ProductSearchParams): Observable<models.SearchResultModel<models.ProductModel>> {
 		const searchParams = this.populateProductSearchParams(filterModel);
 
-        return this.httpClient.get<models.SearchResultModel<models.ProductModel>>(`_api/repo/Product`, { params: searchParams });
+        return this.httpClient.get<models.SearchResultModel<models.ProductModel>>(this.url(`_api/repo/Product`), { params: searchParams });
      }
      
      public getProductById(id: number | string): Observable<models.ProductModel> {
-        return this.httpClient.get<models.ProductModel>(`_api/repo/Product/${id}`);
+        return this.httpClient.get<models.ProductModel>(this.url(`_api/repo/Product/${id}`));
      }
      
      public updateProduct(id: number | string, model: models.ProductModel): Observable<any> {
-        return this.httpClient.post<any>(`_api/repo/Product/${id}`, model);
+        return this.httpClient.post<any>(this.url(`_api/repo/Product/${id}`), model);
      }
      
      public createProduct(model: models.ProductModel): Observable<models.ProductModel> {
-        return this.httpClient.post<any>(`_api/repo/Product`, model);
+        return this.httpClient.post<any>(this.url(`_api/repo/Product`), model);
      }
 
 	 public deleteProduct(id: number | string): Observable<any> {
-        return this.httpClient.post<any>(`_api/repo/Product/delete/${id}`, {});
+        return this.httpClient.post<any>(this.url(`_api/repo/Product/delete/${id}`), {});
      }
 
 	 protected populateProductSearchParams(filterModel: models.ProductSearchParams): HttpParams {
@@ -109,23 +121,23 @@ export class GeneratorTestRepositoryApiService {
      public getOrderList(filterModel: models.OrderSearchParams): Observable<models.SearchResultModel<models.OrderModel>> {
 		const searchParams = this.populateOrderSearchParams(filterModel);
 
-        return this.httpClient.get<models.SearchResultModel<models.OrderModel>>(`_api/repo/Order`, { params: searchParams });
+        return this.httpClient.get<models.SearchResultModel<models.OrderModel>>(this.url(`_api/repo/Order`), { params: searchParams });
      }
      
      public getOrderById(id: number | string): Observable<models.OrderModel> {
-        return this.httpClient.get<models.OrderModel>(`_api/repo/Order/${id}`);
+        return this.httpClient.get<models.OrderModel>(this.url(`_api/repo/Order/${id}`));
      }
      
      public updateOrder(id: number | string, model: models.OrderModel): Observable<any> {
-        return this.httpClient.post<any>(`_api/repo/Order/${id}`, model);
+        return this.httpClient.post<any>(this.url(`_api/repo/Order/${id}`), model);
      }
      
      public createOrder(model: models.OrderModel): Observable<models.OrderModel> {
-        return this.httpClient.post<any>(`_api/repo/Order`, model);
+        return this.httpClient.post<any>(this.url(`_api/repo/Order`), model);
      }
 
 	 public deleteOrder(id: number | string): Observable<any> {
-        return this.httpClient.post<any>(`_api/repo/Order/delete/${id}`, {});
+        return this.httpClient.post<any>(this.url(`_api/repo/Order/delete/${id}`), {});
      }
 
 	 protected populateOrderSearchParams(filterModel: models.OrderSearchParams): HttpParams {
@@ -205,23 +217,23 @@ export class GeneratorTestRepositoryApiService {
      public getPosList(filterModel: models.PosSearchParams): Observable<models.SearchResultModel<models.PosModel>> {
 		const searchParams = this.populatePosSearchParams(filterModel);
 
-        return this.httpClient.get<models.SearchResultModel<models.PosModel>>(`_api/repo/Pos`, { params: searchParams });
+        return this.httpClient.get<models.SearchResultModel<models.PosModel>>(this.url(`_api/repo/Pos`), { params: searchParams });
      }
      
      public getPosById(id: number | string): Observable<models.PosModel> {
-        return this.httpClient.get<models.PosModel>(`_api/repo/Pos/${id}`);
+        return this.httpClient.get<models.PosModel>(this.url(`_api/repo/Pos/${id}`));
      }
      
      public updatePos(id: number | string, model: models.PosModel): Observable<any> {
-        return this.httpClient.post<any>(`_api/repo/Pos/${id}`, model);
+        return this.httpClient.post<any>(this.url(`_api/repo/Pos/${id}`), model);
      }
      
      public createPos(model: models.PosModel): Observable<models.PosModel> {
-        return this.httpClient.post<any>(`_api/repo/Pos`, model);
+        return this.httpClient.post<any>(this.url(`_api/repo/Pos`), model);
      }
 
 	 public deletePos(id: number | string): Observable<any> {
-        return this.httpClient.post<any>(`_api/repo/Pos/delete/${id}`, {});
+        return this.httpClient.post<any>(this.url(`_api/repo/Pos/delete/${id}`), {});
      }
 
 	 protected populatePosSearchParams(filterModel: models.PosSearchParams): HttpParams {

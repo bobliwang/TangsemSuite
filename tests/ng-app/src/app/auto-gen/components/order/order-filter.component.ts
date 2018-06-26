@@ -6,7 +6,7 @@ import * as models from '../../models/models';
 
 @Component({
   selector: 'order-filter',
-  templateUrl: 'order-filter.html',
+  templateUrl: 'order-filter.component.html',
 })
 export class OrderFilterComponent {
 	

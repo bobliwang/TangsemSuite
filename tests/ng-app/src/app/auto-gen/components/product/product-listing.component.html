@@ -11,7 +11,7 @@
 </button>
 
 <!-- TABLE -->
-<table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDisableClear matSortDirection="desc">
+<mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDisableClear matSortDirection="desc">
 
 	<ng-container matColumnDef="id">
 		<th mat-header-cell *matHeaderCellDef>
@@ -112,6 +112,6 @@
 
 	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+</mat-table>
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

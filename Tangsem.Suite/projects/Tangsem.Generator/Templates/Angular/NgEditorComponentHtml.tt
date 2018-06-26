@@ -18,17 +18,17 @@
 
 <# } #>
 
-<div>
+</div>
 
 
 <div class="actions-bar">
 	<button mat-button (click)="save()">
 		Save
-	<button>
+	</button>
 
 	<button mat-button (click)="cancel()">
 		Cancel
-	<button>
+	</button>
 </div>
 
 

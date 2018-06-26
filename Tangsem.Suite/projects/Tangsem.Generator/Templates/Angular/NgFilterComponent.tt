@@ -16,7 +16,7 @@ import * as models from '../../models/models';
 
 @Component({
   selector: '<#= this.TableMetadata.EntityName.Lf() #>-filter',
-  templateUrl: '<#= this.TableMetadata.EntityName.Lf() #>-filter.html',
+  templateUrl: '<#= this.TableMetadata.EntityName.Lf() #>-filter.component.html',
 })
 export class <#= this.TableMetadata.EntityName #>FilterComponent {
 	

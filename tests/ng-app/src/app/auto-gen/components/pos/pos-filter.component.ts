@@ -6,7 +6,7 @@ import * as models from '../../models/models';
 
 @Component({
   selector: 'pos-filter',
-  templateUrl: 'pos-filter.html',
+  templateUrl: 'pos-filter.component.html',
 })
 export class PosFilterComponent {
 	
