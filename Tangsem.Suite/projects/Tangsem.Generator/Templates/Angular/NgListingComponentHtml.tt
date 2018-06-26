@@ -6,7 +6,8 @@
 <#@ import namespace="Tangsem.Common.Extensions" #>
 
 <!-- FILTER -->
-<<#= this.TableMetadata.EntityName.Lf() #>-filter [filterModel]="filterModel"></<#= this.TableMetadata.EntityName.Lf() #>-filter>
+<<#= this.TableMetadata.EntityName.Lf() #>-filter [filterModel]="filterModel" (onSearch)="search($event)">
+</<#= this.TableMetadata.EntityName.Lf() #>-filter>
 
 
 <button mat-button (click)="add()">
