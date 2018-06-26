@@ -20,7 +20,7 @@ namespace Tangsem.Generator.Templates.MVC.ViewModels
 
     public string GetPathToSave(GeneratorConfiguration genConfig)
     {
-      return Path.Combine(this.Configuration.OutputDir, "asp-net-core", "ViewModels", "SearchParams", $"{this.TableMetadata.EntityName}SearchParam.cs");
+      return Path.Combine(this.Configuration.DomainDirPath, "ViewModels", "SearchParams", $"{this.TableMetadata.EntityName}SearchParams.cs");
     }
 
   }

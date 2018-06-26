@@ -5,6 +5,8 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
+using Newtonsoft.Json;
+
 using NHibernate;
 using NHibernate.Dialect;
 using NHibernate.Dialect.Function;
@@ -42,6 +44,16 @@ namespace Tangsem.NHibernate.Extenstions
       }
 
       return source.AsQueryable().Any(expression);
+    }
+
+    public static string ToJsonString(this object source)
+    {
+      if (source == null)
+      {
+        return null;
+      }
+
+      return JsonConvert.SerializeObject(source);
     }
   }
 
@@ -148,6 +160,23 @@ namespace Tangsem.NHibernate.Extenstions
     }
   }
 
+  public class ToJsonStringGenerator : BaseHqlGeneratorForMethod
+  {
+    public ToJsonStringGenerator()
+    {
+      this.SupportedMethods = new[]
+      {
+        ReflectHelper.GetMethod(() => LinqFunctionExtensions.ToJsonString(null))
+      };
+    }
+
+    public override HqlTreeNode BuildHql(MethodInfo method, Expression targetObject,
+      ReadOnlyCollection<Expression> arguments, HqlTreeBuilder treeBuilder, IHqlExpressionVisitor visitor)
+    {
+      return visitor.Visit(arguments[0]);
+    }
+  }
+
   public class ExtendedLinqToHqlGeneratorsRegistry : DefaultLinqToHqlGeneratorsRegistry
   {
     public ExtendedLinqToHqlGeneratorsRegistry()
@@ -156,6 +185,7 @@ namespace Tangsem.NHibernate.Extenstions
       this.Merge(new IsLikeGenerator());
       this.Merge(new IsNulOrEmptyGenerator());
       this.Merge(new IsNulOrWhitespaceGenerator());
+      this.Merge(new ToJsonStringGenerator());
     }
   }
 

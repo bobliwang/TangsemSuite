@@ -18,7 +18,7 @@ namespace Tangsem.Generator.Templates.MVC.ViewModels
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
+    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class SearchParamTemplate : SearchParamTemplateBase
     {
@@ -28,51 +28,58 @@ namespace Tangsem.Generator.Templates.MVC.ViewModels
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n\r\n");
+            this.Write("\r\nusing Tangsem.Data;\r\n\r\n");
             
-            #line 8 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
+            #line 9 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
 
 	var tableMetadata = this.TableMetadata;
 
             
             #line default
             #line hidden
-            this.Write("\r\npublic class ");
+            this.Write("\r\nnamespace ");
             
-            #line 12 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
+            #line 13 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.DomainNamespace));
+            
+            #line default
+            #line hidden
+            this.Write(".ViewModels.SearchParams\r\n{\r\n\r\n\tpublic class ");
+            
+            #line 16 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("SearchParams\r\n{    \r\n");
+            this.Write("SearchParams: SearchParamsBase\r\n\t{    \r\n\t");
             
-            #line 14 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
+            #line 18 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
  foreach (var col in tableMetadata.Columns) { 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\r\n\tpublic ");
+            this.Write("\r\n\t\r\n\t\tpublic ");
             
-            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
+            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.NullableCSharpTypeAsString));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
+            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
-            this.Write(" { get; set; }\r\n\r\n");
+            this.Write(" { get; set; }\r\n\r\n\t");
             
-            #line 19 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
+            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\ViewModels\SearchParamTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n}");
+            this.Write("\r\n\t}\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

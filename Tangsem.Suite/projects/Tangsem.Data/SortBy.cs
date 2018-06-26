@@ -31,7 +31,7 @@ namespace Tangsem.Data
 
   public static class QryExtensions
   {
-    public static IQueryable<T> SortBy<T>(IQueryable<T> qry, SortByModel sortByModel)
+    public static IQueryable<T> SortBy<T>(this IQueryable<T> qry, SortByModel sortByModel)
     {
       if (string.IsNullOrWhiteSpace(sortByModel.SortFieldName))
       {
@@ -42,9 +42,24 @@ namespace Tangsem.Data
     }
 
 
-    public static IQueryable<T> SkipAndTake<T>(IQueryable<T> qry, SearchParamsBase searchParam)
+    public static IQueryable<T> SkipAndTake<T>(this IQueryable<T> qry, SearchParamsBase searchParam)
     {
-      return qry.Skip(searchParam.PageIndex * searchParam.PageSize).Take(searchParam.PageSize);
+      if (searchParam == null)
+      {
+        return qry;
+      }
+
+      if (searchParam.PageIndex != null && searchParam.PageSize != null)
+      {
+        qry = qry.Skip(searchParam.PageIndex.Value * searchParam.PageSize.Value);
+      }
+
+      if (searchParam.PageSize != null)
+      {
+        qry = qry.Take(searchParam.PageSize.Value);
+      }
+
+      return qry;
     }
   }
 

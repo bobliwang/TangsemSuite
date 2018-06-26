@@ -4,25 +4,32 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 
+using AutoMapper;
+using <#= Configuration.EntityNamespace #>;
+using <#= Configuration.DTONamespace #>;
 
-public partial class <#= this.TableMetadata.EntityName #>MappingProfile : Profile
- {
-     public <#= this.TableMetadata.EntityName #>MappingProfile ()
-     {
-         var mapping = this.CreateMap<<#= this.TableMetadata.EntityName #>, <#= this.TableMetadata.EntityName #>Dto>();
+namespace <#= Configuration.DomainNamespace #>.Mappings.AutoMapper
+{
+
+	public partial class <#= this.TableMetadata.EntityName #>MappingProfile : Profile
+	{
+		public <#= this.TableMetadata.EntityName #>MappingProfile ()
+		{
+			var mapping = this.CreateMap<<#= this.TableMetadata.EntityName #>, <#= this.TableMetadata.EntityName #>DTO>();
 
 		
 
-		// TODO: To generate code that ignores auditable columns as createdById, modifiedById ...
-		<# if( this.TableMetadata.IsAuditableEntity) { #>
+			// TODO: To generate code that ignores auditable columns as createdById, modifiedById ...
+			<# if( this.TableMetadata.IsAuditableEntity) { #>
 
-			mapping.ForMember(x => x.CreatedById, opts => opts.Ignore()); 
-			mapping.ForMember(x => x.ModifiedById, opts => opts.Ignore());
-			mapping.ForMember(x => x.CreatedTime, opts => opts.Ignore());
-			mapping.ForMember(x => x.ModifiedTime, opts => opts.Ignore());
-			mapping.ForMember(x => x.Active, opts => opts.Ignore());
+				mapping.ForMember(x => x.CreatedById, opts => opts.Ignore()); 
+				mapping.ForMember(x => x.ModifiedById, opts => opts.Ignore());
+				mapping.ForMember(x => x.CreatedTime, opts => opts.Ignore());
+				mapping.ForMember(x => x.ModifiedTime, opts => opts.Ignore());
+				mapping.ForMember(x => x.Active, opts => opts.Ignore());
 
-		<# } #>
-		mapping.ReverseMap();
-     }
- }
+			<# } #>
+			mapping.ReverseMap();
+		}
+	}
+}

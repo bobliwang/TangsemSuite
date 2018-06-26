@@ -4,23 +4,28 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 
+using AutoMapper;
 
+namespace <#= Configuration.DomainNamespace #>.Mappings.AutoMapper
+{
 
-public class <#=Configuration.RepositoryName#>AutoMapperConfiguration {
-    
-	public MapperConfiguration Configure()
+	public class <#=Configuration.RepositoryName#>AutoMapperConfiguration
 	{
-		var config = new MapperConfiguration(cfg => {
+    
+		public MapperConfiguration Configure()
+		{
+			var config = new MapperConfiguration(cfg => {
 			
-<# foreach (var tableMetadata in this.TableMetadatas) { #>
+	<# foreach (var tableMetadata in this.TableMetadatas) { #>
 
-			cfg.AddProfile<<#= tableMetadata.EntityName #>MappingProfile>();
-<# } #>
-		});
+				cfg.AddProfile<<#= tableMetadata.EntityName #>MappingProfile>();
+	<# } #>
+			});
 
-        return config;
+			return config;
+		}
+
+
+
 	}
-
-
-
 }

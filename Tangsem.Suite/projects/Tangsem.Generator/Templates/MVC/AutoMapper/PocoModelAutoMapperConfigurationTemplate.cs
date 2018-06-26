@@ -18,7 +18,7 @@ namespace Tangsem.Generator.Templates.MVC.AutoMapper
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class PocoModelAutoMapperConfigurationTemplate : PocoModelAutoMapperConfigurationTemplateBase
     {
@@ -28,36 +28,43 @@ namespace Tangsem.Generator.Templates.MVC.AutoMapper
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n\r\n\r\npublic class ");
+            this.Write("\r\nusing AutoMapper;\r\n\r\nnamespace ");
             
-            #line 9 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            #line 9 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.DomainNamespace));
+            
+            #line default
+            #line hidden
+            this.Write(".Mappings.AutoMapper\r\n{\r\n\r\n\tpublic class ");
+            
+            #line 12 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
             #line hidden
-            this.Write("AutoMapperConfiguration {\r\n    \r\n\tpublic MapperConfiguration Configure()\r\n\t{\r\n\t\tv" +
-                    "ar config = new MapperConfiguration(cfg => {\r\n\t\t\t\r\n");
+            this.Write("AutoMapperConfiguration\r\n\t{\r\n    \r\n\t\tpublic MapperConfiguration Configure()\r\n\t\t{\r" +
+                    "\n\t\t\tvar config = new MapperConfiguration(cfg => {\r\n\t\t\t\r\n\t");
             
-            #line 15 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            #line 19 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
  foreach (var tableMetadata in this.TableMetadatas) { 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\tcfg.AddProfile<");
+            this.Write("\r\n\t\t\t\tcfg.AddProfile<");
             
-            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("MappingProfile>();\r\n");
+            this.Write("MappingProfile>();\r\n\t");
             
-            #line 18 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            #line 22 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t});\r\n\r\n        return config;\r\n\t}\r\n\r\n\r\n\r\n}\r\n");
+            this.Write("\t\t\t});\r\n\r\n\t\t\treturn config;\r\n\t\t}\r\n\r\n\r\n\r\n\t}\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

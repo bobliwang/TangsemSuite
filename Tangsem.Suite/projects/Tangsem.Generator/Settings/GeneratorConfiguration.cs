@@ -43,6 +43,14 @@ namespace Tangsem.Generator.Settings
     [XmlAttribute]
     public string ProjectName { get; set; }
 
+    public string RootProjectName
+    {
+      get
+      {
+        return this.ProjectName.Split('.')[0];
+      }
+    }
+
     /// <summary>
     /// Gets or sets OutputDir.
     /// </summary>

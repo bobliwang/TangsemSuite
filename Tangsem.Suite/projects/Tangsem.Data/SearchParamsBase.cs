@@ -16,9 +16,9 @@ namespace Tangsem.Data
 
   public class SearchParamsBase: SortByModel
   {
-    public int PageIndex { get; set; }
+    public int? PageIndex { get; set; }
 
-    public int PageSize { get; set; }
+    public int? PageSize { get; set; }
 
   }
 }

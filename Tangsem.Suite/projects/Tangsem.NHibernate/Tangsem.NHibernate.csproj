@@ -83,6 +83,7 @@
     <Compile Include="Extenstions\IQueryableExtensions.cs" />
     <Compile Include="Extenstions\LinqFunctionExtensions.cs" />
     <Compile Include="Interceptors\AuditingInterceptor.cs" />
+    <Compile Include="Service\IRepositoryProvider.cs" />
     <Compile Include="Service\NhEntityServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserTypes\JsonType.cs" />
