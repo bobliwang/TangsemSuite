@@ -36,11 +36,18 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers
 		}
 
 		[HttpGet("_api/repo/<#=tableMetadata.EntityName#>")]
-		public IActionResult Get<#=tableMetadata.EntityName#>List(<#=tableMetadata.EntityName#>SearchParams model) {
+		public IActionResult Get<#=tableMetadata.EntityName#>List(<#=tableMetadata.EntityName#>SearchParams filterModel) {
 
-			var dataList = _repository.<#= tableMetadata.EntityName.Pluralize() #>.ToList();
+			var filteredQry = this.FilterBySearchParams(_repository.<#= tableMetadata.EntityName.Pluralize() #>, filterModel);
+			var searchResult = new SearchResultModel<<#=tableMetadata.EntityName#>>
+			{
+				PageIndex = filterModel.PageIndex ?? 0,
+				PageSize = filterModel.PageSize ?? int.MaxValue,
+				RowsCount = filteredQry.Count(),
+				PagedData = filteredQry.SortBy(filterModel).SkipAndTake(filterModel).ToList(),
+			};
 
-			return this.Ok(dataList);
+			return this.Ok(searchResult);
 		}
      
 		[HttpGet("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
@@ -128,7 +135,7 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers
 			}
 			<# } #>
 
-			return filteredQry.SortBy(filterModel).SkipAndTake(filterModel);
+			return filteredQry;
 		}
 	}
 
