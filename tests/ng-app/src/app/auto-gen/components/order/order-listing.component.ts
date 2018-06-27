@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSort, MatSnackBar, MatPaginator } from '@angular/material';
+import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
@@ -14,7 +14,7 @@ import * as models from '../../models/models'
 })
 export class OrderListingComponent {
 
-	public orderList: models.OrderModel[];
+	public dataSource = new MatTableDataSource();
 
 	public displayedColumns = [ 'id', 'customerName', 'productId', 'orderTotal', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', "actions" ];
 
@@ -29,49 +29,57 @@ export class OrderListingComponent {
 
 	constructor(
 		private router: Router,
+		private snackBar: MatSnackBar,
 		private repoApi: GeneratorTestRepositoryApiService) {
 	
 	}
 
 	@Input()
-	public filter: models.OrderSearchParams;
+	public filterModel: models.OrderSearchParams;
 
 	public ngOnInit() {
 		
-		this.filter	= this.filter || <models.OrderSearchParams> {};
+		this.filterModel = this.filterModel || <models.OrderSearchParams> {};
 
 		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-		Observable.merge(this.sort.sortChange, this.paginator.page).pipe(
-			startWith({}),
-			switchMap(() => {
-			  this.isLoadingResults = true;
+		Observable.merge(this.sort.sortChange, this.paginator.page).subscribe(() => {
+			this.search();
+		});
+	}
 
-			  Object.assign(this.filter, {
-			  	sortFieldName: this.sort.active,
-			  	direction: this.sort.direction,
-			  	pageIndex: this.paginator.pageIndex
-			  });
-
-			  return this.repoApi.getOrderList(this.filter);
-			}),
-			map(data => {
-			  // Flip flag to show that loading has finished.
-			  this.isLoadingResults = false;
-			  this.resultsLength = data.rowsCount;
-
-			  return data.pagedData;
-			}),
-			catchError(() => {
-			  this.isLoadingResults = false;
-			  // Catch if the GitHub API has reached its rate limit. Return empty data.
-
-			  return Observable.of([]);
-			})
-		  ).subscribe(data => this.orderList = data);
+	public ngAfterViewInit() {
+		this.search();
 	}
 
 	public search() {
+
+		this.filterModel.pageIndex = this.paginator.pageIndex || 0;
+		this.filterModel.pageSize = this.paginator.pageSize || 100;
+		this.filterModel.sortFieldName = this.sort.active || '';
+
+		this.repoApi.getOrderList(this.filterModel).map(data => {
+			// Flip flag to show that loading has finished.
+			this.isLoadingResults = false;
+			this.resultsLength = data.rowsCount;
+
+			return data.pagedData;
+		}).catch(() => {
+			this.isLoadingResults = false;
+
+			return Observable.of([]);
+		}).subscribe(data => this.dataSource.data = data);
+	}
+
+	public delete(rowData: models.OrderModel) {
+		this.repoApi.deleteOrder(rowData.id)
+			.subscribe(() => {
+				
+				this.snackBar.open('deleted successfully', null, { duration: 1000 });
+				this.search();
+			}, err => {
+				this.snackBar.open('failed to delete', null, { duration: 3000 });
+			});
 	}
 
 }

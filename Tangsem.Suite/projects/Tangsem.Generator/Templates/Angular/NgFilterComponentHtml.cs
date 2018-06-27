@@ -33,37 +33,137 @@ namespace Tangsem.Generator.Templates.Angular
             this.Write("\r\n\r\n\r\n<div class=\"filter-ctn\">\r\n\r\n\r\n");
             
             #line 15 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
- foreach(var col in this.TableMetadata.Columns) { 
+ foreach(var col in this.TableMetadata.Columns) {
+	var inputType = getInputType(col.CSharpTypeAsString);
+
             
             #line default
             #line hidden
-            this.Write("\r\n\t<input type=\"");
+            this.Write("<!-- ");
             
-            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(getInputType(col.CSharpTypeAsString)));
+            #line 18 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write(": ");
+            
+            #line 18 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(inputType));
+            
+            #line default
+            #line hidden
+            this.Write(" -->\r\n");
+            
+            #line 19 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+ if (inputType == "text" || inputType == "number") { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\r\n<mat-form-field>\r\n\t<input type=\"");
+            
+            #line 23 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(inputType));
+            
+            #line default
+            #line hidden
+            this.Write("\" matInput\r\n\t\t[(ngModel)]=\"filterModel.");
+            
+            #line 24 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("\" placeholder=\"");
+            
+            #line 24 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("\"/>\r\n</mat-form-field>\r\n");
+            
+            #line 26 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+ } else if (inputType == "checkbox") { 
+            
+            #line default
+            #line hidden
+            this.Write("\t<mat-checkbox [(ngModel)]=\"filterModel.");
+            
+            #line 27 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("\">");
+            
+            #line 27 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("</mat-checkbox>\r\n");
+            
+            #line 28 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+ } else if (inputType == "datepicker") { 
+            
+            #line default
+            #line hidden
+            this.Write("<mat-form-field>\r\n\t<input matInput [matDatepicker]=\"picker");
+            
+            #line 30 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("\" placeholder=\"Choose ");
+            
+            #line 30 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write("\" [(ngModel)]=\"filterModel.");
             
-            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            #line 30 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
-            this.Write("\"/>\r\n\r\n");
+            this.Write("\">\r\n\t  <mat-datepicker-toggle matSuffix [for]=\"picker");
             
-            #line 19 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            #line 31 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("\"></mat-datepicker-toggle>\r\n\t  <mat-datepicker #picker");
+            
+            #line 32 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("></mat-datepicker>\r\n</mat-form-field>\r\n");
+            
+            #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n<div>\r\n\r\n<div>\r\n\t<button (click)=\"search()\" mat-button>\r\n\t\t<mat-icon>\r\n\t\t\tsearc" +
-                    "h\r\n\t\t</mat-icon>\r\n\t\tSearch\r\n\t</button>\r\n</div>\r\n\r\n");
+            this.Write("\r\n");
+            
+            #line 36 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n<div>\r\n\r\n<div>\r\n\t<button (click)=\"search()\" mat-raised-button>\r\n\t\t<mat-icon>\r\n\t" +
+                    "\t\tsearch\r\n\t\t</mat-icon>\r\n\t\tSearch\r\n\t</button>\r\n</div>\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 32 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
+        #line 49 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponentHtml.tt"
 
 	string getInputType(string clrTypeAsString) {
 		switch(clrTypeAsString) {
@@ -76,6 +176,12 @@ namespace Tangsem.Generator.Templates.Angular
 			case "float?":
 			case "double?":
 				return "number";
+			case "bool":
+			case "bool?":
+				return "checkbox";
+			case "System.DateTime":
+			case "System.DateTime?":
+				return "datepicker";
 			default:
 				return "text";
 		}

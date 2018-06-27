@@ -1,4 +1,6 @@
-import { HttpClient, HttpParams, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { Observable } from 'rxjs/Observable';
 import * as models from './models/models';
 
@@ -6,20 +8,9 @@ import { CommonModule } from '@angular/common';
 import { ErrorHandler, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 import {
-	MatStepperModule,
-	MatTabsModule,
-	MatFormFieldModule,
-	MatSelectModule,
-	MatTableModule,
-	MatSortModule,
-	MatButtonModule,
-	MatInputModule,
-	MatAutocompleteModule,
-	MatCheckboxModule,
-	MatIconModule,
-	MatTableDataSource,
-	MatPaginatorModule
+	MatSnackBarModule, MatStepperModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatTableModule, MatSortModule, MatButtonModule, MatInputModule, MatAutocompleteModule, MatCheckboxModule, MatIconModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule
 } from '@angular/material';
 import { GeneratorTestRepositoryApiService } from './services/api.service';
 
@@ -35,31 +26,16 @@ import { OrderEditorComponent } from './components/order/order-editor.component'
 import { PosFilterComponent } from './components/pos/pos-filter.component';
 import { PosListingComponent } from './components/pos/pos-listing.component';
 import { PosEditorComponent } from './components/pos/pos-editor.component';
-import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-routing.module';
-import { RouterModule } from '@angular/router';
 
 
 @NgModule({
 	imports: [
 		CommonModule,
-		FormsModule,
 		ReactiveFormsModule,
-		HttpClientModule,
-		GeneratorTestRepositoryRoutingModule,
+		FormsModule,
+		BrowserAnimationsModule,
 
-		MatIconModule,
-		MatStepperModule,
-		MatTabsModule,
-		MatFormFieldModule,
-		MatSelectModule,
-		MatTableModule,
-		MatSortModule,
-		MatButtonModule,
-		MatInputModule,
-		MatAutocompleteModule,
-		MatCheckboxModule,
-		MatPaginatorModule
-
+		MatSnackBarModule, MatStepperModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatTableModule, MatSortModule, MatButtonModule, MatInputModule, MatAutocompleteModule, MatCheckboxModule, MatIconModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule,
 	],
 	declarations: [
 		
@@ -85,24 +61,10 @@ import { RouterModule } from '@angular/router';
 	],
 
 	exports: [
-		CommonModule,
-		FormsModule,
-		ReactiveFormsModule,
-		HttpClientModule,
+		BrowserAnimationsModule,
+		MatSnackBarModule, MatStepperModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatTableModule, MatSortModule, MatButtonModule, MatInputModule, MatAutocompleteModule, MatCheckboxModule, MatIconModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule,
 
-		MatIconModule,
-		MatStepperModule,
-		MatTabsModule,
-		MatFormFieldModule,
-		MatSelectModule,
-		MatTableModule,
-		MatSortModule,
-		MatButtonModule,
-		MatInputModule,
-		MatAutocompleteModule,
-		MatCheckboxModule,
-		MatPaginatorModule,
-		GeneratorTestRepositoryRoutingModule,
+
 		
 		ProductFilterComponent,
 		ProductEditorComponent,
@@ -117,7 +79,8 @@ import { RouterModule } from '@angular/router';
 		PosFilterComponent,
 		PosEditorComponent,
 		PosListingComponent,
-	]
+
+			]
 
 })
 export class GeneratorTestRepositoryModule {

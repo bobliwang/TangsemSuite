@@ -38,7 +38,7 @@ namespace Tangsem.Data
         return qry;
       }
 
-      return qry.OrderBy(sortByModel.SortFieldName, sortByModel.Direction);
+      return qry.OrderBy(sortByModel.SortFieldName + " " + sortByModel.Direction);
     }
 
 

@@ -26,6 +26,6 @@ import { RouterModule } from '@angular/router';
 })
 export class AppModule {
   constructor(private apiService: GeneratorTestRepositoryApiService) {
-    
+    this.apiService.setApiBaseUrl('http://localhost:5000')
   }
 }

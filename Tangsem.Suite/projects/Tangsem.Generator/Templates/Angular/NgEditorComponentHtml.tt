@@ -7,29 +7,41 @@
 
 <div class="editor-ctn">
 
+<# foreach(var col in this.TableMetadata.Columns) {
+	var inputType = getInputType(col.CSharpTypeAsString);
+#>
+<!-- <#= col.PropertyName.Lf() #>: <#= inputType #> -->
+<# if (inputType == "text" || inputType == "number") { #>
 
-<# foreach(var col in this.TableMetadata.Columns) { #>
 
-	<label>
-		<#= col.PropertyName #>
-	</label>
-	<input type="<#= getInputType(col.CSharpTypeAsString) #>"
-		[(ngModel)]="filterModel.<#= col.PropertyName.Lf() #>"/>
+<mat-form-field>
+	<input type="<#= inputType #>" matInput
+		[(ngModel)]="model.<#= col.PropertyName.Lf() #>" placeholder="<#= col.PropertyName #>"/>
+</mat-form-field>
+<# } else if (inputType == "checkbox") { #>
+	<mat-checkbox [(ngModel)]="model.<#= col.PropertyName.Lf() #>"><#= col.PropertyName #></mat-checkbox>
+<# } else if (inputType == "datepicker") { #>
+<mat-form-field>
+	<input matInput [matDatepicker]="picker<#= col.PropertyName #>" placeholder="Choose <#= col.PropertyName #>" [(ngModel)]="model.<#= col.PropertyName.Lf() #>">
+	  <mat-datepicker-toggle matSuffix [for]="picker<#= col.PropertyName #>"></mat-datepicker-toggle>
+	  <mat-datepicker #picker<#= col.PropertyName #>></mat-datepicker>
+</mat-form-field>
+<# } #>
 
 <# } #>
 
+	<div class="actions-bar">
+		<button mat-button (click)="save()">
+			Save
+		</button>
+
+		<button mat-button (click)="cancel()">
+			Cancel
+		</button>
+	</div>
 </div>
 
 
-<div class="actions-bar">
-	<button mat-button (click)="save()">
-		Save
-	</button>
-
-	<button mat-button (click)="cancel()">
-		Cancel
-	</button>
-</div>
 
 
 <#+
@@ -44,9 +56,14 @@
 			case "float?":
 			case "double?":
 				return "number";
+			case "bool":
+			case "bool?":
+				return "checkbox";
+			case "System.DateTime":
+			case "System.DateTime?":
+				return "datepicker";
 			default:
 				return "text";
 		}
 	}
 #>
-

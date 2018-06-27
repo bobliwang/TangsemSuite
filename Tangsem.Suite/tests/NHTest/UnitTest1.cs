@@ -11,6 +11,7 @@ using NHTest.Common.Domain.Repositories.NHibernate;
 using NHTest.Common.Services;
 using NHTest.NHTest.Common.Domain.ViewModels;
 
+using Tangsem.Data;
 using Tangsem.NHibernate.Extenstions;
 
 namespace NHTest
@@ -43,6 +44,20 @@ namespace NHTest
         }
 
         repo.Commit();
+      }
+    }
+
+    [TestMethod]
+    public void TestOrderBy()
+    {
+      using (var repo = this.OpenRepository())
+      {
+        var qry = repo.Products;
+
+        var prods = qry.SortBy(new SortByModel { SortFieldName = "Id", Direction = "desc" }).ToList();
+
+
+
       }
     }
 

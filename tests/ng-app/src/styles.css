@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.two-columns-flex {
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.filter-column {
+    flex: 200px 0 0;
+}
+
+.editor-ctn {
+    width: 600px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-ctn {
+    width: 200px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.actions-bar {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

@@ -1,32 +1,60 @@
 <div class="filter-ctn">
 
 
-
-	<input type="number" [(ngModel)]="filterModel.id"/>
-
-
-	<input type="text" [(ngModel)]="filterModel.name"/>
+<!-- id: number -->
 
 
-	<input type="number" [(ngModel)]="filterModel.createdById"/>
+<mat-form-field>
+	<input type="number" matInput
+		[(ngModel)]="filterModel.id" placeholder="Id"/>
+</mat-form-field>
+
+<!-- name: text -->
 
 
-	<input type="number" [(ngModel)]="filterModel.modifiedById"/>
+<mat-form-field>
+	<input type="text" matInput
+		[(ngModel)]="filterModel.name" placeholder="Name"/>
+</mat-form-field>
+
+<!-- createdById: number -->
 
 
-	<input type="text" [(ngModel)]="filterModel.createdTime"/>
+<mat-form-field>
+	<input type="number" matInput
+		[(ngModel)]="filterModel.createdById" placeholder="CreatedById"/>
+</mat-form-field>
+
+<!-- modifiedById: number -->
 
 
-	<input type="text" [(ngModel)]="filterModel.modifiedTime"/>
+<mat-form-field>
+	<input type="number" matInput
+		[(ngModel)]="filterModel.modifiedById" placeholder="ModifiedById"/>
+</mat-form-field>
 
+<!-- createdTime: datepicker -->
+<mat-form-field>
+	<input matInput [matDatepicker]="pickerCreatedTime" placeholder="Choose CreatedTime" [(ngModel)]="filterModel.createdTime">
+	  <mat-datepicker-toggle matSuffix [for]="pickerCreatedTime"></mat-datepicker-toggle>
+	  <mat-datepicker #pickerCreatedTime></mat-datepicker>
+</mat-form-field>
 
-	<input type="text" [(ngModel)]="filterModel.active"/>
+<!-- modifiedTime: datepicker -->
+<mat-form-field>
+	<input matInput [matDatepicker]="pickerModifiedTime" placeholder="Choose ModifiedTime" [(ngModel)]="filterModel.modifiedTime">
+	  <mat-datepicker-toggle matSuffix [for]="pickerModifiedTime"></mat-datepicker-toggle>
+	  <mat-datepicker #pickerModifiedTime></mat-datepicker>
+</mat-form-field>
+
+<!-- active: checkbox -->
+	<mat-checkbox [(ngModel)]="filterModel.active">Active</mat-checkbox>
 
 
 <div>
 
 <div>
-	<button (click)="search()" mat-button>
+	<button (click)="search()" mat-raised-button>
 		<mat-icon>
 			search
 		</mat-icon>

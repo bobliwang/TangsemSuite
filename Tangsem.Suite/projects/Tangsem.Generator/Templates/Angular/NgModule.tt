@@ -9,6 +9,8 @@
 <#@ import namespace="Tangsem.Generator.Settings" #>
 
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { Observable } from 'rxjs/Observable';
 import * as models from './models/models';
 
@@ -16,17 +18,28 @@ import { CommonModule } from '@angular/common';
 import { ErrorHandler, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+<#
+	var matModules = new [] {
+		"MatSnackBarModule",
+		"MatStepperModule",
+		"MatTabsModule",
+		"MatFormFieldModule",
+		"MatSelectModule",
+		"MatTableModule",
+		"MatSortModule",
+		"MatButtonModule",
+		"MatInputModule",
+		"MatAutocompleteModule",
+		"MatCheckboxModule",
+		"MatIconModule",
+		"MatPaginatorModule",
+		"MatDatepickerModule",
+		"MatNativeDateModule",
+	};
+#>
+
 import {
-	MatStepperModule,
-	MatTabsModule,
-	MatFormFieldModule,
-	MatSelectModule,
-	MatTableModule,
-	MatSortModule,
-	MatButtonModule,
-	MatInputModule,
-	MatAutocompleteModule,
-	MatCheckboxModule
+	<#= string.Join(", ", matModules) #>
 } from '@angular/material';
 import { <#=Configuration.RepositoryName#>ApiService } from './services/api.service';
 
@@ -42,17 +55,10 @@ import { <#= tableMetadata.EntityName #>EditorComponent } from './components/<#=
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
+		FormsModule,
+		BrowserAnimationsModule,
 
-		MatStepperModule,
-		MatTabsModule,
-		MatFormFieldModule,
-		MatSelectModule,
-		MatTableModule,
-		MatSortModule,
-		MatButtonModule,
-		MatInputModule,
-		MatAutocompleteModule,
-		MatCheckboxModule
+		<#= string.Join(", ", matModules) #>,
 	],
 	declarations: [
 		<# foreach (var tableMetadata in this.TableMetadatas) { #>
@@ -70,16 +76,17 @@ import { <#= tableMetadata.EntityName #>EditorComponent } from './components/<#=
 	],
 
 	exports: [
-		MatStepperModule,
-		MatTabsModule,
-		MatFormFieldModule,
-		MatSelectModule,
-		MatTableModule,
-		MatSortModule,
-		MatButtonModule,
-		MatInputModule,
-		MatAutocompleteModule,
-		MatCheckboxModule
+		BrowserAnimationsModule,
+		<#= string.Join(", ", matModules) #>,
+
+
+		<# foreach (var tableMetadata in this.TableMetadatas) { #>
+
+		<#= tableMetadata.EntityName #>FilterComponent,
+		<#= tableMetadata.EntityName #>EditorComponent,
+		<#= tableMetadata.EntityName #>ListingComponent,
+
+		<# } #>
 	]
 
 })

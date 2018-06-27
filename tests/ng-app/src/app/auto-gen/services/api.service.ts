@@ -1,7 +1,7 @@
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import * as models from '../models/models';
-import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GeneratorTestRepositoryApiService {
@@ -41,7 +41,7 @@ export class GeneratorTestRepositoryApiService {
      }
 
 	 public deleteProduct(id: number | string): Observable<any> {
-        return this.httpClient.post<any>(this.url(`_api/repo/Product/delete/${id}`), {});
+        return this.httpClient.post<any>(this.url(`_api/repo/Product/${id}/delete`), {});
      }
 
 	 protected populateProductSearchParams(filterModel: models.ProductSearchParams): HttpParams {
@@ -137,7 +137,7 @@ export class GeneratorTestRepositoryApiService {
      }
 
 	 public deleteOrder(id: number | string): Observable<any> {
-        return this.httpClient.post<any>(this.url(`_api/repo/Order/delete/${id}`), {});
+        return this.httpClient.post<any>(this.url(`_api/repo/Order/${id}/delete`), {});
      }
 
 	 protected populateOrderSearchParams(filterModel: models.OrderSearchParams): HttpParams {
@@ -233,7 +233,7 @@ export class GeneratorTestRepositoryApiService {
      }
 
 	 public deletePos(id: number | string): Observable<any> {
-        return this.httpClient.post<any>(this.url(`_api/repo/Pos/delete/${id}`), {});
+        return this.httpClient.post<any>(this.url(`_api/repo/Pos/${id}/delete`), {});
      }
 
 	 protected populatePosSearchParams(filterModel: models.PosSearchParams): HttpParams {

@@ -19,7 +19,7 @@ namespace Tangsem.Generator.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class NgListingComponentHtml : NgListingComponentHtmlBase
     {
@@ -29,87 +29,103 @@ namespace Tangsem.Generator.Templates.Angular
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n<!-- FILTER -->\r\n<");
+            this.Write("\r\n\r\n<div class=\"two-columns-flex\">\r\n\r\n\t<!-- FILTER -->\r\n\t<div class=\"filter-colum" +
+                    "n\">\r\n\r\n\t\t<h4>Filters</h4>\r\n\r\n\t\t<");
             
-            #line 9 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 16 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
-            this.Write("-filter [filterModel]=\"filterModel\" (onSearch)=\"search($event)\">\r\n</");
+            this.Write("-filter [filterModel]=\"filterModel\" (onSearch)=\"search($event)\">\r\n\t\t</");
             
-            #line 10 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
-            this.Write("-filter>\r\n\r\n\r\n<button mat-button (click)=\"add()\">\r\n\t<mat-icon>\r\n\t\tadd\r\n\t</mat-ico" +
-                    "n>\r\n\tNew\r\n</button>\r\n\r\n<!-- TABLE -->\r\n<table mat-table [dataSource]=\"dataSource" +
-                    "\" matSort matSortActive=\"id\" matSortDisableClear matSortDirection=\"desc\">\r\n\r\n");
+            this.Write(@"-filter>
+	</div>
+
+	<div class=""table-column"">
+		<button mat-raised-button (click)=""add()"">
+			<mat-icon>
+				add
+			</mat-icon>
+			New
+		</button>
+
+		<!-- TABLE -->
+		<mat-table [dataSource]=""dataSource"" matSort matSortActive=""id"" matSortDisableClear matSortDirection=""desc"">
+
+		");
             
-            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 31 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
  foreach(var col in this.TableMetadata.Columns) { 
             
             #line default
             #line hidden
-            this.Write("\t<ng-container matColumnDef=\"");
+            this.Write("\t\t\t<ng-container matColumnDef=\"");
             
-            #line 24 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 32 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
-            this.Write("\">\r\n\t\t<th mat-header-cell *matHeaderCellDef>\r\n\t\t\t");
+            this.Write("\">\r\n\t\t\t\t<mat-header-cell *matHeaderCellDef style=\"padding: 5px\">\r\n\t\t\t\t\t");
             
-            #line 26 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t</th>\r\n\t\t<td mat-cell *matCellDef=\"let rowData\">\r\n\t\t\t{{rowData.");
+            this.Write("\r\n\t\t\t\t</mat-header-cell>\r\n\t\t\t\t<mat-cell *matCellDef=\"let rowData\" style=\"padding:" +
+                    " 5px\">\r\n\t\t\t\t\t{{rowData.");
             
-            #line 29 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 37 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
-            this.Write("}}\r\n\t\t</td>\r\n\t</ng-container>\r\n");
+            this.Write("}}\r\n\t\t\t\t</mat-cell>\r\n\t\t\t</ng-container>\r\n\t\t");
             
-            #line 32 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 40 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
  } 
             
             #line default
             #line hidden
             this.Write(@"
 
-	<ng-container matColumnDef=""actions"">
-		<th mat-header-cell *matHeaderCellDef>
+			<ng-container matColumnDef=""actions"">
+				<mat-header-cell *matHeaderCellDef>
 		
-		</th>
+				</mat-header-cell>
 
-		<td mat-cell *matCellDef=""let rowData"">
-			<button mat-button (click)=""edit(rowData)"">
-				<mat-icon>
-					edit
-				</mat-icon>
-				Edit
-			</button>
+				<mat-cell *matCellDef=""let rowData"">
+					<button mat-button (click)=""edit(rowData)"">
+						<mat-icon>
+							edit
+						</mat-icon>
+						Edit
+					</button>
 
-			<button mat-button (click)=""delete(rowData)"">
-				<mat-icon>
-					delete
-				</mat-icon>
-				Delete
-			</button>
-		</td>
-	</ng-container>
+					<button mat-button (click)=""delete(rowData)"">
+						<mat-icon>
+							delete
+						</mat-icon>
+						Delete
+					</button>
+				</mat-cell>
+			</ng-container>
 
 
-	<tr mat-header-row *matHeaderRowDef=""displayedColumns""></tr>
-	<tr mat-row *matRowDef=""let row; columns: displayedColumns;""></tr>
-</table>
+			<mat-header-row *matHeaderRowDef=""displayedColumns""></mat-header-row>
+			<mat-row *matRowDef=""let row; columns: displayedColumns;""></mat-row>
+		</mat-table>
 
-<mat-paginator [pageSizeOptions]=""[5, 10, 20]"" showFirstLastButtons></mat-paginator>");
+		<mat-paginator [length]=""resultsLength"" [pageSizeOptions]=""[2, 5, 10, 20]"" showFirstLastButtons></mat-paginator>
+	</div>
+</div>");
             return this.GenerationEnvironment.ToString();
         }
     }
