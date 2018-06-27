@@ -30,7 +30,7 @@
 
 		<# foreach(var col in this.TableMetadata.Columns) { #>
 			<ng-container matColumnDef="<#= col.PropertyName.Lf() #>">
-				<mat-header-cell *matHeaderCellDef style="padding: 5px">
+				<mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
 					<#= col.PropertyName #>
 				</mat-header-cell>
 				<mat-cell *matCellDef="let rowData" style="padding: 5px">

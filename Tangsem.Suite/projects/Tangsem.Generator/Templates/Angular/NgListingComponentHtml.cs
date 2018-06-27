@@ -72,7 +72,8 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("\">\r\n\t\t\t\t<mat-header-cell *matHeaderCellDef style=\"padding: 5px\">\r\n\t\t\t\t\t");
+            this.Write("\">\r\n\t\t\t\t<mat-header-cell *matHeaderCellDef mat-sort-header style=\"padding: 5px\">\r" +
+                    "\n\t\t\t\t\t");
             
             #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));

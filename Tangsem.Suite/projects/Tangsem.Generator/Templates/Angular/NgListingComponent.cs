@@ -128,11 +128,12 @@ import { ");
 		this.filterModel.pageIndex = this.paginator.pageIndex || 0;
 		this.filterModel.pageSize = this.paginator.pageSize || 100;
 		this.filterModel.sortFieldName = this.sort.active || '';
+		this.filterModel.direction = this.sort.direction || 'desc';
 
 
 		this.repoApi.get");
             
-            #line 70 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 71 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -152,14 +153,14 @@ import { ");
 
 	public delete(rowData: models.");
             
-            #line 83 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 84 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.TsModelName));
             
             #line default
             #line hidden
             this.Write(") {\r\n\t\tthis.repoApi.delete");
             
-            #line 84 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 85 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default

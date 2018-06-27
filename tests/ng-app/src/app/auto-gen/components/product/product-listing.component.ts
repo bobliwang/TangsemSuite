@@ -57,6 +57,8 @@ export class ProductListingComponent {
 		this.filterModel.pageIndex = this.paginator.pageIndex || 0;
 		this.filterModel.pageSize = this.paginator.pageSize || 100;
 		this.filterModel.sortFieldName = this.sort.active || '';
+		this.filterModel.direction = this.sort.direction || 'desc';
+
 
 		this.repoApi.getProductList(this.filterModel).map(data => {
 			// Flip flag to show that loading has finished.
