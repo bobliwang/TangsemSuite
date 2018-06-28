@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/cor
 import { Router } from '@angular/router';
 import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { merge } from 'rxjs/observable/merge';
 
 import { GeneratorTestRepositoryApiService } from '../../services/api.service';
 import * as models from '../../models/models'
@@ -14,7 +14,7 @@ import * as models from '../../models/models'
 })
 export class PosListingComponent {
 
-	public dataSource = new MatTableDataSource();
+	public dataSource = [];
 
 	public displayedColumns = [ 'id', 'name', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', "actions" ];
 
@@ -70,7 +70,7 @@ export class PosListingComponent {
 			this.isLoadingResults = false;
 
 			return Observable.of([]);
-		}).subscribe(data => this.dataSource.data = data);
+		}).subscribe(pagedData => this.dataSource = pagedData);
 	}
 
 	public delete(rowData: models.PosModel) {

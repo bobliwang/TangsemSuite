@@ -35,7 +35,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/cor
 import { Router } from '@angular/router';
 import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { merge } from 'rxjs/observable/merge';
 
 import { ");
             
@@ -66,8 +66,7 @@ import { ");
             
             #line default
             #line hidden
-            this.Write("ListingComponent {\r\n\r\n\tpublic dataSource = new MatTableDataSource();\r\n\r\n\tpublic d" +
-                    "isplayedColumns = [ ");
+            this.Write("ListingComponent {\r\n\r\n\tpublic dataSource = [];\r\n\r\n\tpublic displayedColumns = [ ");
             
             #line 27 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", this.TableMetadata.Columns.Select(col => $"'{col.PropertyName.Lf()}'"))));
@@ -148,7 +147,7 @@ import { ");
 			this.isLoadingResults = false;
 
 			return Observable.of([]);
-		}).subscribe(data => this.dataSource.data = data);
+		}).subscribe(pagedData => this.dataSource = pagedData);
 	}
 
 	public delete(rowData: models.");

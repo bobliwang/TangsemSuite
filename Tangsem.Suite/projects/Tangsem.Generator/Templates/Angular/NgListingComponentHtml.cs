@@ -56,7 +56,7 @@ namespace Tangsem.Generator.Templates.Angular
 		</button>
 
 		<!-- TABLE -->
-		<mat-table [dataSource]=""dataSource"" matSort matSortActive=""id"" matSortDisableClear matSortDirection=""desc"">
+		<table mat-table [dataSource]=""dataSource"" matSort matSortActive=""id"" matSortDisableClear matSortDirection=""desc"">
 
 		");
             
@@ -72,23 +72,23 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("\">\r\n\t\t\t\t<mat-header-cell *matHeaderCellDef mat-sort-header style=\"padding: 5px\">\r" +
-                    "\n\t\t\t\t\t");
+            this.Write("\">\r\n\t\t\t\t<th mat-header-cell *matHeaderCellDef mat-sort-header style=\"padding: 5px" +
+                    "\">\r\n\t\t\t\t\t");
             
             #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t\t</mat-header-cell>\r\n\t\t\t\t<mat-cell *matCellDef=\"let rowData\" style=\"padding:" +
-                    " 5px\">\r\n\t\t\t\t\t{{rowData.");
+            this.Write("\r\n\t\t\t\t</th>\r\n\t\t\t\t<td mat-cell *matCellDef=\"let rowData\" style=\"padding: 5px\">\r\n\t\t" +
+                    "\t\t\t{{rowData.");
             
             #line 37 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
-            this.Write("}}\r\n\t\t\t\t</mat-cell>\r\n\t\t\t</ng-container>\r\n\t\t");
+            this.Write("}}\r\n\t\t\t\t</td>\r\n\t\t\t</ng-container>\r\n\t\t");
             
             #line 40 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
  } 
@@ -98,11 +98,11 @@ namespace Tangsem.Generator.Templates.Angular
             this.Write(@"
 
 			<ng-container matColumnDef=""actions"">
-				<mat-header-cell *matHeaderCellDef>
+				<th mat-header-cell *matHeaderCellDef>
 		
-				</mat-header-cell>
+				</th>
 
-				<mat-cell *matCellDef=""let rowData"">
+				<td mat-cell *matCellDef=""let rowData"">
 					<button mat-button (click)=""edit(rowData)"">
 						<mat-icon>
 							edit
@@ -116,13 +116,13 @@ namespace Tangsem.Generator.Templates.Angular
 						</mat-icon>
 						Delete
 					</button>
-				</mat-cell>
+				</td>
 			</ng-container>
 
 
-			<mat-header-row *matHeaderRowDef=""displayedColumns""></mat-header-row>
-			<mat-row *matRowDef=""let row; columns: displayedColumns;""></mat-row>
-		</mat-table>
+			<tr mat-header-row *matHeaderRowDef=""displayedColumns""></tr>
+			<tr mat-row *matRowDef=""let row; columns: displayedColumns;""></tr>
+		</table>
 
 		<mat-paginator [length]=""resultsLength"" [pageSizeOptions]=""[2, 5, 10, 20]"" showFirstLastButtons></mat-paginator>
 	</div>
