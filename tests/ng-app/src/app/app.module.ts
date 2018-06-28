@@ -43,11 +43,14 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule, } from '@angular/material';
+import { DialogsService } from './services/dialogs.service';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -92,10 +95,15 @@ import {
     MatTreeModule,
     
   ],
+  entryComponents: [
+    DialogComponent
+  ],
   exports: [
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    DialogsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

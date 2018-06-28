@@ -5,7 +5,10 @@ import { Observable } from 'rxjs/Rx';
 import { merge } from 'rxjs/observable/merge';
 
 import { GeneratorTestRepositoryApiService } from '../../services/api.service';
-import * as models from '../../models/models'
+import * as models from '../../models/models';
+
+import { DialogsService } from '../../../services/dialogs.service';
+import { ResultCode } from '../../../components/dialog/dialog.models';
 
 
 @Component({
@@ -30,6 +33,7 @@ export class PosListingComponent {
 	constructor(
 		private router: Router,
 		private snackBar: MatSnackBar,
+		private dialogs: DialogsService,
 		private repoApi: GeneratorTestRepositoryApiService) {
 	
 	}
@@ -74,14 +78,19 @@ export class PosListingComponent {
 	}
 
 	public delete(rowData: models.PosModel) {
-		this.repoApi.deletePos(rowData.id)
-			.subscribe(() => {
+		this.dialogs.confirm('', 'Do you want to delete?', ResultCode.Yes).subscribe(confirmed => {
+			if (!confirmed) {
+				return;
+			}
+
+			this.repoApi.deletePos(rowData.id).subscribe(() => {
 				
-				this.snackBar.open('deleted successfully', null, { duration: 1000 });
+				this.snackBar.open('Deleted successfully', null, { duration: 1000 });
 				this.search();
 			}, err => {
-				this.snackBar.open('failed to delete', null, { duration: 3000 });
+				this.snackBar.open('Failed to delete', null, { duration: 3000 });
 			});
+		});
 	}
 
 

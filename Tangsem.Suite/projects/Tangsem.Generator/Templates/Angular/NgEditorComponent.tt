@@ -13,6 +13,9 @@ import * as models from '../../models/models';
 
 import { <#=Configuration.RepositoryName#>ApiService } from '../../services/api.service';
 
+import { DialogsService } from '../../../services/dialogs.service';
+import { ResultCode } from '../../../components/dialog/dialog.models';
+
 @Component({
   selector: '<#= this.TableMetadata.EntityName.Lf() #>-editor',
   templateUrl: '<#= this.TableMetadata.EntityName.Lf() #>-editor.component.html',
@@ -27,11 +30,11 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent {
 
 	@Input()
 	public redirectToRoute = '<#= this.TableMetadata.EntityName.Lf() #>/listing';
-
 	
 	constructor(
 		private router: Router,
 		private snackBar: MatSnackBar,
+		private dialogs: DialogsService,
 		private repoApi: <#=Configuration.RepositoryName#>ApiService) {
 	
 	}
@@ -85,6 +88,14 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent {
 		}, err => {
 			this.snackBar.open('failed to updade', null, { duration: 3000 });
 		});
+	}
+
+	protected cancel() {
+		if (this.redirectToRoute) {
+			this.dialogs.confirm('', 'Do you want to cancel?', ResultCode.Yes).subscribe(confirmed => {
+				this.router.navigate([this.redirectToRoute]);
+			});			
+		}
 	}
 
 }

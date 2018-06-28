@@ -5,6 +5,9 @@ import * as models from '../../models/models';
 
 import { GeneratorTestRepositoryApiService } from '../../services/api.service';
 
+import { DialogsService } from '../../../services/dialogs.service';
+import { ResultCode } from '../../../components/dialog/dialog.models';
+
 @Component({
   selector: 'product-editor',
   templateUrl: 'product-editor.component.html',
@@ -19,11 +22,11 @@ export class ProductEditorComponent {
 
 	@Input()
 	public redirectToRoute = 'product/listing';
-
 	
 	constructor(
 		private router: Router,
 		private snackBar: MatSnackBar,
+		private dialogs: DialogsService,
 		private repoApi: GeneratorTestRepositoryApiService) {
 	
 	}
@@ -77,6 +80,14 @@ export class ProductEditorComponent {
 		}, err => {
 			this.snackBar.open('failed to updade', null, { duration: 3000 });
 		});
+	}
+
+	protected cancel() {
+		if (this.redirectToRoute) {
+			this.dialogs.confirm('', 'Do you want to cancel?', ResultCode.Yes).subscribe(confirmed => {
+				this.router.navigate([this.redirectToRoute]);
+			});			
+		}
 	}
 
 }

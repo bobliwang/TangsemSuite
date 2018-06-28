@@ -1,0 +1,12 @@
+<h1 mat-dialog-title *ngIf="model.title">{{ model.title }}</h1>
+<div mat-dialog-content>
+    {{ model.body }}
+</div>
+<div mat-dialog-actions align="end">
+
+  <button mat-button *ngFor="let btn of buttons" [mat-dialog-close]="btn.resultCode"
+    [attr.cdkFocusInitial]="btn.default ? '' : null">
+    {{ btn.text }}
+  </button>
+
+</div>
