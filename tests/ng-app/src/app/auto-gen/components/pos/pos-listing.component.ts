@@ -84,4 +84,9 @@ export class PosListingComponent {
 			});
 	}
 
+
+	public add() {
+		this.router.navigate(['pos/create']);
+	}
+
 }

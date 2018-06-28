@@ -92,4 +92,9 @@ export class <#= this.TableMetadata.EntityName #>ListingComponent {
 			});
 	}
 
+
+	public add() {
+		this.router.navigate(['<#= this.TableMetadata.EntityName.Lf() #>/create']);
+	}
+
 }

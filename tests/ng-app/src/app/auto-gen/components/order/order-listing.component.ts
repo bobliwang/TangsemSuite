@@ -84,4 +84,9 @@ export class OrderListingComponent {
 			});
 	}
 
+
+	public add() {
+		this.router.navigate(['order/create']);
+	}
+
 }

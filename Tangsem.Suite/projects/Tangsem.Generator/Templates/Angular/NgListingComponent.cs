@@ -164,9 +164,26 @@ import { ");
             
             #line default
             #line hidden
-            this.Write("(rowData.id)\r\n\t\t\t.subscribe(() => {\r\n\t\t\t\t\r\n\t\t\t\tthis.snackBar.open(\'deleted succes" +
-                    "sfully\', null, { duration: 1000 });\r\n\t\t\t\tthis.search();\r\n\t\t\t}, err => {\r\n\t\t\t\tthi" +
-                    "s.snackBar.open(\'failed to delete\', null, { duration: 3000 });\r\n\t\t\t});\r\n\t}\r\n\r\n}");
+            this.Write(@"(rowData.id)
+			.subscribe(() => {
+				
+				this.snackBar.open('deleted successfully', null, { duration: 1000 });
+				this.search();
+			}, err => {
+				this.snackBar.open('failed to delete', null, { duration: 3000 });
+			});
+	}
+
+
+	public add() {
+		this.router.navigate(['");
+            
+            #line 97 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("/create\']);\r\n\t}\r\n\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

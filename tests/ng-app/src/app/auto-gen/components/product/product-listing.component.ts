@@ -84,4 +84,9 @@ export class ProductListingComponent {
 			});
 	}
 
+
+	public add() {
+		this.router.navigate(['product/create']);
+	}
+
 }
