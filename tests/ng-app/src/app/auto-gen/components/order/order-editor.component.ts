@@ -15,7 +15,10 @@ export class OrderEditorComponent {
 	public model: models.OrderModel;
 
 	@Input()
-	public mode: models.EditorMode = 'view';
+	public mode: models.EditorMode = 'create';
+
+	@Input()
+	public redirectToRoute = 'order/listing';
 
 	
 	constructor(
@@ -49,7 +52,11 @@ export class OrderEditorComponent {
 			}
 
 			this.snackBar.open('created successfully', null, { duration: 1000 });
-			this.router.navigate(['listing']);
+
+			if (this.redirectToRoute) {
+				this.router.navigate([this.redirectToRoute]);	
+			}
+			
 		}, err => {
 			this.snackBar.open('failed to create', null, { duration: 3000 });
 		});
@@ -63,7 +70,10 @@ export class OrderEditorComponent {
 			}
 
 			this.snackBar.open('updated successfully', null, { duration: 1000 });
-			this.router.navigate(['listing']);
+			
+			if (this.redirectToRoute) {
+				this.router.navigate([this.redirectToRoute]);	
+			}
 		}, err => {
 			this.snackBar.open('failed to updade', null, { duration: 3000 });
 		});

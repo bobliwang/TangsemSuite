@@ -15,7 +15,10 @@ export class PosEditorComponent {
 	public model: models.PosModel;
 
 	@Input()
-	public mode: models.EditorMode = 'view';
+	public mode: models.EditorMode = 'create';
+
+	@Input()
+	public redirectToRoute = 'pos/listing';
 
 	
 	constructor(
@@ -49,7 +52,11 @@ export class PosEditorComponent {
 			}
 
 			this.snackBar.open('created successfully', null, { duration: 1000 });
-			this.router.navigate(['listing']);
+
+			if (this.redirectToRoute) {
+				this.router.navigate([this.redirectToRoute]);	
+			}
+			
 		}, err => {
 			this.snackBar.open('failed to create', null, { duration: 3000 });
 		});
@@ -63,7 +70,10 @@ export class PosEditorComponent {
 			}
 
 			this.snackBar.open('updated successfully', null, { duration: 1000 });
-			this.router.navigate(['listing']);
+			
+			if (this.redirectToRoute) {
+				this.router.navigate([this.redirectToRoute]);	
+			}
 		}, err => {
 			this.snackBar.open('failed to updade', null, { duration: 3000 });
 		});

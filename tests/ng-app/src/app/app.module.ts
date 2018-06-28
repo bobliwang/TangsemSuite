@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { GeneratorTestRepositoryModule } from './auto-gen/generatorTestRepository.module';
 import { GeneratorTestRepositoryApiService } from './auto-gen/services/api.service';
 import { RouterModule } from '@angular/router';
+import { routes } from './auto-gen/generatorTestRepository-routing.module';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     HttpClientModule,
     GeneratorTestRepositoryModule,
-		RouterModule.forRoot([]),
+		RouterModule.forRoot(routes),
   ],
   exports: [
     HttpClientModule
