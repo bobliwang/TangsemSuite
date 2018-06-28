@@ -102,15 +102,11 @@ namespace Tangsem.Generator.Templates.Angular
 		}
 	}
 
-	public cancel() {
-		this.router.navigate(['listing']);
-	}
-
 	protected create() {
 
 		this.repoApi.create");
             
-            #line 60 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 56 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -135,7 +131,7 @@ namespace Tangsem.Generator.Templates.Angular
 
 		this.repoApi.update");
             
-            #line 78 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 74 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -158,7 +154,9 @@ namespace Tangsem.Generator.Templates.Angular
 	protected cancel() {
 		if (this.redirectToRoute) {
 			this.dialogs.confirm('', 'Do you want to cancel?', ResultCode.Yes).subscribe(confirmed => {
-				this.router.navigate([this.redirectToRoute]);
+				if (confirmed) {
+					this.router.navigate([this.redirectToRoute]);
+				}
 			});			
 		}
 	}

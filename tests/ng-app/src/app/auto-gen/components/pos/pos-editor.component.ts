@@ -43,10 +43,6 @@ export class PosEditorComponent {
 		}
 	}
 
-	public cancel() {
-		this.router.navigate(['listing']);
-	}
-
 	protected create() {
 
 		this.repoApi.createPos(this.model).subscribe(result => {
@@ -85,7 +81,9 @@ export class PosEditorComponent {
 	protected cancel() {
 		if (this.redirectToRoute) {
 			this.dialogs.confirm('', 'Do you want to cancel?', ResultCode.Yes).subscribe(confirmed => {
-				this.router.navigate([this.redirectToRoute]);
+				if (confirmed) {
+					this.router.navigate([this.redirectToRoute]);
+				}
 			});			
 		}
 	}

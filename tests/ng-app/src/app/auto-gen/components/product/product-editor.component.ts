@@ -43,10 +43,6 @@ export class ProductEditorComponent {
 		}
 	}
 
-	public cancel() {
-		this.router.navigate(['listing']);
-	}
-
 	protected create() {
 
 		this.repoApi.createProduct(this.model).subscribe(result => {
@@ -85,7 +81,9 @@ export class ProductEditorComponent {
 	protected cancel() {
 		if (this.redirectToRoute) {
 			this.dialogs.confirm('', 'Do you want to cancel?', ResultCode.Yes).subscribe(confirmed => {
-				this.router.navigate([this.redirectToRoute]);
+				if (confirmed) {
+					this.router.navigate([this.redirectToRoute]);
+				}
 			});			
 		}
 	}
