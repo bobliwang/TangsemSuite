@@ -124,8 +124,17 @@ namespace Tangsem.Data.StoredProc
     {
       var cmd = this.DbConnection.CreateCommand();
 
-      cmd.CommandType = CommandType.StoredProcedure;
-      cmd.CommandText = this.SpName;
+      if (this.SpName.ToLowerInvariant().StartsWith("p_"))
+      {
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.CommandText = this.SpName;
+      }
+      else
+      {
+        cmd.CommandType = CommandType.Text;
+        var paramsText = string.Join(",", this.Params.Select(p => "@" + p.Name));
+        cmd.CommandText = $"SELECT * FROM dbo.{this.SpName}({paramsText})";
+      }
 
       if (this._timeout != null)
       {

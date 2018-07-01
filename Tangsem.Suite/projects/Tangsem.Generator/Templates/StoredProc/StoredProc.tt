@@ -33,8 +33,8 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 using System.Linq;
-using AirloomMTAWebApp.Revamp.Common.Domain.Repositories;
-using AirloomMTAWebApp.Revamp.Common.StoredProcs;
+using <#= Configuration.RepositoryNamespace #>;
+using Tangsem.NHibernate.StoredProc;
 using NHibernate;
 
 namespace <#= Configuration.RepositoryNamespace #>.<#= Configuration.OrmType.AsNamespacePart() #>
@@ -51,7 +51,7 @@ namespace <#= Configuration.RepositoryNamespace #>.<#= Configuration.OrmType.AsN
   foreach(var gp in groups){#>
 
     // --------- <#=gp.Key#> ------------
-    public static <#= gp.Key#> <#= gp.Key#>(this I<#= Configuration.RepositoryName  #> repository<# if(HasInputParams(gp)){#>, <#= getInputParamNames(gp)#> <#}#> )
+    public static <#= gp.Key#> <#= gp.Key#>(this <#= Configuration.RepositoryName  #> repository<# if(HasInputParams(gp)){#>, <#= getInputParamNames(gp)#> <#}#> )
     {
       var sp = new <#= gp.Key#>(repository.CurrentSession);
 

@@ -45,8 +45,14 @@ namespace Tangsem.Generator.Templates.StoredProc
             this.Write("  \r\n");
             this.Write(" \r\n");
             this.Write("\r\n\r\nusing System;\r\nusing System.Data;\r\nusing System.Collections.Generic;\r\nusing S" +
-                    "ystem.Linq;\r\nusing AirloomMTAWebApp.Revamp.Common.Domain.Repositories;\r\nusing Ai" +
-                    "rloomMTAWebApp.Revamp.Common.StoredProcs;\r\nusing NHibernate;\r\n\r\nnamespace ");
+                    "ystem.Linq;\r\nusing ");
+            
+            #line 36 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\StoredProc\StoredProc.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryNamespace));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\nusing Tangsem.NHibernate.StoredProc;\r\nusing NHibernate;\r\n\r\nnamespace ");
             
             #line 40 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\StoredProc\StoredProc.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryNamespace));
@@ -95,7 +101,7 @@ namespace Tangsem.Generator.Templates.StoredProc
             
             #line default
             #line hidden
-            this.Write("(this I");
+            this.Write("(this ");
             
             #line 54 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\StoredProc\StoredProc.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
