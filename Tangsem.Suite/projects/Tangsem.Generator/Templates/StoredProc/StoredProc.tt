@@ -1,0 +1,247 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+
+<#@ template debug="false" hostspecific="false" language="C#" #>
+
+
+
+<#@ assembly name="System" #> 
+<#@ assembly name="System.Data" #> 
+<#@ assembly name="System.Core" #> 
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ assembly name="Microsoft.CSharp" #>
+
+
+<#@ import namespace="System" #> 
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.IO" #>  
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml" #> 
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="Tangsem.Generator.Settings" #>
+
+
+using System;
+using System.Data;
+using System.Collections.Generic;
+using System.Linq;
+using AirloomMTAWebApp.Revamp.Common.Domain.Repositories;
+using AirloomMTAWebApp.Revamp.Common.StoredProcs;
+using NHibernate;
+
+namespace <#= Configuration.RepositoryNamespace #>.<#= Configuration.OrmType.AsNamespacePart() #>
+{
+  public static class StoredProcedureExtensions
+  {
+<#
+  var dbConnecitonString = this.Configuration.ConnectionString;
+
+  var dt = getDataTable(dbConnecitonString);
+  
+  var groups = dt.Rows.Cast<DataRow>().GroupBy(x => x["ProcedureName"] as string);
+
+  foreach(var gp in groups){#>
+
+    // --------- <#=gp.Key#> ------------
+    public static <#= gp.Key#> <#= gp.Key#>(this I<#= Configuration.RepositoryName  #> repository<# if(HasInputParams(gp)){#>, <#= getInputParamNames(gp)#> <#}#> )
+    {
+      var sp = new <#= gp.Key#>(repository.CurrentSession);
+
+<# if (HasParams(gp)){
+    foreach(var row in gp){#>
+      sp.AddParameter(@"<#= getDbParamName(row)#>",  <#= !true.Equals(row["IsOutPutParameter"]) ? getParamName(row) : "null" #>, <#= getNhNullableType(row)#>, <#= true.Equals(row["IsOutPutParameter"]) ? "ParameterDirection.Output" : "ParameterDirection.Input" #>);
+<# }
+
+} #>
+
+      return sp;
+    }
+<#
+  }
+#>
+
+
+
+  }
+
+
+<#  foreach(var gp in groups){#>
+  public class <#= gp.Key#> : NhSpExecutor
+  {
+
+    public <#= gp.Key#>(ISession session) : base(session, "<#= gp.Key#>")
+    { 
+    }
+
+    protected override void PostExecute(IDbCommand cmd)
+    {
+      base.PostExecute(cmd);
+
+      <# foreach(var row in gp.Where(x => true.Equals(x["IsOutPutParameter"]))){ #>
+
+      this.<#= getDbParamName(row) #> = _params.First(x => x.Name == "<#= getDbParamName(row)#>").Value as <#= getCsharpType(row) #>;
+      <# } #>
+
+    }
+    
+    <# foreach(var row in gp.Where(x => true.Equals(x["IsOutPutParameter"]))){ #>
+
+    public <#= getCsharpType(row) #> <#= getDbParamName(row) #> { get; private set; }
+
+    <# } #>
+
+
+  }
+
+<#
+  }
+#>
+
+
+}
+
+<#
+  var str = this.GenerationEnvironment.ToString().Trim();
+  this.GenerationEnvironment.Clear();
+#>
+
+<#=str#>
+
+<#+
+  public bool HasParams(IGrouping<string, DataRow> group){
+    return !group.Any(x => x.IsNull("ParameterName"));
+  }
+
+  public bool HasInputParams(IGrouping<string, DataRow> group){
+    return !group.Any(x => x.IsNull("ParameterName") && ! 1.Equals(x["IsOutPutParameter"]));
+  }
+
+  public string getParamNames(IGrouping<string, DataRow> group){
+     return string.Join(", " , group.Select(x => getCsharpType(x) + " " + getParamName(x)));
+  }
+
+  public string getInputParamNames(IGrouping<string, DataRow> group){
+     return string.Join(", " , group.Where(x => !true.Equals(x["IsOutPutParameter"])).Select(x => getCsharpType(x) + " " + getParamName(x)));
+  }
+
+  public string getParamName(DataRow row){
+    var name = (row["ParameterName"] as String).Substring(1);
+    name = name.Substring(0,1).ToLower() + name.Substring(1);
+
+    return name;
+  }
+
+  public string getDbParamName(DataRow row){
+    var name = (row["ParameterName"] as String).Substring(1);
+    return name;
+  }
+
+  public string getCsharpType(DataRow dr)
+  {
+      var dbType = dr["ParameterDataType"] as string;
+
+      switch(dbType){
+        case "int": return "int?";
+        case "smallint": return "short?";
+        case "datetime": return "DateTime?";
+        case "bit": return "bool?";        
+        case "decimal": return "decimal?";
+        case "nvarchar":
+        case "varchar":
+        case "nchar":
+          return "string";
+
+        case "binary":        
+        case "image": return "byte[]";
+
+        case "uniqueidentifier":
+          return "Guid";
+        default:
+          return dbType + " Not Support";
+      }
+  }
+
+  public string getNhNullableType(DataRow dr){
+
+      var dbType = dr["ParameterDataType"] as string;
+
+      switch(dbType){
+        case "int": return "NHibernateUtil.Int32";
+        case "smallint": return "NHibernateUtil.Int16";
+        case "datetime": return "NHibernateUtil.DateTime";
+        case "bit": return "NHibernateUtil.Boolean";        
+        case "decimal": return "NHibernateUtil.Decimal";
+        case "nvarchar":
+        case "varchar":
+        case "nchar":
+          return "NHibernateUtil.String";
+        
+        case "binary":          
+        case "image": return "NHibernateUtil.Binary";
+
+        case "uniqueidentifier":
+          return "NHibernateUtil.Guid";
+        default:
+          return dbType + " Not Support";
+      }
+  }
+
+
+  
+  public DataTable getDataTable(string dbConnecitonString){
+  
+    ////var dbConnecitonString = @"Data Source=(local);Initial Catalog=TEST2012_REOS;Integrated Security=True";
+    ////var dbConnecitonString = @"Data Source=Airloom-Lee\R2;Initial Catalog=ArnottsMTA;User ID=sa;Password=sa";
+
+    var dt = new DataTable();
+
+      using(var conn = new SqlConnection(dbConnecitonString)){
+        conn.Open();
+
+        var cmd = conn.CreateCommand();
+        cmd.CommandText = @"SELECT  SCHEMA_NAME(SCHEMA_ID) AS [Schema]
+          , SO.name AS [ProcedureName]
+          , SO.Type_Desc AS [ObjectType (UDF/SP)]
+          , P.parameter_id AS [ParameterID]
+          , P.name AS [ParameterName]
+          , TYPE_NAME(P.user_type_id) AS [ParameterDataType]
+          , P.max_length AS [ParameterMaxBytes]
+          , P.is_output AS [IsOutPutParameter]
+          , P.[default_value] AS [DefaultValue]
+          , p.[has_default_value] AS [HasDefaultValue]
+          --, object_definition(P.OBJECT_ID)
+    FROM    sys.objects AS SO
+            LEFT JOIN sys.parameters AS P ON SO.OBJECT_ID = P.OBJECT_ID
+            -- AND P.is_output = 0 
+    WHERE   
+			--SO.OBJECT_ID IN ( SELECT  OBJECT_ID
+   --                           FROM    sys.objects
+   --                           WHERE   TYPE IN ( 'P', 'FN', 'F', 'IT' )
+			--			)
+   --         AND
+			(SO.[name] LIKE 'p_%' OR SO.[name] LIKE 'fn_%')
+            AND SO.[type_desc] IN('SQL_STORED_PROCEDURE', 'SQL_INLINE_TABLE_VALUED_FUNCTION')
+            AND SO.[Name] NOT LIKE '%csgen%'
+			AND SO.[Name] <> 'fn_diagramobjects'
+    ORDER BY [Schema]
+          , SO.name
+          , P.parameter_id";
+    
+
+        var dr = cmd.ExecuteReader();
+
+        dt.Load(dr);
+    }
+
+    return dt;
+  }
+
+#>

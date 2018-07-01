@@ -209,6 +209,14 @@
       <DependentUpon>Repository.Designer.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\SingleTableMetadataTemplate.cs" />
+    <Compile Include="Templates\StoredProc\StoredProc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoredProc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\StoredProc\StoredProc.ext.cs">
+      <DependentUpon>StoredProc.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\TemplateBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +323,10 @@
     </Content>
     <Content Include="Templates\MVC\Models\PlaceHolder.txt" />
     <Content Include="Templates\MVC\Views\PlaceHolder.txt" />
+    <Content Include="Templates\StoredProc\StoredProc.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>StoredProc.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortBy.cs" />
     <Compile Include="SearchParamsBase.cs" />
+    <Compile Include="StoredProc\ISpExecutor.cs" />
+    <Compile Include="StoredProc\SpExecutorBase.cs" />
+    <Compile Include="StoredProc\SpParam.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tangsem.Common\Tangsem.Common.csproj">

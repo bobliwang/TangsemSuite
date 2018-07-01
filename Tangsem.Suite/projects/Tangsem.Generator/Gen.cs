@@ -17,6 +17,7 @@ using Tangsem.Generator.Templates.MVC.AutoMapper;
 using Tangsem.Generator.Templates.MVC.Controllers;
 using Tangsem.Generator.Templates.MVC.ViewModels;
 using Tangsem.Generator.Templates.Repositories;
+using Tangsem.Generator.Templates.StoredProc;
 
 namespace Tangsem.Generator
 {
@@ -89,7 +90,9 @@ namespace Tangsem.Generator
         new NgModels(this.GeneratorConfiguration, tableMetadatas ),
         new PocoModelAutoMapperConfigurationTemplate(this.GeneratorConfiguration, tableMetadatas),
         new NgModule(this.GeneratorConfiguration, tableMetadatas),
-        new NgRoutingModule(this.GeneratorConfiguration, tableMetadatas)
+        new NgRoutingModule(this.GeneratorConfiguration, tableMetadatas),
+
+        new StoredProc(this.GeneratorConfiguration, tableMetadatas)
       };
 
       this.ExecuteTemplates(templates);
@@ -114,6 +117,7 @@ namespace Tangsem.Generator
 
           // PocoDTO
           new PocoDTOTemplate(this.GeneratorConfiguration, tableMetadata),
+
           new PocoModelAutoMapperProfileTemplate(this.GeneratorConfiguration, tableMetadata),
           new ApiControllerTemplate(this.GeneratorConfiguration, tableMetadata),
           new SearchParamTemplate(this.GeneratorConfiguration, tableMetadata),

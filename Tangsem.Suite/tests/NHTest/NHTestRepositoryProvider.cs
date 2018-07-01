@@ -67,12 +67,12 @@ namespace NHTest.Common.Services
     {
       var config = new Configuration().LinqToHqlGeneratorsRegistry<ExtendedLinqToHqlGeneratorsRegistry>();
 
+      var msSqlConfig = MsSqlConfiguration.MsSql2008.ConnectionString(_connectionString).ShowSql()
+                          .MaxFetchDepth(3).Dialect<MsSql2008DialectExt>();
+
       return Fluently
         .Configure(config)
-        .Database(MsSqlConfiguration.MsSql2008.ConnectionString(_connectionString)
-                    .ShowSql()
-                    .MaxFetchDepth(3)
-                    .Dialect<MsSql2008DialectExt>())
+        .Database(msSqlConfig)
         .Mappings(m =>
           m.FluentMappings.AddFromAssemblyOf<Product>())
         .BuildSessionFactory();

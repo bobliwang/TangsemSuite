@@ -36,7 +36,12 @@ namespace NHTest
           var specs = new List<ProductSpec>();
 
           specs.Add(new ProductSpec { Name = $"Color {idx}", Value = "Black", Description = "Black Color" });
-          specs.Add(new ProductSpec { Name = "Dimension", Value = "40x60", Description = "40mm X 60mm" });
+          specs.Add(new ProductSpec
+          {
+            Name = "Dimension",
+            Value = $"{prod.Id * 10} x {prod.Id * 20}",
+            Description = $"{prod.Id * 10}mm x {prod.Id * 20}mm"
+          });
 
           prod.SpecsJson = specs.ToArray();
 
