@@ -29,6 +29,8 @@
 		<table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDisableClear matSortDirection="desc">
 
 		<# foreach(var col in this.TableMetadata.Columns) { #>
+
+			<!-- <#= col.PropertyName.Lf() #> column -->
 			<ng-container matColumnDef="<#= col.PropertyName.Lf() #>">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
 					<#= col.PropertyName #>
