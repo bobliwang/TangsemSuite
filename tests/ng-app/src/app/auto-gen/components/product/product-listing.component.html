@@ -20,7 +20,7 @@
 		<!-- TABLE -->
 		<table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDisableClear matSortDirection="desc">
 
-					<ng-container matColumnDef="id">
+			<ng-container matColumnDef="id">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
 					Id
 				</th>
@@ -28,7 +28,7 @@
 					{{rowData.id}}
 				</td>
 			</ng-container>
-					<ng-container matColumnDef="name">
+			<ng-container matColumnDef="name">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
 					Name
 				</th>
@@ -36,23 +36,37 @@
 					{{rowData.name}}
 				</td>
 			</ng-container>
-					<ng-container matColumnDef="unitPrice">
+			<ng-container matColumnDef="unitPrice">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
 					UnitPrice
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.unitPrice}}
+
+					
+
+					<ng-container *ngIf="unitPriceTemplate else defaultUnitPriceTemplate" >
+						<ng-container *ngTemplateOutlet="unitPriceTemplate; context: { rowData: rowData }"></ng-container>
+					</ng-container>
+
+					<ng-template #defaultUnitPriceTemplate>
+						{{rowData.unitPrice}}
+					</ng-template>
+					
+					
+
 				</td>
 			</ng-container>
-					<ng-container matColumnDef="specsJson">
+			<ng-container matColumnDef="specsJson">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
 					SpecsJson
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.specsJson}}
+
+					<ng-container *ngTemplateOutlet="specsTemplate; context: { rowData: rowData }"></ng-container>
+
 				</td>
 			</ng-container>
-					<ng-container matColumnDef="createdById">
+			<ng-container matColumnDef="createdById">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
 					CreatedById
 				</th>
@@ -60,7 +74,7 @@
 					{{rowData.createdById}}
 				</td>
 			</ng-container>
-					<ng-container matColumnDef="createdTime">
+			<ng-container matColumnDef="createdTime">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
 					CreatedTime
 				</th>
@@ -68,7 +82,7 @@
 					{{rowData.createdTime}}
 				</td>
 			</ng-container>
-					<ng-container matColumnDef="modifiedById">
+			<ng-container matColumnDef="modifiedById">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
 					ModifiedById
 				</th>
@@ -76,7 +90,7 @@
 					{{rowData.modifiedById}}
 				</td>
 			</ng-container>
-					<ng-container matColumnDef="modifiedTime">
+			<ng-container matColumnDef="modifiedTime">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
 					ModifiedTime
 				</th>
@@ -84,7 +98,7 @@
 					{{rowData.modifiedTime}}
 				</td>
 			</ng-container>
-					<ng-container matColumnDef="active">
+			<ng-container matColumnDef="active">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
 					Active
 				</th>
@@ -92,11 +106,11 @@
 					{{rowData.active}}
 				</td>
 			</ng-container>
-		
+
 
 			<ng-container matColumnDef="actions">
 				<th mat-header-cell *matHeaderCellDef>
-		
+
 				</th>
 
 				<td mat-cell *matCellDef="let rowData">

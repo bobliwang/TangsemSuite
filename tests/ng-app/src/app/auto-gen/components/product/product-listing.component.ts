@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Input, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
@@ -29,6 +29,12 @@ export class ProductListingComponent {
 
 	@ViewChild(MatSort)
 	public sort: MatSort;
+
+	@Input()
+	public specsTemplate: TemplateRef<any>;
+
+	@Input()
+	public unitPriceTemplate: TemplateRef<any>;
 
 	constructor(
 		private router: Router,

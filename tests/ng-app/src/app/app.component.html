@@ -15,10 +15,27 @@
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content>
+
+            <div>
+                <product-listing [specsTemplate]="specsTemplate" [unitPriceTemplate]="unitPriceTemplate">
+
+                    <ng-template #specsTemplate let-rowData="rowData">
+                        <prod-specs [specs]="rowData.specsJson"></prod-specs>
+                    </ng-template>
+
+                    <ng-template #unitPriceTemplate let-rowData="rowData">
+                        {{ rowData.unitPrice }} *
+                    </ng-template>
+                    
+                </product-listing>
+
+
+            </div>
+
             <div>
                 <router-outlet></router-outlet>
             </div>
         </mat-sidenav-content>
     </mat-sidenav-container>
-    
+
 </div>
