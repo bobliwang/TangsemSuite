@@ -42,18 +42,12 @@
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
 
-					
-
-					<ng-container *ngIf="unitPriceTemplate else defaultUnitPriceTemplate" >
-						<ng-container *ngTemplateOutlet="unitPriceTemplate; context: { rowData: rowData }"></ng-container>
-					</ng-container>
+					<ng-container *ngTemplateOutlet="unitPriceTemplate || defaultUnitPriceTemplate; context: { rowData: rowData }"></ng-container>
 
 					<ng-template #defaultUnitPriceTemplate>
 						{{rowData.unitPrice}}
 					</ng-template>
 					
-					
-
 				</td>
 			</ng-container>
 			<ng-container matColumnDef="specsJson">
