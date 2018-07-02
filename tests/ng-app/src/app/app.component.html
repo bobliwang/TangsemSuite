@@ -17,7 +17,10 @@
         <mat-sidenav-content>
 
             <div>
-                <product-listing [specsTemplate]="specsTemplate" [unitPriceTemplate]="unitPriceTemplate">
+                <product-listing
+                    [templates]="{specsTemplate: specsTemplate, unitPriceTemplate: unitPriceTemplate}"
+                    [displayedColumns]="['id', 'name', 'unitPrice', 'specsJson']"
+                    >
 
                     <ng-template #specsTemplate let-rowData="rowData">
                         <prod-specs [specs]="rowData.specsJson"></prod-specs>
