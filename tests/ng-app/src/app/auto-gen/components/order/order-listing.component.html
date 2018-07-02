@@ -25,7 +25,15 @@
 					Id
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.id}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.idTemplate || defaultIdTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultIdTemplate>
+						{{rowData.id}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="customerName">
@@ -33,7 +41,15 @@
 					CustomerName
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.customerName}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.customerNameTemplate || defaultCustomerNameTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultCustomerNameTemplate>
+						{{rowData.customerName}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="productId">
@@ -41,7 +57,15 @@
 					ProductId
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.productId}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.productIdTemplate || defaultProductIdTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultProductIdTemplate>
+						{{rowData.productId}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="orderTotal">
@@ -49,7 +73,15 @@
 					OrderTotal
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.orderTotal}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.orderTotalTemplate || defaultOrderTotalTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultOrderTotalTemplate>
+						{{rowData.orderTotal}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="createdById">
@@ -57,7 +89,15 @@
 					CreatedById
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.createdById}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.createdByIdTemplate || defaultCreatedByIdTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultCreatedByIdTemplate>
+						{{rowData.createdById}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="modifiedById">
@@ -65,7 +105,15 @@
 					ModifiedById
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.modifiedById}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.modifiedByIdTemplate || defaultModifiedByIdTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultModifiedByIdTemplate>
+						{{rowData.modifiedById}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="createdTime">
@@ -73,7 +121,15 @@
 					CreatedTime
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.createdTime}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.createdTimeTemplate || defaultCreatedTimeTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultCreatedTimeTemplate>
+						{{rowData.createdTime}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="modifiedTime">
@@ -81,7 +137,15 @@
 					ModifiedTime
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.modifiedTime}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.modifiedTimeTemplate || defaultModifiedTimeTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultModifiedTimeTemplate>
+						{{rowData.modifiedTime}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="active">
@@ -89,7 +153,15 @@
 					Active
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.active}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.activeTemplate || defaultActiveTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultActiveTemplate>
+						{{rowData.active}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 		

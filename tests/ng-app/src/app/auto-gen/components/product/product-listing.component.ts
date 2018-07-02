@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Input, TemplateRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
@@ -18,7 +18,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
 export class ProductListingComponent {
 
 	public dataSource = [];
-	
+
 	@Input()
 	public displayedColumns = [ 'id', 'name', 'unitPrice', 'specsJson', 'createdById', 'createdTime', 'modifiedById', 'modifiedTime', 'active', "actions" ];
 
@@ -44,7 +44,7 @@ export class ProductListingComponent {
 
 	@Input()
 	public filterModel: models.ProductSearchParams;
-	
+
 	public ngOnInit() {
 		
 		this.filterModel = this.filterModel || <models.ProductSearchParams> {};
@@ -57,13 +57,10 @@ export class ProductListingComponent {
 	}
 
 	public ngAfterViewInit() {
-		
-		console.log('templates:', this.templates);
 		this.search();
 	}
 
 	public search() {
-		
 
 		this.filterModel.pageIndex = this.paginator.pageIndex || 0;
 		this.filterModel.pageSize = this.paginator.pageSize || 100;

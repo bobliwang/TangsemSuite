@@ -25,7 +25,15 @@
 					Id
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.id}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.idTemplate || defaultIdTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultIdTemplate>
+						{{rowData.id}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="name">
@@ -33,7 +41,15 @@
 					Name
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.name}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.nameTemplate || defaultNameTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultNameTemplate>
+						{{rowData.name}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="createdById">
@@ -41,7 +57,15 @@
 					CreatedById
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.createdById}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.createdByIdTemplate || defaultCreatedByIdTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultCreatedByIdTemplate>
+						{{rowData.createdById}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="modifiedById">
@@ -49,7 +73,15 @@
 					ModifiedById
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.modifiedById}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.modifiedByIdTemplate || defaultModifiedByIdTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultModifiedByIdTemplate>
+						{{rowData.modifiedById}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="createdTime">
@@ -57,7 +89,15 @@
 					CreatedTime
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.createdTime}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.createdTimeTemplate || defaultCreatedTimeTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultCreatedTimeTemplate>
+						{{rowData.createdTime}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="modifiedTime">
@@ -65,7 +105,15 @@
 					ModifiedTime
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.modifiedTime}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.modifiedTimeTemplate || defaultModifiedTimeTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultModifiedTimeTemplate>
+						{{rowData.modifiedTime}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 					<ng-container matColumnDef="active">
@@ -73,7 +121,15 @@
 					Active
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.active}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.activeTemplate || defaultActiveTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultActiveTemplate>
+						{{rowData.active}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 		

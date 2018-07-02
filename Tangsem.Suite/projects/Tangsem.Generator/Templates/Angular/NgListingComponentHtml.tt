@@ -34,7 +34,15 @@
 					<#= col.PropertyName #>
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
-					{{rowData.<#= col.PropertyName.Lf() #>}}
+
+					
+					<ng-container *ngTemplateOutlet="templates.<#= col.PropertyName.Lf() #>Template || default<#= col.PropertyName #>Template; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #default<#= col.PropertyName #>Template>
+						{{rowData.<#= col.PropertyName.Lf() #>}}
+					</ng-template>
+
+					
 				</td>
 			</ng-container>
 		<# } #>

@@ -19,6 +19,7 @@ export class PosListingComponent {
 
 	public dataSource = [];
 
+	@Input()
 	public displayedColumns = [ 'id', 'name', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', "actions" ];
 
 	public resultsLength = 0;
@@ -29,6 +30,9 @@ export class PosListingComponent {
 
 	@ViewChild(MatSort)
 	public sort: MatSort;
+
+	@Input()
+	public templates = {};
 
 	constructor(
 		private router: Router,

@@ -73,9 +73,10 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
             
             #line default
             #line hidden
-            this.Write("ListingComponent {\r\n\r\n\tpublic dataSource = [];\r\n\r\n\tpublic displayedColumns = [ ");
+            this.Write("ListingComponent {\r\n\r\n\tpublic dataSource = [];\r\n\r\n\t@Input()\r\n\tpublic displayedCol" +
+                    "umns = [ ");
             
-            #line 30 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 31 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", this.TableMetadata.Columns.Select(col => $"'{col.PropertyName.Lf()}'"))));
             
             #line default
@@ -91,20 +92,23 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
 	@ViewChild(MatSort)
 	public sort: MatSort;
 
+	@Input()
+	public templates = {};
+
 	constructor(
 		private router: Router,
 		private snackBar: MatSnackBar,
 		private dialogs: DialogsService,
 		private repoApi: ");
             
-            #line 45 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 49 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
             #line hidden
             this.Write("ApiService) {\r\n\t\r\n\t}\r\n\r\n\t@Input()\r\n\tpublic filterModel: models.");
             
-            #line 50 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 54 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -112,7 +116,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
             this.Write("SearchParams;\r\n\r\n\tpublic ngOnInit() {\r\n\t\t\r\n\t\tthis.filterModel = this.filterModel " +
                     "|| <models.");
             
-            #line 54 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 58 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -140,7 +144,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
 
 		this.repoApi.get");
             
-            #line 75 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 79 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -160,7 +164,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
 
 	public delete(rowData: models.");
             
-            #line 88 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 92 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.TsModelName));
             
             #line default
@@ -169,7 +173,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
                     "be(confirmed => {\r\n\t\t\tif (!confirmed) {\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\r\n\t\t\tthis.repoApi.de" +
                     "lete");
             
-            #line 94 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 98 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -188,7 +192,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
 	public add() {
 		this.router.navigate(['");
             
-            #line 106 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 110 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default

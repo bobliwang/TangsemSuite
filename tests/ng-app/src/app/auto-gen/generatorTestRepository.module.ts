@@ -36,7 +36,6 @@ import { ProdSpecsComponent } from '../components/prod-specs/prod-specs.componen
 		FormsModule,
 		BrowserAnimationsModule,
 
-
 		MatSnackBarModule, MatStepperModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatTableModule, MatSortModule, MatButtonModule, MatInputModule, MatAutocompleteModule, MatCheckboxModule, MatIconModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule,
 	],
 	declarations: [
@@ -67,7 +66,7 @@ import { ProdSpecsComponent } from '../components/prod-specs/prod-specs.componen
 		BrowserAnimationsModule,
 		MatSnackBarModule, MatStepperModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatTableModule, MatSortModule, MatButtonModule, MatInputModule, MatAutocompleteModule, MatCheckboxModule, MatIconModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule,
 
-
+		
 		ProdSpecsComponent,
 		
 		ProductFilterComponent,

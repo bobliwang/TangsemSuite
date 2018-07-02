@@ -19,6 +19,7 @@ export class OrderListingComponent {
 
 	public dataSource = [];
 
+	@Input()
 	public displayedColumns = [ 'id', 'customerName', 'productId', 'orderTotal', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', "actions" ];
 
 	public resultsLength = 0;
@@ -29,6 +30,9 @@ export class OrderListingComponent {
 
 	@ViewChild(MatSort)
 	public sort: MatSort;
+
+	@Input()
+	public templates = {};
 
 	constructor(
 		private router: Router,

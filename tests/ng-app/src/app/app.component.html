@@ -18,11 +18,11 @@
 
             <div>
                 <product-listing
-                    [templates]="{specsTemplate: specsTemplate, unitPriceTemplate: unitPriceTemplate}"
+                    [templates]="{specsJsonTemplate: specsJsonTemplate, unitPriceTemplate: unitPriceTemplate}"
                     [displayedColumns]="['id', 'name', 'unitPrice', 'specsJson']"
                     >
 
-                    <ng-template #specsTemplate let-rowData="rowData">
+                    <ng-template #specsJsonTemplate let-rowData="rowData">
                         <prod-specs [specs]="rowData.specsJson"></prod-specs>
                     </ng-template>
 

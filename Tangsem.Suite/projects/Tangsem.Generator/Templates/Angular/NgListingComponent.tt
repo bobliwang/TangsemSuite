@@ -27,6 +27,7 @@ export class <#= this.TableMetadata.EntityName #>ListingComponent {
 
 	public dataSource = [];
 
+	@Input()
 	public displayedColumns = [ <#= string.Join(", ", this.TableMetadata.Columns.Select(col => $"'{col.PropertyName.Lf()}'")) #>, "actions" ];
 
 	public resultsLength = 0;
@@ -37,6 +38,9 @@ export class <#= this.TableMetadata.EntityName #>ListingComponent {
 
 	@ViewChild(MatSort)
 	public sort: MatSort;
+
+	@Input()
+	public templates = {};
 
 	constructor(
 		private router: Router,
