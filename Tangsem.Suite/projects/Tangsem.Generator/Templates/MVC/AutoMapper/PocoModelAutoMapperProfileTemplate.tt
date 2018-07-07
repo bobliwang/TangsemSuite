@@ -15,11 +15,16 @@ namespace <#= Configuration.DomainNamespace #>.Mappings.AutoMapper
 	{
 		public <#= this.TableMetadata.EntityName #>MappingProfile ()
 		{
+            // Entity to DTO
 			var mapping = this.CreateMap<<#= this.TableMetadata.EntityName #>, <#= this.TableMetadata.EntityName #>DTO>();
 
-		
+            <# foreach(var outgingRef in this.TableMetadata.OutgoingReferences) { #>
+                //mapping.ForMember
+            <# } #>
 
-			// TODO: To generate code that ignores auditable columns as createdById, modifiedById ...
+            // DTO to Entity
+            mapping = mapping.ReverseMap();
+
 			<# if( this.TableMetadata.IsAuditableEntity) { #>
 
 				mapping.ForMember(x => x.CreatedById, opts => opts.Ignore()); 
@@ -29,7 +34,6 @@ namespace <#= Configuration.DomainNamespace #>.Mappings.AutoMapper
 				mapping.ForMember(x => x.Active, opts => opts.Ignore());
 
 			<# } #>
-			mapping.ReverseMap();
 		}
 	}
 }

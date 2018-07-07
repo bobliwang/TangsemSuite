@@ -63,24 +63,39 @@ namespace Tangsem.Generator.Templates.MVC.AutoMapper
             
             #line default
             #line hidden
-            this.Write("MappingProfile ()\r\n\t\t{\r\n\t\t\tvar mapping = this.CreateMap<");
+            this.Write("MappingProfile ()\r\n\t\t{\r\n            // Entity to DTO\r\n\t\t\tvar mapping = this.Creat" +
+                    "eMap<");
             
-            #line 18 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            #line 19 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 18 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            #line 19 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("DTO>();\r\n\r\n\t\t\r\n\r\n\t\t\t// TODO: To generate code that ignores auditable columns as c" +
-                    "reatedById, modifiedById ...\r\n\t\t\t");
+            this.Write("DTO>();\r\n\r\n            ");
+            
+            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ foreach(var outgingRef in this.TableMetadata.OutgoingReferences) { 
+            
+            #line default
+            #line hidden
+            this.Write("                //mapping.ForMember\r\n            ");
             
             #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            // DTO to Entity\r\n            mapping = mapping.ReverseMap();\r\n\r\n\t\t" +
+                    "\t");
+            
+            #line 28 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
  if( this.TableMetadata.IsAuditableEntity) { 
             
             #line default
@@ -94,12 +109,12 @@ namespace Tangsem.Generator.Templates.MVC.AutoMapper
 
 			");
             
-            #line 31 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            #line 36 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\tmapping.ReverseMap();\r\n\t\t}\r\n\t}\r\n}");
+            this.Write("\t\t}\r\n\t}\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
