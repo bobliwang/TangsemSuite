@@ -5,6 +5,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
+using Newtonsoft.Json;
+
 using Tangsem.Common.DataAccess;
 
 namespace Tangsem.Common.Extensions
@@ -91,6 +93,11 @@ namespace Tangsem.Common.Extensions
           if (val == DBNull.Value)
           {
             val = null;
+          }
+
+          if (val is string strVal && col.PropertyInfo.PropertyType.IsArray)
+          {
+            val = JsonConvert.DeserializeObject(strVal, col.PropertyInfo.PropertyType);
           }
 
           col.PropertyInfo.SetValue(t, val, null);
