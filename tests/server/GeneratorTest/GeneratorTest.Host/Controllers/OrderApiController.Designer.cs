@@ -33,7 +33,11 @@ namespace GeneratorTest.Host.Controllers
 				PageIndex = filterModel.PageIndex ?? 0,
 				PageSize = filterModel.PageSize ?? int.MaxValue,
 				RowsCount = filteredQry.Count(),
-				PagedData = filteredQry.SortBy(filterModel).SkipAndTake(filterModel).ToList().Select(x => _mapper.Map<OrderDTO>(x)).ToList(),
+				PagedData = filteredQry.SortBy(filterModel)
+                                       .SkipAndTake(filterModel)
+                                       .ToList()
+                                       .Select(x => _mapper.Map<OrderDTO>(x))
+                                       .ToList(),
 			};
 
 			return this.Ok(searchResult);
@@ -41,8 +45,13 @@ namespace GeneratorTest.Host.Controllers
      
 		[HttpGet("_api/repo/Order/{id}")]
 		public IActionResult GetOrderById(int id) {
-			var entity = _repository.LookupOrderById(id);
-		  var orderDto = _mapper.Map<OrderDTO>(entity);
+			var order = _repository.LookupOrderById(id);
+            if (order == null)
+			{
+				return this.NotFound($"Order is not found by id {id}");
+			}
+
+            var orderDto = _mapper.Map<OrderDTO>(order);
 
 			return this.Ok(orderDto);
 		}

@@ -97,6 +97,9 @@ export class PosListingComponent {
 		});
 	}
 
+	public edit(rowData: models.PosModel) {
+		this.router.navigate([`pos/${rowData.id}/edit`]);
+	}
 
 	public add() {
 		this.router.navigate(['pos/create']);

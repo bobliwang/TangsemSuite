@@ -105,6 +105,9 @@ export class <#= this.TableMetadata.EntityName #>ListingComponent {
 		});
 	}
 
+	public edit(rowData: models.<#= this.TableMetadata.TsModelName #>) {
+		this.router.navigate([`<#= this.TableMetadata.EntityName.Lf() #>/${rowData.id}/edit`]);
+	}
 
 	public add() {
 		this.router.navigate(['<#= this.TableMetadata.EntityName.Lf() #>/create']);

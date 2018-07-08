@@ -1,5 +1,5 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
 import * as models from '../../models/models';
 
@@ -7,13 +7,12 @@ import { GeneratorTestRepositoryApiService } from '../../services/api.service';
 
 import { DialogsService } from '../../../services/dialogs.service';
 import { ResultCode } from '../../../components/dialog/dialog.models';
-import { EditorMode } from '../../models/models';
 
 @Component({
   selector: 'order-editor',
   templateUrl: 'order-editor.component.html',
 })
-export class OrderEditorComponent {
+export class OrderEditorComponent implements OnInit {
 	
 	@Input()
 	public model: models.OrderModel;
@@ -23,6 +22,15 @@ export class OrderEditorComponent {
 
 	@Input()
 	public redirectToRoute = 'order/listing';
+
+    @Output()
+    public onLoadDataError = new EventEmitter<any>();
+
+    @Output()
+    public onSaveSuccess = new EventEmitter<any>();
+
+    @Output()
+    public onSaveError = new EventEmitter<any>();
 	
 	constructor(
 		private router: Router,
@@ -34,8 +42,7 @@ export class OrderEditorComponent {
 	}
 
 	public ngOnInit() {
-
-		this.activatedRoute.params.subscribe(params => {
+        this.activatedRoute.params.subscribe(params => {
 			const action = params['action'];
 			const id = params['id'];
 
@@ -44,14 +51,21 @@ export class OrderEditorComponent {
 			this.mode = action || this.mode;
 
 			if (this.mode === 'edit' || this.mode === 'view') {
-				this.repoApi.getOrderById(id).subscribe(result => {
-					this.model = result;
-				});
+				this.loadData(id);
 			}
 		});
 
 		this.model = this.model || {};
 	}
+
+    public loadData(id: number | string) {
+        this.repoApi.getOrderById(id).subscribe(result => {
+			this.model = result;
+		}, err => {
+            console.error(`unable to load Order by id ${id}`, err);
+            this.onLoadDataError.emit({ error: err, id: id});
+        });
+    }
 
 	public save() {
 		if (this.mode === 'create') {
@@ -87,12 +101,14 @@ export class OrderEditorComponent {
 			}
 
 			this.snackBar.open('updated successfully', null, { duration: 1000 });
-			
+			this.onSaveSuccess.emit({ model: this.model });
+
 			if (this.redirectToRoute) {
 				this.router.navigate([this.redirectToRoute]);	
 			}
 		}, err => {
 			this.snackBar.open('failed to updade', null, { duration: 3000 });
+            this.onSaveError.emit({ error: err, model: this.model });
 		});
 	}
 
@@ -105,5 +121,4 @@ export class OrderEditorComponent {
 			});			
 		}
 	}
-
 }

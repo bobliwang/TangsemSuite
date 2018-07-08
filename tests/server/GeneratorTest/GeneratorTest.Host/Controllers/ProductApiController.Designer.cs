@@ -28,12 +28,16 @@ namespace GeneratorTest.Host.Controllers
 		public IActionResult GetProductList(ProductSearchParams filterModel) {
 
 			var filteredQry = this.FilterBySearchParams(_repository.Products, filterModel);
-			var searchResult = new SearchResultModel<Product>
+			var searchResult = new SearchResultModel<ProductDTO>
 			{
 				PageIndex = filterModel.PageIndex ?? 0,
 				PageSize = filterModel.PageSize ?? int.MaxValue,
 				RowsCount = filteredQry.Count(),
-				PagedData = filteredQry.SortBy(filterModel).SkipAndTake(filterModel).ToList(),
+				PagedData = filteredQry.SortBy(filterModel)
+                                       .SkipAndTake(filterModel)
+                                       .ToList()
+                                       .Select(x => _mapper.Map<ProductDTO>(x))
+                                       .ToList(),
 			};
 
 			return this.Ok(searchResult);
@@ -41,9 +45,15 @@ namespace GeneratorTest.Host.Controllers
      
 		[HttpGet("_api/repo/Product/{id}")]
 		public IActionResult GetProductById(int id) {
-			var entity = _repository.LookupProductById(id);
+			var product = _repository.LookupProductById(id);
+            if (product == null)
+			{
+				return this.NotFound($"Product is not found by id {id}");
+			}
 
-			return this.Ok(entity);
+            var productDto = _mapper.Map<ProductDTO>(product);
+
+			return this.Ok(productDto);
 		}
 
 		[HttpPost("_api/repo/Product/{id}")]

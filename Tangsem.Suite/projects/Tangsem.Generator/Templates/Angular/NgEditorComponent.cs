@@ -19,7 +19,7 @@ namespace Tangsem.Generator.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class NgEditorComponent : NgEditorComponentBase
     {
@@ -30,12 +30,15 @@ namespace Tangsem.Generator.Templates.Angular
         public virtual string TransformText()
         {
             this.Write("\r\n");
-            this.Write("\r\nimport { Router } from \'@angular/router\';\r\nimport { Component, OnInit, ViewChil" +
-                    "d, Input } from \'@angular/core\';\r\nimport { MatPaginator, MatSort, MatSnackBar } " +
-                    "from \'@angular/material\';\r\nimport * as models from \'../../models/models\';\r\n\r\nimp" +
-                    "ort { ");
+            this.Write(@"
+import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
+import * as models from '../../models/models';
+
+import { ");
             
-            #line 14 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 14 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
@@ -44,28 +47,28 @@ namespace Tangsem.Generator.Templates.Angular
                     " \'../../../services/dialogs.service\';\r\nimport { ResultCode } from \'../../../comp" +
                     "onents/dialog/dialog.models\';\r\n\r\n@Component({\r\n  selector: \'");
             
-            #line 20 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 20 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-editor\',\r\n  templateUrl: \'");
             
-            #line 21 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-editor.component.html\',\r\n})\r\nexport class ");
             
-            #line 23 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("EditorComponent {\r\n\t\r\n\t@Input()\r\n\tpublic model: models.");
+            this.Write("EditorComponent implements OnInit {\r\n\t\r\n\t@Input()\r\n\tpublic model: models.");
             
-            #line 26 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 26 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.TsModelName));
             
             #line default
@@ -73,15 +76,30 @@ namespace Tangsem.Generator.Templates.Angular
             this.Write(";\r\n\r\n\t@Input()\r\n\tpublic mode: models.EditorMode = \'create\';\r\n\r\n\t@Input()\r\n\tpublic" +
                     " redirectToRoute = \'");
             
-            #line 32 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 32 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
-            this.Write("/listing\';\r\n\t\r\n\tconstructor(\r\n\t\tprivate router: Router,\r\n\t\tprivate snackBar: MatS" +
-                    "nackBar,\r\n\t\tprivate dialogs: DialogsService,\r\n\t\tprivate repoApi: ");
+            this.Write(@"/listing';
+
+    @Output()
+    public onLoadDataError = new EventEmitter<any>();
+
+    @Output()
+    public onSaveSuccess = new EventEmitter<any>();
+
+    @Output()
+    public onSaveError = new EventEmitter<any>();
+	
+	constructor(
+		private router: Router,
+		private activatedRoute: ActivatedRoute,
+		private snackBar: MatSnackBar,
+		private dialogs: DialogsService,
+		private repoApi: ");
             
-            #line 38 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 48 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
@@ -91,8 +109,42 @@ namespace Tangsem.Generator.Templates.Angular
 	}
 
 	public ngOnInit() {
+        this.activatedRoute.params.subscribe(params => {
+			const action = params['action'];
+			const id = params['id'];
+
+			console.log(JSON.stringify({action, id}));
+
+			this.mode = action || this.mode;
+
+			if (this.mode === 'edit' || this.mode === 'view') {
+				this.loadData(id);
+			}
+		});
+
 		this.model = this.model || {};
 	}
+
+    public loadData(id: number | string) {
+        this.repoApi.get");
+            
+            #line 70 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("ById(id).subscribe(result => {\r\n\t\t\tthis.model = result;\r\n\t\t}, err => {\r\n         " +
+                    "   console.error(`unable to load ");
+            
+            #line 73 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write(@" by id ${id}`, err);
+            this.onLoadDataError.emit({ error: err, id: id});
+        });
+    }
 
 	public save() {
 		if (this.mode === 'create') {
@@ -106,7 +158,7 @@ namespace Tangsem.Generator.Templates.Angular
 
 		this.repoApi.create");
             
-            #line 56 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 88 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -131,7 +183,7 @@ namespace Tangsem.Generator.Templates.Angular
 
 		this.repoApi.update");
             
-            #line 74 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 106 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -142,12 +194,14 @@ namespace Tangsem.Generator.Templates.Angular
 			}
 
 			this.snackBar.open('updated successfully', null, { duration: 1000 });
-			
+			this.onSaveSuccess.emit({ model: this.model });
+
 			if (this.redirectToRoute) {
 				this.router.navigate([this.redirectToRoute]);	
 			}
 		}, err => {
 			this.snackBar.open('failed to updade', null, { duration: 3000 });
+            this.onSaveError.emit({ error: err, model: this.model });
 		});
 	}
 
@@ -160,7 +214,6 @@ namespace Tangsem.Generator.Templates.Angular
 			});			
 		}
 	}
-
 }");
             return this.GenerationEnvironment.ToString();
         }

@@ -19,7 +19,7 @@ namespace Tangsem.Generator.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class NgListingComponent : NgListingComponentBase
     {
@@ -39,7 +39,7 @@ import { merge } from 'rxjs/observable/merge';
 
 import { ");
             
-            #line 15 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 15 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
@@ -54,21 +54,21 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
 @Component({
   selector: '");
             
-            #line 23 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-listing\',\r\n  templateUrl: \'");
             
-            #line 24 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 24 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-listing.component.html\',\r\n})\r\nexport class ");
             
-            #line 26 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 26 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -76,7 +76,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
             this.Write("ListingComponent {\r\n\r\n\tpublic dataSource = [];\r\n\r\n\t@Input()\r\n\tpublic displayedCol" +
                     "umns = [ ");
             
-            #line 31 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 31 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", this.TableMetadata.Columns.Select(col => $"'{col.PropertyName.Lf()}'"))));
             
             #line default
@@ -101,14 +101,14 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
 		private dialogs: DialogsService,
 		private repoApi: ");
             
-            #line 49 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 49 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
             #line hidden
             this.Write("ApiService) {\r\n\t\r\n\t}\r\n\r\n\t@Input()\r\n\tpublic filterModel: models.");
             
-            #line 54 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 54 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -116,7 +116,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
             this.Write("SearchParams;\r\n\r\n\tpublic ngOnInit() {\r\n\t\t\r\n\t\tthis.filterModel = this.filterModel " +
                     "|| <models.");
             
-            #line 58 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 58 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -144,7 +144,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
 
 		this.repoApi.get");
             
-            #line 79 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 79 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -164,7 +164,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
 
 	public delete(rowData: models.");
             
-            #line 92 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 92 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.TsModelName));
             
             #line default
@@ -173,7 +173,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
                     "be(confirmed => {\r\n\t\t\tif (!confirmed) {\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\r\n\t\t\tthis.repoApi.de" +
                     "lete");
             
-            #line 98 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 98 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -188,11 +188,23 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
 		});
 	}
 
-
-	public add() {
-		this.router.navigate(['");
+	public edit(rowData: models.");
             
-            #line 110 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 108 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.TsModelName));
+            
+            #line default
+            #line hidden
+            this.Write(") {\r\n\t\tthis.router.navigate([`");
+            
+            #line 109 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("/${rowData.id}/edit`]);\r\n\t}\r\n\r\n\tpublic add() {\r\n\t\tthis.router.navigate([\'");
+            
+            #line 113 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default

@@ -39,27 +39,37 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers
 		public IActionResult Get<#=tableMetadata.EntityName#>List(<#=tableMetadata.EntityName#>SearchParams filterModel) {
 
 			var filteredQry = this.FilterBySearchParams(_repository.<#= tableMetadata.EntityName.Pluralize() #>, filterModel);
-			var searchResult = new SearchResultModel<<#=tableMetadata.EntityName#>>
+			var searchResult = new SearchResultModel<<#=tableMetadata.EntityName#>DTO>
 			{
 				PageIndex = filterModel.PageIndex ?? 0,
 				PageSize = filterModel.PageSize ?? int.MaxValue,
 				RowsCount = filteredQry.Count(),
-				PagedData = filteredQry.SortBy(filterModel).SkipAndTake(filterModel).ToList(),
+				PagedData = filteredQry.SortBy(filterModel)
+                                       .SkipAndTake(filterModel)
+                                       .ToList()
+                                       .Select(x => _mapper.Map<<#=tableMetadata.EntityName#>DTO>(x))
+                                       .ToList(),
 			};
 
 			return this.Ok(searchResult);
 		}
      
 		[HttpGet("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
-		public IActionResult Get<#=tableMetadata.EntityName#>ById(int id) {
-			var entity = _repository.Lookup<#= tableMetadata.EntityName #>ById(id);
+		public IActionResult Get<#=tableMetadata.EntityName#>ById(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id) {
+			var <#= tableMetadata.EntityName.Lf() #> = _repository.Lookup<#= tableMetadata.EntityName #>ById(id);
+            if (<#= tableMetadata.EntityName.Lf() #> == null)
+			{
+				return this.NotFound($"<#=tableMetadata.EntityName#> is not found by id {id}");
+			}
 
-			return this.Ok(entity);
+            var <#= tableMetadata.EntityName.Lf() #>Dto = _mapper.Map<<#=tableMetadata.EntityName#>DTO>(<#= tableMetadata.EntityName.Lf() #>);
+
+			return this.Ok(<#= tableMetadata.EntityName.Lf() #>Dto);
 		}
 
 		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
 		[TransactionFilter]
-		public IActionResult Update<#=tableMetadata.EntityName#>(int id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
+		public IActionResult Update<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
 			var entity = _repository.Lookup<#= tableMetadata.EntityName #>ById(id);
 
 			if (entity == null)

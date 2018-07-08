@@ -19,7 +19,7 @@ namespace Tangsem.Generator.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class NgListingComponentHtml : NgListingComponentHtmlBase
     {
@@ -32,14 +32,14 @@ namespace Tangsem.Generator.Templates.Angular
             this.Write("\r\n\r\n<div class=\"two-columns-flex\">\r\n\r\n\t<!-- FILTER -->\r\n\t<div class=\"filter-colum" +
                     "n\">\r\n\r\n\t\t<h4>Filters</h4>\r\n\r\n\t\t<");
             
-            #line 16 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 16 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-filter [filterModel]=\"filterModel\" (onSearch)=\"search($event)\">\r\n\t\t</");
             
-            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 17 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
@@ -48,6 +48,7 @@ namespace Tangsem.Generator.Templates.Angular
 	</div>
 
 	<div class=""table-column"">
+
 		<button mat-raised-button (click)=""add()"">
 			<mat-icon>
 				add
@@ -60,21 +61,21 @@ namespace Tangsem.Generator.Templates.Angular
 
 		");
             
-            #line 31 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 32 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
  foreach(var col in this.TableMetadata.Columns) { 
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t<!-- ");
             
-            #line 33 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 34 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write(" column -->\r\n\t\t\t<ng-container matColumnDef=\"");
             
-            #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 35 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
@@ -82,7 +83,7 @@ namespace Tangsem.Generator.Templates.Angular
             this.Write("\">\r\n\t\t\t\t<th mat-header-cell *matHeaderCellDef mat-sort-header style=\"padding: 5px" +
                     "\">\r\n\t\t\t\t\t");
             
-            #line 36 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 37 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
@@ -90,14 +91,14 @@ namespace Tangsem.Generator.Templates.Angular
             this.Write("\r\n\t\t\t\t</th>\r\n\t\t\t\t<td mat-cell *matCellDef=\"let rowData\" style=\"padding: 5px\">\r\n\r\n" +
                     "\t\t\t\t\t\r\n\t\t\t\t\t<ng-container *ngTemplateOutlet=\"templates.");
             
-            #line 41 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 42 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("Template || default");
             
-            #line 41 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 42 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
@@ -105,21 +106,21 @@ namespace Tangsem.Generator.Templates.Angular
             this.Write("Template; context: { rowData: rowData }\"></ng-container>\r\n\r\n\t\t\t\t\t<ng-template #de" +
                     "fault");
             
-            #line 43 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 44 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write("Template>\r\n\t\t\t\t\t\t{{rowData.");
             
-            #line 44 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 45 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("}}\r\n\t\t\t\t\t</ng-template>\r\n\r\n\t\t\t\t\t\r\n\t\t\t\t</td>\r\n\t\t\t</ng-container>\r\n\t\t");
             
-            #line 50 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 51 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
  } 
             
             #line default

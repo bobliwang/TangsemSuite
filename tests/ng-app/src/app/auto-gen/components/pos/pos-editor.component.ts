@@ -1,5 +1,5 @@
-import { Router } from '@angular/router';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
 import * as models from '../../models/models';
 
@@ -12,7 +12,7 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
   selector: 'pos-editor',
   templateUrl: 'pos-editor.component.html',
 })
-export class PosEditorComponent {
+export class PosEditorComponent implements OnInit {
 	
 	@Input()
 	public model: models.PosModel;
@@ -22,9 +22,19 @@ export class PosEditorComponent {
 
 	@Input()
 	public redirectToRoute = 'pos/listing';
+
+    @Output()
+    public onLoadDataError = new EventEmitter<any>();
+
+    @Output()
+    public onSaveSuccess = new EventEmitter<any>();
+
+    @Output()
+    public onSaveError = new EventEmitter<any>();
 	
 	constructor(
 		private router: Router,
+		private activatedRoute: ActivatedRoute,
 		private snackBar: MatSnackBar,
 		private dialogs: DialogsService,
 		private repoApi: GeneratorTestRepositoryApiService) {
@@ -32,8 +42,30 @@ export class PosEditorComponent {
 	}
 
 	public ngOnInit() {
+        this.activatedRoute.params.subscribe(params => {
+			const action = params['action'];
+			const id = params['id'];
+
+			console.log(JSON.stringify({action, id}));
+
+			this.mode = action || this.mode;
+
+			if (this.mode === 'edit' || this.mode === 'view') {
+				this.loadData(id);
+			}
+		});
+
 		this.model = this.model || {};
 	}
+
+    public loadData(id: number | string) {
+        this.repoApi.getPosById(id).subscribe(result => {
+			this.model = result;
+		}, err => {
+            console.error(`unable to load Pos by id ${id}`, err);
+            this.onLoadDataError.emit({ error: err, id: id});
+        });
+    }
 
 	public save() {
 		if (this.mode === 'create') {
@@ -69,12 +101,14 @@ export class PosEditorComponent {
 			}
 
 			this.snackBar.open('updated successfully', null, { duration: 1000 });
-			
+			this.onSaveSuccess.emit({ model: this.model });
+
 			if (this.redirectToRoute) {
 				this.router.navigate([this.redirectToRoute]);	
 			}
 		}, err => {
 			this.snackBar.open('failed to updade', null, { duration: 3000 });
+            this.onSaveError.emit({ error: err, model: this.model });
 		});
 	}
 
@@ -87,5 +121,4 @@ export class PosEditorComponent {
 			});			
 		}
 	}
-
 }

@@ -97,6 +97,9 @@ export class ProductListingComponent {
 		});
 	}
 
+	public edit(rowData: models.ProductModel) {
+		this.router.navigate([`product/${rowData.id}/edit`]);
+	}
 
 	public add() {
 		this.router.navigate(['product/create']);

@@ -101,7 +101,6 @@ export class OrderListingComponent {
 		this.router.navigate([`order/${rowData.id}/edit`]);
 	}
 
-
 	public add() {
 		this.router.navigate(['order/create']);
 	}

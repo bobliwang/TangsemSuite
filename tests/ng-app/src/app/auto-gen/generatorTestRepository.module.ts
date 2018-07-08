@@ -26,7 +26,6 @@ import { OrderEditorComponent } from './components/order/order-editor.component'
 import { PosFilterComponent } from './components/pos/pos-filter.component';
 import { PosListingComponent } from './components/pos/pos-listing.component';
 import { PosEditorComponent } from './components/pos/pos-editor.component';
-import { ProdSpecsComponent } from '../components/prod-specs/prod-specs.component';
 
 
 @NgModule({
@@ -40,7 +39,6 @@ import { ProdSpecsComponent } from '../components/prod-specs/prod-specs.componen
 	],
 	declarations: [
 		
-		ProdSpecsComponent,
 		ProductFilterComponent,
 		ProductEditorComponent,
 		ProductListingComponent,
@@ -66,8 +64,7 @@ import { ProdSpecsComponent } from '../components/prod-specs/prod-specs.componen
 		BrowserAnimationsModule,
 		MatSnackBarModule, MatStepperModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatTableModule, MatSortModule, MatButtonModule, MatInputModule, MatAutocompleteModule, MatCheckboxModule, MatIconModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule,
 
-		
-		ProdSpecsComponent,
+
 		
 		ProductFilterComponent,
 		ProductEditorComponent,

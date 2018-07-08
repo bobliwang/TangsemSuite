@@ -28,12 +28,16 @@ namespace GeneratorTest.Host.Controllers
 		public IActionResult GetPosList(PosSearchParams filterModel) {
 
 			var filteredQry = this.FilterBySearchParams(_repository.Poses, filterModel);
-			var searchResult = new SearchResultModel<Pos>
+			var searchResult = new SearchResultModel<PosDTO>
 			{
 				PageIndex = filterModel.PageIndex ?? 0,
 				PageSize = filterModel.PageSize ?? int.MaxValue,
 				RowsCount = filteredQry.Count(),
-				PagedData = filteredQry.SortBy(filterModel).SkipAndTake(filterModel).ToList(),
+				PagedData = filteredQry.SortBy(filterModel)
+                                       .SkipAndTake(filterModel)
+                                       .ToList()
+                                       .Select(x => _mapper.Map<PosDTO>(x))
+                                       .ToList(),
 			};
 
 			return this.Ok(searchResult);
@@ -41,9 +45,15 @@ namespace GeneratorTest.Host.Controllers
      
 		[HttpGet("_api/repo/Pos/{id}")]
 		public IActionResult GetPosById(int id) {
-			var entity = _repository.LookupPosById(id);
+			var pos = _repository.LookupPosById(id);
+            if (pos == null)
+			{
+				return this.NotFound($"Pos is not found by id {id}");
+			}
 
-			return this.Ok(entity);
+            var posDto = _mapper.Map<PosDTO>(pos);
+
+			return this.Ok(posDto);
 		}
 
 		[HttpPost("_api/repo/Pos/{id}")]
