@@ -16,6 +16,9 @@ namespace GeneratorTest.Common.Domain.Mappings.AutoMapper
 				cfg.AddProfile<OrderMappingProfile>();
 	
 				cfg.AddProfile<PosMappingProfile>();
+
+        
+
 				});
 
 			return config;

@@ -9,8 +9,6 @@ namespace GeneratorTest.Common.Domain.Mappings.AutoMapper
 
 	public partial class OrderMappingProfile : Profile
 	{
-	  private Func<IGeneratorTestRepository> _repoFunc;
-    
 		public OrderMappingProfile ()
 		{
 			IMappingExpression<Order, OrderDTO> mappingToDto = this.CreateMap<Order, OrderDTO>();
@@ -22,22 +20,33 @@ namespace GeneratorTest.Common.Domain.Mappings.AutoMapper
 
 	  public virtual void SetupMappingToEntity(IMappingExpression<OrderDTO, Order> mappingEntity)
 	  {
+      // ignore auditing columns
+	    mappingEntity.ForMember(x => x.CreatedById, opts => opts.Ignore());
+	    mappingEntity.ForMember(x => x.ModifiedById, opts => opts.Ignore());
+	    mappingEntity.ForMember(x => x.CreatedTime, opts => opts.Ignore());
+	    mappingEntity.ForMember(x => x.ModifiedTime, opts => opts.Ignore());
 
-	    mappingEntity.ForMember(x => x.Product, opts => opts.MapFrom(s => s.ProductId == null ? null : _repoFunc().LookupProductById(s.ProductId.Value) ));
-
-	  }
+      mappingEntity.ForMember(x => x.Active, opts => opts.Condition(s => s.Active != null));
+    }
 
 	  public virtual void SetupMappingToDto(IMappingExpression<Order, OrderDTO> mappingToDto)
 	  {
 	    mappingToDto.ForMember(x => x.ProductId, opts => opts.MapFrom(s => s.Product != null ? (int?)s.Product.Id : null));
+    }
+  }
+  
+  public class EntityConverter<T> : ITypeConverter<int, T> where T : class
+  {
+    private readonly IGeneratorTestRepository _repository;
 
-      
-      // ignore auditing columns
-      mappingToDto.ForMember(x => x.CreatedById, opts => opts.Ignore());
-	    mappingToDto.ForMember(x => x.ModifiedById, opts => opts.Ignore());
-	    mappingToDto.ForMember(x => x.CreatedTime, opts => opts.Ignore());
-	    mappingToDto.ForMember(x => x.ModifiedTime, opts => opts.Ignore());
-	    mappingToDto.ForMember(x => x.Active, opts => opts.Ignore());
+    public EntityConverter(IGeneratorTestRepository repository)
+    {
+      _repository = repository;
+    }
+
+    public T Convert(int source, T destination, ResolutionContext context)
+    {
+      return _repository.LookupById<T>(source);
     }
   }
 }
