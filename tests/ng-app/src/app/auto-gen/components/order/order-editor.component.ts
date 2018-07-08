@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
 import * as models from '../../models/models';
@@ -7,6 +7,7 @@ import { GeneratorTestRepositoryApiService } from '../../services/api.service';
 
 import { DialogsService } from '../../../services/dialogs.service';
 import { ResultCode } from '../../../components/dialog/dialog.models';
+import { EditorMode } from '../../models/models';
 
 @Component({
   selector: 'order-editor',
@@ -25,6 +26,7 @@ export class OrderEditorComponent {
 	
 	constructor(
 		private router: Router,
+		private activatedRoute: ActivatedRoute,
 		private snackBar: MatSnackBar,
 		private dialogs: DialogsService,
 		private repoApi: GeneratorTestRepositoryApiService) {
@@ -32,6 +34,22 @@ export class OrderEditorComponent {
 	}
 
 	public ngOnInit() {
+
+		this.activatedRoute.params.subscribe(params => {
+			const action = params['action'];
+			const id = params['id'];
+
+			console.log(JSON.stringify({action, id}));
+
+			this.mode = action || this.mode;
+
+			if (this.mode === 'edit' || this.mode === 'view') {
+				this.repoApi.getOrderById(id).subscribe(result => {
+					this.model = result;
+				});
+			}
+		});
+
 		this.model = this.model || {};
 	}
 

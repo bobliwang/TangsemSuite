@@ -28,12 +28,12 @@ namespace GeneratorTest.Host.Controllers
 		public IActionResult GetOrderList(OrderSearchParams filterModel) {
 
 			var filteredQry = this.FilterBySearchParams(_repository.Orders, filterModel);
-			var searchResult = new SearchResultModel<Order>
+			var searchResult = new SearchResultModel<OrderDTO>
 			{
 				PageIndex = filterModel.PageIndex ?? 0,
 				PageSize = filterModel.PageSize ?? int.MaxValue,
 				RowsCount = filteredQry.Count(),
-				PagedData = filteredQry.SortBy(filterModel).SkipAndTake(filterModel).ToList(),
+				PagedData = filteredQry.SortBy(filterModel).SkipAndTake(filterModel).ToList().Select(x => _mapper.Map<OrderDTO>(x)).ToList(),
 			};
 
 			return this.Ok(searchResult);
@@ -42,8 +42,9 @@ namespace GeneratorTest.Host.Controllers
 		[HttpGet("_api/repo/Order/{id}")]
 		public IActionResult GetOrderById(int id) {
 			var entity = _repository.LookupOrderById(id);
+		  var orderDto = _mapper.Map<OrderDTO>(entity);
 
-			return this.Ok(entity);
+			return this.Ok(orderDto);
 		}
 
 		[HttpPost("_api/repo/Order/{id}")]
