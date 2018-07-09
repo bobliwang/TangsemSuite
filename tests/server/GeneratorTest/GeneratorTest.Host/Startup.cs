@@ -10,15 +10,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+
 
 namespace GeneratorTest.Host
 {
   public class Startup
   {
     public IConfiguration Configuration { get; private set; }
-
+    
     public GeneratorTestRepositoryBuilder RepositoryBuilder { get; private set; }
 
     public Startup(IHostingEnvironment environment)
@@ -39,9 +38,11 @@ namespace GeneratorTest.Host
 
 
     // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices(IServiceCollection services)
+    public IServiceProvider ConfigureServices(IServiceCollection services)
     {
-      services.AddSingleton(sp => new GeneratorTestRepositoryAutoMapperConfiguration().Configure().CreateMapper());
+        
+
+      services.AddSingleton(sp => new GeneratorTestRepositoryAutoMapperConfiguration().Configure(new AppRepoProvider(sp)).CreateMapper());
 
       // CORS
       services.AddCors();
@@ -49,15 +50,18 @@ namespace GeneratorTest.Host
       services.AddMvc();
 
       services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+      
       services.AddScoped(sp =>
       { 
         var repo = this.RepositoryBuilder.CreateRepository(new FakeDataContext());
         return (IGeneratorTestRepository) repo;
       });
+
+      return services.BuildServiceProvider();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
     {
       app.UseStaticFiles();
       this.EnableCORS(app);
@@ -82,4 +86,20 @@ namespace GeneratorTest.Host
       });
     }
   }
+
+  public class AppRepoProvider: IRepoProvider
+  {
+    public AppRepoProvider(IServiceProvider serviceProvider)
+    {
+      this.ServiceProvider = serviceProvider;
+    }
+
+    public IServiceProvider ServiceProvider { get; private set; }
+
+    public IGeneratorTestRepository Get()
+    {
+      return this.ServiceProvider.GetService<IGeneratorTestRepository>();
+    }
+  }
+
 }
