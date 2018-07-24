@@ -34,13 +34,13 @@
 
   <ItemGroup>
     <Reference Include="Tangsem.Common">
-      <HintPath>..\libs\Tangsem.Common.dll</HintPath>
+      <HintPath>..\..\..\..\Tangsem.Suite\projects\Tangsem.NHibernate\bin\Debug\Tangsem.Common.dll</HintPath>
     </Reference>
     <Reference Include="Tangsem.Data">
-      <HintPath>..\libs\Tangsem.Data.dll</HintPath>
+      <HintPath>..\..\..\..\Tangsem.Suite\projects\Tangsem.NHibernate\bin\Debug\Tangsem.Data.dll</HintPath>
     </Reference>
     <Reference Include="Tangsem.NHibernate">
-      <HintPath>..\libs\Tangsem.NHibernate.dll</HintPath>
+      <HintPath>..\..\..\..\Tangsem.Suite\projects\Tangsem.NHibernate\bin\Debug\Tangsem.NHibernate.dll</HintPath>
     </Reference>
   </ItemGroup>
 

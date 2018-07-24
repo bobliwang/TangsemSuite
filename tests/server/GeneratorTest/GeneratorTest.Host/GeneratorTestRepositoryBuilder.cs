@@ -31,10 +31,10 @@ namespace GeneratorTest.Host
 
       return Fluently
         .Configure(config)
-        .Database(MsSqlConfiguration.MsSql2008.ConnectionString(_connectionString)
+        .Database(MsSqlConfiguration.MsSql2012.ConnectionString(_connectionString)
           .ShowSql()
           .MaxFetchDepth(3)
-          .Dialect<MsSql2008DialectExt>())
+          .Dialect<MsSql2012DialectExt>())
         .Mappings(m =>
           m.FluentMappings.AddFromAssemblyOf<Product>())
         .BuildSessionFactory();
