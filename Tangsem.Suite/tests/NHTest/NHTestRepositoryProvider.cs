@@ -14,6 +14,7 @@ using NHTest.Common.Domain.Repositories;
 using NHTest.Common.Domain.Repositories.NHibernate;
 
 using Tangsem.Data.Domain;
+using Tangsem.NHibernate.Dialects;
 using Tangsem.NHibernate.Extenstions;
 using Tangsem.NHibernate.Interceptors;
 

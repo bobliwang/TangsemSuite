@@ -49,11 +49,11 @@
       <HintPath>..\..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Iesi.Collections.4.0.2\lib\net461\Iesi.Collections.dll</HintPath>
+      <HintPath>..\..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="NHibernate, Version=5.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NHibernate.5.0.3\lib\net461\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate, Version=5.1.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NHibernate.5.1.3\lib\net461\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Remotion.Linq.2.1.2\lib\net45\Remotion.Linq.dll</HintPath>
@@ -110,10 +110,6 @@
     <ProjectReference Include="..\..\projects\Tangsem.NHibernate\Tangsem.NHibernate.csproj">
       <Project>{804A3FB9-89DF-4C66-B09B-AFAEF76069FD}</Project>
       <Name>Tangsem.NHibernate</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\web\Tangsem.Generator.WebMvc3Demo.Common\Tangsem.Generator.WebMvc3Demo.Common.csproj">
-      <Project>{e638683e-9173-485d-8ab9-eecd66e2328e}</Project>
-      <Name>Tangsem.Generator.WebMvc3Demo.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

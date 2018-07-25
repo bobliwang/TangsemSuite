@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 using NHibernate;
-using NHibernate.SqlCommand;
 using NHibernate.Type;
 
 using Tangsem.Common.Entities;
