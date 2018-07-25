@@ -4,7 +4,7 @@ using NHibernate.Dialect.Function;
 
 namespace Tangsem.NHibernate.Dialects
 {
-  public class MsSql2012DialectExt : MsSql2008Dialect
+  public class MsSql2012DialectExt : MsSql2012Dialect
   {
     public MsSql2012DialectExt()
     {

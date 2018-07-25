@@ -5,6 +5,7 @@ using GeneratorTest.Common.Domain.Repositories.NHibernate;
 using NHibernate;
 using NHibernate.Cfg;
 using Tangsem.Data.Domain;
+using Tangsem.NHibernate.Dialects;
 using Tangsem.NHibernate.Domain;
 using Tangsem.NHibernate.Extenstions;
 using Tangsem.NHibernate.Interceptors;
@@ -15,7 +16,7 @@ namespace GeneratorTest.Host
   public class GeneratorTestRepositoryBuilder: IRepositoryProvider
   {
 
-    private string _connectionString;
+    private readonly string _connectionString;
 
     private ISessionFactory _sessionFactory;
 
