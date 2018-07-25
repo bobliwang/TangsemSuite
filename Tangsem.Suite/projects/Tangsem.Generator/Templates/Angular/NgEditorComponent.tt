@@ -31,6 +31,19 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
 	@Input()
 	public redirectToRoute = '<#= this.TableMetadata.EntityName.Lf() #>/listing';
 
+    <# if (this.TableMetadata.OutgoingReferences != null && this.TableMetadata.OutgoingReferences.Any()) {#>
+
+    //////////////////// Outgoing References BEGINGs ////////////////////////
+        <# foreach(var outgoingRef in this.TableMetadata.OutgoingReferences) { #>
+
+    @Input()
+    public <#= outgoingRef.ParentPropertyName.Lf() #>Options: models.<#= outgoingRef.ParentTableMetadata.TsModelName #>[];
+
+        <# } #>
+
+    //////////////////// Outgoing References ENDs ////////////////////////
+    <# } #>
+
     @Output()
     public onLoadDataError = new EventEmitter<any>();
 
@@ -64,6 +77,22 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
 		});
 
 		this.model = this.model || {};
+
+
+        <# if (this.TableMetadata.OutgoingReferences != null && this.TableMetadata.OutgoingReferences.Any()) {#>
+
+        //////////////////// Outgoing References BEGINGs ////////////////////////
+            <# foreach(var outgoingRef in this.TableMetadata.OutgoingReferences) { #>
+
+        this.repoApi.get<#= outgoingRef.ParentTableMetadata.EntityName #>List( <models.<#= outgoingRef.ParentTableMetadata.EntityName #>SearchParams> { sortFieldName: '', direction: '', pageIndex: 0, pageSize: 1000 }).subscribe(pagingResult => {
+            this.<#= outgoingRef.ParentPropertyName.Lf() #>Options = pagingResult.pagedData;
+        });
+
+            <# } #>
+
+        //////////////////// Outgoing References ENDs ////////////////////////
+        <# } #>
+
 	}
 
     public loadData(id: number | string) {

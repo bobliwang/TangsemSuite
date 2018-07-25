@@ -2,68 +2,96 @@
 
 <!-- id: number -->
 
+    
 
-<mat-form-field>
-	<input type="number" matInput
-		[(ngModel)]="model.id" placeholder="Id"/>
-</mat-form-field>
+    <mat-form-field>
+	    <input type="number" matInput
+		    [(ngModel)]="model.id" placeholder="Id"/>
+    </mat-form-field>
+    
+
 
 <!-- name: text -->
 
+    
 
-<mat-form-field>
-	<input type="text" matInput
-		[(ngModel)]="model.name" placeholder="Name"/>
-</mat-form-field>
+    <mat-form-field>
+	    <input type="text" matInput
+		    [(ngModel)]="model.name" placeholder="Name"/>
+    </mat-form-field>
+    
+
 
 <!-- unitPrice: number -->
 
+    
 
-<mat-form-field>
-	<input type="number" matInput
-		[(ngModel)]="model.unitPrice" placeholder="UnitPrice"/>
-</mat-form-field>
+    <mat-form-field>
+	    <input type="number" matInput
+		    [(ngModel)]="model.unitPrice" placeholder="UnitPrice"/>
+    </mat-form-field>
+    
+
 
 <!-- specsJson: text -->
 
+    
 
-<mat-form-field>
-	<input type="text" matInput
-		[(ngModel)]="model.specsJson" placeholder="SpecsJson"/>
-</mat-form-field>
+    <mat-form-field>
+	    <input type="text" matInput
+		    [(ngModel)]="model.specsJson" placeholder="SpecsJson"/>
+    </mat-form-field>
+    
+
 
 <!-- createdById: number -->
 
+    
 
-<mat-form-field>
-	<input type="number" matInput
-		[(ngModel)]="model.createdById" placeholder="CreatedById"/>
-</mat-form-field>
+    <mat-form-field>
+	    <input type="number" matInput
+		    [(ngModel)]="model.createdById" placeholder="CreatedById"/>
+    </mat-form-field>
+    
+
 
 <!-- createdTime: datepicker -->
-<mat-form-field>
-	<input matInput [matDatepicker]="pickerCreatedTime" placeholder="Choose CreatedTime" [(ngModel)]="model.createdTime">
-	  <mat-datepicker-toggle matSuffix [for]="pickerCreatedTime"></mat-datepicker-toggle>
-	  <mat-datepicker #pickerCreatedTime></mat-datepicker>
-</mat-form-field>
+
+        <mat-form-field>
+	    <input matInput [matDatepicker]="pickerCreatedTime" placeholder="Choose CreatedTime" [(ngModel)]="model.createdTime">
+	      <mat-datepicker-toggle matSuffix [for]="pickerCreatedTime"></mat-datepicker-toggle>
+	      <mat-datepicker #pickerCreatedTime></mat-datepicker>
+    </mat-form-field>
+    
+
 
 <!-- modifiedById: number -->
 
+    
 
-<mat-form-field>
-	<input type="number" matInput
-		[(ngModel)]="model.modifiedById" placeholder="ModifiedById"/>
-</mat-form-field>
+    <mat-form-field>
+	    <input type="number" matInput
+		    [(ngModel)]="model.modifiedById" placeholder="ModifiedById"/>
+    </mat-form-field>
+    
+
 
 <!-- modifiedTime: datepicker -->
-<mat-form-field>
-	<input matInput [matDatepicker]="pickerModifiedTime" placeholder="Choose ModifiedTime" [(ngModel)]="model.modifiedTime">
-	  <mat-datepicker-toggle matSuffix [for]="pickerModifiedTime"></mat-datepicker-toggle>
-	  <mat-datepicker #pickerModifiedTime></mat-datepicker>
-</mat-form-field>
+
+        <mat-form-field>
+	    <input matInput [matDatepicker]="pickerModifiedTime" placeholder="Choose ModifiedTime" [(ngModel)]="model.modifiedTime">
+	      <mat-datepicker-toggle matSuffix [for]="pickerModifiedTime"></mat-datepicker-toggle>
+	      <mat-datepicker #pickerModifiedTime></mat-datepicker>
+    </mat-form-field>
+    
+
 
 <!-- active: checkbox -->
-	<mat-checkbox [(ngModel)]="model.active">Active</mat-checkbox>
+
+    	    <mat-checkbox [(ngModel)]="model.active">Active</mat-checkbox>
+    
+
+
 
 
 	<div class="actions-bar">

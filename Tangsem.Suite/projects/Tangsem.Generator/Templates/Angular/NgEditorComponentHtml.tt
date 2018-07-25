@@ -11,24 +11,44 @@
 	var inputType = getInputType(col.CSharpTypeAsString);
 #>
 <!-- <#= col.PropertyName.Lf() #>: <#= inputType #> -->
-<# if (inputType == "text" || inputType == "number") { #>
+
+<# if (!col.IsOutgoingRefKey) { #>
+    <# if (inputType == "text" || inputType == "number") { #>
 
 
-<mat-form-field>
-	<input type="<#= inputType #>" matInput
-		[(ngModel)]="model.<#= col.PropertyName.Lf() #>" placeholder="<#= col.PropertyName #>"/>
-</mat-form-field>
-<# } else if (inputType == "checkbox") { #>
-	<mat-checkbox [(ngModel)]="model.<#= col.PropertyName.Lf() #>"><#= col.PropertyName #></mat-checkbox>
-<# } else if (inputType == "datepicker") { #>
-<mat-form-field>
-	<input matInput [matDatepicker]="picker<#= col.PropertyName #>" placeholder="Choose <#= col.PropertyName #>" [(ngModel)]="model.<#= col.PropertyName.Lf() #>">
-	  <mat-datepicker-toggle matSuffix [for]="picker<#= col.PropertyName #>"></mat-datepicker-toggle>
-	  <mat-datepicker #picker<#= col.PropertyName #>></mat-datepicker>
-</mat-form-field>
+    <mat-form-field>
+	    <input type="<#= inputType #>" matInput
+		    [(ngModel)]="model.<#= col.PropertyName.Lf() #>" placeholder="<#= col.PropertyName #>"/>
+    </mat-form-field>
+    <# } else if (inputType == "checkbox") { #>
+	    <mat-checkbox [(ngModel)]="model.<#= col.PropertyName.Lf() #>"><#= col.PropertyName #></mat-checkbox>
+    <# } else if (inputType == "datepicker") { #>
+    <mat-form-field>
+	    <input matInput [matDatepicker]="picker<#= col.PropertyName #>" placeholder="Choose <#= col.PropertyName #>" [(ngModel)]="model.<#= col.PropertyName.Lf() #>">
+	      <mat-datepicker-toggle matSuffix [for]="picker<#= col.PropertyName #>"></mat-datepicker-toggle>
+	      <mat-datepicker #picker<#= col.PropertyName #>></mat-datepicker>
+    </mat-form-field>
+    <# } #>
+
+<# } else {
+    var outgoingRef = col.OutgoingReference;
+ #>
+
+    <mat-form-field>
+        <mat-select placeholder="Select <#= outgoingRef.ParentPropertyName #>"
+            [(ngModel)]="model.<#= outgoingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName.Lf() #>">
+            <mat-option value=""></mat-option>
+            <mat-option *ngFor="let opt of <#= outgoingRef.ParentPropertyName.Lf() #>Options" [value]="opt.<#= outgoingRef.ColumnPairs[0].ParentColumnMetadata.PropertyName.Lf() #>">
+                {{opt.<#= outgoingRef.ParentTableMetadata.Columns[1].PropertyName.Lf() #>}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
 <# } #>
 
+
 <# } #>
+
 
 	<div class="actions-bar">
 		<button mat-button (click)="save()">

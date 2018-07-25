@@ -23,6 +23,7 @@ export class PosEditorComponent implements OnInit {
 	@Input()
 	public redirectToRoute = 'pos/listing';
 
+    
     @Output()
     public onLoadDataError = new EventEmitter<any>();
 
@@ -56,6 +57,9 @@ export class PosEditorComponent implements OnInit {
 		});
 
 		this.model = this.model || {};
+
+
+        
 	}
 
     public loadData(id: number | string) {

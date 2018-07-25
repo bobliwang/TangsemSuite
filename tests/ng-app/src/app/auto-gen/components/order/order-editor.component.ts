@@ -23,6 +23,15 @@ export class OrderEditorComponent implements OnInit {
 	@Input()
 	public redirectToRoute = 'order/listing';
 
+    
+    //////////////////// Outgoing References BEGINGs ////////////////////////
+        
+    @Input()
+    public productOptions: models.ProductModel[];
+
+        
+    //////////////////// Outgoing References ENDs ////////////////////////
+    
     @Output()
     public onLoadDataError = new EventEmitter<any>();
 
@@ -56,6 +65,18 @@ export class OrderEditorComponent implements OnInit {
 		});
 
 		this.model = this.model || {};
+
+
+        
+        //////////////////// Outgoing References BEGINGs ////////////////////////
+            
+        this.repoApi.getProductList( <models.ProductSearchParams> { sortFieldName: '', direction: '', pageIndex: 0, pageSize: 1000 }).subscribe(pagingResult => {
+            this.productOptions = pagingResult.pagedData;
+        });
+
+            
+        //////////////////// Outgoing References ENDs ////////////////////////
+        
 	}
 
     public loadData(id: number | string) {
