@@ -5,13 +5,6 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{E389CD07-467E-4882-A43A-CC82DEF974C0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{66C189EB-AE87-4484-B935-09DA217537B8}"
-	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
-		Tangsem.Suite.vsmdi = Tangsem.Suite.vsmdi
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C992E35A-AADA-4A93-9C98-0AC03638436A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.Common", "projects\Tangsem.Common\Tangsem.Common.csproj", "{A5DAFCC5-6AC6-4805-B7CA-A351084654CA}"
@@ -23,8 +16,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.Generator.Metadata", "projects\Tangsem.Generator.Metadata\Tangsem.Generator.Metadata.csproj", "{BEE62F90-879F-40A3-A3C4-666373B2BF89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.Generator", "projects\Tangsem.Generator\Tangsem.Generator.csproj", "{6CE102E0-7F36-434A-AEC0-541A20FD2548}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.Web.Mvc", "projects\Tangsem.Web.Mvc\Tangsem.Web.Mvc.csproj", "{EED36856-EA81-4EAF-B661-0FA9DBE67BB4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangsem.EF", "projects\Tangsem.EF\Tangsem.EF.csproj", "{B6C6C2C0-4276-4307-BE2B-0DE3E81AB4F2}"
 EndProject
@@ -60,10 +51,6 @@ Global
 		{6CE102E0-7F36-434A-AEC0-541A20FD2548}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CE102E0-7F36-434A-AEC0-541A20FD2548}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CE102E0-7F36-434A-AEC0-541A20FD2548}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EED36856-EA81-4EAF-B661-0FA9DBE67BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EED36856-EA81-4EAF-B661-0FA9DBE67BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EED36856-EA81-4EAF-B661-0FA9DBE67BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EED36856-EA81-4EAF-B661-0FA9DBE67BB4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B6C6C2C0-4276-4307-BE2B-0DE3E81AB4F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6C6C2C0-4276-4307-BE2B-0DE3E81AB4F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6C6C2C0-4276-4307-BE2B-0DE3E81AB4F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -86,7 +73,6 @@ Global
 		{804A3FB9-89DF-4C66-B09B-AFAEF76069FD} = {E389CD07-467E-4882-A43A-CC82DEF974C0}
 		{BEE62F90-879F-40A3-A3C4-666373B2BF89} = {7D3A3156-57BE-46DF-B864-17FBECFF4CC2}
 		{6CE102E0-7F36-434A-AEC0-541A20FD2548} = {7D3A3156-57BE-46DF-B864-17FBECFF4CC2}
-		{EED36856-EA81-4EAF-B661-0FA9DBE67BB4} = {E389CD07-467E-4882-A43A-CC82DEF974C0}
 		{B6C6C2C0-4276-4307-BE2B-0DE3E81AB4F2} = {E389CD07-467E-4882-A43A-CC82DEF974C0}
 		{FBD7502E-F60B-44EB-84E5-78FEFDACF5F4} = {7D3A3156-57BE-46DF-B864-17FBECFF4CC2}
 		{39CD28C9-4B5E-4424-9839-DFABB462941D} = {C992E35A-AADA-4A93-9C98-0AC03638436A}

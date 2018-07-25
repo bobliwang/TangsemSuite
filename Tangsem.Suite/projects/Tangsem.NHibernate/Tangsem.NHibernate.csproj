@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialects\MsSql2012DialectExt.cs" />
     <Compile Include="Extenstions\ExtendedLinqToHqlGeneratorsRegistry.cs" />
     <Compile Include="Extenstions\IQueryableExtensions.cs" />
     <Compile Include="Extenstions\IsLikeGenerator.cs" />
@@ -87,7 +88,7 @@
     <Compile Include="Extenstions\IsNulOrWhitespaceGenerator.cs" />
     <Compile Include="Extenstions\JsonArrayLengthGenerator.cs" />
     <Compile Include="Extenstions\LinqFunctionExtensions.cs" />
-    <Compile Include="Extenstions\MsSql2008DialectExt.cs" />
+    <Compile Include="Dialects\MsSql2008DialectExt.cs" />
     <Compile Include="Extenstions\ToJsonStringGenerator.cs" />
     <Compile Include="Interceptors\AuditingInterceptor.cs" />
     <Compile Include="Service\IRepositoryProvider.cs" />
