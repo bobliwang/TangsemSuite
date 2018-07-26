@@ -23,6 +23,9 @@ export class ProductEditorComponent implements OnInit {
     @Input()
     public loadOutgoingRefOptions = true;
 
+    @Input()
+    public isDialog = false;
+
 	@Input()
 	public model: models.ProductModel;
 
@@ -145,9 +148,13 @@ export class ProductEditorComponent implements OnInit {
 
 @Component({
   selector: 'product-details-dialog',
-  template: `    
-    <div mat-dialog-content>      
-      <product-editor [entityId]="data.id" [subscribeToRoutingParams]="false"></product-editor>
+  template: `
+    <h4 mat-dialog-title *ngIf="!!data.title">
+        {{ data.title }}
+    </h4>
+    <div mat-dialog-content>
+      <product-editor
+        [entityId]="data.entityId" [subscribeToRoutingParams]="false" [isDialog]="true"></product-editor>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="close()">Close</button>      
@@ -158,7 +165,7 @@ export class ProductDetailsDialog {
 
   constructor(
     public dialogRef: MatDialogRef<ProductDetailsDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: { entityId: number, title?: string }) {
   }
 
   close(): void {

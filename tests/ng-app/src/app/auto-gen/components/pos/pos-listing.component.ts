@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import { merge } from 'rxjs/observable/merge';
 
@@ -9,6 +9,7 @@ import * as models from '../../models/models';
 
 import { DialogsService } from '../../../services/dialogs.service';
 import { ResultCode } from '../../../components/dialog/dialog.models';
+
 
 
 @Component({
@@ -37,6 +38,7 @@ export class PosListingComponent {
 	constructor(
 		private router: Router,
 		private snackBar: MatSnackBar,
+		private matDialog: MatDialog,
 		private dialogs: DialogsService,
 		private repoApi: GeneratorTestRepositoryApiService) {
 	
@@ -105,4 +107,6 @@ export class PosListingComponent {
 		this.router.navigate(['pos/create']);
 	}
 
+
+    
 }

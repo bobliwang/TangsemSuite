@@ -31,6 +31,9 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
     @Input()
     public loadOutgoingRefOptions = true;
 
+    @Input()
+    public isDialog = false;
+
 	@Input()
 	public model: models.<#= this.TableMetadata.TsModelName #>;
 
@@ -178,10 +181,13 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
 
 @Component({
   selector: '<#= this.TableMetadata.EntityName.Lf() #>-details-dialog',
-  template: `    
-    <div mat-dialog-content>      
+  template: `
+    <h4 mat-dialog-title *ngIf="!!data.title">
+        {{ data.title }}
+    </h4>
+    <div mat-dialog-content>
       <<#= this.TableMetadata.EntityName.Lf() #>-editor
-        [entityId]="data.id" [subscribeToRoutingParams]="false"></<#= this.TableMetadata.EntityName.Lf() #>-editor>
+        [entityId]="data.entityId" [subscribeToRoutingParams]="false" [isDialog]="true"></<#= this.TableMetadata.EntityName.Lf() #>-editor>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="close()">Close</button>      
@@ -192,7 +198,7 @@ export class <#= this.TableMetadata.EntityName #>DetailsDialog {
 
   constructor(
     public dialogRef: MatDialogRef<<#= this.TableMetadata.EntityName #>DetailsDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: { entityId: <#= this.TableMetadata.PrimaryKeys[0].TsTypeAsString #>, title?: string }) {
   }
 
   close(): void {

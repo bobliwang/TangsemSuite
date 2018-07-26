@@ -74,12 +74,13 @@
 
 					<ng-template #defaultProductIdTemplate>
 
-                                                
+                                                <!--
+                            You may also use below to open a new page to see details.
+                            - target="_blank" and
+                            - [routerLink]="'/product/' + rowData.productId + '/edit'"
+                        -->
                         <a mat-button
-							target="_blank"
-							(click)="showProductDetails(rowData.productId)"
-							[routerLink]="'/product/' + rowData.productId + '/edit'"
-							>
+                            (click)="showProductDetails(rowData.productId)">
                             {{ rowData.productId }}...
                         </a>
                         

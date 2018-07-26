@@ -216,9 +216,9 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("\r\n\r\n\t<div class=\"actions-bar\">\r\n\t\t<button mat-button (click)=\"save()\">\r\n\t\t\tSave\r\n" +
-                    "\t\t</button>\r\n\r\n\t\t<button mat-button (click)=\"cancel()\">\r\n\t\t\tCancel\r\n\t\t</button>\r" +
-                    "\n\t</div>\r\n</div>\r\n\r\n\r\n\r\n\r\n");
+            this.Write("\r\n\r\n\t<div class=\"actions-bar\" *ngIf=\"!isDialog\">\r\n\t\t<button mat-button (click)=\"s" +
+                    "ave()\">\r\n\t\t\tSave\r\n\t\t</button>\r\n\r\n\t\t<button mat-button (click)=\"cancel()\">\r\n\t\t\tCa" +
+                    "ncel\r\n\t\t</button>\r\n\t</div>\r\n</div>\r\n\r\n\r\n\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         

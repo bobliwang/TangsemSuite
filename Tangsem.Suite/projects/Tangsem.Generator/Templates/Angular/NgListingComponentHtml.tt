@@ -45,10 +45,14 @@
 
                         <# if(!col.IsOutgoingRefKey) { #>
                         {{ rowData.<#= col.PropertyName.Lf() #> }}
-                        <# } else { #>                        
+                        <# } else { #>
+                        <!--
+                            You may also use below to open a new page to see details.
+                            - target="_blank" and
+                            - [routerLink]="'/<#= col.OutgoingReference.ParentTableMetadata.EntityName.Lf() #>/' + rowData.<#= col.PropertyName.Lf() #> + '/edit'"
+                        -->
                         <a mat-button
-                            target="_blank"
-                            [routerLink]="'/<#= col.OutgoingReference.ParentTableMetadata.EntityName.Lf() #>/' + rowData.<#= col.PropertyName.Lf() #> + '/edit'">
+                            (click)="show<#= col.OutgoingReference.ParentTableMetadata.EntityName #>Details(rowData.<#= col.PropertyName.Lf() #>)">
                             {{ rowData.<#= col.PropertyName.Lf() #> }}...
                         </a>
                         <# } #>

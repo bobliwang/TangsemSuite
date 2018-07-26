@@ -23,6 +23,9 @@ export class OrderEditorComponent implements OnInit {
     @Input()
     public loadOutgoingRefOptions = true;
 
+    @Input()
+    public isDialog = false;
+
 	@Input()
 	public model: models.OrderModel;
 
@@ -162,9 +165,13 @@ export class OrderEditorComponent implements OnInit {
 
 @Component({
   selector: 'order-details-dialog',
-  template: `    
-    <div mat-dialog-content>      
-      <order-editor [entityId]="data.id" [subscribeToRoutingParams]="false" ></order-editor>
+  template: `
+    <h4 mat-dialog-title *ngIf="!!data.title">
+        {{ data.title }}
+    </h4>
+    <div mat-dialog-content>
+      <order-editor
+        [entityId]="data.entityId" [subscribeToRoutingParams]="false" [isDialog]="true"></order-editor>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="close()">Close</button>      
@@ -175,7 +182,7 @@ export class OrderDetailsDialog {
 
   constructor(
     public dialogRef: MatDialogRef<OrderDetailsDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: { entityId: number, title?: string }) {
   }
 
   close(): void {

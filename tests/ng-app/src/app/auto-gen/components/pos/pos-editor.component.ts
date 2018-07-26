@@ -23,6 +23,9 @@ export class PosEditorComponent implements OnInit {
     @Input()
     public loadOutgoingRefOptions = true;
 
+    @Input()
+    public isDialog = false;
+
 	@Input()
 	public model: models.PosModel;
 
@@ -145,9 +148,13 @@ export class PosEditorComponent implements OnInit {
 
 @Component({
   selector: 'pos-details-dialog',
-  template: `    
-    <div mat-dialog-content>      
-      <pos-editor [entityId]="data.id"></pos-editor>
+  template: `
+    <h4 mat-dialog-title *ngIf="!!data.title">
+        {{ data.title }}
+    </h4>
+    <div mat-dialog-content>
+      <pos-editor
+        [entityId]="data.entityId" [subscribeToRoutingParams]="false" [isDialog]="true"></pos-editor>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="close()">Close</button>      
@@ -158,7 +165,7 @@ export class PosDetailsDialog {
 
   constructor(
     public dialogRef: MatDialogRef<PosDetailsDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: { entityId: number, title?: string }) {
   }
 
   close(): void {

@@ -9,6 +9,7 @@ import * as models from '../../models/models';
 
 import { DialogsService } from '../../../services/dialogs.service';
 import { ResultCode } from '../../../components/dialog/dialog.models';
+
 import { ProductDetailsDialog } from '../product/product-editor.component';
 
 
@@ -38,7 +39,7 @@ export class OrderListingComponent {
 	constructor(
 		private router: Router,
 		private snackBar: MatSnackBar,
-		private magDialog: MatDialog,
+		private matDialog: MatDialog,
 		private dialogs: DialogsService,
 		private repoApi: GeneratorTestRepositoryApiService) {
 	
@@ -107,11 +108,17 @@ export class OrderListingComponent {
 		this.router.navigate(['order/create']);
 	}
 
-	public showProductDetails(productId: number) {
-		this.magDialog.open(ProductDetailsDialog, {
-			width: '80vw',
-			data: { id: productId }
-		 });
-	}
 
+    
+    public showProductDetails(id: number) {
+        this.matDialog.open(ProductDetailsDialog, {
+			width: '80vw',
+			data: {
+                entityId: id,
+                title: `Product Details`
+            }
+		 });           
+    }
+
+    
 }

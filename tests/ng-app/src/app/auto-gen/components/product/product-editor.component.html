@@ -94,7 +94,7 @@
 
 
 
-	<div class="actions-bar">
+	<div class="actions-bar" *ngIf="!isDialog">
 		<button mat-button (click)="save()">
 			Save
 		</button>

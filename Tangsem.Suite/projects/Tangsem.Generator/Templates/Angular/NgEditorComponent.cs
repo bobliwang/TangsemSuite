@@ -66,11 +66,24 @@ import { ");
             
             #line default
             #line hidden
-            this.Write("EditorComponent implements OnInit {\r\n\r\n    @Input()\r\n    public subscribeToRoutin" +
-                    "gParams = true;\r\n\r\n    @Input()\r\n    public entityId = null;\r\n\r\n    @Input()\r\n  " +
-                    "  public loadOutgoingRefOptions = true;\r\n\r\n\t@Input()\r\n\tpublic model: models.");
+            this.Write(@"EditorComponent implements OnInit {
+
+    @Input()
+    public subscribeToRoutingParams = true;
+
+    @Input()
+    public entityId = null;
+
+    @Input()
+    public loadOutgoingRefOptions = true;
+
+    @Input()
+    public isDialog = false;
+
+	@Input()
+	public model: models.");
             
-            #line 35 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 38 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.TsModelName));
             
             #line default
@@ -78,14 +91,14 @@ import { ");
             this.Write(";\r\n\r\n\t@Input()\r\n\tpublic mode: models.EditorMode = \'create\';\r\n\r\n\t@Input()\r\n\tpublic" +
                     " redirectToRoute = \'");
             
-            #line 41 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 44 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("/listing\';\r\n\r\n    ");
             
-            #line 43 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 46 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
  if (this.TableMetadata.OutgoingReferences != null && this.TableMetadata.OutgoingReferences.Any()) {
             
             #line default
@@ -93,28 +106,28 @@ import { ");
             this.Write("\r\n    //////////////////// Outgoing References BEGINGs ////////////////////////\r\n" +
                     "        ");
             
-            #line 46 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 49 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
  foreach(var outgoingRef in this.TableMetadata.OutgoingReferences) { 
             
             #line default
             #line hidden
             this.Write("\r\n    @Input()\r\n    public ");
             
-            #line 49 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 52 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentPropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("Options: models.");
             
-            #line 49 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 52 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.TsModelName));
             
             #line default
             #line hidden
             this.Write("[];\r\n\r\n        ");
             
-            #line 51 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 54 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
  } 
             
             #line default
@@ -122,7 +135,7 @@ import { ");
             this.Write("\r\n    //////////////////// Outgoing References ENDs ////////////////////////\r\n   " +
                     " ");
             
-            #line 54 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 57 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
  } 
             
             #line default
@@ -144,7 +157,7 @@ import { ");
 		private dialogs: DialogsService,
 		private repoApi: ");
             
-            #line 70 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 73 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
@@ -178,7 +191,7 @@ import { ");
 
             ");
             
-            #line 97 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 100 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
  if (this.TableMetadata.OutgoingReferences != null && this.TableMetadata.OutgoingReferences.Any()) {
             
             #line default
@@ -186,21 +199,21 @@ import { ");
             this.Write("\r\n            //////////////////// Outgoing References BEGINGs //////////////////" +
                     "//////\r\n                ");
             
-            #line 100 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 103 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
  foreach(var outgoingRef in this.TableMetadata.OutgoingReferences) { 
             
             #line default
             #line hidden
             this.Write("\r\n            this.repoApi.get");
             
-            #line 102 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 105 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("List( <models.");
             
-            #line 102 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 105 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName));
             
             #line default
@@ -208,14 +221,14 @@ import { ");
             this.Write("SearchParams> { sortFieldName: \'\', direction: \'\', pageIndex: 0, pageSize: 1000 })" +
                     ".subscribe(pagingResult => {\r\n                this.");
             
-            #line 103 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 106 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentPropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("Options = pagingResult.pagedData;\r\n            });\r\n\r\n                ");
             
-            #line 106 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 109 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
  } 
             
             #line default
@@ -223,7 +236,7 @@ import { ");
             this.Write("\r\n            //////////////////// Outgoing References ENDs /////////////////////" +
                     "///\r\n            ");
             
-            #line 109 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 112 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
  } 
             
             #line default
@@ -231,7 +244,7 @@ import { ");
             this.Write("\r\n        }\r\n\t}\r\n\r\n    public loadData(id: number | string) {\r\n        this.repoA" +
                     "pi.get");
             
-            #line 115 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 118 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -239,7 +252,7 @@ import { ");
             this.Write("ById(id).subscribe(result => {\r\n\t\t\tthis.model = result;\r\n\t\t}, err => {\r\n         " +
                     "   console.error(`unable to load ");
             
-            #line 118 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 121 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -261,7 +274,7 @@ import { ");
 
 		this.repoApi.create");
             
-            #line 133 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 136 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -286,7 +299,7 @@ import { ");
 
 		this.repoApi.update");
             
-            #line 151 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 154 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -322,22 +335,23 @@ import { ");
 @Component({
   selector: '");
             
-            #line 180 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
-            
-            #line default
-            #line hidden
-            this.Write("-details-dialog\',\r\n  template: `    \r\n    <div mat-dialog-content>      \r\n      <" +
-                    "");
-            
             #line 183 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
-            this.Write("-editor\r\n        [entityId]=\"data.id\" [subscribeToRoutingParams]=\"false\"></");
+            this.Write("-details-dialog\',\r\n  template: `\r\n    <h4 mat-dialog-title *ngIf=\"!!data.title\">\r" +
+                    "\n        {{ data.title }}\r\n    </h4>\r\n    <div mat-dialog-content>\r\n      <");
             
-            #line 184 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 189 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("-editor\r\n        [entityId]=\"data.entityId\" [subscribeToRoutingParams]=\"false\" [i" +
+                    "sDialog]=\"true\"></");
+            
+            #line 190 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
@@ -346,20 +360,27 @@ import { ");
                     "-button (click)=\"close()\">Close</button>      \r\n    </div>\r\n  `,\r\n})\r\nexport cla" +
                     "ss ");
             
-            #line 191 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 197 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("DetailsDialog {\r\n\r\n  constructor(\r\n    public dialogRef: MatDialogRef<");
             
-            #line 194 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            #line 200 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("DetailsDialog>,\r\n    @Inject(MAT_DIALOG_DATA) public data: any) {\r\n  }\r\n\r\n  close" +
-                    "(): void {\r\n    this.dialogRef.close();\r\n  }\r\n}");
+            this.Write("DetailsDialog>,\r\n    @Inject(MAT_DIALOG_DATA) public data: { entityId: ");
+            
+            #line 201 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.PrimaryKeys[0].TsTypeAsString));
+            
+            #line default
+            #line hidden
+            this.Write(", title?: string }) {\r\n  }\r\n\r\n  close(): void {\r\n    this.dialogRef.close();\r\n  }" +
+                    "\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
