@@ -28,12 +28,16 @@ import { PosListingComponent } from './components/pos/pos-listing.component';
 import { PosEditorComponent } from './components/pos/pos-editor.component';
 
 
+
+import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-routing.module';
+
 @NgModule({
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
 		FormsModule,
 		BrowserAnimationsModule,
+        GeneratorTestRepositoryRoutingModule,
 
 		MatSnackBarModule, MatStepperModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatTableModule, MatSortModule, MatButtonModule, MatInputModule, MatAutocompleteModule, MatCheckboxModule, MatIconModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule,
 	],

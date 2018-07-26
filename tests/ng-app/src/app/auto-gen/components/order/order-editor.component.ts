@@ -13,7 +13,13 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
   templateUrl: 'order-editor.component.html',
 })
 export class OrderEditorComponent implements OnInit {
-	
+
+    @Input()
+    public subscribeToRoutingParams = true;
+
+    @Input()
+    public loadOutgoingRefOptions = true;
+
 	@Input()
 	public model: models.OrderModel;
 
@@ -51,32 +57,37 @@ export class OrderEditorComponent implements OnInit {
 	}
 
 	public ngOnInit() {
-        this.activatedRoute.params.subscribe(params => {
-			const action = params['action'];
-			const id = params['id'];
 
-			console.log(JSON.stringify({action, id}));
+        if (this.subscribeToRoutingParams) {
+            this.activatedRoute.params.subscribe(params => {
+			    const action = params['action'];
+			    const id = params['id'];
 
-			this.mode = action || this.mode;
+			    console.log(JSON.stringify({action, id}));
 
-			if (this.mode === 'edit' || this.mode === 'view') {
-				this.loadData(id);
-			}
-		});
+			    this.mode = action || this.mode;
+
+			    if (this.mode === 'edit' || this.mode === 'view') {
+				    this.loadData(id);
+			    }
+		    });
+        }
 
 		this.model = this.model || {};
 
-
-        
-        //////////////////// Outgoing References BEGINGs ////////////////////////
-            
-        this.repoApi.getProductList( <models.ProductSearchParams> { sortFieldName: '', direction: '', pageIndex: 0, pageSize: 1000 }).subscribe(pagingResult => {
-            this.productOptions = pagingResult.pagedData;
-        });
+        if (this.loadOutgoingRefOptions) {
 
             
-        //////////////////// Outgoing References ENDs ////////////////////////
-        
+            //////////////////// Outgoing References BEGINGs ////////////////////////
+                
+            this.repoApi.getProductList( <models.ProductSearchParams> { sortFieldName: '', direction: '', pageIndex: 0, pageSize: 1000 }).subscribe(pagingResult => {
+                this.productOptions = pagingResult.pagedData;
+            });
+
+                
+            //////////////////// Outgoing References ENDs ////////////////////////
+            
+        }
 	}
 
     public loadData(id: number | string) {

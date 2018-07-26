@@ -21,7 +21,13 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
   templateUrl: '<#= this.TableMetadata.EntityName.Lf() #>-editor.component.html',
 })
 export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnInit {
-	
+
+    @Input()
+    public subscribeToRoutingParams = true;
+
+    @Input()
+    public loadOutgoingRefOptions = true;
+
 	@Input()
 	public model: models.<#= this.TableMetadata.TsModelName #>;
 
@@ -63,36 +69,41 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
 	}
 
 	public ngOnInit() {
-        this.activatedRoute.params.subscribe(params => {
-			const action = params['action'];
-			const id = params['id'];
 
-			console.log(JSON.stringify({action, id}));
+        if (this.subscribeToRoutingParams) {
+            this.activatedRoute.params.subscribe(params => {
+			    const action = params['action'];
+			    const id = params['id'];
 
-			this.mode = action || this.mode;
+			    console.log(JSON.stringify({action, id}));
 
-			if (this.mode === 'edit' || this.mode === 'view') {
-				this.loadData(id);
-			}
-		});
+			    this.mode = action || this.mode;
+
+			    if (this.mode === 'edit' || this.mode === 'view') {
+				    this.loadData(id);
+			    }
+		    });
+        }
 
 		this.model = this.model || {};
 
+        if (this.loadOutgoingRefOptions) {
 
-        <# if (this.TableMetadata.OutgoingReferences != null && this.TableMetadata.OutgoingReferences.Any()) {#>
+            <# if (this.TableMetadata.OutgoingReferences != null && this.TableMetadata.OutgoingReferences.Any()) {#>
 
-        //////////////////// Outgoing References BEGINGs ////////////////////////
-            <# foreach(var outgoingRef in this.TableMetadata.OutgoingReferences) { #>
+            //////////////////// Outgoing References BEGINGs ////////////////////////
+                <# foreach(var outgoingRef in this.TableMetadata.OutgoingReferences) { #>
 
-        this.repoApi.get<#= outgoingRef.ParentTableMetadata.EntityName #>List( <models.<#= outgoingRef.ParentTableMetadata.EntityName #>SearchParams> { sortFieldName: '', direction: '', pageIndex: 0, pageSize: 1000 }).subscribe(pagingResult => {
-            this.<#= outgoingRef.ParentPropertyName.Lf() #>Options = pagingResult.pagedData;
-        });
+            this.repoApi.get<#= outgoingRef.ParentTableMetadata.EntityName #>List( <models.<#= outgoingRef.ParentTableMetadata.EntityName #>SearchParams> { sortFieldName: '', direction: '', pageIndex: 0, pageSize: 1000 }).subscribe(pagingResult => {
+                this.<#= outgoingRef.ParentPropertyName.Lf() #>Options = pagingResult.pagedData;
+            });
 
+                <# } #>
+
+            //////////////////// Outgoing References ENDs ////////////////////////
             <# } #>
 
-        //////////////////// Outgoing References ENDs ////////////////////////
-        <# } #>
-
+        }
 	}
 
     public loadData(id: number | string) {

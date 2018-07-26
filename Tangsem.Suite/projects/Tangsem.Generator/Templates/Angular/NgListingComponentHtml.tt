@@ -42,7 +42,17 @@
 					<ng-container *ngTemplateOutlet="templates.<#= col.PropertyName.Lf() #>Template || default<#= col.PropertyName #>Template; context: { rowData: rowData }"></ng-container>
 
 					<ng-template #default<#= col.PropertyName #>Template>
-						{{rowData.<#= col.PropertyName.Lf() #>}}
+
+                        <# if(!col.IsOutgoingRefKey) { #>
+                        {{ rowData.<#= col.PropertyName.Lf() #> }}
+                        <# } else { #>                        
+                        <a mat-button
+                            target="_blank"
+                            [routerLink]="'/<#= col.OutgoingReference.ParentTableMetadata.EntityName.Lf() #>/' + rowData.<#= col.PropertyName.Lf() #> + '/edit'">
+                            {{ rowData.<#= col.PropertyName.Lf() #> }}...
+                        </a>
+                        <# } #>
+
 					</ng-template>
 
 					

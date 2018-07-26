@@ -51,12 +51,16 @@ import { <#= tableMetadata.EntityName #>EditorComponent } from './components/<#=
 
 <# } #>
 
+
+import { <#= Configuration.RepositoryName #>RoutingModule } from './<#= Configuration.RepositoryName.Lf() #>-routing.module';
+
 @NgModule({
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
 		FormsModule,
 		BrowserAnimationsModule,
+        <#= Configuration.RepositoryName #>RoutingModule,
 
 		<#= string.Join(", ", matModules) #>,
 	],

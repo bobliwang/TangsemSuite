@@ -111,16 +111,59 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("Template>\r\n\t\t\t\t\t\t{{rowData.");
+            this.Write("Template>\r\n\r\n                        ");
             
-            #line 45 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            #line 46 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+ if(!col.IsOutgoingRefKey) { 
+            
+            #line default
+            #line hidden
+            this.Write("                        {{ rowData.");
+            
+            #line 47 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
-            this.Write("}}\r\n\t\t\t\t\t</ng-template>\r\n\r\n\t\t\t\t\t\r\n\t\t\t\t</td>\r\n\t\t\t</ng-container>\r\n\t\t");
+            this.Write(" }}\r\n                        ");
+            
+            #line 48 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("                        \r\n                        <a mat-button\r\n                " +
+                    "            target=\"_blank\"\r\n                            [routerLink]=\"\'/");
             
             #line 51 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.OutgoingReference.ParentTableMetadata.EntityName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("/\' + rowData.");
+            
+            #line 51 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write(" + \'/edit\'\">\r\n                            {{ rowData.");
+            
+            #line 52 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write(" }}...\r\n                        </a>\r\n                        ");
+            
+            #line 54 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t\t\t\t</ng-template>\r\n\r\n\t\t\t\t\t\r\n\t\t\t\t</td>\r\n\t\t\t</ng-container>\r\n\t\t");
+            
+            #line 61 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
  } 
             
             #line default

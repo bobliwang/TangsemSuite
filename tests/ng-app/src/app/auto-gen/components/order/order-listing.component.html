@@ -33,7 +33,9 @@
 					<ng-container *ngTemplateOutlet="templates.idTemplate || defaultIdTemplate; context: { rowData: rowData }"></ng-container>
 
 					<ng-template #defaultIdTemplate>
-						{{rowData.id}}
+
+                                                {{ rowData.id }}
+                        
 					</ng-template>
 
 					
@@ -51,7 +53,9 @@
 					<ng-container *ngTemplateOutlet="templates.customerNameTemplate || defaultCustomerNameTemplate; context: { rowData: rowData }"></ng-container>
 
 					<ng-template #defaultCustomerNameTemplate>
-						{{rowData.customerName}}
+
+                                                {{ rowData.customerName }}
+                        
 					</ng-template>
 
 					
@@ -69,7 +73,14 @@
 					<ng-container *ngTemplateOutlet="templates.productIdTemplate || defaultProductIdTemplate; context: { rowData: rowData }"></ng-container>
 
 					<ng-template #defaultProductIdTemplate>
-						{{rowData.productId}}
+
+                                                
+                        <a mat-button
+                            target="_blank"
+                            [routerLink]="'/product/' + rowData.productId + '/edit'">
+                            {{ rowData.productId }}...
+                        </a>
+                        
 					</ng-template>
 
 					
@@ -87,7 +98,9 @@
 					<ng-container *ngTemplateOutlet="templates.orderTotalTemplate || defaultOrderTotalTemplate; context: { rowData: rowData }"></ng-container>
 
 					<ng-template #defaultOrderTotalTemplate>
-						{{rowData.orderTotal}}
+
+                                                {{ rowData.orderTotal }}
+                        
 					</ng-template>
 
 					
@@ -105,7 +118,9 @@
 					<ng-container *ngTemplateOutlet="templates.createdByIdTemplate || defaultCreatedByIdTemplate; context: { rowData: rowData }"></ng-container>
 
 					<ng-template #defaultCreatedByIdTemplate>
-						{{rowData.createdById}}
+
+                                                {{ rowData.createdById }}
+                        
 					</ng-template>
 
 					
@@ -123,7 +138,9 @@
 					<ng-container *ngTemplateOutlet="templates.modifiedByIdTemplate || defaultModifiedByIdTemplate; context: { rowData: rowData }"></ng-container>
 
 					<ng-template #defaultModifiedByIdTemplate>
-						{{rowData.modifiedById}}
+
+                                                {{ rowData.modifiedById }}
+                        
 					</ng-template>
 
 					
@@ -141,7 +158,9 @@
 					<ng-container *ngTemplateOutlet="templates.createdTimeTemplate || defaultCreatedTimeTemplate; context: { rowData: rowData }"></ng-container>
 
 					<ng-template #defaultCreatedTimeTemplate>
-						{{rowData.createdTime}}
+
+                                                {{ rowData.createdTime }}
+                        
 					</ng-template>
 
 					
@@ -159,7 +178,9 @@
 					<ng-container *ngTemplateOutlet="templates.modifiedTimeTemplate || defaultModifiedTimeTemplate; context: { rowData: rowData }"></ng-container>
 
 					<ng-template #defaultModifiedTimeTemplate>
-						{{rowData.modifiedTime}}
+
+                                                {{ rowData.modifiedTime }}
+                        
 					</ng-template>
 
 					
@@ -177,7 +198,9 @@
 					<ng-container *ngTemplateOutlet="templates.activeTemplate || defaultActiveTemplate; context: { rowData: rowData }"></ng-container>
 
 					<ng-template #defaultActiveTemplate>
-						{{rowData.active}}
+
+                                                {{ rowData.active }}
+                        
 					</ng-template>
 
 					

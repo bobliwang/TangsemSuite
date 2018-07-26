@@ -13,7 +13,13 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
   templateUrl: 'pos-editor.component.html',
 })
 export class PosEditorComponent implements OnInit {
-	
+
+    @Input()
+    public subscribeToRoutingParams = true;
+
+    @Input()
+    public loadOutgoingRefOptions = true;
+
 	@Input()
 	public model: models.PosModel;
 
@@ -43,23 +49,28 @@ export class PosEditorComponent implements OnInit {
 	}
 
 	public ngOnInit() {
-        this.activatedRoute.params.subscribe(params => {
-			const action = params['action'];
-			const id = params['id'];
 
-			console.log(JSON.stringify({action, id}));
+        if (this.subscribeToRoutingParams) {
+            this.activatedRoute.params.subscribe(params => {
+			    const action = params['action'];
+			    const id = params['id'];
 
-			this.mode = action || this.mode;
+			    console.log(JSON.stringify({action, id}));
 
-			if (this.mode === 'edit' || this.mode === 'view') {
-				this.loadData(id);
-			}
-		});
+			    this.mode = action || this.mode;
+
+			    if (this.mode === 'edit' || this.mode === 'view') {
+				    this.loadData(id);
+			    }
+		    });
+        }
 
 		this.model = this.model || {};
 
+        if (this.loadOutgoingRefOptions) {
 
-        
+            
+        }
 	}
 
     public loadData(id: number | string) {
