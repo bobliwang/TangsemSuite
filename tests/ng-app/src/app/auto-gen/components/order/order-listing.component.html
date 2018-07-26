@@ -76,8 +76,10 @@
 
                                                 
                         <a mat-button
-                            target="_blank"
-                            [routerLink]="'/product/' + rowData.productId + '/edit'">
+							target="_blank"
+							(click)="showProductDetails(rowData.productId)"
+							[routerLink]="'/product/' + rowData.productId + '/edit'"
+							>
                             {{ rowData.productId }}...
                         </a>
                         

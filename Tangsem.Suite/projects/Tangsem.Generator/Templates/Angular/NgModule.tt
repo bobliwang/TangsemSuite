@@ -47,7 +47,7 @@ import { <#=Configuration.RepositoryName#>ApiService } from './services/api.serv
 <# foreach (var tableMetadata in this.TableMetadatas) { #>
 import { <#= tableMetadata.EntityName #>FilterComponent } from './components/<#= tableMetadata.EntityName.Lf() #>/<#= tableMetadata.EntityName.Lf() #>-filter.component';
 import { <#= tableMetadata.EntityName #>ListingComponent } from './components/<#= tableMetadata.EntityName.Lf() #>/<#= tableMetadata.EntityName.Lf() #>-listing.component';
-import { <#= tableMetadata.EntityName #>EditorComponent } from './components/<#= tableMetadata.EntityName.Lf() #>/<#= tableMetadata.EntityName.Lf() #>-editor.component';
+import { <#= tableMetadata.EntityName #>EditorComponent, <#= tableMetadata.EntityName #>DetailsDialog } from './components/<#= tableMetadata.EntityName.Lf() #>/<#= tableMetadata.EntityName.Lf() #>-editor.component';
 
 <# } #>
 
@@ -70,6 +70,7 @@ import { <#= Configuration.RepositoryName #>RoutingModule } from './<#= Configur
 		<#= tableMetadata.EntityName #>FilterComponent,
 		<#= tableMetadata.EntityName #>EditorComponent,
 		<#= tableMetadata.EntityName #>ListingComponent,
+        <#= tableMetadata.EntityName #>DetailsDialog,
 
 		<# } #>
 
@@ -78,6 +79,14 @@ import { <#= Configuration.RepositoryName #>RoutingModule } from './<#= Configur
 	providers: [
 		<#=Configuration.RepositoryName#>ApiService
 	],
+
+    entryComponents: [
+        <# foreach (var tableMetadata in this.TableMetadatas) { #>
+
+        <#= tableMetadata.EntityName #>DetailsDialog,
+
+		<# } #>
+    ],
 
 	exports: [
 		BrowserAnimationsModule,

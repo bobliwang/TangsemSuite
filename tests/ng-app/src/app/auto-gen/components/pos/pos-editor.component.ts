@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { MatPaginator, MatSort, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import * as models from '../../models/models';
 
 import { GeneratorTestRepositoryApiService } from '../../services/api.service';
@@ -16,6 +16,9 @@ export class PosEditorComponent implements OnInit {
 
     @Input()
     public subscribeToRoutingParams = true;
+
+    @Input()
+    public entityId = null;
 
     @Input()
     public loadOutgoingRefOptions = true;
@@ -63,6 +66,8 @@ export class PosEditorComponent implements OnInit {
 				    this.loadData(id);
 			    }
 		    });
+        } else if (this.entityId != null && !this.model) {
+            this.loadData(this.entityId);
         }
 
 		this.model = this.model || {};
@@ -136,4 +141,27 @@ export class PosEditorComponent implements OnInit {
 			});			
 		}
 	}
+}
+
+@Component({
+  selector: 'pos-details-dialog',
+  template: `    
+    <div mat-dialog-content>      
+      <pos-editor [entityId]="data.id"></pos-editor>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-button (click)="close()">Close</button>      
+    </div>
+  `,
+})
+export class PosDetailsDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<PosDetailsDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
+
+  close(): void {
+    this.dialogRef.close();
+  }
 }

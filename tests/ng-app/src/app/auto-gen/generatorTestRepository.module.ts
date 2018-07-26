@@ -17,15 +17,15 @@ import { GeneratorTestRepositoryApiService } from './services/api.service';
 /************ AUTO GEN COMPONENTS **************/
 import { ProductFilterComponent } from './components/product/product-filter.component';
 import { ProductListingComponent } from './components/product/product-listing.component';
-import { ProductEditorComponent } from './components/product/product-editor.component';
+import { ProductEditorComponent, ProductDetailsDialog } from './components/product/product-editor.component';
 
 import { OrderFilterComponent } from './components/order/order-filter.component';
 import { OrderListingComponent } from './components/order/order-listing.component';
-import { OrderEditorComponent } from './components/order/order-editor.component';
+import { OrderEditorComponent, OrderDetailsDialog } from './components/order/order-editor.component';
 
 import { PosFilterComponent } from './components/pos/pos-filter.component';
 import { PosListingComponent } from './components/pos/pos-listing.component';
-import { PosEditorComponent } from './components/pos/pos-editor.component';
+import { PosEditorComponent, PosDetailsDialog } from './components/pos/pos-editor.component';
 
 
 
@@ -46,16 +46,19 @@ import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-
 		ProductFilterComponent,
 		ProductEditorComponent,
 		ProductListingComponent,
+        ProductDetailsDialog,
 
 		
 		OrderFilterComponent,
 		OrderEditorComponent,
 		OrderListingComponent,
+        OrderDetailsDialog,
 
 		
 		PosFilterComponent,
 		PosEditorComponent,
 		PosListingComponent,
+        PosDetailsDialog,
 
 		
 	],
@@ -63,6 +66,18 @@ import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-
 	providers: [
 		GeneratorTestRepositoryApiService
 	],
+
+    entryComponents: [
+        
+        ProductDetailsDialog,
+
+		
+        OrderDetailsDialog,
+
+		
+        PosDetailsDialog,
+
+		    ],
 
 	exports: [
 		BrowserAnimationsModule,

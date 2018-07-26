@@ -7,8 +7,8 @@
 <#@ import namespace="Tangsem.Common.Extensions" #>
 
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { MatPaginator, MatSort, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import * as models from '../../models/models';
 
 import { <#=Configuration.RepositoryName#>ApiService } from '../../services/api.service';
@@ -24,6 +24,9 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
 
     @Input()
     public subscribeToRoutingParams = true;
+
+    @Input()
+    public entityId = null;
 
     @Input()
     public loadOutgoingRefOptions = true;
@@ -83,6 +86,8 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
 				    this.loadData(id);
 			    }
 		    });
+        } else if (this.entityId != null && !this.model) {
+            this.loadData(this.entityId);
         }
 
 		this.model = this.model || {};
@@ -169,4 +174,28 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
 			});			
 		}
 	}
+}
+
+@Component({
+  selector: '<#= this.TableMetadata.EntityName.Lf() #>-details-dialog',
+  template: `    
+    <div mat-dialog-content>      
+      <<#= this.TableMetadata.EntityName.Lf() #>-editor
+        [entityId]="data.id" [subscribeToRoutingParams]="false"></<#= this.TableMetadata.EntityName.Lf() #>-editor>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-button (click)="close()">Close</button>      
+    </div>
+  `,
+})
+export class <#= this.TableMetadata.EntityName #>DetailsDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<<#= this.TableMetadata.EntityName #>DetailsDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
+
+  close(): void {
+    this.dialogRef.close();
+  }
 }
