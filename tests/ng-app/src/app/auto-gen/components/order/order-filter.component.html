@@ -4,12 +4,15 @@
 <!-- id: number -->
 
 
+
 <mat-form-field>
 	<input type="number" matInput
 		[(ngModel)]="filterModel.id" placeholder="Id"/>
 </mat-form-field>
 
+
 <!-- customerName: text -->
+
 
 
 <mat-form-field>
@@ -17,15 +20,23 @@
 		[(ngModel)]="filterModel.customerName" placeholder="CustomerName"/>
 </mat-form-field>
 
+
 <!-- productId: number -->
 
 
-<mat-form-field>
-	<input type="number" matInput
-		[(ngModel)]="filterModel.productId" placeholder="ProductId"/>
-</mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Select Product"
+            [(ngModel)]="filterModel.productId">
+            <mat-option value=""></mat-option>
+            <mat-option *ngFor="let opt of productOptions" [value]="opt.id">
+                {{opt.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
 
 <!-- orderTotal: number -->
+
 
 
 <mat-form-field>
@@ -33,7 +44,9 @@
 		[(ngModel)]="filterModel.orderTotal" placeholder="OrderTotal"/>
 </mat-form-field>
 
+
 <!-- createdById: number -->
+
 
 
 <mat-form-field>
@@ -41,7 +54,9 @@
 		[(ngModel)]="filterModel.createdById" placeholder="CreatedById"/>
 </mat-form-field>
 
+
 <!-- modifiedById: number -->
+
 
 
 <mat-form-field>
@@ -49,22 +64,32 @@
 		[(ngModel)]="filterModel.modifiedById" placeholder="ModifiedById"/>
 </mat-form-field>
 
+
 <!-- createdTime: datepicker -->
+
+
 <mat-form-field>
 	<input matInput [matDatepicker]="pickerCreatedTime" placeholder="Choose CreatedTime" [(ngModel)]="filterModel.createdTime">
 	  <mat-datepicker-toggle matSuffix [for]="pickerCreatedTime"></mat-datepicker-toggle>
 	  <mat-datepicker #pickerCreatedTime></mat-datepicker>
 </mat-form-field>
 
+
 <!-- modifiedTime: datepicker -->
+
+
 <mat-form-field>
 	<input matInput [matDatepicker]="pickerModifiedTime" placeholder="Choose ModifiedTime" [(ngModel)]="filterModel.modifiedTime">
 	  <mat-datepicker-toggle matSuffix [for]="pickerModifiedTime"></mat-datepicker-toggle>
 	  <mat-datepicker #pickerModifiedTime></mat-datepicker>
 </mat-form-field>
 
+
 <!-- active: checkbox -->
+
+
 	<mat-checkbox [(ngModel)]="filterModel.active">Active</mat-checkbox>
+
 
 
 <div>

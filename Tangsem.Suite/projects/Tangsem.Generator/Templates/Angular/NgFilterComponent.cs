@@ -38,39 +38,95 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import * as models from '../../models/models';
 
-@Component({
-  selector: '");
+import { ");
             
-            #line 18 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            #line 17 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
+            
+            #line default
+            #line hidden
+            this.Write("ApiService } from \'../../services/api.service\';\r\n\r\n@Component({\r\n  selector: \'");
+            
+            #line 20 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-filter\',\r\n  templateUrl: \'");
             
-            #line 19 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-filter.component.html\',\r\n})\r\nexport class ");
             
-            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("FilterComponent {\r\n\t\r\n\t@Input()\r\n\tpublic filterModel: models.");
+            this.Write("FilterComponent {\r\n    \r\n    constructor(\r\n\t\tprivate repoApi: ");
             
-            #line 24 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            #line 26 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
+            
+            #line default
+            #line hidden
+            this.Write("ApiService) {\t\r\n\t}\r\n\t\r\n\t@Input()\r\n\tpublic filterModel: models.");
+            
+            #line 30 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("SearchParams;\r\n\r\n\t@Output(\'onSearch\')\r\n\tpublic onSearch = new EventEmitter<models" +
-                    ".");
+            this.Write("SearchParams;\r\n\r\n    ");
             
-            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            #line 32 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+ if (this.TableMetadata.OutgoingReferences != null && this.TableMetadata.OutgoingReferences.Any()) {
+            
+            #line default
+            #line hidden
+            this.Write("\r\n    //////////////////// Outgoing References BEGINGs ////////////////////////\r\n" +
+                    "        ");
+            
+            #line 35 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+ foreach(var outgoingRef in this.TableMetadata.OutgoingReferences) { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n    @Input()\r\n    public ");
+            
+            #line 38 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentPropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("Options: models.");
+            
+            #line 38 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.TsModelName));
+            
+            #line default
+            #line hidden
+            this.Write("[];\r\n\r\n        ");
+            
+            #line 40 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n    //////////////////// Outgoing References ENDs ////////////////////////\r\n   " +
+                    " ");
+            
+            #line 43 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t@Output(\'onSearch\')\r\n\tpublic onSearch = new EventEmitter<models.");
+            
+            #line 46 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
@@ -78,13 +134,64 @@ import * as models from '../../models/models';
             this.Write("SearchParams>();\r\n\r\n\tpublic ngOnInit() {\r\n\t\tthis.filterModel = this.filterModel |" +
                     "| <models.");
             
-            #line 30 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            #line 49 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("SearchParams> {};\r\n\t}\r\n\r\n\tpublic search() {\r\n\t\tthis.onSearch.emit(this.filterMode" +
-                    "l);\r\n\t}\r\n\r\n}");
+            this.Write("SearchParams> {};\r\n\r\n        ");
+            
+            #line 51 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+ if (this.TableMetadata.OutgoingReferences != null && this.TableMetadata.OutgoingReferences.Any()) {
+            
+            #line default
+            #line hidden
+            this.Write("\r\n        //////////////////// Outgoing References BEGINGs //////////////////////" +
+                    "//\r\n            ");
+            
+            #line 54 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+ foreach(var outgoingRef in this.TableMetadata.OutgoingReferences) { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n        this.repoApi.get");
+            
+            #line 56 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("List( <models.");
+            
+            #line 56 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SearchParams> { sortFieldName: \'\', direction: \'\', pageIndex: 0, pageSize: 1000 })" +
+                    ".subscribe(pagingResult => {\r\n            this.");
+            
+            #line 57 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentPropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("Options = pagingResult.pagedData;\r\n        });\r\n\r\n            ");
+            
+            #line 60 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n        //////////////////// Outgoing References ENDs ////////////////////////\r" +
+                    "\n        ");
+            
+            #line 63 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgFilterComponent.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t}\r\n\r\n\tpublic search() {\r\n\t\tthis.onSearch.emit(this.filterModel);\r\n\t}\r\n\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -14,20 +14,53 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import * as models from '../../models/models';
 
+import { <#=Configuration.RepositoryName#>ApiService } from '../../services/api.service';
+
 @Component({
   selector: '<#= this.TableMetadata.EntityName.Lf() #>-filter',
   templateUrl: '<#= this.TableMetadata.EntityName.Lf() #>-filter.component.html',
 })
 export class <#= this.TableMetadata.EntityName #>FilterComponent {
+    
+    constructor(
+		private repoApi: <#=Configuration.RepositoryName#>ApiService) {	
+	}
 	
 	@Input()
 	public filterModel: models.<#= this.TableMetadata.EntityName #>SearchParams;
+
+    <# if (this.TableMetadata.OutgoingReferences != null && this.TableMetadata.OutgoingReferences.Any()) {#>
+
+    //////////////////// Outgoing References BEGINGs ////////////////////////
+        <# foreach(var outgoingRef in this.TableMetadata.OutgoingReferences) { #>
+
+    @Input()
+    public <#= outgoingRef.ParentPropertyName.Lf() #>Options: models.<#= outgoingRef.ParentTableMetadata.TsModelName #>[];
+
+        <# } #>
+
+    //////////////////// Outgoing References ENDs ////////////////////////
+    <# } #>
 
 	@Output('onSearch')
 	public onSearch = new EventEmitter<models.<#= this.TableMetadata.EntityName #>SearchParams>();
 
 	public ngOnInit() {
 		this.filterModel = this.filterModel || <models.<#= this.TableMetadata.EntityName #>SearchParams> {};
+
+        <# if (this.TableMetadata.OutgoingReferences != null && this.TableMetadata.OutgoingReferences.Any()) {#>
+
+        //////////////////// Outgoing References BEGINGs ////////////////////////
+            <# foreach(var outgoingRef in this.TableMetadata.OutgoingReferences) { #>
+
+        this.repoApi.get<#= outgoingRef.ParentTableMetadata.EntityName #>List( <models.<#= outgoingRef.ParentTableMetadata.EntityName #>SearchParams> { sortFieldName: '', direction: '', pageIndex: 0, pageSize: 1000 }).subscribe(pagingResult => {
+            this.<#= outgoingRef.ParentPropertyName.Lf() #>Options = pagingResult.pagedData;
+        });
+
+            <# } #>
+
+        //////////////////// Outgoing References ENDs ////////////////////////
+        <# } #>
 	}
 
 	public search() {

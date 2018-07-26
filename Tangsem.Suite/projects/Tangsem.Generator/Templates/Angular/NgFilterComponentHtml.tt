@@ -16,8 +16,10 @@
 	var inputType = getInputType(col.CSharpTypeAsString);
 #>
 <!-- <#= col.PropertyName.Lf() #>: <#= inputType #> -->
-<# if (inputType == "text" || inputType == "number") { #>
 
+<# if (!col.IsOutgoingRefKey) { #>
+
+<# if (inputType == "text" || inputType == "number") { #>
 
 <mat-form-field>
 	<input type="<#= inputType #>" matInput
@@ -31,6 +33,22 @@
 	  <mat-datepicker-toggle matSuffix [for]="picker<#= col.PropertyName #>"></mat-datepicker-toggle>
 	  <mat-datepicker #picker<#= col.PropertyName #>></mat-datepicker>
 </mat-form-field>
+<# } #>
+
+<# }  else {
+    var outgoingRef = col.OutgoingReference;
+ #>
+
+    <mat-form-field>
+        <mat-select placeholder="Select <#= outgoingRef.ParentPropertyName #>"
+            [(ngModel)]="filterModel.<#= outgoingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName.Lf() #>">
+            <mat-option value=""></mat-option>
+            <mat-option *ngFor="let opt of <#= outgoingRef.ParentPropertyName.Lf() #>Options" [value]="opt.<#= outgoingRef.ColumnPairs[0].ParentColumnMetadata.PropertyName.Lf() #>">
+                {{opt.<#= outgoingRef.ParentTableMetadata.Columns[1].PropertyName.Lf() #>}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
 <# } #>
 
 <# } #>
