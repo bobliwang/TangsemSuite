@@ -50,64 +50,60 @@ export class GeneratorTestRepositoryApiService {
 		let params = new HttpParams();
 
 		if (filterModel) {
+            filterModel.sortFieldName = filterModel.sortFieldName || '';
+            filterModel.direction = filterModel.direction || '';
+            filterModel.pageIndex = filterModel.pageIndex || 0;
+            filterModel.pageSize = filterModel.pageSize || 0;
+        
 			params = params.set('sortFieldName', filterModel.sortFieldName)
 						   .set('direction', filterModel.direction)
 						   .set('pageIndex', filterModel.pageIndex.toString())
 						   .set('pageSize', filterModel.pageSize.toString());
 
 			
-			if (filterModel.id)
+			if (filterModel.id != null)
 			{
 				params = params.set('id', filterModel.id.toString());
-
 			}
 			
-			if (filterModel.name)
+			if (filterModel.name != null)
 			{
 				params = params.set('name', filterModel.name.toString());
-
 			}
 			
-			if (filterModel.unitPrice)
+			if (filterModel.unitPrice != null)
 			{
 				params = params.set('unitPrice', filterModel.unitPrice.toString());
-
 			}
 			
-			if (filterModel.specsJson)
+			if (filterModel.specsJson != null)
 			{
 				params = params.set('specsJson', filterModel.specsJson.toString());
-
 			}
 			
-			if (filterModel.createdById)
+			if (filterModel.createdById != null)
 			{
 				params = params.set('createdById', filterModel.createdById.toString());
-
 			}
 			
-			if (filterModel.createdTime)
+			if (filterModel.createdTime != null)
 			{
 				params = params.set('createdTime', filterModel.createdTime.toString());
-
 			}
 			
-			if (filterModel.modifiedById)
+			if (filterModel.modifiedById != null)
 			{
 				params = params.set('modifiedById', filterModel.modifiedById.toString());
-
 			}
 			
-			if (filterModel.modifiedTime)
+			if (filterModel.modifiedTime != null)
 			{
 				params = params.set('modifiedTime', filterModel.modifiedTime.toString());
-
 			}
 			
-			if (filterModel.active)
+			if (filterModel.active != null)
 			{
 				params = params.set('active', filterModel.active.toString());
-
 			}
 			
 		}
@@ -146,64 +142,60 @@ export class GeneratorTestRepositoryApiService {
 		let params = new HttpParams();
 
 		if (filterModel) {
+            filterModel.sortFieldName = filterModel.sortFieldName || '';
+            filterModel.direction = filterModel.direction || '';
+            filterModel.pageIndex = filterModel.pageIndex || 0;
+            filterModel.pageSize = filterModel.pageSize || 0;
+        
 			params = params.set('sortFieldName', filterModel.sortFieldName)
 						   .set('direction', filterModel.direction)
 						   .set('pageIndex', filterModel.pageIndex.toString())
 						   .set('pageSize', filterModel.pageSize.toString());
 
 			
-			if (filterModel.id)
+			if (filterModel.id != null)
 			{
 				params = params.set('id', filterModel.id.toString());
-
 			}
 			
-			if (filterModel.customerName)
+			if (filterModel.customerName != null)
 			{
 				params = params.set('customerName', filterModel.customerName.toString());
-
 			}
 			
-			if (filterModel.productId)
+			if (filterModel.productId != null)
 			{
 				params = params.set('productId', filterModel.productId.toString());
-
 			}
 			
-			if (filterModel.orderTotal)
+			if (filterModel.orderTotal != null)
 			{
 				params = params.set('orderTotal', filterModel.orderTotal.toString());
-
 			}
 			
-			if (filterModel.createdById)
+			if (filterModel.createdById != null)
 			{
 				params = params.set('createdById', filterModel.createdById.toString());
-
 			}
 			
-			if (filterModel.modifiedById)
+			if (filterModel.modifiedById != null)
 			{
 				params = params.set('modifiedById', filterModel.modifiedById.toString());
-
 			}
 			
-			if (filterModel.createdTime)
+			if (filterModel.createdTime != null)
 			{
 				params = params.set('createdTime', filterModel.createdTime.toString());
-
 			}
 			
-			if (filterModel.modifiedTime)
+			if (filterModel.modifiedTime != null)
 			{
 				params = params.set('modifiedTime', filterModel.modifiedTime.toString());
-
 			}
 			
-			if (filterModel.active)
+			if (filterModel.active != null)
 			{
 				params = params.set('active', filterModel.active.toString());
-
 			}
 			
 		}
@@ -242,52 +234,50 @@ export class GeneratorTestRepositoryApiService {
 		let params = new HttpParams();
 
 		if (filterModel) {
+            filterModel.sortFieldName = filterModel.sortFieldName || '';
+            filterModel.direction = filterModel.direction || '';
+            filterModel.pageIndex = filterModel.pageIndex || 0;
+            filterModel.pageSize = filterModel.pageSize || 0;
+        
 			params = params.set('sortFieldName', filterModel.sortFieldName)
 						   .set('direction', filterModel.direction)
 						   .set('pageIndex', filterModel.pageIndex.toString())
 						   .set('pageSize', filterModel.pageSize.toString());
 
 			
-			if (filterModel.id)
+			if (filterModel.id != null)
 			{
 				params = params.set('id', filterModel.id.toString());
-
 			}
 			
-			if (filterModel.name)
+			if (filterModel.name != null)
 			{
 				params = params.set('name', filterModel.name.toString());
-
 			}
 			
-			if (filterModel.createdById)
+			if (filterModel.createdById != null)
 			{
 				params = params.set('createdById', filterModel.createdById.toString());
-
 			}
 			
-			if (filterModel.modifiedById)
+			if (filterModel.modifiedById != null)
 			{
 				params = params.set('modifiedById', filterModel.modifiedById.toString());
-
 			}
 			
-			if (filterModel.createdTime)
+			if (filterModel.createdTime != null)
 			{
 				params = params.set('createdTime', filterModel.createdTime.toString());
-
 			}
 			
-			if (filterModel.modifiedTime)
+			if (filterModel.modifiedTime != null)
 			{
 				params = params.set('modifiedTime', filterModel.modifiedTime.toString());
-
 			}
 			
-			if (filterModel.active)
+			if (filterModel.active != null)
 			{
 				params = params.set('active', filterModel.active.toString());
-
 			}
 			
 		}

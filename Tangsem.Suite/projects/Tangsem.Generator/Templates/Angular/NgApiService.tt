@@ -61,6 +61,11 @@ export class <#=Configuration.RepositoryName#>ApiService {
 		let params = new HttpParams();
 
 		if (filterModel) {
+            filterModel.sortFieldName = filterModel.sortFieldName || '';
+            filterModel.direction = filterModel.direction || '';
+            filterModel.pageIndex = filterModel.pageIndex || 0;
+            filterModel.pageSize = filterModel.pageSize || 0;
+        
 			params = params.set('sortFieldName', filterModel.sortFieldName)
 						   .set('direction', filterModel.direction)
 						   .set('pageIndex', filterModel.pageIndex.toString())
@@ -68,10 +73,9 @@ export class <#=Configuration.RepositoryName#>ApiService {
 
 			<# foreach (var col in tableMetadata.Columns) { #>
 
-			if (filterModel.<#= col.PropertyName.Lf() #>)
+			if (filterModel.<#= col.PropertyName.Lf() #> != null)
 			{
 				params = params.set('<#= col.PropertyName.Lf() #>', filterModel.<#= col.PropertyName.Lf() #>.toString());
-
 			}
 			<# } #>
 

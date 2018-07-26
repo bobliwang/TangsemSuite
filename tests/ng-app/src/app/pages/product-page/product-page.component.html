@@ -1,0 +1,13 @@
+<product-listing
+  [templates]="{specsJsonTemplate: specsJsonTemplate, unitPriceTemplate: unitPriceTemplate}"
+>
+
+  <ng-template #specsJsonTemplate let-rowData="rowData">
+      <prod-specs [specs]="rowData.specsJson"></prod-specs>
+  </ng-template>
+
+  <ng-template #unitPriceTemplate let-rowData="rowData">
+      {{ rowData.unitPrice }} AUD
+  </ng-template>
+
+</product-listing>

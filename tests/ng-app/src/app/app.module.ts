@@ -45,12 +45,19 @@ import {
   MatTreeModule, } from '@angular/material';
 import { DialogsService } from './services/dialogs.service';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { ProdSpecsComponent } from './components/prod-specs/prod-specs.component';
 
+routes.push(...[
+  { path: 'my-product/listing', component: ProductPageComponent },
+]);
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogComponent
+    DialogComponent,
+    ProductPageComponent,
+    ProdSpecsComponent
   ],
   imports: [
     BrowserModule,

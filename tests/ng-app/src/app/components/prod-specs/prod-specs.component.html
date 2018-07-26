@@ -1,4 +1,11 @@
-<span>Injected Column Template for Specs</span>
-<div *ngFor="let spec of specs">
-  {{spec.name}}: {{spec.value}}
+<div *ngFor="let spec of specs" style="display: flex; flex-direction: row; width: 100%">  
+  <div style="flex: 220px">
+    <label>
+        {{spec.name}}:
+    </label>
+  </div>
+
+  <div style="flex: 220px">
+      {{spec.value}}
+  </div>
 </div>
