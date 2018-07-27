@@ -22,6 +22,8 @@ namespace GeneratorTest.Common.Domain.Mappings.AutoMapper
 				cfg.AddProfile(new OrderMappingProfile(repoProvider));
 	
 				cfg.AddProfile(new PosMappingProfile(repoProvider));
+	
+				cfg.AddProfile(new StoreMappingProfile(repoProvider));
 				});
 
 			return config;

@@ -9,6 +9,9 @@ import { OrderEditorComponent } from './components/order/order-editor.component'
 import { PosListingComponent } from './components/pos/pos-listing.component';
 import { PosEditorComponent } from './components/pos/pos-editor.component';
 
+import { StoreListingComponent } from './components/store/store-listing.component';
+import { StoreEditorComponent } from './components/store/store-editor.component';
+
 
 import { ExtendedRoute } from '../models/extended-route';
 
@@ -25,6 +28,10 @@ export const routes: ExtendedRoute[] = [
 	{ path: 'pos/:id/:action', component: PosEditorComponent, hideFromMenuItem: true },
 	{ path: 'pos/listing', component: PosListingComponent },
 	{ path: 'pos/create', component: PosEditorComponent },
+
+	{ path: 'store/:id/:action', component: StoreEditorComponent, hideFromMenuItem: true },
+	{ path: 'store/listing', component: StoreListingComponent },
+	{ path: 'store/create', component: StoreEditorComponent },
 
 
 ]

@@ -55,6 +55,19 @@ namespace GeneratorTest.Common.Domain.Repositories.NHibernate
       }
     }
 
+    
+    
+    /// <summary>
+    /// The IQueryable for Stores.
+    /// </summary>
+    public virtual IQueryable<Store> Stores
+    {
+      get
+      {
+        return this.GetEntities<Store>();
+      }
+    }
+
         
     
 
@@ -181,6 +194,48 @@ namespace GeneratorTest.Common.Domain.Repositories.NHibernate
     public virtual Pos SaveOrUpdatePos(Pos pos)
     {
       return this.SaveOrUpdate<Pos>(pos);
+    }
+
+    
+    
+    /// <summary>
+    /// Get Store by primary key.
+    /// </summary>
+    public virtual Store LookupStoreById(int id)
+    {
+      return this.LookupById<Store>(id);
+    }
+    
+    /// <summary>
+    /// Delete Store by primary key.
+    /// </summary>
+    public virtual Store DeleteStoreById(int id)
+    {
+      return this.DeleteById<Store>(id);
+    }
+    
+    /// <summary>
+    /// Save a new Store instance.
+    /// </summary>
+    public virtual Store SaveStore(Store store)
+    {
+      return this.Save<Store>(store);
+    }
+    
+    /// <summary>
+    /// Update an existing Store instance.
+    /// </summary>
+    public virtual Store UpdateStore(Store store)
+    {
+      return this.Update<Store>(store);
+    }
+    
+    /// <summary>
+    /// Save or update an existing Store instance.
+    /// </summary>
+    public virtual Store SaveOrUpdateStore(Store store)
+    {
+      return this.SaveOrUpdate<Store>(store);
     }
 
     

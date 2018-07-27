@@ -130,3 +130,34 @@ export interface PosModel {
 
 export interface PosSearchParams extends PosModel, SearchParams  {
 }
+
+
+export interface StoreModel {
+
+     
+
+		id?: number;
+
+
+		storeName?: string;
+
+
+		createdById?: number;
+
+
+		createdTime?: string;
+
+
+		modifiedById?: number;
+
+
+		modifiedTime?: string;
+
+
+		active?: boolean;
+
+
+}
+
+export interface StoreSearchParams extends StoreModel, SearchParams  {
+}

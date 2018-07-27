@@ -1,0 +1,80 @@
+<div class="filter-ctn">
+
+
+<!-- id: number -->
+
+
+
+<mat-form-field>
+	<input type="number" matInput
+		[(ngModel)]="filterModel.id" placeholder="Id"/>
+</mat-form-field>
+
+
+<!-- storeName: text -->
+
+
+
+<mat-form-field>
+	<input type="text" matInput
+		[(ngModel)]="filterModel.storeName" placeholder="StoreName"/>
+</mat-form-field>
+
+
+<!-- createdById: number -->
+
+
+
+<mat-form-field>
+	<input type="number" matInput
+		[(ngModel)]="filterModel.createdById" placeholder="CreatedById"/>
+</mat-form-field>
+
+
+<!-- createdTime: datepicker -->
+
+
+<mat-form-field>
+	<input matInput [matDatepicker]="pickerCreatedTime" placeholder="Choose CreatedTime" [(ngModel)]="filterModel.createdTime">
+	  <mat-datepicker-toggle matSuffix [for]="pickerCreatedTime"></mat-datepicker-toggle>
+	  <mat-datepicker #pickerCreatedTime></mat-datepicker>
+</mat-form-field>
+
+
+<!-- modifiedById: number -->
+
+
+
+<mat-form-field>
+	<input type="number" matInput
+		[(ngModel)]="filterModel.modifiedById" placeholder="ModifiedById"/>
+</mat-form-field>
+
+
+<!-- modifiedTime: datepicker -->
+
+
+<mat-form-field>
+	<input matInput [matDatepicker]="pickerModifiedTime" placeholder="Choose ModifiedTime" [(ngModel)]="filterModel.modifiedTime">
+	  <mat-datepicker-toggle matSuffix [for]="pickerModifiedTime"></mat-datepicker-toggle>
+	  <mat-datepicker #pickerModifiedTime></mat-datepicker>
+</mat-form-field>
+
+
+<!-- active: checkbox -->
+
+
+	<mat-checkbox [(ngModel)]="filterModel.active">Active</mat-checkbox>
+
+
+
+<div>
+
+<div>
+	<button (click)="search()" mat-raised-button>
+		<mat-icon>
+			search
+		</mat-icon>
+		Search
+	</button>
+</div>

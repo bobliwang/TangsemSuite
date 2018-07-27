@@ -27,6 +27,10 @@ import { PosFilterComponent } from './components/pos/pos-filter.component';
 import { PosListingComponent } from './components/pos/pos-listing.component';
 import { PosEditorComponent, PosDetailsDialog } from './components/pos/pos-editor.component';
 
+import { StoreFilterComponent } from './components/store/store-filter.component';
+import { StoreListingComponent } from './components/store/store-listing.component';
+import { StoreEditorComponent, StoreDetailsDialog } from './components/store/store-editor.component';
+
 
 
 import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-routing.module';
@@ -61,6 +65,12 @@ import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-
         PosDetailsDialog,
 
 		
+		StoreFilterComponent,
+		StoreEditorComponent,
+		StoreListingComponent,
+        StoreDetailsDialog,
+
+		
 	],
 	
 	providers: [
@@ -76,6 +86,9 @@ import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-
 
 		
         PosDetailsDialog,
+
+		
+        StoreDetailsDialog,
 
 		    ],
 
@@ -98,6 +111,11 @@ import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-
 		PosFilterComponent,
 		PosEditorComponent,
 		PosListingComponent,
+
+		
+		StoreFilterComponent,
+		StoreEditorComponent,
+		StoreListingComponent,
 
 			]
 

@@ -37,6 +37,13 @@ namespace GeneratorTest.Common.Domain.Repositories
 		/// </summary>
 		IQueryable<Pos> Poses { get; }
 
+		
+		
+		/// <summary>
+		/// Maps to database table/view Store. The IQueryable for Stores.
+		/// </summary>
+		IQueryable<Store> Stores { get; }
+
 				
 		
 
@@ -119,6 +126,33 @@ namespace GeneratorTest.Common.Domain.Repositories
 		/// Save or update an existing Pos instance.
 		/// </summary>
 		Pos SaveOrUpdatePos(Pos pos);
+
+		
+		
+		/// <summary>
+		/// Get Store by primary key.
+		/// </summary>
+		Store LookupStoreById(int id);
+		
+		/// <summary>
+		/// Delete Store by primary key.
+		/// </summary>
+		Store DeleteStoreById(int id);
+		
+		/// <summary>
+		/// Save a new Store instance.
+		/// </summary>
+		Store SaveStore(Store store);
+		
+		/// <summary>
+		/// Update an existing Store instance.
+		/// </summary>
+		Store UpdateStore(Store store);
+		
+		/// <summary>
+		/// Save or update an existing Store instance.
+		/// </summary>
+		Store SaveOrUpdateStore(Store store);
 
 		
 	}
