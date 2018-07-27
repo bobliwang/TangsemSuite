@@ -7,21 +7,40 @@ namespace GeneratorTest.Common.Domain.Mappings.AutoMapper
 
 	public partial class PosMappingProfile : Profile
 	{
-		public PosMappingProfile ()
+	    private readonly IRepoProvider repoProvider;
+
+		public PosMappingProfile (IRepoProvider repoProvider)
 		{
-			var mapping = this.CreateMap<Pos, PosDTO>();
+            this.repoProvider = repoProvider;
 
-		
-
-			// TODO: To generate code that ignores auditable columns as createdById, modifiedById ...
-			
-				mapping.ForMember(x => x.CreatedById, opts => opts.Ignore()); 
-				mapping.ForMember(x => x.ModifiedById, opts => opts.Ignore());
-				mapping.ForMember(x => x.CreatedTime, opts => opts.Ignore());
-				mapping.ForMember(x => x.ModifiedTime, opts => opts.Ignore());
-				mapping.ForMember(x => x.Active, opts => opts.Ignore());
-
-						mapping.ReverseMap();
+            // Entity to DTO
+            var mappingToDto = this.CreateMap<Pos, PosDTO>();
+            this.SetupMappingToDto(mappingToDto);
+		  
+            // DTO to Entity
+		    var mappingEntity = mappingToDto.ReverseMap();
+            this.SetupMappingToEntity(mappingEntity);
 		}
+
+        public virtual void SetupMappingToEntity(IMappingExpression<PosDTO, Pos> mappingEntity)
+	    {
+            
+            // ignore auditing columns
+	        mappingEntity.ForMember(x => x.CreatedById, opts => opts.Ignore());
+	        mappingEntity.ForMember(x => x.ModifiedById, opts => opts.Ignore());
+	        mappingEntity.ForMember(x => x.CreatedTime, opts => opts.Ignore());
+	        mappingEntity.ForMember(x => x.ModifiedTime, opts => opts.Ignore());
+
+            mappingEntity.ForMember(x => x.Active, opts => opts.Condition(s => s.Active != null));
+
+                        
+            
+            	    
+        }
+
+	    public virtual void SetupMappingToDto(IMappingExpression<Pos, PosDTO> mappingToDto)
+	    {
+
+                    }
 	}
 }

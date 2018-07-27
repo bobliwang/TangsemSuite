@@ -56,65 +56,248 @@ namespace Tangsem.Generator.Templates.MVC.AutoMapper
             
             #line default
             #line hidden
-            this.Write("MappingProfile : Profile\r\n\t{\r\n\t\tpublic ");
+            this.Write("MappingProfile : Profile\r\n\t{\r\n\t    private readonly IRepoProvider repoProvider;\r\n" +
+                    "\r\n\t\tpublic ");
             
-            #line 16 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            #line 18 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("MappingProfile ()\r\n\t\t{\r\n            // Entity to DTO\r\n\t\t\tvar mapping = this.Creat" +
-                    "eMap<");
+            this.Write("MappingProfile (IRepoProvider repoProvider)\r\n\t\t{\r\n            this.repoProvider =" +
+                    " repoProvider;\r\n\r\n            // Entity to DTO\r\n            var mappingToDto = t" +
+                    "his.CreateMap<");
             
-            #line 19 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 19 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("DTO>();\r\n\r\n            ");
+            this.Write(@"DTO>();
+            this.SetupMappingToDto(mappingToDto);
+		  
+            // DTO to Entity
+		    var mappingEntity = mappingToDto.ReverseMap();
+            this.SetupMappingToEntity(mappingEntity);
+		}
+
+        public virtual void SetupMappingToEntity(IMappingExpression<");
             
-            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
- foreach(var outgingRef in this.TableMetadata.OutgoingReferences) { 
+            #line 31 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("                //mapping.ForMember\r\n            ");
+            this.Write("DTO, ");
             
-            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
- } 
+            #line 31 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("\r\n            // DTO to Entity\r\n            mapping = mapping.ReverseMap();\r\n\r\n\t\t" +
-                    "\t");
+            this.Write("> mappingEntity)\r\n\t    {\r\n            ");
             
-            #line 28 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            #line 33 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
  if( this.TableMetadata.IsAuditableEntity) { 
             
             #line default
             #line hidden
             this.Write(@"
-				mapping.ForMember(x => x.CreatedById, opts => opts.Ignore()); 
-				mapping.ForMember(x => x.ModifiedById, opts => opts.Ignore());
-				mapping.ForMember(x => x.CreatedTime, opts => opts.Ignore());
-				mapping.ForMember(x => x.ModifiedTime, opts => opts.Ignore());
-				mapping.ForMember(x => x.Active, opts => opts.Ignore());
+            // ignore auditing columns
+	        mappingEntity.ForMember(x => x.CreatedById, opts => opts.Ignore());
+	        mappingEntity.ForMember(x => x.ModifiedById, opts => opts.Ignore());
+	        mappingEntity.ForMember(x => x.CreatedTime, opts => opts.Ignore());
+	        mappingEntity.ForMember(x => x.ModifiedTime, opts => opts.Ignore());
 
-			");
+            mappingEntity.ForMember(x => x.Active, opts => opts.Condition(s => s.Active != null));
+
+            ");
             
-            #line 36 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            #line 43 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t}\r\n\t}\r\n}");
+            this.Write("            \r\n            \r\n            ");
+            
+            #line 46 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ foreach(var outgingRef in this.TableMetadata.OutgoingReferences) { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            mappingEntity.ForMember(x => x.");
+            
+            #line 48 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ParentPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(", opts => opts.ResolveUsing((s, t) =>\r\n\t        {\r\n                ");
+            
+            #line 50 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ if (outgingRef.ColumnPairs[0].ChildColumnMetadata.Nullable) { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t            if (s.");
+            
+            #line 52 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(" == null)\r\n\t            {\r\n\t                return null;\r\n\t            }\r\n\r\n     " +
+                    "           ");
+            
+            #line 57 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t            if (t.");
+            
+            #line 59 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ParentPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(" != null && s.");
+            
+            #line 59 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(" == t.");
+            
+            #line 59 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ParentPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(".");
+            
+            #line 59 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ColumnPairs[0].ParentColumnMetadata.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n\t            {\r\n                    // same id value, use source.\r\n\t          " +
+                    "      return t.");
+            
+            #line 62 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ParentPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n\t            }\r\n\r\n\t            var repo = this.repoProvider.Get();\r\n\r\n        " +
+                    "        ");
+            
+            #line 67 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ if (outgingRef.ColumnPairs[0].ChildColumnMetadata.Nullable) { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t            return repo.Lookup");
+            
+            #line 69 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ParentTableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("ById(s.");
+            
+            #line 69 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(".Value);\r\n                ");
+            
+            #line 70 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n                return repo.Lookup");
+            
+            #line 72 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ParentTableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("ById(s.");
+            
+            #line 72 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n                ");
+            
+            #line 73 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t        }));\r\n\r\n            ");
+            
+            #line 76 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t    \r\n        }\r\n\r\n\t    public virtual void SetupMappingToDto(IMappingExpression" +
+                    "<");
+            
+            #line 80 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write(", ");
+            
+            #line 80 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("DTO> mappingToDto)\r\n\t    {\r\n\r\n            ");
+            
+            #line 83 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ foreach(var outgingRef in this.TableMetadata.OutgoingReferences) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t        mappingToDto.ForMember(x => x.");
+            
+            #line 84 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(", opts => opts.ResolveUsing((s, t) =>\r\n\t        {\r\n\t            return s.");
+            
+            #line 86 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgingRef.ParentPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("?.Id;\r\n\t        }));\r\n            ");
+            
+            #line 88 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("        }\r\n\t}\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

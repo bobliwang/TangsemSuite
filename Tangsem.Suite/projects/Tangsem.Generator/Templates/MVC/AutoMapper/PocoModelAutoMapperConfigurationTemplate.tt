@@ -5,20 +5,26 @@
 <#@ import namespace="System.Collections.Generic" #>
 
 using AutoMapper;
+using <#= Configuration.RepositoryNamespace #>;
 
 namespace <#= Configuration.DomainNamespace #>.Mappings.AutoMapper
 {
 
+    public interface IRepoProvider
+    {
+        I<#=Configuration.RepositoryName#> Get();
+    }
+
 	public class <#=Configuration.RepositoryName#>AutoMapperConfiguration
 	{
     
-		public MapperConfiguration Configure()
+		public MapperConfiguration Configure(IRepoProvider repoProvider)
 		{
 			var config = new MapperConfiguration(cfg => {
 			
 	<# foreach (var tableMetadata in this.TableMetadatas) { #>
 
-				cfg.AddProfile<<#= tableMetadata.EntityName #>MappingProfile>();
+				cfg.AddProfile(new <#= tableMetadata.EntityName #>MappingProfile(repoProvider));
 	<# } #>
 			});
 

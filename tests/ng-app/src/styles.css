@@ -20,6 +20,14 @@
     flex-direction: column;
 }
 
+
+.editor-row {
+    width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
 .filter-ctn {
     width: 200px;
     margin: auto;

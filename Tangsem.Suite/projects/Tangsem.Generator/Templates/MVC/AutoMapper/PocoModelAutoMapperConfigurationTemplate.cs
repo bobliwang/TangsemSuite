@@ -28,38 +28,53 @@ namespace Tangsem.Generator.Templates.MVC.AutoMapper
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\nusing AutoMapper;\r\n\r\nnamespace ");
+            this.Write("\r\nusing AutoMapper;\r\nusing ");
             
-            #line 9 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            #line 8 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryNamespace));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n\r\nnamespace ");
+            
+            #line 10 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.DomainNamespace));
             
             #line default
             #line hidden
-            this.Write(".Mappings.AutoMapper\r\n{\r\n\r\n\tpublic class ");
+            this.Write(".Mappings.AutoMapper\r\n{\r\n\r\n    public interface IRepoProvider\r\n    {\r\n        I");
             
-            #line 12 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            #line 15 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
             #line hidden
-            this.Write("AutoMapperConfiguration\r\n\t{\r\n    \r\n\t\tpublic MapperConfiguration Configure()\r\n\t\t{\r" +
-                    "\n\t\t\tvar config = new MapperConfiguration(cfg => {\r\n\t\t\t\r\n\t");
+            this.Write(" Get();\r\n    }\r\n\r\n\tpublic class ");
             
-            #line 19 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            #line 18 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
+            
+            #line default
+            #line hidden
+            this.Write("AutoMapperConfiguration\r\n\t{\r\n    \r\n\t\tpublic MapperConfiguration Configure(IRepoPr" +
+                    "ovider repoProvider)\r\n\t\t{\r\n\t\t\tvar config = new MapperConfiguration(cfg => {\r\n\t\t\t" +
+                    "\r\n\t");
+            
+            #line 25 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
  foreach (var tableMetadata in this.TableMetadatas) { 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t\tcfg.AddProfile<");
+            this.Write("\r\n\t\t\t\tcfg.AddProfile(new ");
             
-            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("MappingProfile>();\r\n\t");
+            this.Write("MappingProfile(repoProvider));\r\n\t");
             
-            #line 22 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
+            #line 28 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt"
  } 
             
             #line default

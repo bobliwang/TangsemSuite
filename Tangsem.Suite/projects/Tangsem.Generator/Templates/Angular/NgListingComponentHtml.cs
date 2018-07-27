@@ -213,7 +213,7 @@ namespace Tangsem.Generator.Templates.Angular
 			<tr mat-row *matRowDef=""let row; columns: displayedColumns;""></tr>
 		</table>
 
-		<mat-paginator [length]=""resultsLength"" [pageSizeOptions]=""[2, 5, 10, 20]"" showFirstLastButtons></mat-paginator>
+		<mat-paginator [length]=""resultsLength"" [pageSizeOptions]=""[5, 10, 20, 50, 100]"" showFirstLastButtons></mat-paginator>
 	</div>
 </div>");
             return this.GenerationEnvironment.ToString();

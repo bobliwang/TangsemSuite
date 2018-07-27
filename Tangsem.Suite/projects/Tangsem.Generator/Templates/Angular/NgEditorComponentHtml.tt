@@ -10,60 +10,61 @@
 <# foreach(var col in this.TableMetadata.Columns) {
 	var inputType = getInputType(col.CSharpTypeAsString);
 #>
-<!-- <#= col.PropertyName.Lf() #>: <#= inputType #> -->
-<div>
-<# if (!col.IsOutgoingRefKey) { #>
-    <# if (inputType == "text" || inputType == "number") { #>
 
+    <!-- <#= col.PropertyName.Lf() #>: <#= inputType #> - <#= col.ColumnSize #> -->
+    <div class="editor-row">
+    <# if (!col.IsOutgoingRefKey) { #>
+        <# if (inputType == "text" || inputType == "number") { #>
 
-    <mat-form-field>
-        <# if (col.ColumnSize < 50) { #>
+        <mat-form-field>
+            <# if (inputType == "number" || (col.ColumnSize >= 0 && col.ColumnSize < 50) ) { #>
 
-	    <input type="<#= inputType #>" matInput #<#= col.PropertyName.Lf() #>="ngModel"
-		    [(ngModel)]="model.<#= col.PropertyName.Lf() #>" placeholder="<#= col.PropertyName #>" <#= col.Nullable || col.IsPrimaryKey ? "" : "required" #> />
+	        <input type="<#= inputType #>" matInput #<#= col.PropertyName.Lf() #>="ngModel" <#= col.IsPrimaryKey ? "readonly" : "" #>
+		        [(ngModel)]="model.<#= col.PropertyName.Lf() #>" placeholder="<#= col.PropertyName #>"
+                <#= col.ColumnSize > 0 ? ("maxlength=\"" + col.ColumnSize + "\"") : "" #> <#= col.Nullable || col.IsPrimaryKey ? "" : "required" #> />
 
-        <# } else { #>
-        <textarea matInput #<#= col.PropertyName.Lf() #>="ngModel" <#= col.ColumnSize > 10 ? ("maxlength=\"" + col.ColumnSize + "\"") : "" #>
-		    [(ngModel)]="model.<#= col.PropertyName.Lf() #>" placeholder="<#= col.PropertyName #>" <#= col.Nullable|| col.IsPrimaryKey ? "" : "required" #>></textarea>
-        <# }#>
+            <# } else { #>
+            <textarea matInput #<#= col.PropertyName.Lf() #>="ngModel" <#= col.ColumnSize > 0 ? ("maxlength=\"" + col.ColumnSize + "\"") : "" #> <#= col.IsPrimaryKey ? "readonly" : "" #>
+		        [(ngModel)]="model.<#= col.PropertyName.Lf() #>" placeholder="<#= col.PropertyName #>" <#= col.Nullable|| col.IsPrimaryKey ? "" : "required" #>></textarea>
+            <# }#>
 
-    </mat-form-field>
-    <# } else if (inputType == "checkbox") { #>
-	    <mat-checkbox [(ngModel)]="model.<#= col.PropertyName.Lf() #>" #<#= col.PropertyName.Lf() #>="ngModel"><#= col.PropertyName #></mat-checkbox>
-    <# } else if (inputType == "datepicker") { #>
-    <mat-form-field>
-	    <input matInput [matDatepicker]="picker<#= col.PropertyName #>" placeholder="Choose <#= col.PropertyName #>" #<#= col.PropertyName.Lf() #>="ngModel"
-            [(ngModel)]="model.<#= col.PropertyName.Lf() #>" <#= col.Nullable ? "" : "required" #>>
-	      <mat-datepicker-toggle matSuffix [for]="picker<#= col.PropertyName #>"></mat-datepicker-toggle>
-	      <mat-datepicker #picker<#= col.PropertyName #>></mat-datepicker>
-    </mat-form-field>
+        </mat-form-field>
+        <# } else if (inputType == "checkbox") { #>
+	        <mat-checkbox [(ngModel)]="model.<#= col.PropertyName.Lf() #>" #<#= col.PropertyName.Lf() #>="ngModel"><#= col.PropertyName #></mat-checkbox>
+        <# } else if (inputType == "datepicker") { #>
+        <mat-form-field>
+	        <input matInput [matDatepicker]="picker<#= col.PropertyName #>" placeholder="Choose <#= col.PropertyName #>" #<#= col.PropertyName.Lf() #>="ngModel"
+                [(ngModel)]="model.<#= col.PropertyName.Lf() #>" <#= col.Nullable ? "" : "required" #>>
+	          <mat-datepicker-toggle matSuffix [for]="picker<#= col.PropertyName #>"></mat-datepicker-toggle>
+	          <mat-datepicker #picker<#= col.PropertyName #>></mat-datepicker>
+        </mat-form-field>
+        <# } #>
+
+    <# } else {
+        var outgoingRef = col.OutgoingReference;
+     #>
+
+        <mat-form-field>
+            <mat-select placeholder="Select <#= outgoingRef.ParentPropertyName #>" #<#= col.PropertyName.Lf() #>="ngModel"
+                [(ngModel)]="model.<#= outgoingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName.Lf() #>" <#= outgoingRef.ColumnPairs[0].ChildColumnMetadata.Nullable ? "" : "required" #>>
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let opt of <#= outgoingRef.ParentPropertyName.Lf() #>Options" [value]="opt.<#= outgoingRef.ColumnPairs[0].ParentColumnMetadata.PropertyName.Lf() #>">
+                    {{opt.<#= outgoingRef.ParentTableMetadata.Columns[1].PropertyName.Lf() #>}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
     <# } #>
 
-<# } else {
-    var outgoingRef = col.OutgoingReference;
- #>
+        <!-- Validation HERE -->
+        <div *ngIf="<#= col.PropertyName.Lf() #>.invalid && (<#= col.PropertyName.Lf() #>.dirty || <#= col.PropertyName.Lf() #>.touched)"
+            class="alert alert-danger">
 
-    <mat-form-field>
-        <mat-select placeholder="Select <#= outgoingRef.ParentPropertyName #>" #<#= col.PropertyName.Lf() #>="ngModel"
-            [(ngModel)]="model.<#= outgoingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName.Lf() #>" <#= outgoingRef.ColumnPairs[0].ChildColumnMetadata.Nullable ? "" : "required" #>>
-            <mat-option value=""></mat-option>
-            <mat-option *ngFor="let opt of <#= outgoingRef.ParentPropertyName.Lf() #>Options" [value]="opt.<#= outgoingRef.ColumnPairs[0].ParentColumnMetadata.PropertyName.Lf() #>">
-                {{opt.<#= outgoingRef.ParentTableMetadata.Columns[1].PropertyName.Lf() #>}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-<# } #>
-
-    <!-- Validation HERE -->
-    <div *ngIf="<#= col.PropertyName.Lf() #>.invalid && (<#= col.PropertyName.Lf() #>.dirty || <#= col.PropertyName.Lf() #>.touched)"
-        class="alert alert-danger">
-
-        <div *ngIf="<#= col.PropertyName.Lf() #>.errors.required">
-            <#= col.PropertyName #> is required.
+            <div *ngIf="<#= col.PropertyName.Lf() #>.errors.required">
+                <#= col.PropertyName #> is required.
+            </div>
         </div>
     </div>
-</div>
 
 <# } #>
 

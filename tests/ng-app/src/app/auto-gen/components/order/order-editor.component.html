@@ -1,196 +1,204 @@
 <div class="editor-ctn">
 
-<!-- id: number -->
-<div>
-    
 
-    <mat-form-field>
-        
-	    <input type="number" matInput #id="ngModel"
-		    [(ngModel)]="model.id" placeholder="Id"  />
-
-        
-    </mat-form-field>
-    
-
-    <!-- Validation HERE -->
-    <div *ngIf="id.invalid && (id.dirty || id.touched)"
-        class="alert alert-danger">
-
-        <div *ngIf="id.errors.required">
-            Id is required.
-        </div>
-    </div>
-</div>
-
-<!-- customerName: text -->
-<div>
-    
-
-    <mat-form-field>
-                <textarea matInput #customerName="ngModel" maxlength="200"
-		    [(ngModel)]="model.customerName" placeholder="CustomerName" ></textarea>
-        
-    </mat-form-field>
-    
-
-    <!-- Validation HERE -->
-    <div *ngIf="customerName.invalid && (customerName.dirty || customerName.touched)"
-        class="alert alert-danger">
-
-        <div *ngIf="customerName.errors.required">
-            CustomerName is required.
-        </div>
-    </div>
-</div>
-
-<!-- productId: number -->
-<div>
-
-    <mat-form-field>
-        <mat-select placeholder="Select Product" #productId="ngModel"
-            [(ngModel)]="model.productId" >
-            <mat-option value=""></mat-option>
-            <mat-option *ngFor="let opt of productOptions" [value]="opt.id">
-                {{opt.name}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-
-    <!-- Validation HERE -->
-    <div *ngIf="productId.invalid && (productId.dirty || productId.touched)"
-        class="alert alert-danger">
-
-        <div *ngIf="productId.errors.required">
-            ProductId is required.
-        </div>
-    </div>
-</div>
-
-<!-- orderTotal: number -->
-<div>
-    
-
-    <mat-form-field>
-        
-	    <input type="number" matInput #orderTotal="ngModel"
-		    [(ngModel)]="model.orderTotal" placeholder="OrderTotal" required />
-
-        
-    </mat-form-field>
-    
-
-    <!-- Validation HERE -->
-    <div *ngIf="orderTotal.invalid && (orderTotal.dirty || orderTotal.touched)"
-        class="alert alert-danger">
-
-        <div *ngIf="orderTotal.errors.required">
-            OrderTotal is required.
-        </div>
-    </div>
-</div>
-
-<!-- createdById: number -->
-<div>
-    
-
-    <mat-form-field>
-        
-	    <input type="number" matInput #createdById="ngModel"
-		    [(ngModel)]="model.createdById" placeholder="CreatedById"  />
-
-        
-    </mat-form-field>
-    
-
-    <!-- Validation HERE -->
-    <div *ngIf="createdById.invalid && (createdById.dirty || createdById.touched)"
-        class="alert alert-danger">
-
-        <div *ngIf="createdById.errors.required">
-            CreatedById is required.
-        </div>
-    </div>
-</div>
-
-<!-- modifiedById: number -->
-<div>
-    
-
-    <mat-form-field>
-        
-	    <input type="number" matInput #modifiedById="ngModel"
-		    [(ngModel)]="model.modifiedById" placeholder="ModifiedById"  />
-
-        
-    </mat-form-field>
-    
-
-    <!-- Validation HERE -->
-    <div *ngIf="modifiedById.invalid && (modifiedById.dirty || modifiedById.touched)"
-        class="alert alert-danger">
-
-        <div *ngIf="modifiedById.errors.required">
-            ModifiedById is required.
-        </div>
-    </div>
-</div>
-
-<!-- createdTime: datepicker -->
-<div>
+    <!-- id: number - 0 -->
+    <div class="editor-row">
+            
         <mat-form-field>
-	    <input matInput [matDatepicker]="pickerCreatedTime" placeholder="Choose CreatedTime" #createdTime="ngModel"
-            [(ngModel)]="model.createdTime" >
-	      <mat-datepicker-toggle matSuffix [for]="pickerCreatedTime"></mat-datepicker-toggle>
-	      <mat-datepicker #pickerCreatedTime></mat-datepicker>
-    </mat-form-field>
+            
+	        <input type="number" matInput #id="ngModel" readonly
+		        [(ngModel)]="model.id" placeholder="Id"
+                  />
+
+            
+        </mat-form-field>
+        
     
+        <!-- Validation HERE -->
+        <div *ngIf="id.invalid && (id.dirty || id.touched)"
+            class="alert alert-danger">
 
-    <!-- Validation HERE -->
-    <div *ngIf="createdTime.invalid && (createdTime.dirty || createdTime.touched)"
-        class="alert alert-danger">
-
-        <div *ngIf="createdTime.errors.required">
-            CreatedTime is required.
+            <div *ngIf="id.errors.required">
+                Id is required.
+            </div>
         </div>
     </div>
-</div>
 
-<!-- modifiedTime: datepicker -->
-<div>
+
+    <!-- customerName: text - 200 -->
+    <div class="editor-row">
+            
         <mat-form-field>
-	    <input matInput [matDatepicker]="pickerModifiedTime" placeholder="Choose ModifiedTime" #modifiedTime="ngModel"
-            [(ngModel)]="model.modifiedTime" >
-	      <mat-datepicker-toggle matSuffix [for]="pickerModifiedTime"></mat-datepicker-toggle>
-	      <mat-datepicker #pickerModifiedTime></mat-datepicker>
-    </mat-form-field>
+                        <textarea matInput #customerName="ngModel" maxlength="200" 
+		        [(ngModel)]="model.customerName" placeholder="CustomerName" ></textarea>
+            
+        </mat-form-field>
+        
     
+        <!-- Validation HERE -->
+        <div *ngIf="customerName.invalid && (customerName.dirty || customerName.touched)"
+            class="alert alert-danger">
 
-    <!-- Validation HERE -->
-    <div *ngIf="modifiedTime.invalid && (modifiedTime.dirty || modifiedTime.touched)"
-        class="alert alert-danger">
-
-        <div *ngIf="modifiedTime.errors.required">
-            ModifiedTime is required.
+            <div *ngIf="customerName.errors.required">
+                CustomerName is required.
+            </div>
         </div>
     </div>
-</div>
 
-<!-- active: checkbox -->
-<div>
-    	    <mat-checkbox [(ngModel)]="model.active" #active="ngModel">Active</mat-checkbox>
+
+    <!-- productId: number - 0 -->
+    <div class="editor-row">
     
+        <mat-form-field>
+            <mat-select placeholder="Select Product" #productId="ngModel"
+                [(ngModel)]="model.productId" >
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let opt of productOptions" [value]="opt.id">
+                    {{opt.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <!-- Validation HERE -->
-    <div *ngIf="active.invalid && (active.dirty || active.touched)"
-        class="alert alert-danger">
+    
+        <!-- Validation HERE -->
+        <div *ngIf="productId.invalid && (productId.dirty || productId.touched)"
+            class="alert alert-danger">
 
-        <div *ngIf="active.errors.required">
-            Active is required.
+            <div *ngIf="productId.errors.required">
+                ProductId is required.
+            </div>
         </div>
     </div>
-</div>
+
+
+    <!-- orderTotal: number - 0 -->
+    <div class="editor-row">
+            
+        <mat-form-field>
+            
+	        <input type="number" matInput #orderTotal="ngModel" 
+		        [(ngModel)]="model.orderTotal" placeholder="OrderTotal"
+                 required />
+
+            
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="orderTotal.invalid && (orderTotal.dirty || orderTotal.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="orderTotal.errors.required">
+                OrderTotal is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- createdById: number - 0 -->
+    <div class="editor-row">
+            
+        <mat-form-field>
+            
+	        <input type="number" matInput #createdById="ngModel" 
+		        [(ngModel)]="model.createdById" placeholder="CreatedById"
+                  />
+
+            
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="createdById.invalid && (createdById.dirty || createdById.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="createdById.errors.required">
+                CreatedById is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- modifiedById: number - 0 -->
+    <div class="editor-row">
+            
+        <mat-form-field>
+            
+	        <input type="number" matInput #modifiedById="ngModel" 
+		        [(ngModel)]="model.modifiedById" placeholder="ModifiedById"
+                  />
+
+            
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="modifiedById.invalid && (modifiedById.dirty || modifiedById.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="modifiedById.errors.required">
+                ModifiedById is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- createdTime: datepicker - 0 -->
+    <div class="editor-row">
+                    <mat-form-field>
+	        <input matInput [matDatepicker]="pickerCreatedTime" placeholder="Choose CreatedTime" #createdTime="ngModel"
+                [(ngModel)]="model.createdTime" >
+	          <mat-datepicker-toggle matSuffix [for]="pickerCreatedTime"></mat-datepicker-toggle>
+	          <mat-datepicker #pickerCreatedTime></mat-datepicker>
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="createdTime.invalid && (createdTime.dirty || createdTime.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="createdTime.errors.required">
+                CreatedTime is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- modifiedTime: datepicker - 0 -->
+    <div class="editor-row">
+                    <mat-form-field>
+	        <input matInput [matDatepicker]="pickerModifiedTime" placeholder="Choose ModifiedTime" #modifiedTime="ngModel"
+                [(ngModel)]="model.modifiedTime" >
+	          <mat-datepicker-toggle matSuffix [for]="pickerModifiedTime"></mat-datepicker-toggle>
+	          <mat-datepicker #pickerModifiedTime></mat-datepicker>
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="modifiedTime.invalid && (modifiedTime.dirty || modifiedTime.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="modifiedTime.errors.required">
+                ModifiedTime is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- active: checkbox - 0 -->
+    <div class="editor-row">
+            	        <mat-checkbox [(ngModel)]="model.active" #active="ngModel">Active</mat-checkbox>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="active.invalid && (active.dirty || active.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="active.errors.required">
+                Active is required.
+            </div>
+        </div>
+    </div>
 
 
 
