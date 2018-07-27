@@ -52,7 +52,7 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write(" -->\r\n\r\n");
+            this.Write(" -->\r\n<div>\r\n");
             
             #line 15 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
  if (!col.IsOutgoingRefKey) { 
@@ -66,100 +66,191 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("\r\n\r\n    <mat-form-field>\r\n\t    <input type=\"");
+            this.Write("\r\n\r\n    <mat-form-field>\r\n        ");
             
             #line 20 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+ if (col.ColumnSize < 50) { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t    <input type=\"");
+            
+            #line 22 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(inputType));
             
             #line default
             #line hidden
-            this.Write("\" matInput\r\n\t\t    [(ngModel)]=\"model.");
+            this.Write("\" matInput #");
             
-            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 22 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("=\"ngModel\"\r\n\t\t    [(ngModel)]=\"model.");
+            
+            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("\" placeholder=\"");
             
-            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
-            this.Write("\"/>\r\n    </mat-form-field>\r\n    ");
+            this.Write("\" ");
             
             #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.Nullable || col.IsPrimaryKey ? "" : "required"));
+            
+            #line default
+            #line hidden
+            this.Write(" />\r\n\r\n        ");
+            
+            #line 25 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("        <textarea matInput #");
+            
+            #line 26 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("=\"ngModel\" ");
+            
+            #line 26 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.ColumnSize > 10 ? ("maxlength=\"" + col.ColumnSize + "\"") : ""));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t    [(ngModel)]=\"model.");
+            
+            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("\" placeholder=\"");
+            
+            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("\" ");
+            
+            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.Nullable|| col.IsPrimaryKey ? "" : "required"));
+            
+            #line default
+            #line hidden
+            this.Write("></textarea>\r\n        ");
+            
+            #line 28 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+ }
+            
+            #line default
+            #line hidden
+            this.Write("\r\n    </mat-form-field>\r\n    ");
+            
+            #line 31 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
  } else if (inputType == "checkbox") { 
             
             #line default
             #line hidden
             this.Write("\t    <mat-checkbox [(ngModel)]=\"model.");
             
-            #line 24 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 32 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
-            this.Write("\">");
+            this.Write("\" #");
             
-            #line 24 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 32 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("=\"ngModel\">");
+            
+            #line 32 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write("</mat-checkbox>\r\n    ");
             
-            #line 25 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 33 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
  } else if (inputType == "datepicker") { 
             
             #line default
             #line hidden
             this.Write("    <mat-form-field>\r\n\t    <input matInput [matDatepicker]=\"picker");
             
-            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 35 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write("\" placeholder=\"Choose ");
             
-            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 35 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
-            this.Write("\" [(ngModel)]=\"model.");
+            this.Write("\" #");
             
-            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 35 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
             
             #line default
             #line hidden
-            this.Write("\">\r\n\t      <mat-datepicker-toggle matSuffix [for]=\"picker");
+            this.Write("=\"ngModel\"\r\n            [(ngModel)]=\"model.");
             
-            #line 28 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 36 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("\" ");
+            
+            #line 36 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.Nullable ? "" : "required"));
+            
+            #line default
+            #line hidden
+            this.Write(">\r\n\t      <mat-datepicker-toggle matSuffix [for]=\"picker");
+            
+            #line 37 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write("\"></mat-datepicker-toggle>\r\n\t      <mat-datepicker #picker");
             
-            #line 29 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 38 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write("></mat-datepicker>\r\n    </mat-form-field>\r\n    ");
             
-            #line 31 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 40 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 33 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 42 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
  } else {
     var outgoingRef = col.OutgoingReference;
  
@@ -168,50 +259,99 @@ namespace Tangsem.Generator.Templates.Angular
             #line hidden
             this.Write("\r\n    <mat-form-field>\r\n        <mat-select placeholder=\"Select ");
             
-            #line 38 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 47 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentPropertyName));
             
             #line default
             #line hidden
-            this.Write("\"\r\n            [(ngModel)]=\"model.");
+            this.Write("\" #");
             
-            #line 39 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 47 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("=\"ngModel\"\r\n            [(ngModel)]=\"model.");
+            
+            #line 48 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName.Lf()));
             
             #line default
             #line hidden
-            this.Write("\">\r\n            <mat-option value=\"\"></mat-option>\r\n            <mat-option *ngFo" +
-                    "r=\"let opt of ");
+            this.Write("\" ");
             
-            #line 41 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 48 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ColumnPairs[0].ChildColumnMetadata.Nullable ? "" : "required"));
+            
+            #line default
+            #line hidden
+            this.Write(">\r\n            <mat-option value=\"\"></mat-option>\r\n            <mat-option *ngFor" +
+                    "=\"let opt of ");
+            
+            #line 50 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentPropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("Options\" [value]=\"opt.");
             
-            #line 41 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 50 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ColumnPairs[0].ParentColumnMetadata.PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("\">\r\n                {{opt.");
             
-            #line 42 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 51 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.Columns[1].PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write("}}\r\n            </mat-option>\r\n        </mat-select>\r\n    </mat-form-field>\r\n\r\n");
             
-            #line 47 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 56 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n\r\n");
+            this.Write("\r\n    <!-- Validation HERE -->\r\n    <div *ngIf=\"");
             
-            #line 50 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            #line 59 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write(".invalid && (");
+            
+            #line 59 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write(".dirty || ");
+            
+            #line 59 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write(".touched)\"\r\n        class=\"alert alert-danger\">\r\n\r\n        <div *ngIf=\"");
+            
+            #line 62 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write(".errors.required\">\r\n            ");
+            
+            #line 63 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
+            
+            #line default
+            #line hidden
+            this.Write(" is required.\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n");
+            
+            #line 68 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
  } 
             
             #line default
@@ -222,7 +362,7 @@ namespace Tangsem.Generator.Templates.Angular
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 67 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
+        #line 85 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponentHtml.tt"
 
 	string getInputType(string clrTypeAsString) {
 		switch(clrTypeAsString) {
