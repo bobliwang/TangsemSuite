@@ -1,7 +1,7 @@
 <div class="two-columns-flex">
 
 	<!-- FILTER -->
-	<div class="filter-column">
+	<div class="filter-column" *ngIf="showFilters">
 
 		<h4>Filters</h4>
 
@@ -15,12 +15,21 @@
             Order
         </h3>
     
-		<button mat-raised-button (click)="add()">
-			<mat-icon>
-				add
-			</mat-icon>
-			New
-		</button>
+        <div>
+            <button mat-raised-button (click)="showFilters = !showFilters">
+			    <mat-icon>
+			        search
+			    </mat-icon>
+			    Toggle Filters
+		    </button>
+            <button mat-raised-button (click)="add()">
+			    <mat-icon>
+				    add
+			    </mat-icon>
+			    New
+		    </button>
+        </div>
+		
 
 		<!-- TABLE -->
 		<table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDisableClear matSortDirection="desc">

@@ -19,6 +19,9 @@ export class CustomerFilterComponent {
 	@Input()
 	public filterModel: models.CustomerSearchParams;
 
+    @Input()
+    public showFilters = false;
+
     
     //////////////////// Outgoing References BEGINGs ////////////////////////
         

@@ -19,6 +19,9 @@ export class OrderFilterComponent {
 	@Input()
 	public filterModel: models.OrderSearchParams;
 
+    @Input()
+    public showFilters = false;
+
     
     //////////////////// Outgoing References BEGINGs ////////////////////////
         

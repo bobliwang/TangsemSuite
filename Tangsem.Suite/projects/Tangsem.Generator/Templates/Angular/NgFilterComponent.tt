@@ -29,6 +29,9 @@ export class <#= this.TableMetadata.EntityName #>FilterComponent {
 	@Input()
 	public filterModel: models.<#= this.TableMetadata.EntityName #>SearchParams;
 
+    @Input()
+    public showFilters = false;
+
     <# if (this.TableMetadata.OutgoingReferences != null && this.TableMetadata.OutgoingReferences.Any()) {#>
 
     //////////////////// Outgoing References BEGINGs ////////////////////////

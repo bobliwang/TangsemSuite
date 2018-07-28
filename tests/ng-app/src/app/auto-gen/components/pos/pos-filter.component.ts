@@ -19,6 +19,9 @@ export class PosFilterComponent {
 	@Input()
 	public filterModel: models.PosSearchParams;
 
+    @Input()
+    public showFilters = false;
+
     
 	@Output('onSearch')
 	public onSearch = new EventEmitter<models.PosSearchParams>();

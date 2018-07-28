@@ -19,6 +19,9 @@ export class ProductFilterComponent {
 	@Input()
 	public filterModel: models.ProductSearchParams;
 
+    @Input()
+    public showFilters = false;
+
     
 	@Output('onSearch')
 	public onSearch = new EventEmitter<models.ProductSearchParams>();
