@@ -17,7 +17,28 @@ export class GeneratorTestRepositoryApiService {
 
 	public url(path: string) {
 		return `${this._apiBaseUrl}/${path}`;
-	}	
+	}
+
+    
+	public updateSearchParams(params: HttpParams, filterModel: any): HttpParams {
+        filterModel.sortFieldName = filterModel.sortFieldName || '';
+        filterModel.direction = filterModel.direction || '';
+        filterModel.pageIndex = filterModel.pageIndex || 0;
+        filterModel.pageSize = filterModel.pageSize || 0;
+        
+		params = params.set('sortFieldName', filterModel.sortFieldName)
+						.set('direction', filterModel.direction)
+						.set('pageIndex', filterModel.pageIndex.toString())
+						.set('pageSize', filterModel.pageSize.toString());
+
+	    Object.keys(filterModel).forEach(keyName => {
+		    if (filterModel[keyName] != null) {
+			    params = params.set(keyName, filterModel[keyName].toString());
+		    }
+	    });
+
+	    return params;
+	}
 
 
 
@@ -49,58 +70,8 @@ export class GeneratorTestRepositoryApiService {
 
 		let params = new HttpParams();
 
-		if (filterModel) {
-            filterModel.sortFieldName = filterModel.sortFieldName || '';
-            filterModel.direction = filterModel.direction || '';
-            filterModel.pageIndex = filterModel.pageIndex || 0;
-            filterModel.pageSize = filterModel.pageSize || 0;
-        
-			params = params.set('sortFieldName', filterModel.sortFieldName)
-						   .set('direction', filterModel.direction)
-						   .set('pageIndex', filterModel.pageIndex.toString())
-						   .set('pageSize', filterModel.pageSize.toString());
-
-			
-			if (filterModel.customerId != null)
-			{
-				params = params.set('customerId', filterModel.customerId.toString());
-			}
-			
-			if (filterModel.customerName != null)
-			{
-				params = params.set('customerName', filterModel.customerName.toString());
-			}
-			
-			if (filterModel.storeId != null)
-			{
-				params = params.set('storeId', filterModel.storeId.toString());
-			}
-			
-			if (filterModel.createdById != null)
-			{
-				params = params.set('createdById', filterModel.createdById.toString());
-			}
-			
-			if (filterModel.modifiedById != null)
-			{
-				params = params.set('modifiedById', filterModel.modifiedById.toString());
-			}
-			
-			if (filterModel.createdTime != null)
-			{
-				params = params.set('createdTime', filterModel.createdTime.toString());
-			}
-			
-			if (filterModel.modifiedTime != null)
-			{
-				params = params.set('modifiedTime', filterModel.modifiedTime.toString());
-			}
-			
-			if (filterModel.active != null)
-			{
-				params = params.set('active', filterModel.active.toString());
-			}
-			
+		if (filterModel) {            
+            params = this.updateSearchParams(params, filterModel);
 		}
 
 		return params;
@@ -136,58 +107,8 @@ export class GeneratorTestRepositoryApiService {
 
 		let params = new HttpParams();
 
-		if (filterModel) {
-            filterModel.sortFieldName = filterModel.sortFieldName || '';
-            filterModel.direction = filterModel.direction || '';
-            filterModel.pageIndex = filterModel.pageIndex || 0;
-            filterModel.pageSize = filterModel.pageSize || 0;
-        
-			params = params.set('sortFieldName', filterModel.sortFieldName)
-						   .set('direction', filterModel.direction)
-						   .set('pageIndex', filterModel.pageIndex.toString())
-						   .set('pageSize', filterModel.pageSize.toString());
-
-			
-			if (filterModel.id != null)
-			{
-				params = params.set('id', filterModel.id.toString());
-			}
-			
-			if (filterModel.storeName != null)
-			{
-				params = params.set('storeName', filterModel.storeName.toString());
-			}
-			
-			if (filterModel.storePhoto != null)
-			{
-				params = params.set('storePhoto', filterModel.storePhoto.toString());
-			}
-			
-			if (filterModel.createdById != null)
-			{
-				params = params.set('createdById', filterModel.createdById.toString());
-			}
-			
-			if (filterModel.createdTime != null)
-			{
-				params = params.set('createdTime', filterModel.createdTime.toString());
-			}
-			
-			if (filterModel.modifiedById != null)
-			{
-				params = params.set('modifiedById', filterModel.modifiedById.toString());
-			}
-			
-			if (filterModel.modifiedTime != null)
-			{
-				params = params.set('modifiedTime', filterModel.modifiedTime.toString());
-			}
-			
-			if (filterModel.active != null)
-			{
-				params = params.set('active', filterModel.active.toString());
-			}
-			
+		if (filterModel) {            
+            params = this.updateSearchParams(params, filterModel);
 		}
 
 		return params;
@@ -223,68 +144,8 @@ export class GeneratorTestRepositoryApiService {
 
 		let params = new HttpParams();
 
-		if (filterModel) {
-            filterModel.sortFieldName = filterModel.sortFieldName || '';
-            filterModel.direction = filterModel.direction || '';
-            filterModel.pageIndex = filterModel.pageIndex || 0;
-            filterModel.pageSize = filterModel.pageSize || 0;
-        
-			params = params.set('sortFieldName', filterModel.sortFieldName)
-						   .set('direction', filterModel.direction)
-						   .set('pageIndex', filterModel.pageIndex.toString())
-						   .set('pageSize', filterModel.pageSize.toString());
-
-			
-			if (filterModel.id != null)
-			{
-				params = params.set('id', filterModel.id.toString());
-			}
-			
-			if (filterModel.customerName != null)
-			{
-				params = params.set('customerName', filterModel.customerName.toString());
-			}
-			
-			if (filterModel.productId != null)
-			{
-				params = params.set('productId', filterModel.productId.toString());
-			}
-			
-			if (filterModel.customerId != null)
-			{
-				params = params.set('customerId', filterModel.customerId.toString());
-			}
-			
-			if (filterModel.orderTotal != null)
-			{
-				params = params.set('orderTotal', filterModel.orderTotal.toString());
-			}
-			
-			if (filterModel.createdById != null)
-			{
-				params = params.set('createdById', filterModel.createdById.toString());
-			}
-			
-			if (filterModel.modifiedById != null)
-			{
-				params = params.set('modifiedById', filterModel.modifiedById.toString());
-			}
-			
-			if (filterModel.createdTime != null)
-			{
-				params = params.set('createdTime', filterModel.createdTime.toString());
-			}
-			
-			if (filterModel.modifiedTime != null)
-			{
-				params = params.set('modifiedTime', filterModel.modifiedTime.toString());
-			}
-			
-			if (filterModel.active != null)
-			{
-				params = params.set('active', filterModel.active.toString());
-			}
-			
+		if (filterModel) {            
+            params = this.updateSearchParams(params, filterModel);
 		}
 
 		return params;
@@ -320,63 +181,8 @@ export class GeneratorTestRepositoryApiService {
 
 		let params = new HttpParams();
 
-		if (filterModel) {
-            filterModel.sortFieldName = filterModel.sortFieldName || '';
-            filterModel.direction = filterModel.direction || '';
-            filterModel.pageIndex = filterModel.pageIndex || 0;
-            filterModel.pageSize = filterModel.pageSize || 0;
-        
-			params = params.set('sortFieldName', filterModel.sortFieldName)
-						   .set('direction', filterModel.direction)
-						   .set('pageIndex', filterModel.pageIndex.toString())
-						   .set('pageSize', filterModel.pageSize.toString());
-
-			
-			if (filterModel.id != null)
-			{
-				params = params.set('id', filterModel.id.toString());
-			}
-			
-			if (filterModel.name != null)
-			{
-				params = params.set('name', filterModel.name.toString());
-			}
-			
-			if (filterModel.unitPrice != null)
-			{
-				params = params.set('unitPrice', filterModel.unitPrice.toString());
-			}
-			
-			if (filterModel.specsJson != null)
-			{
-				params = params.set('specsJson', filterModel.specsJson.toString());
-			}
-			
-			if (filterModel.createdById != null)
-			{
-				params = params.set('createdById', filterModel.createdById.toString());
-			}
-			
-			if (filterModel.createdTime != null)
-			{
-				params = params.set('createdTime', filterModel.createdTime.toString());
-			}
-			
-			if (filterModel.modifiedById != null)
-			{
-				params = params.set('modifiedById', filterModel.modifiedById.toString());
-			}
-			
-			if (filterModel.modifiedTime != null)
-			{
-				params = params.set('modifiedTime', filterModel.modifiedTime.toString());
-			}
-			
-			if (filterModel.active != null)
-			{
-				params = params.set('active', filterModel.active.toString());
-			}
-			
+		if (filterModel) {            
+            params = this.updateSearchParams(params, filterModel);
 		}
 
 		return params;
@@ -412,53 +218,8 @@ export class GeneratorTestRepositoryApiService {
 
 		let params = new HttpParams();
 
-		if (filterModel) {
-            filterModel.sortFieldName = filterModel.sortFieldName || '';
-            filterModel.direction = filterModel.direction || '';
-            filterModel.pageIndex = filterModel.pageIndex || 0;
-            filterModel.pageSize = filterModel.pageSize || 0;
-        
-			params = params.set('sortFieldName', filterModel.sortFieldName)
-						   .set('direction', filterModel.direction)
-						   .set('pageIndex', filterModel.pageIndex.toString())
-						   .set('pageSize', filterModel.pageSize.toString());
-
-			
-			if (filterModel.id != null)
-			{
-				params = params.set('id', filterModel.id.toString());
-			}
-			
-			if (filterModel.name != null)
-			{
-				params = params.set('name', filterModel.name.toString());
-			}
-			
-			if (filterModel.createdById != null)
-			{
-				params = params.set('createdById', filterModel.createdById.toString());
-			}
-			
-			if (filterModel.modifiedById != null)
-			{
-				params = params.set('modifiedById', filterModel.modifiedById.toString());
-			}
-			
-			if (filterModel.createdTime != null)
-			{
-				params = params.set('createdTime', filterModel.createdTime.toString());
-			}
-			
-			if (filterModel.modifiedTime != null)
-			{
-				params = params.set('modifiedTime', filterModel.modifiedTime.toString());
-			}
-			
-			if (filterModel.active != null)
-			{
-				params = params.set('active', filterModel.active.toString());
-			}
-			
+		if (filterModel) {            
+            params = this.updateSearchParams(params, filterModel);
 		}
 
 		return params;

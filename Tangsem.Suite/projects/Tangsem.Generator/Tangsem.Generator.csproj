@@ -181,6 +181,14 @@
     <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.ext.cs">
       <DependentUpon>PocoModelAutoMapperProfileTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="Templates\MVC\Controllers\ApiControllerBaseTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApiControllerBaseTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MVC\Controllers\ApiControllerBaseTemplate.ext.cs">
+      <DependentUpon>ApiControllerBaseTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\MVC\Controllers\ApiControllerTemplate.cs">
       <DependentUpon>ApiControllerTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -311,6 +319,10 @@
     <Content Include="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>PocoModelAutoMapperProfileTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\MVC\Controllers\ApiControllerBaseTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ApiControllerBaseTemplate.cs</LastGenOutput>
     </Content>
     <Content Include="Templates\MVC\Controllers\PlaceHolder.txt" />
     <Content Include="Templates\MVC\Controllers\ApiControllerTemplate.tt">

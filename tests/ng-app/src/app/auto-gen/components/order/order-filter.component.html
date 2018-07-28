@@ -39,8 +39,8 @@
 
 
     <mat-form-field>
-        <mat-select placeholder="Select Customer"
-            [(ngModel)]="filterModel.customerId">
+        <mat-select placeholder="Select Customer" multiple
+            [(ngModel)]="filterModel.customerIds">
             <mat-option value=""></mat-option>
             <mat-option *ngFor="let opt of customerOptions" [value]="opt.customerId">
                 {{opt.customerName}}

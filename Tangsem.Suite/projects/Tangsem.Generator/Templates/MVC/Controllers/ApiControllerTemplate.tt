@@ -20,132 +20,45 @@ using <#= Configuration.DomainNamespace #>.ViewModels.SearchParams;
 using Tangsem.Data;
 using Tangsem.NHibernate.Extenstions;
 using <#= Configuration.RootProjectName #>.Host.Filters;
+using <#= Configuration.RootProjectName #>.Host.Controllers.Base;
 
 namespace <#= Configuration.RootProjectName #>.Host.Controllers
 {
-	public partial class <#= tableMetadata.EntityName #>ApiController : Controller
-	{
-		private I<#= Configuration.RepositoryName #> _repository = null;
-
-		private IMapper _mapper = null;
-
-		public <#= tableMetadata.EntityName #>ApiController(I<#= Configuration.RepositoryName #> repository, IMapper mapper)
-		{
-			_repository = repository;
-			_mapper = mapper;
+	public partial class <#= tableMetadata.EntityName #>ApiController : <#= tableMetadata.EntityName #>ApiControllerBase
+	{	
+		public <#= tableMetadata.EntityName #>ApiController(I<#= Configuration.RepositoryName #> repository, IMapper mapper): base(repository, mapper) {
 		}
 
 		[HttpGet("_api/repo/<#=tableMetadata.EntityName#>")]
-		public IActionResult Get<#=tableMetadata.EntityName#>List(<#=tableMetadata.EntityName#>SearchParams filterModel) {
-
-			var filteredQry = this.FilterBySearchParams(_repository.<#= tableMetadata.EntityName.Pluralize() #>, filterModel);
-			var searchResult = new SearchResultModel<<#=tableMetadata.EntityName#>DTO>
-			{
-				PageIndex = filterModel.PageIndex ?? 0,
-				PageSize = filterModel.PageSize ?? int.MaxValue,
-				RowsCount = filteredQry.Count(),
-				PagedData = filteredQry.SortBy(filterModel)
-                                       .SkipAndTake(filterModel)
-                                       .ToList()
-                                       .Select(x => _mapper.Map<<#=tableMetadata.EntityName#>DTO>(x))
-                                       .ToList(),
-			};
-
-			return this.Ok(searchResult);
+		public override IActionResult Get<#=tableMetadata.EntityName#>List(<#=tableMetadata.EntityName#>SearchParams filterModel) {
+            return base.Get<#=tableMetadata.EntityName#>List(filterModel);
 		}
      
 		[HttpGet("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
-		public IActionResult Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id) {
-			var <#= tableMetadata.EntityName.Lf() #> = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
-            if (<#= tableMetadata.EntityName.Lf() #> == null)
-			{
-				return this.NotFound($"<#=tableMetadata.EntityName#> is not found by id {id}");
-			}
-
-            var <#= tableMetadata.EntityName.Lf() #>Dto = _mapper.Map<<#=tableMetadata.EntityName#>DTO>(<#= tableMetadata.EntityName.Lf() #>);
-
-			return this.Ok(<#= tableMetadata.EntityName.Lf() #>Dto);
+		public override IActionResult Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id) {
+			return base.Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
 		}
 
 		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
 		[TransactionFilter]
-		public IActionResult Update<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
-			var entity = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
-
-			if (entity == null)
-			{
-				return this.NotFound($"<#=tableMetadata.EntityName#> is not found by id {id}");
-			}
-
-			_mapper.Map(model, entity);
-			_repository.Update<#=tableMetadata.EntityName#>(entity);
-
-			return this.Ok();
+		public override IActionResult Update<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
+		    return base.Update<#=tableMetadata.EntityName#>(id, model);
 		}
      
 		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>")]
 		[TransactionFilter]
-		public IActionResult Create<#=tableMetadata.EntityName#>([FromBody] <#=tableMetadata.EntityName#>DTO model) {
-			var entity = new <#=tableMetadata.EntityName#>();
-
-			_mapper.Map(model, entity);
-			_repository.Save<#=tableMetadata.EntityName#>(entity);
-
-			return this.Ok();
+		public override IActionResult Create<#=tableMetadata.EntityName#>([FromBody] <#=tableMetadata.EntityName#>DTO model) {
+			return base.Create<#=tableMetadata.EntityName#>(model);
 		}
 
 		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}/delete")]
 		[TransactionFilter]
-		public IActionResult Delete<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, bool isHardDelete) {
-			var entity = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
-
-			if (entity == null)
-			{
-				return this.NotFound($"<#=tableMetadata.EntityName#> is not found by id {id}");
-			}
-
-			if (isHardDelete) {
-				_repository.Delete<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);			
-			}
-			else
-			{
-				entity.Active = false;
-				_repository.Update<#=tableMetadata.EntityName#>(entity);
-			}
-
-			return this.Ok();
+		public override IActionResult Delete<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, bool isHardDelete) {
+            return base.Delete<#=tableMetadata.EntityName#>(id, isHardDelete);
 		}
 
-		protected IQueryable<<#=tableMetadata.EntityName#>> FilterBySearchParams(IQueryable<<#=tableMetadata.EntityName#>> qry, <#=tableMetadata.EntityName#>SearchParams filterModel)
-		{
-			var filteredQry = qry; 
-		
-			<# foreach (var col in tableMetadata.Columns) { #>
-
-			if (filterModel.<#= col.PropertyName #> != null)
-			{
-			<# if (col.OutgoingReference == null) { #>
-				<# if (col.ClrType == typeof(string)) { #>
-
-					<# if (col.IsJsonType) { #>
-						filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #>.ToJsonString().Contains(filterModel.<#= col.PropertyName #>));
-					<# } else { #>
-						filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #>.Contains(filterModel.<#= col.PropertyName #>));
-					<# } #>
-					
-				<# } else { #>
-			
-					filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #> == filterModel.<#= col.PropertyName #>);
-				<# } #>
-			<# } else { #>
-					// OutgoingReference
-					filteredQry = filteredQry.Where(x => x.<#= col.OutgoingReference.ParentPropertyName #>.Id == filterModel.<#= col.PropertyName #>);
-			<# } #>
-
-			}
-			<# } #>
-
-			return filteredQry;
+		public override IQueryable<<#=tableMetadata.EntityName#>> FilterBySearchParams(IQueryable<<#=tableMetadata.EntityName#>> qry, <#=tableMetadata.EntityName#>SearchParams filterModel) {
+            return base.FilterBySearchParams(qry, filterModel);
 		}
 	}
 

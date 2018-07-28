@@ -4,7 +4,7 @@ using Tangsem.Data;
 namespace GeneratorTest.Common.Domain.ViewModels.SearchParams
 {
 
-	public class OrderSearchParams: SearchParamsBase
+	public partial class OrderSearchParams: SearchParamsBase
 	{    
 	
 	

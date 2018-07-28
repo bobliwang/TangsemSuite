@@ -9,172 +9,55 @@ using GeneratorTest.Common.Domain.ViewModels.SearchParams;
 using Tangsem.Data;
 using Tangsem.NHibernate.Extenstions;
 using GeneratorTest.Host.Filters;
+using GeneratorTest.Host.Controllers.Base;
 
 namespace GeneratorTest.Host.Controllers
 {
-	public partial class OrderApiController : Controller
-	{
-		private IGeneratorTestRepository _repository = null;
-
-		private IMapper _mapper = null;
-
-		public OrderApiController(IGeneratorTestRepository repository, IMapper mapper)
-		{
-			_repository = repository;
-			_mapper = mapper;
+	public partial class OrderApiController : OrderApiControllerBase
+	{	
+		public OrderApiController(IGeneratorTestRepository repository, IMapper mapper): base(repository, mapper) {
 		}
 
 		[HttpGet("_api/repo/Order")]
-		public IActionResult GetOrderList(OrderSearchParams filterModel) {
-
-			var filteredQry = this.FilterBySearchParams(_repository.Orders, filterModel);
-			var searchResult = new SearchResultModel<OrderDTO>
-			{
-				PageIndex = filterModel.PageIndex ?? 0,
-				PageSize = filterModel.PageSize ?? int.MaxValue,
-				RowsCount = filteredQry.Count(),
-				PagedData = filteredQry.SortBy(filterModel)
-                                       .SkipAndTake(filterModel)
-                                       .ToList()
-                                       .Select(x => _mapper.Map<OrderDTO>(x))
-                                       .ToList(),
-			};
-
-			return this.Ok(searchResult);
+		public override IActionResult GetOrderList(OrderSearchParams filterModel) {
+            return base.GetOrderList(filterModel);
 		}
      
 		[HttpGet("_api/repo/Order/{id}")]
-		public IActionResult GetOrderById(int id) {
-			var order = _repository.LookupOrderById(id);
-            if (order == null)
-			{
-				return this.NotFound($"Order is not found by id {id}");
-			}
-
-            var orderDto = _mapper.Map<OrderDTO>(order);
-
-			return this.Ok(orderDto);
+		public override IActionResult GetOrderById(int id) {
+			return base.GetOrderById(id);
 		}
 
 		[HttpPost("_api/repo/Order/{id}")]
 		[TransactionFilter]
-		public IActionResult UpdateOrder(int id, [FromBody] OrderDTO model) {
-			var entity = _repository.LookupOrderById(id);
-
-			if (entity == null)
-			{
-				return this.NotFound($"Order is not found by id {id}");
-			}
-
-			_mapper.Map(model, entity);
-			_repository.UpdateOrder(entity);
-
-			return this.Ok();
+		public override IActionResult UpdateOrder(int id, [FromBody] OrderDTO model) {
+		    return base.UpdateOrder(id, model);
 		}
      
 		[HttpPost("_api/repo/Order")]
 		[TransactionFilter]
-		public IActionResult CreateOrder([FromBody] OrderDTO model) {
-			var entity = new Order();
-
-			_mapper.Map(model, entity);
-			_repository.SaveOrder(entity);
-
-			return this.Ok();
+		public override IActionResult CreateOrder([FromBody] OrderDTO model) {
+			return base.CreateOrder(model);
 		}
 
 		[HttpPost("_api/repo/Order/{id}/delete")]
 		[TransactionFilter]
-		public IActionResult DeleteOrder(int id, bool isHardDelete) {
-			var entity = _repository.LookupOrderById(id);
-
-			if (entity == null)
-			{
-				return this.NotFound($"Order is not found by id {id}");
-			}
-
-			if (isHardDelete) {
-				_repository.DeleteOrderById(id);			
-			}
-			else
-			{
-				entity.Active = false;
-				_repository.UpdateOrder(entity);
-			}
-
-			return this.Ok();
+		public override IActionResult DeleteOrder(int id, bool isHardDelete) {
+            return base.DeleteOrder(id, isHardDelete);
 		}
 
-		protected IQueryable<Order> FilterBySearchParams(IQueryable<Order> qry, OrderSearchParams filterModel)
-		{
-			var filteredQry = qry; 
-		
-			
-			if (filterModel.Id != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.Id == filterModel.Id);
-							
-			}
-			
-			if (filterModel.CustomerName != null)
-			{
-							
-											filteredQry = filteredQry.Where(x => x.CustomerName.Contains(filterModel.CustomerName));
-										
-							
-			}
-			
-			if (filterModel.ProductId != null)
-			{
-								// OutgoingReference
-					filteredQry = filteredQry.Where(x => x.Product.Id == filterModel.ProductId);
-			
-			}
-			
-			if (filterModel.OrderTotal != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.OrderTotal == filterModel.OrderTotal);
-							
-			}
-			
-			if (filterModel.CreatedById != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.CreatedById == filterModel.CreatedById);
-							
-			}
-			
-			if (filterModel.ModifiedById != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.ModifiedById == filterModel.ModifiedById);
-							
-			}
-			
-			if (filterModel.CreatedTime != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.CreatedTime == filterModel.CreatedTime);
-							
-			}
-			
-			if (filterModel.ModifiedTime != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.ModifiedTime == filterModel.ModifiedTime);
-							
-			}
-			
-			if (filterModel.Active != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.Active == filterModel.Active);
-							
-			}
-			
-			return filteredQry;
+		public override IQueryable<Order> FilterBySearchParams(IQueryable<Order> qry, OrderSearchParams filterModel) {
+
+            qry = base.FilterBySearchParams(qry, filterModel);
+
+            if (!string.IsNullOrWhiteSpace(filterModel.CustomerIds))
+            {
+                var customerIds = filterModel.CustomerIds.Split(',').Select(x => System.Guid.Parse(x.Trim()));
+
+                qry = qry.Where(x => customerIds.Contains(x.Customer.CustomerId));
+            }
+
+		    return qry;
 		}
 	}
 

@@ -27,7 +27,28 @@ export class <#=Configuration.RepositoryName#>ApiService {
 
 	public url(path: string) {
 		return `${this._apiBaseUrl}/${path}`;
-	}	
+	}
+
+    
+	public updateSearchParams(params: HttpParams, filterModel: any): HttpParams {
+        filterModel.sortFieldName = filterModel.sortFieldName || '';
+        filterModel.direction = filterModel.direction || '';
+        filterModel.pageIndex = filterModel.pageIndex || 0;
+        filterModel.pageSize = filterModel.pageSize || 0;
+        
+		params = params.set('sortFieldName', filterModel.sortFieldName)
+						.set('direction', filterModel.direction)
+						.set('pageIndex', filterModel.pageIndex.toString())
+						.set('pageSize', filterModel.pageSize.toString());
+
+	    Object.keys(filterModel).forEach(keyName => {
+		    if (filterModel[keyName] != null) {
+			    params = params.set(keyName, filterModel[keyName].toString());
+		    }
+	    });
+
+	    return params;
+	}
 
 
 <# foreach (var tableMetadata in this.TableMetadatas) { #>
@@ -60,25 +81,8 @@ export class <#=Configuration.RepositoryName#>ApiService {
 
 		let params = new HttpParams();
 
-		if (filterModel) {
-            filterModel.sortFieldName = filterModel.sortFieldName || '';
-            filterModel.direction = filterModel.direction || '';
-            filterModel.pageIndex = filterModel.pageIndex || 0;
-            filterModel.pageSize = filterModel.pageSize || 0;
-        
-			params = params.set('sortFieldName', filterModel.sortFieldName)
-						   .set('direction', filterModel.direction)
-						   .set('pageIndex', filterModel.pageIndex.toString())
-						   .set('pageSize', filterModel.pageSize.toString());
-
-			<# foreach (var col in tableMetadata.Columns) { #>
-
-			if (filterModel.<#= col.PropertyName.Lf() #> != null)
-			{
-				params = params.set('<#= col.PropertyName.Lf() #>', filterModel.<#= col.PropertyName.Lf() #>.toString());
-			}
-			<# } #>
-
+		if (filterModel) {            
+            params = this.updateSearchParams(params, filterModel);
 		}
 
 		return params;

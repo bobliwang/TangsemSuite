@@ -119,6 +119,7 @@ namespace Tangsem.Generator
           new PocoDTOTemplate(this.GeneratorConfiguration, tableMetadata),
 
           new PocoModelAutoMapperProfileTemplate(this.GeneratorConfiguration, tableMetadata),
+          new ApiControllerBaseTemplate(this.GeneratorConfiguration, tableMetadata),
           new ApiControllerTemplate(this.GeneratorConfiguration, tableMetadata),
           new SearchParamTemplate(this.GeneratorConfiguration, tableMetadata),
 

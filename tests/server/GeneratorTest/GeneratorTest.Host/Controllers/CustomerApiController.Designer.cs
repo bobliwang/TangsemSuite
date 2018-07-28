@@ -9,158 +9,45 @@ using GeneratorTest.Common.Domain.ViewModels.SearchParams;
 using Tangsem.Data;
 using Tangsem.NHibernate.Extenstions;
 using GeneratorTest.Host.Filters;
+using GeneratorTest.Host.Controllers.Base;
 
 namespace GeneratorTest.Host.Controllers
 {
-	public partial class CustomerApiController : Controller
-	{
-		private IGeneratorTestRepository _repository = null;
-
-		private IMapper _mapper = null;
-
-		public CustomerApiController(IGeneratorTestRepository repository, IMapper mapper)
-		{
-			_repository = repository;
-			_mapper = mapper;
+	public partial class CustomerApiController : CustomerApiControllerBase
+	{	
+		public CustomerApiController(IGeneratorTestRepository repository, IMapper mapper): base(repository, mapper) {
 		}
 
 		[HttpGet("_api/repo/Customer")]
-		public IActionResult GetCustomerList(CustomerSearchParams filterModel) {
-
-			var filteredQry = this.FilterBySearchParams(_repository.Customers, filterModel);
-			var searchResult = new SearchResultModel<CustomerDTO>
-			{
-				PageIndex = filterModel.PageIndex ?? 0,
-				PageSize = filterModel.PageSize ?? int.MaxValue,
-				RowsCount = filteredQry.Count(),
-				PagedData = filteredQry.SortBy(filterModel)
-                                       .SkipAndTake(filterModel)
-                                       .ToList()
-                                       .Select(x => _mapper.Map<CustomerDTO>(x))
-                                       .ToList(),
-			};
-
-			return this.Ok(searchResult);
+		public override IActionResult GetCustomerList(CustomerSearchParams filterModel) {
+            return base.GetCustomerList(filterModel);
 		}
      
 		[HttpGet("_api/repo/Customer/{id}")]
-		public IActionResult GetCustomerByCustomerId(System.Guid id) {
-			var customer = _repository.LookupCustomerByCustomerId(id);
-            if (customer == null)
-			{
-				return this.NotFound($"Customer is not found by id {id}");
-			}
-
-            var customerDto = _mapper.Map<CustomerDTO>(customer);
-
-			return this.Ok(customerDto);
+		public override IActionResult GetCustomerByCustomerId(System.Guid id) {
+			return base.GetCustomerByCustomerId(id);
 		}
 
 		[HttpPost("_api/repo/Customer/{id}")]
 		[TransactionFilter]
-		public IActionResult UpdateCustomer(System.Guid id, [FromBody] CustomerDTO model) {
-			var entity = _repository.LookupCustomerByCustomerId(id);
-
-			if (entity == null)
-			{
-				return this.NotFound($"Customer is not found by id {id}");
-			}
-
-			_mapper.Map(model, entity);
-			_repository.UpdateCustomer(entity);
-
-			return this.Ok();
+		public override IActionResult UpdateCustomer(System.Guid id, [FromBody] CustomerDTO model) {
+		    return base.UpdateCustomer(id, model);
 		}
      
 		[HttpPost("_api/repo/Customer")]
 		[TransactionFilter]
-		public IActionResult CreateCustomer([FromBody] CustomerDTO model) {
-			var entity = new Customer();
-
-			_mapper.Map(model, entity);
-			_repository.SaveCustomer(entity);
-
-			return this.Ok();
+		public override IActionResult CreateCustomer([FromBody] CustomerDTO model) {
+			return base.CreateCustomer(model);
 		}
 
 		[HttpPost("_api/repo/Customer/{id}/delete")]
 		[TransactionFilter]
-		public IActionResult DeleteCustomer(System.Guid id, bool isHardDelete) {
-			var entity = _repository.LookupCustomerByCustomerId(id);
-
-			if (entity == null)
-			{
-				return this.NotFound($"Customer is not found by id {id}");
-			}
-
-			if (isHardDelete) {
-				_repository.DeleteCustomerByCustomerId(id);			
-			}
-			else
-			{
-				entity.Active = false;
-				_repository.UpdateCustomer(entity);
-			}
-
-			return this.Ok();
+		public override IActionResult DeleteCustomer(System.Guid id, bool isHardDelete) {
+            return base.DeleteCustomer(id, isHardDelete);
 		}
 
-		protected IQueryable<Customer> FilterBySearchParams(IQueryable<Customer> qry, CustomerSearchParams filterModel)
-		{
-			var filteredQry = qry; 
-		
-			
-			if (filterModel.CustomerId != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.CustomerId == filterModel.CustomerId);
-							
-			}
-			
-			if (filterModel.CustomerName != null)
-			{
-							
-											filteredQry = filteredQry.Where(x => x.CustomerName.Contains(filterModel.CustomerName));
-										
-							
-			}
-			
-			if (filterModel.CreatedById != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.CreatedById == filterModel.CreatedById);
-							
-			}
-			
-			if (filterModel.ModifiedById != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.ModifiedById == filterModel.ModifiedById);
-							
-			}
-			
-			if (filterModel.CreatedTime != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.CreatedTime == filterModel.CreatedTime);
-							
-			}
-			
-			if (filterModel.ModifiedTime != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.ModifiedTime == filterModel.ModifiedTime);
-							
-			}
-			
-			if (filterModel.Active != null)
-			{
-										
-					filteredQry = filteredQry.Where(x => x.Active == filterModel.Active);
-							
-			}
-			
-			return filteredQry;
+		public override IQueryable<Customer> FilterBySearchParams(IQueryable<Customer> qry, CustomerSearchParams filterModel) {
+            return base.FilterBySearchParams(qry, filterModel);
 		}
 	}
 

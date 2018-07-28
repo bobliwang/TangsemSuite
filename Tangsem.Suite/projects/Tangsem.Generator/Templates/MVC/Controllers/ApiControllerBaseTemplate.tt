@@ -1,0 +1,145 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Tangsem.Common.Extensions" #>
+
+<#
+	var tableMetadata = this.TableMetadata;
+#>
+
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using <#= Configuration.RepositoryNamespace #>;
+using <#= Configuration.EntityNamespace #>;
+using <#= Configuration.DTONamespace #>;
+using <#= Configuration.DomainNamespace #>.ViewModels.SearchParams;
+
+using Tangsem.Data;
+using Tangsem.NHibernate.Extenstions;
+using <#= Configuration.RootProjectName #>.Host.Filters;
+
+namespace <#= Configuration.RootProjectName #>.Host.Controllers.Base
+{
+	public partial class <#= tableMetadata.EntityName #>ApiControllerBase : Controller
+	{
+		protected readonly I<#= Configuration.RepositoryName #> _repository = null;
+
+		protected readonly IMapper _mapper = null;
+
+		public <#= tableMetadata.EntityName #>ApiControllerBase(I<#= Configuration.RepositoryName #> repository, IMapper mapper)
+		{
+			_repository = repository;
+			_mapper = mapper;
+		}
+
+		public virtual IActionResult Get<#=tableMetadata.EntityName#>List(<#=tableMetadata.EntityName#>SearchParams filterModel) {
+
+			var filteredQry = this.FilterBySearchParams(_repository.<#= tableMetadata.EntityName.Pluralize() #>, filterModel);
+			var searchResult = new SearchResultModel<<#=tableMetadata.EntityName#>DTO>
+			{
+				PageIndex = filterModel.PageIndex ?? 0,
+				PageSize = filterModel.PageSize ?? int.MaxValue,
+				RowsCount = filteredQry.Count(),
+				PagedData = filteredQry.SortBy(filterModel)
+                                       .SkipAndTake(filterModel)
+                                       .ToList()
+                                       .Select(x => _mapper.Map<<#=tableMetadata.EntityName#>DTO>(x))
+                                       .ToList(),
+			};
+
+			return this.Ok(searchResult);
+		}
+     
+		public virtual IActionResult Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id) {
+			var <#= tableMetadata.EntityName.Lf() #> = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
+            if (<#= tableMetadata.EntityName.Lf() #> == null)
+			{
+				return this.NotFound($"<#=tableMetadata.EntityName#> is not found by id {id}");
+			}
+
+            var <#= tableMetadata.EntityName.Lf() #>Dto = _mapper.Map<<#=tableMetadata.EntityName#>DTO>(<#= tableMetadata.EntityName.Lf() #>);
+
+			return this.Ok(<#= tableMetadata.EntityName.Lf() #>Dto);
+		}
+
+		public virtual IActionResult Update<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
+			var entity = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
+
+			if (entity == null)
+			{
+				return this.NotFound($"<#=tableMetadata.EntityName#> is not found by id {id}");
+			}
+
+			_mapper.Map(model, entity);
+			_repository.Update<#=tableMetadata.EntityName#>(entity);
+
+			return this.Ok();
+		}
+     
+		public virtual IActionResult Create<#=tableMetadata.EntityName#>([FromBody] <#=tableMetadata.EntityName#>DTO model) {
+			var entity = new <#=tableMetadata.EntityName#>();
+
+			_mapper.Map(model, entity);
+			_repository.Save<#=tableMetadata.EntityName#>(entity);
+
+			return this.Ok();
+		}
+
+		public virtual IActionResult Delete<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, bool isHardDelete) {
+			var entity = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
+
+			if (entity == null)
+			{
+				return this.NotFound($"<#=tableMetadata.EntityName#> is not found by id {id}");
+			}
+
+			if (isHardDelete) {
+				_repository.Delete<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);			
+			}
+			else
+			{
+				entity.Active = false;
+				_repository.Update<#=tableMetadata.EntityName#>(entity);
+			}
+
+			return this.Ok();
+		}
+
+		public virtual IQueryable<<#=tableMetadata.EntityName#>> FilterBySearchParams(IQueryable<<#=tableMetadata.EntityName#>> qry, <#=tableMetadata.EntityName#>SearchParams filterModel)
+		{
+			var filteredQry = qry; 
+		
+			<# foreach (var col in tableMetadata.Columns) { #>
+
+			if (filterModel.<#= col.PropertyName #> != null)
+			{
+			<# if (col.OutgoingReference == null) { #>
+				<# if (col.ClrType == typeof(string)) { #>
+					<# if (col.IsJsonType) { #>
+
+				filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #>.ToJsonString().Contains(filterModel.<#= col.PropertyName #>));
+					<# } else { #>
+
+				filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #>.Contains(filterModel.<#= col.PropertyName #>));
+					<# } #>
+					
+				<# } else { #>
+			
+				filteredQry = filteredQry.Where(x => x.<#= col.PropertyName #> == filterModel.<#= col.PropertyName #>);
+				<# } #>
+			<# } else { #>
+				// OutgoingReference
+				filteredQry = filteredQry.Where(x => x.<#= col.OutgoingReference.ParentPropertyName #>.<#= col.OutgoingReference.ParentTableMetadata.PrimaryKeyPropertyName #> == filterModel.<#= col.PropertyName #>);
+			<# } #>
+
+			}
+			<# } #>
+
+			return filteredQry;
+		}
+	}
+
+}
