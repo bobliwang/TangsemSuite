@@ -26,13 +26,16 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
     public subscribeToRoutingParams = true;
 
     @Input()
-    public entityId = null;
+    public <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #> = null;
 
     @Input()
     public loadOutgoingRefOptions = true;
 
     @Input()
     public isDialog = false;
+
+    @Input()
+    public hideActionBar = false;
 
 	@Input()
 	public model: models.<#= this.TableMetadata.TsModelName #>;
@@ -79,18 +82,18 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
         if (this.subscribeToRoutingParams) {
             this.activatedRoute.params.subscribe(params => {
 			    const action = params['action'];
-			    const id = params['id'];
+			    const <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #> = params['<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>'];
 
-			    console.log(JSON.stringify({action, id}));
+			    console.log(JSON.stringify({action, <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>}));
 
 			    this.mode = action || this.mode;
 
 			    if (this.mode === 'edit' || this.mode === 'view') {
-				    this.loadData(id);
+				    this.loadData(<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>);
 			    }
 		    });
-        } else if (this.entityId != null && !this.model) {
-            this.loadData(this.entityId);
+        } else if (this.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #> != null && !this.model) {
+            this.loadData(this.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>);
         }
 
 		this.model = this.model || {};
@@ -114,12 +117,12 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
         }
 	}
 
-    public loadData(id: number | string) {
-        this.repoApi.get<#= this.TableMetadata.EntityName #>ById(id).subscribe(result => {
+    public loadData(<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>: number | string) {
+        this.repoApi.get<#= this.TableMetadata.EntityName #>By<#= this.TableMetadata.PrimaryKeyPropertyName #>(<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>).subscribe(result => {
 			this.model = result;
 		}, err => {
-            console.error(`unable to load <#= this.TableMetadata.EntityName #> by id ${id}`, err);
-            this.onLoadDataError.emit({ error: err, id: id});
+            console.error(`unable to load <#= this.TableMetadata.EntityName #> by <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #> ${<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>}`, err);
+            this.onLoadDataError.emit({ error: err, <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>: <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>});
         });
     }
 
@@ -134,8 +137,8 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
 	protected create() {
 
 		this.repoApi.create<#= this.TableMetadata.EntityName #>(this.model).subscribe(result => {
-			if (result && result.id) {
-				this.model.id = result.id;
+			if (result && result.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>) {
+				this.model.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #> = result.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>;
 			}
 
 			this.snackBar.open('created successfully', null, { duration: 1000 });
@@ -151,9 +154,9 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
 
 	protected update() {
 
-		this.repoApi.update<#= this.TableMetadata.EntityName #>(this.model.id, this.model).subscribe(result => {
-			if (result && result.id) {
-				this.model.id = result.id;
+		this.repoApi.update<#= this.TableMetadata.EntityName #>(this.model.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>, this.model).subscribe(result => {
+			if (result && result.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>) {
+				this.model.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #> = result.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>;
 			}
 
 			this.snackBar.open('updated successfully', null, { duration: 1000 });
@@ -187,7 +190,7 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
     </h4>
     <div mat-dialog-content>
       <<#= this.TableMetadata.EntityName.Lf() #>-editor
-        [entityId]="data.entityId" [subscribeToRoutingParams]="false" [isDialog]="true"></<#= this.TableMetadata.EntityName.Lf() #>-editor>
+        [<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>]="data.entityId" [subscribeToRoutingParams]="false" [isDialog]="true"></<#= this.TableMetadata.EntityName.Lf() #>-editor>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="close()">Close</button>      
@@ -198,7 +201,7 @@ export class <#= this.TableMetadata.EntityName #>DetailsDialog {
 
   constructor(
     public dialogRef: MatDialogRef<<#= this.TableMetadata.EntityName #>DetailsDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: { entityId: <#= this.TableMetadata.PrimaryKeys[0].TsTypeAsString #>, title?: string }) {
+    @Inject(MAT_DIALOG_DATA) public data: { <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>: <#= this.TableMetadata.PrimaryKeys[0].TsTypeAsString #>, title?: string }) {
   }
 
   close(): void {

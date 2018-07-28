@@ -18,12 +18,18 @@ namespace GeneratorTest.Common.Domain.Mappings.AutoMapper
             this.SetupMappingToDto(mappingToDto);
 		  
             // DTO to Entity
-		    var mappingEntity = mappingToDto.ReverseMap();
+            // Using mappingToDto.ReverseMap(); will cause issues: https://github.com/AutoMapper/AutoMapper/issues/1764
+            // MapFrom/ResolveUsing no longer support null assignment
+            //  - It has something to do with ReverseMap() and resolving the same property in the first mapping.
+            //  - If I split the logic into two different CreateMap declarations, it works correctly.
+		    var mappingEntity = this.CreateMap<ProductDTO, Product>();
             this.SetupMappingToEntity(mappingEntity);
 		}
 
         public virtual void SetupMappingToEntity(IMappingExpression<ProductDTO, Product> mappingEntity)
 	    {
+            mappingEntity.ForMember(x => x.Id, opts => opts.Condition(s => s.Id != default(System.Int32)));
+
             
             // ignore auditing columns
 	        mappingEntity.ForMember(x => x.CreatedById, opts => opts.Ignore());

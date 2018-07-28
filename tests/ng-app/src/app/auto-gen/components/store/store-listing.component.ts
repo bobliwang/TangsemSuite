@@ -21,7 +21,7 @@ export class StoreListingComponent {
 	public dataSource = [];
 
 	@Input()
-	public displayedColumns = [ 'id', 'storeName', 'createdById', 'createdTime', 'modifiedById', 'modifiedTime', 'active', "actions" ];
+	public displayedColumns = [ 'id', 'storeName', 'storePhoto', 'createdById', 'createdTime', 'modifiedById', 'modifiedTime', 'active', "actions" ];
 
 	public resultsLength = 0;
 	public isLoadingResults = true;

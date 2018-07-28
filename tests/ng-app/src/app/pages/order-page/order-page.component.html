@@ -1,0 +1,21 @@
+<order-listing
+  [templates]="{customerIdTemplate: customerIdTemplate, productIdTemplate: productIdTemplate}"
+  [displayedColumns]="['id', 'customerName', 'productId', 'customerId', 'active', 'actions' ]"
+>
+
+  <ng-template #customerIdTemplate let-rowData="rowData">
+      
+      <a mat-button (click)="rowData._showCustomerDetails = !rowData._showCustomerDetails">
+        {{ rowData.customerId }}
+      </a>
+
+      <customer-editor *ngIf="rowData._showCustomerDetails"
+        [subscribeToRoutingParams]="false"
+        [customerId]="rowData.customerId" [hideActionBar]="true"></customer-editor>
+  </ng-template>
+
+  <ng-template #productIdTemplate let-rowData="rowData">
+    {{ rowData.productId }}
+</ng-template>
+
+</order-listing>

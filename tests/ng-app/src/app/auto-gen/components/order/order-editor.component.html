@@ -71,6 +71,31 @@
     </div>
 
 
+    <!-- customerId: text - 0 -->
+    <div class="editor-row">
+    
+        <mat-form-field>
+            <mat-select placeholder="Select Customer" #customerId="ngModel"
+                [(ngModel)]="model.customerId" >
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let opt of customerOptions" [value]="opt.customerId">
+                    {{opt.customerName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    
+        <!-- Validation HERE -->
+        <div *ngIf="customerId.invalid && (customerId.dirty || customerId.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="customerId.errors.required">
+                CustomerId is required.
+            </div>
+        </div>
+    </div>
+
+
     <!-- orderTotal: number - 0 -->
     <div class="editor-row">
             
@@ -202,7 +227,7 @@
 
 
 
-	<div class="actions-bar" *ngIf="!isDialog">
+	<div class="actions-bar" *ngIf="!isDialog && !hideActionBar">
 		<button mat-button (click)="save()">
 			Save
 		</button>

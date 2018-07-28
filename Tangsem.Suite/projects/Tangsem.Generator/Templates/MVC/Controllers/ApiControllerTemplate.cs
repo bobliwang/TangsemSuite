@@ -176,7 +176,14 @@ namespace Tangsem.Generator.Templates.MVC.Controllers
             
             #line default
             #line hidden
-            this.Write("ById(");
+            this.Write("By");
+            
+            #line 58 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeyPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("(");
             
             #line 58 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeys[0].CSharpTypeAsString));
@@ -197,7 +204,14 @@ namespace Tangsem.Generator.Templates.MVC.Controllers
             
             #line default
             #line hidden
-            this.Write("ById(id);\r\n            if (");
+            this.Write("By");
+            
+            #line 59 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeyPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("(id);\r\n            if (");
             
             #line 60 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName.Lf()));
@@ -274,7 +288,14 @@ namespace Tangsem.Generator.Templates.MVC.Controllers
             
             #line default
             #line hidden
-            this.Write("ById(id);\r\n\r\n\t\t\tif (entity == null)\r\n\t\t\t{\r\n\t\t\t\treturn this.NotFound($\"");
+            this.Write("By");
+            
+            #line 73 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeyPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("(id);\r\n\r\n\t\t\tif (entity == null)\r\n\t\t\t{\r\n\t\t\t\treturn this.NotFound($\"");
             
             #line 77 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
@@ -338,14 +359,28 @@ namespace Tangsem.Generator.Templates.MVC.Controllers
             
             #line default
             #line hidden
-            this.Write("(int id, bool isHardDelete) {\r\n\t\t\tvar entity = _repository.Lookup");
+            this.Write("(");
+            
+            #line 99 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeys[0].CSharpTypeAsString));
+            
+            #line default
+            #line hidden
+            this.Write(" id, bool isHardDelete) {\r\n\t\t\tvar entity = _repository.Lookup");
             
             #line 100 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("ById(id);\r\n\r\n\t\t\tif (entity == null)\r\n\t\t\t{\r\n\t\t\t\treturn this.NotFound($\"");
+            this.Write("By");
+            
+            #line 100 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeyPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("(id);\r\n\r\n\t\t\tif (entity == null)\r\n\t\t\t{\r\n\t\t\t\treturn this.NotFound($\"");
             
             #line 104 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
@@ -360,8 +395,15 @@ namespace Tangsem.Generator.Templates.MVC.Controllers
             
             #line default
             #line hidden
-            this.Write("ById(id);\t\t\t\r\n\t\t\t}\r\n\t\t\telse\r\n\t\t\t{\r\n\t\t\t\tentity.Active = false;\r\n\t\t\t\t_repository.Up" +
-                    "date");
+            this.Write("By");
+            
+            #line 108 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeyPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("(id);\t\t\t\r\n\t\t\t}\r\n\t\t\telse\r\n\t\t\t{\r\n\t\t\t\tentity.Active = false;\r\n\t\t\t\t_repository.Update" +
+                    "");
             
             #line 113 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));

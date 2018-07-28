@@ -19,9 +19,16 @@ namespace GeneratorTest.Common.Domain.Repositories
 
 		
 		/// <summary>
-		/// Maps to database table/view Product. The IQueryable for Products.
+		/// Maps to database table/view Customer. The IQueryable for Customers.
 		/// </summary>
-		IQueryable<Product> Products { get; }
+		IQueryable<Customer> Customers { get; }
+
+		
+		
+		/// <summary>
+		/// Maps to database table/view Store. The IQueryable for Stores.
+		/// </summary>
+		IQueryable<Store> Stores { get; }
 
 		
 		
@@ -33,45 +40,72 @@ namespace GeneratorTest.Common.Domain.Repositories
 		
 		
 		/// <summary>
-		/// Maps to database table/view Pos. The IQueryable for Poses.
+		/// Maps to database table/view Product. The IQueryable for Products.
 		/// </summary>
-		IQueryable<Pos> Poses { get; }
+		IQueryable<Product> Products { get; }
 
 		
 		
 		/// <summary>
-		/// Maps to database table/view Store. The IQueryable for Stores.
+		/// Maps to database table/view Pos. The IQueryable for Poses.
 		/// </summary>
-		IQueryable<Store> Stores { get; }
+		IQueryable<Pos> Poses { get; }
 
 				
 		
 
 		
 		/// <summary>
-		/// Get Product by primary key.
+		/// Get Customer by primary key.
 		/// </summary>
-		Product LookupProductById(int id);
+		Customer LookupCustomerByCustomerId(System.Guid customerId);
 		
 		/// <summary>
-		/// Delete Product by primary key.
+		/// Delete Customer by primary key.
 		/// </summary>
-		Product DeleteProductById(int id);
+		Customer DeleteCustomerByCustomerId(System.Guid customerId);
 		
 		/// <summary>
-		/// Save a new Product instance.
+		/// Save a new Customer instance.
 		/// </summary>
-		Product SaveProduct(Product product);
+		Customer SaveCustomer(Customer customer);
 		
 		/// <summary>
-		/// Update an existing Product instance.
+		/// Update an existing Customer instance.
 		/// </summary>
-		Product UpdateProduct(Product product);
+		Customer UpdateCustomer(Customer customer);
 		
 		/// <summary>
-		/// Save or update an existing Product instance.
+		/// Save or update an existing Customer instance.
 		/// </summary>
-		Product SaveOrUpdateProduct(Product product);
+		Customer SaveOrUpdateCustomer(Customer customer);
+
+		
+		
+		/// <summary>
+		/// Get Store by primary key.
+		/// </summary>
+		Store LookupStoreById(int id);
+		
+		/// <summary>
+		/// Delete Store by primary key.
+		/// </summary>
+		Store DeleteStoreById(int id);
+		
+		/// <summary>
+		/// Save a new Store instance.
+		/// </summary>
+		Store SaveStore(Store store);
+		
+		/// <summary>
+		/// Update an existing Store instance.
+		/// </summary>
+		Store UpdateStore(Store store);
+		
+		/// <summary>
+		/// Save or update an existing Store instance.
+		/// </summary>
+		Store SaveOrUpdateStore(Store store);
 
 		
 		
@@ -103,6 +137,33 @@ namespace GeneratorTest.Common.Domain.Repositories
 		
 		
 		/// <summary>
+		/// Get Product by primary key.
+		/// </summary>
+		Product LookupProductById(int id);
+		
+		/// <summary>
+		/// Delete Product by primary key.
+		/// </summary>
+		Product DeleteProductById(int id);
+		
+		/// <summary>
+		/// Save a new Product instance.
+		/// </summary>
+		Product SaveProduct(Product product);
+		
+		/// <summary>
+		/// Update an existing Product instance.
+		/// </summary>
+		Product UpdateProduct(Product product);
+		
+		/// <summary>
+		/// Save or update an existing Product instance.
+		/// </summary>
+		Product SaveOrUpdateProduct(Product product);
+
+		
+		
+		/// <summary>
 		/// Get Pos by primary key.
 		/// </summary>
 		Pos LookupPosById(int id);
@@ -126,33 +187,6 @@ namespace GeneratorTest.Common.Domain.Repositories
 		/// Save or update an existing Pos instance.
 		/// </summary>
 		Pos SaveOrUpdatePos(Pos pos);
-
-		
-		
-		/// <summary>
-		/// Get Store by primary key.
-		/// </summary>
-		Store LookupStoreById(int id);
-		
-		/// <summary>
-		/// Delete Store by primary key.
-		/// </summary>
-		Store DeleteStoreById(int id);
-		
-		/// <summary>
-		/// Save a new Store instance.
-		/// </summary>
-		Store SaveStore(Store store);
-		
-		/// <summary>
-		/// Update an existing Store instance.
-		/// </summary>
-		Store UpdateStore(Store store);
-		
-		/// <summary>
-		/// Save or update an existing Store instance.
-		/// </summary>
-		Store SaveOrUpdateStore(Store store);
 
 		
 	}

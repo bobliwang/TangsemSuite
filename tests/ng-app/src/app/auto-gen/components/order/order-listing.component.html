@@ -90,6 +90,34 @@
 				</td>
 			</ng-container>
 		
+			<!-- customerId column -->
+			<ng-container matColumnDef="customerId">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+					CustomerId
+				</th>
+				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
+
+					
+					<ng-container *ngTemplateOutlet="templates.customerIdTemplate || defaultCustomerIdTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultCustomerIdTemplate>
+
+                                                <!--
+                            You may also use below to open a new page to see details.
+                            - target="_blank" and
+                            - [routerLink]="'/customer/' + rowData.customerId + '/edit'"
+                        -->
+                        <a mat-button
+                            (click)="showCustomerDetails(rowData.customerId)">
+                            {{ rowData.customerId }}...
+                        </a>
+                        
+					</ng-template>
+
+					
+				</td>
+			</ng-container>
+		
 			<!-- orderTotal column -->
 			<ng-container matColumnDef="orderTotal">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">

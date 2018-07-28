@@ -100,7 +100,7 @@ export class <#= this.TableMetadata.EntityName #>ListingComponent {
 				return;
 			}
 
-			this.repoApi.delete<#= this.TableMetadata.EntityName #>(rowData.id).subscribe(() => {
+			this.repoApi.delete<#= this.TableMetadata.EntityName #>(rowData.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>).subscribe(() => {
 				
 				this.snackBar.open('Deleted successfully', null, { duration: 1000 });
 				this.search();
@@ -111,7 +111,7 @@ export class <#= this.TableMetadata.EntityName #>ListingComponent {
 	}
 
 	public edit(rowData: models.<#= this.TableMetadata.TsModelName #>) {
-		this.router.navigate([`<#= this.TableMetadata.EntityName.Lf() #>/${rowData.id}/edit`]);
+		this.router.navigate([`<#= this.TableMetadata.EntityName.Lf() #>/${rowData.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>}/edit`]);
 	}
 
 	public add() {

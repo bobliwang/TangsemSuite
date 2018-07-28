@@ -87,7 +87,8 @@ namespace @Configuration.EntityNamespace
     /// Property @col.PropertyName mapping to @(TableMetadata.Name).@(col.ColumnName)
     /// </summary>
     [JsonProperty("@(col.PropertyName.LowerFirst())")]   
-    public virtual @col.CSharpTypeAsString @col.PropertyName { get; set; }
+    public virtual @col.CSharpTypeAsString @col.PropertyName { get; set; }@if (col.IsPrimaryKey && col.ClrType == typeof(System.Guid)) {<text> = System.Guid.NewGuid(); </text>}
+
     </text>}
 
     #endregion

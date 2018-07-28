@@ -35,6 +35,20 @@
     </mat-form-field>
 
 
+<!-- customerId: text -->
+
+
+    <mat-form-field>
+        <mat-select placeholder="Select Customer"
+            [(ngModel)]="filterModel.customerId">
+            <mat-option value=""></mat-option>
+            <mat-option *ngFor="let opt of customerOptions" [value]="opt.customerId">
+                {{opt.customerName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
 <!-- orderTotal: number -->
 
 

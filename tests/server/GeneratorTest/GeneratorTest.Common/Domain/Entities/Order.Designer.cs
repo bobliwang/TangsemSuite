@@ -98,6 +98,16 @@ namespace GeneratorTest.Common.Domain.Entities
         
 
     /// <summary>
+    /// The property name 'Customer'. It is for the reference 'FK_Order_Customer'.
+    /// </summary>
+    public static readonly string Prop_Customer  = "Customer";
+
+    /// <summary>
+    /// The lamda expression for Customer.
+    /// </summary>
+    public static readonly Expression<Func<Order, object>> Expr_Customer = x => x.Customer;
+    
+    /// <summary>
     /// The property name 'Product'. It is for the reference 'FK_Order_Product'.
     /// </summary>
     public static readonly string Prop_Product  = "Product";
@@ -173,6 +183,11 @@ namespace GeneratorTest.Common.Domain.Entities
     #region "Outgoing References"
 
     /// <summary>
+    /// Gets or sets reference to Customer. ReferenceName: FK_Order_Customer.
+    /// </summary>
+    public virtual Customer Customer { get; set; }
+    
+    /// <summary>
     /// Gets or sets reference to Product. ReferenceName: FK_Order_Product.
     /// </summary>
     public virtual Product Product { get; set; }
@@ -187,6 +202,8 @@ namespace GeneratorTest.Common.Domain.Entities
       public static readonly int CustomerName_MaxLenth = 200;
     
       public static readonly int ProductId_MaxLenth = 0;
+    
+      public static readonly int CustomerId_MaxLenth = 0;
     
       public static readonly int OrderTotal_MaxLenth = 0;
     

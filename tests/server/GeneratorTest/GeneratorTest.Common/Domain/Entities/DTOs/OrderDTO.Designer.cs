@@ -33,6 +33,11 @@ namespace GeneratorTest.Common.Domain.Entities.DTOs
 		public virtual int? ProductId { get; set; }
 		
 		/// <summary>
+		/// Property CustomerId mapping to Order.CustomerId
+		/// </summary>
+		public virtual System.Guid? CustomerId { get; set; }
+		
+		/// <summary>
 		/// Property OrderTotal mapping to Order.OrderTotal
 		/// </summary>
 		public virtual decimal OrderTotal { get; set; }

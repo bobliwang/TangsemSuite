@@ -18,13 +18,16 @@ export class ProductEditorComponent implements OnInit {
     public subscribeToRoutingParams = true;
 
     @Input()
-    public entityId = null;
+    public id = null;
 
     @Input()
     public loadOutgoingRefOptions = true;
 
     @Input()
     public isDialog = false;
+
+    @Input()
+    public hideActionBar = false;
 
 	@Input()
 	public model: models.ProductModel;
@@ -69,8 +72,8 @@ export class ProductEditorComponent implements OnInit {
 				    this.loadData(id);
 			    }
 		    });
-        } else if (this.entityId != null && !this.model) {
-            this.loadData(this.entityId);
+        } else if (this.id != null && !this.model) {
+            this.loadData(this.id);
         }
 
 		this.model = this.model || {};
@@ -154,7 +157,7 @@ export class ProductEditorComponent implements OnInit {
     </h4>
     <div mat-dialog-content>
       <product-editor
-        [entityId]="data.entityId" [subscribeToRoutingParams]="false" [isDialog]="true"></product-editor>
+        [id]="data.entityId" [subscribeToRoutingParams]="false" [isDialog]="true"></product-editor>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="close()">Close</button>      
@@ -165,7 +168,7 @@ export class ProductDetailsDialog {
 
   constructor(
     public dialogRef: MatDialogRef<ProductDetailsDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: { entityId: number, title?: string }) {
+    @Inject(MAT_DIALOG_DATA) public data: { id: number, title?: string }) {
   }
 
   close(): void {

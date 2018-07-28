@@ -521,11 +521,35 @@ WriteLiteral(" ");
             
             #line default
             #line hidden
-WriteLiteral(" { get; set; }\r\n    ");
+
+            
+            #line 90 "..\..\Templates\Entities\Poco.Designer.cshtml"
+                                                            WriteLiteral(" { get; set; }");
+
+            
+            #line default
+            #line hidden
+            
+            #line 90 "..\..\Templates\Entities\Poco.Designer.cshtml"
+                                                                           if (col.IsPrimaryKey && col.ClrType == typeof(System.Guid)) {
+            
+            #line default
+            #line hidden
+WriteLiteral(" = System.Guid.NewGuid(); ");
 
 
             
-            #line 91 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 90 "..\..\Templates\Entities\Poco.Designer.cshtml"
+                                                                                                                                                                               }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n    ");
+
+
+            
+            #line 92 "..\..\Templates\Entities\Poco.Designer.cshtml"
            }
 
             
@@ -535,7 +559,7 @@ WriteLiteral("\r\n    #endregion\r\n    \r\n    #region \"Outgoing References\"\
 
 
             
-            #line 96 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 97 "..\..\Templates\Entities\Poco.Designer.cshtml"
      if (Configuration.GenRelationship)
     {
     foreach (var reference in @TableMetadata.OutgoingReferences)
@@ -547,7 +571,7 @@ WriteLiteral("\r\n    /// <summary>\r\n    /// Gets or sets reference to ");
 
 
             
-            #line 101 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 102 "..\..\Templates\Entities\Poco.Designer.cshtml"
                               Write(reference.ParentPropertyName);
 
             
@@ -557,7 +581,7 @@ WriteLiteral(". ReferenceName: ");
 
 
             
-            #line 101 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 102 "..\..\Templates\Entities\Poco.Designer.cshtml"
                                                                               Write(reference.Name);
 
             
@@ -567,7 +591,7 @@ WriteLiteral(".\r\n    /// </summary>\r\n    public virtual ");
 
 
             
-            #line 103 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 104 "..\..\Templates\Entities\Poco.Designer.cshtml"
                Write(reference.ParentTableMetadata.EntityName);
 
             
@@ -577,7 +601,7 @@ WriteLiteral(" ");
 
 
             
-            #line 103 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 104 "..\..\Templates\Entities\Poco.Designer.cshtml"
                                                            Write(reference.ParentPropertyName);
 
             
@@ -587,7 +611,7 @@ WriteLiteral(" { get; set; }\r\n    ");
 
 
             
-            #line 104 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 105 "..\..\Templates\Entities\Poco.Designer.cshtml"
            }
     }
 
@@ -598,7 +622,7 @@ WriteLiteral("    #endregion\r\n    \r\n    #region \"Incoming References\"\r\n"
 
 
             
-            #line 109 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 110 "..\..\Templates\Entities\Poco.Designer.cshtml"
  if (Configuration.GenRelationship) { 
     foreach (var reference in this.TableMetadata.IncomingReferences)
     {
@@ -609,7 +633,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 112 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 113 "..\..\Templates\Entities\Poco.Designer.cshtml"
        var childObjParamName = reference.ChildTableMetadata.EntityName.Substring(0, 1).ToLower() + reference.ChildTableMetadata.EntityName.Substring(1); 
 
             
@@ -619,7 +643,7 @@ WriteLiteral("    /// <summary>\r\n    /// Field for the child list of Ref: ");
 
 
             
-            #line 114 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 115 "..\..\Templates\Entities\Poco.Designer.cshtml"
                                      Write(reference.Name);
 
             
@@ -629,7 +653,7 @@ WriteLiteral(".\r\n    /// </summary>\r\n    public virtual IList<");
 
 
             
-            #line 116 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 117 "..\..\Templates\Entities\Poco.Designer.cshtml"
                      Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -639,7 +663,7 @@ WriteLiteral("> ");
 
 
             
-            #line 116 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 117 "..\..\Templates\Entities\Poco.Designer.cshtml"
                                                                  Write(reference.ChildListPropertyName);
 
             
@@ -649,7 +673,7 @@ WriteLiteral(" { get; set; }\r\n    \r\n    /// <summary>\r\n    /// Add ");
 
 
             
-            #line 119 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 120 "..\..\Templates\Entities\Poco.Designer.cshtml"
         Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -659,7 +683,7 @@ WriteLiteral(" entity to ");
 
 
             
-            #line 119 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 120 "..\..\Templates\Entities\Poco.Designer.cshtml"
                                                              Write(reference.ChildListPropertyName);
 
             
@@ -669,7 +693,7 @@ WriteLiteral(".\r\n    /// </summary>\r\n    /// <param name=\"");
 
 
             
-            #line 121 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 122 "..\..\Templates\Entities\Poco.Designer.cshtml"
                  Write(childObjParamName);
 
             
@@ -679,7 +703,7 @@ WriteLiteral("\">\r\n    ///\tThe ");
 
 
             
-            #line 122 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 123 "..\..\Templates\Entities\Poco.Designer.cshtml"
         Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -689,7 +713,7 @@ WriteLiteral(" entity.\r\n    /// </param>\r\n    public virtual void AddTo");
 
 
             
-            #line 124 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 125 "..\..\Templates\Entities\Poco.Designer.cshtml"
                          Write(reference.ChildListPropertyName);
 
             
@@ -699,7 +723,7 @@ WriteLiteral("(");
 
 
             
-            #line 124 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 125 "..\..\Templates\Entities\Poco.Designer.cshtml"
                                                             Write(reference.ChildTableMetadata.EntityName);
 
             
@@ -709,7 +733,7 @@ WriteLiteral(" ");
 
 
             
-            #line 124 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 125 "..\..\Templates\Entities\Poco.Designer.cshtml"
                                                                                                        Write(childObjParamName);
 
             
@@ -719,7 +743,7 @@ WriteLiteral(")\r\n    {\r\n      ");
 
 
             
-            #line 126 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 127 "..\..\Templates\Entities\Poco.Designer.cshtml"
   Write(childObjParamName);
 
             
@@ -729,7 +753,7 @@ WriteLiteral(".");
 
 
             
-            #line 126 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 127 "..\..\Templates\Entities\Poco.Designer.cshtml"
                        Write(reference.ParentPropertyName);
 
             
@@ -739,7 +763,7 @@ WriteLiteral(" = this;\r\n      this.");
 
 
             
-            #line 127 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 128 "..\..\Templates\Entities\Poco.Designer.cshtml"
        Write(reference.ChildListPropertyName);
 
             
@@ -749,7 +773,7 @@ WriteLiteral(".Add(");
 
 
             
-            #line 127 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 128 "..\..\Templates\Entities\Poco.Designer.cshtml"
                                               Write(childObjParamName);
 
             
@@ -759,7 +783,7 @@ WriteLiteral(");\r\n    }\r\n    ");
 
 
             
-            #line 129 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 130 "..\..\Templates\Entities\Poco.Designer.cshtml"
            }
 }
 
@@ -770,7 +794,7 @@ WriteLiteral("    #endregion\r\n    \r\n");
 
 
             
-            #line 133 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 134 "..\..\Templates\Entities\Poco.Designer.cshtml"
      foreach (var col in @TableMetadata.Columns)
     {
             
@@ -780,7 +804,7 @@ WriteLiteral("\r\n      public static readonly int ");
 
 
             
-            #line 135 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 136 "..\..\Templates\Entities\Poco.Designer.cshtml"
                              Write(col.PropertyName);
 
             
@@ -790,7 +814,7 @@ WriteLiteral("_MaxLenth = ");
 
 
             
-            #line 135 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 136 "..\..\Templates\Entities\Poco.Designer.cshtml"
                                                             Write(col.ColumnSize);
 
             
@@ -800,7 +824,7 @@ WriteLiteral(";\r\n    ");
 
 
             
-            #line 136 "..\..\Templates\Entities\Poco.Designer.cshtml"
+            #line 137 "..\..\Templates\Entities\Poco.Designer.cshtml"
            }
 
             

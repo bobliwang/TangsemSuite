@@ -44,22 +44,17 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write(@"-filter>
-	</div>
-
-	<div class=""table-column"">
-
-		<button mat-raised-button (click)=""add()"">
-			<mat-icon>
-				add
-			</mat-icon>
-			New
-		</button>
-
-		<!-- TABLE -->
-		<table mat-table [dataSource]=""dataSource"" matSort matSortActive=""id"" matSortDisableClear matSortDirection=""desc"">
-
-		");
+            this.Write("-filter>\r\n\t</div>\r\n\r\n\t<div class=\"table-column\">\r\n\r\n\t\t<button mat-raised-button (" +
+                    "click)=\"add()\">\r\n\t\t\t<mat-icon>\r\n\t\t\t\tadd\r\n\t\t\t</mat-icon>\r\n\t\t\tNew\r\n\t\t</button>\r\n\r\n" +
+                    "\t\t<!-- TABLE -->\r\n\t\t<table mat-table [dataSource]=\"dataSource\" matSort matSortAc" +
+                    "tive=\"");
+            
+            #line 30 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.PrimaryKeyPropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("\" matSortDisableClear matSortDirection=\"desc\">\r\n\r\n\t\t");
             
             #line 32 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponentHtml.tt"
  foreach(var col in this.TableMetadata.Columns) { 

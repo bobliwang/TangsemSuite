@@ -128,6 +128,9 @@ namespace GeneratorTest.Common.Domain.Entities.Mappings.NHibernate
 		private void MapOutgoingReferences()
 		{
 
+			this.References<Customer>(x => x.Customer)
+                .Fetch.Join()
+                .Column("CustomerId");			
 			this.References<Product>(x => x.Product)
                 .Fetch.Join()
                 .Column("ProductId");			

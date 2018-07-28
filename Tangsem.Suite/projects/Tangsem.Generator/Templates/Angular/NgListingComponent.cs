@@ -209,7 +209,14 @@ import { ");
             
             #line default
             #line hidden
-            this.Write(@"(rowData.id).subscribe(() => {
+            this.Write("(rowData.");
+            
+            #line 103 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.PrimaryKeyPropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write(@").subscribe(() => {
 				
 				this.snackBar.open('Deleted successfully', null, { duration: 1000 });
 				this.search();
@@ -233,7 +240,14 @@ import { ");
             
             #line default
             #line hidden
-            this.Write("/${rowData.id}/edit`]);\r\n\t}\r\n\r\n\tpublic add() {\r\n\t\tthis.router.navigate([\'");
+            this.Write("/${rowData.");
+            
+            #line 114 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.PrimaryKeyPropertyName.Lf()));
+            
+            #line default
+            #line hidden
+            this.Write("}/edit`]);\r\n\t}\r\n\r\n\tpublic add() {\r\n\t\tthis.router.navigate([\'");
             
             #line 118 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));

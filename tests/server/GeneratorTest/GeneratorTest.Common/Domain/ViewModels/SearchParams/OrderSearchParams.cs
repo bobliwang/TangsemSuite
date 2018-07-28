@@ -20,6 +20,10 @@ namespace GeneratorTest.Common.Domain.ViewModels.SearchParams
 
 	
 	
+		public System.Guid? CustomerId { get; set; }
+
+	
+	
 		public decimal? OrderTotal { get; set; }
 
 	

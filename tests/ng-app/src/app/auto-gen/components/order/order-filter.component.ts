@@ -23,6 +23,10 @@ export class OrderFilterComponent {
     //////////////////// Outgoing References BEGINGs ////////////////////////
         
     @Input()
+    public customerOptions: models.CustomerModel[];
+
+        
+    @Input()
     public productOptions: models.ProductModel[];
 
         
@@ -36,6 +40,11 @@ export class OrderFilterComponent {
 
         
         //////////////////// Outgoing References BEGINGs ////////////////////////
+            
+        this.repoApi.getCustomerList( <models.CustomerSearchParams> { sortFieldName: '', direction: '', pageIndex: 0, pageSize: 1000 }).subscribe(pagingResult => {
+            this.customerOptions = pagingResult.pagedData;
+        });
+
             
         this.repoApi.getProductList( <models.ProductSearchParams> { sortFieldName: '', direction: '', pageIndex: 0, pageSize: 1000 }).subscribe(pagingResult => {
             this.productOptions = pagingResult.pagedData;

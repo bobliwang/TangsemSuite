@@ -46,6 +46,27 @@
     </div>
 
 
+    <!-- storePhoto: text - 1000 -->
+    <div class="editor-row">
+            
+        <mat-form-field>
+                        <textarea matInput #storePhoto="ngModel" maxlength="1000" 
+		        [(ngModel)]="model.storePhoto" placeholder="StorePhoto" ></textarea>
+            
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="storePhoto.invalid && (storePhoto.dirty || storePhoto.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="storePhoto.errors.required">
+                StorePhoto is required.
+            </div>
+        </div>
+    </div>
+
+
     <!-- createdById: number - 0 -->
     <div class="editor-row">
             
@@ -153,7 +174,7 @@
 
 
 
-	<div class="actions-bar" *ngIf="!isDialog">
+	<div class="actions-bar" *ngIf="!isDialog && !hideActionBar">
 		<button mat-button (click)="save()">
 			Save
 		</button>

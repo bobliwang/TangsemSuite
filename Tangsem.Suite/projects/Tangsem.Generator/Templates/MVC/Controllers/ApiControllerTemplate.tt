@@ -55,8 +55,8 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers
 		}
      
 		[HttpGet("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
-		public IActionResult Get<#=tableMetadata.EntityName#>ById(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id) {
-			var <#= tableMetadata.EntityName.Lf() #> = _repository.Lookup<#= tableMetadata.EntityName #>ById(id);
+		public IActionResult Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id) {
+			var <#= tableMetadata.EntityName.Lf() #> = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
             if (<#= tableMetadata.EntityName.Lf() #> == null)
 			{
 				return this.NotFound($"<#=tableMetadata.EntityName#> is not found by id {id}");
@@ -70,7 +70,7 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers
 		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
 		[TransactionFilter]
 		public IActionResult Update<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
-			var entity = _repository.Lookup<#= tableMetadata.EntityName #>ById(id);
+			var entity = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
 
 			if (entity == null)
 			{
@@ -96,8 +96,8 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers
 
 		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}/delete")]
 		[TransactionFilter]
-		public IActionResult Delete<#=tableMetadata.EntityName#>(int id, bool isHardDelete) {
-			var entity = _repository.Lookup<#= tableMetadata.EntityName #>ById(id);
+		public IActionResult Delete<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, bool isHardDelete) {
+			var entity = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
 
 			if (entity == null)
 			{
@@ -105,7 +105,7 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers
 			}
 
 			if (isHardDelete) {
-				_repository.Delete<#=tableMetadata.EntityName#>ById(id);			
+				_repository.Delete<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);			
 			}
 			else
 			{

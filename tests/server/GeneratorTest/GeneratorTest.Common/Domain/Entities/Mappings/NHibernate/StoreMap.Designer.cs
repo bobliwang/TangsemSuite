@@ -66,6 +66,15 @@ namespace GeneratorTest.Common.Domain.Entities.Mappings.NHibernate
         
 			 
 			   
+			   // StorePhoto
+
+         
+         this.Map(x => x.StorePhoto).Column("StorePhoto")
+
+ .Length(1000) ;
+        
+			 
+			   
 			   // CreatedById
 
          
@@ -127,6 +136,12 @@ namespace GeneratorTest.Common.Domain.Entities.Mappings.NHibernate
 		private void MapIncomingReferences()
 		{
 
+			this.HasMany<Customer>(x => x.Customers)
+				.KeyColumn("StoreId")
+                .Inverse()
+                .LazyLoad()
+                .AsBag();
+			
 		}
     	}
 }

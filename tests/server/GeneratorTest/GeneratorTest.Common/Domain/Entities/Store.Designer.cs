@@ -37,6 +37,16 @@ namespace GeneratorTest.Common.Domain.Entities
     public static readonly Expression<Func<Store, object>> Expr_StoreName = x => x.StoreName;
     
     /// <summary>
+    /// The property name 'StorePhoto'. It matches the property to column 'StorePhoto'.
+    /// </summary>
+    public static readonly string Prop_StorePhoto = "StorePhoto";
+    
+    /// <summary>
+    /// The lamda expression for StorePhoto.
+    /// </summary>
+    public static readonly Expression<Func<Store, object>> Expr_StorePhoto = x => x.StorePhoto;
+    
+    /// <summary>
     /// The property name 'CreatedById'. It matches the property to column 'CreatedById'.
     /// </summary>
     public static readonly string Prop_CreatedById = "CreatedById";
@@ -94,7 +104,9 @@ namespace GeneratorTest.Common.Domain.Entities
     /// </summary>
     public Store()
     {
-    }
+
+        this.Customers = new List<Customer>();
+            }
   
 
     #region "Basic Columns"
@@ -111,6 +123,12 @@ namespace GeneratorTest.Common.Domain.Entities
     /// </summary>
     [JsonProperty("storeName")]   
     public virtual string StoreName { get; set; }
+    
+    /// <summary>
+    /// Property StorePhoto mapping to Store.StorePhoto
+    /// </summary>
+    [JsonProperty("storePhoto")]   
+    public virtual string StorePhoto { get; set; }
     
     /// <summary>
     /// Property CreatedById mapping to Store.CreatedById
@@ -148,12 +166,31 @@ namespace GeneratorTest.Common.Domain.Entities
     #endregion
     
     #region "Incoming References"
-    #endregion
+
+    /// <summary>
+    /// Field for the child list of Ref: FK_Customer_Store.
+    /// </summary>
+    public virtual IList<Customer> Customers { get; set; }
+    
+    /// <summary>
+    /// Add Customer entity to Customers.
+    /// </summary>
+    /// <param name="customer">
+    ///	The Customer entity.
+    /// </param>
+    public virtual void AddToCustomers(Customer customer)
+    {
+      customer.Store = this;
+      this.Customers.Add(customer);
+    }
+        #endregion
     
 
       public static readonly int Id_MaxLenth = 0;
     
       public static readonly int StoreName_MaxLenth = 200;
+    
+      public static readonly int StorePhoto_MaxLenth = 1000;
     
       public static readonly int CreatedById_MaxLenth = 0;
     

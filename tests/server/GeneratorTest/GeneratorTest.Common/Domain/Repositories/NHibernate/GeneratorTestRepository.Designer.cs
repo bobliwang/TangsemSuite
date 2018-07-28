@@ -19,13 +19,26 @@ namespace GeneratorTest.Common.Domain.Repositories.NHibernate
 
     
     /// <summary>
-    /// The IQueryable for Products.
+    /// The IQueryable for Customers.
     /// </summary>
-    public virtual IQueryable<Product> Products
+    public virtual IQueryable<Customer> Customers
     {
       get
       {
-        return this.GetEntities<Product>();
+        return this.GetEntities<Customer>();
+      }
+    }
+
+    
+    
+    /// <summary>
+    /// The IQueryable for Stores.
+    /// </summary>
+    public virtual IQueryable<Store> Stores
+    {
+      get
+      {
+        return this.GetEntities<Store>();
       }
     }
 
@@ -45,6 +58,19 @@ namespace GeneratorTest.Common.Domain.Repositories.NHibernate
     
     
     /// <summary>
+    /// The IQueryable for Products.
+    /// </summary>
+    public virtual IQueryable<Product> Products
+    {
+      get
+      {
+        return this.GetEntities<Product>();
+      }
+    }
+
+    
+    
+    /// <summary>
     /// The IQueryable for Poses.
     /// </summary>
     public virtual IQueryable<Pos> Poses
@@ -55,61 +81,90 @@ namespace GeneratorTest.Common.Domain.Repositories.NHibernate
       }
     }
 
-    
-    
-    /// <summary>
-    /// The IQueryable for Stores.
-    /// </summary>
-    public virtual IQueryable<Store> Stores
-    {
-      get
-      {
-        return this.GetEntities<Store>();
-      }
-    }
-
         
     
 
     
     /// <summary>
-    /// Get Product by primary key.
+    /// Get Customer by primary key.
     /// </summary>
-    public virtual Product LookupProductById(int id)
+    public virtual Customer LookupCustomerByCustomerId(System.Guid customerId)
     {
-      return this.LookupById<Product>(id);
+      return this.LookupById<Customer>(customerId);
     }
     
     /// <summary>
-    /// Delete Product by primary key.
+    /// Delete Customer by primary key.
     /// </summary>
-    public virtual Product DeleteProductById(int id)
+    public virtual Customer DeleteCustomerByCustomerId(System.Guid customerId)
     {
-      return this.DeleteById<Product>(id);
+      return this.DeleteById<Customer>(customerId);
     }
     
     /// <summary>
-    /// Save a new Product instance.
+    /// Save a new Customer instance.
     /// </summary>
-    public virtual Product SaveProduct(Product product)
+    public virtual Customer SaveCustomer(Customer customer)
     {
-      return this.Save<Product>(product);
+      return this.Save<Customer>(customer);
     }
     
     /// <summary>
-    /// Update an existing Product instance.
+    /// Update an existing Customer instance.
     /// </summary>
-    public virtual Product UpdateProduct(Product product)
+    public virtual Customer UpdateCustomer(Customer customer)
     {
-      return this.Update<Product>(product);
+      return this.Update<Customer>(customer);
     }
     
     /// <summary>
-    /// Save or update an existing Product instance.
+    /// Save or update an existing Customer instance.
     /// </summary>
-    public virtual Product SaveOrUpdateProduct(Product product)
+    public virtual Customer SaveOrUpdateCustomer(Customer customer)
     {
-      return this.SaveOrUpdate<Product>(product);
+      return this.SaveOrUpdate<Customer>(customer);
+    }
+
+    
+    
+    /// <summary>
+    /// Get Store by primary key.
+    /// </summary>
+    public virtual Store LookupStoreById(int id)
+    {
+      return this.LookupById<Store>(id);
+    }
+    
+    /// <summary>
+    /// Delete Store by primary key.
+    /// </summary>
+    public virtual Store DeleteStoreById(int id)
+    {
+      return this.DeleteById<Store>(id);
+    }
+    
+    /// <summary>
+    /// Save a new Store instance.
+    /// </summary>
+    public virtual Store SaveStore(Store store)
+    {
+      return this.Save<Store>(store);
+    }
+    
+    /// <summary>
+    /// Update an existing Store instance.
+    /// </summary>
+    public virtual Store UpdateStore(Store store)
+    {
+      return this.Update<Store>(store);
+    }
+    
+    /// <summary>
+    /// Save or update an existing Store instance.
+    /// </summary>
+    public virtual Store SaveOrUpdateStore(Store store)
+    {
+      return this.SaveOrUpdate<Store>(store);
     }
 
     
@@ -157,6 +212,48 @@ namespace GeneratorTest.Common.Domain.Repositories.NHibernate
     
     
     /// <summary>
+    /// Get Product by primary key.
+    /// </summary>
+    public virtual Product LookupProductById(int id)
+    {
+      return this.LookupById<Product>(id);
+    }
+    
+    /// <summary>
+    /// Delete Product by primary key.
+    /// </summary>
+    public virtual Product DeleteProductById(int id)
+    {
+      return this.DeleteById<Product>(id);
+    }
+    
+    /// <summary>
+    /// Save a new Product instance.
+    /// </summary>
+    public virtual Product SaveProduct(Product product)
+    {
+      return this.Save<Product>(product);
+    }
+    
+    /// <summary>
+    /// Update an existing Product instance.
+    /// </summary>
+    public virtual Product UpdateProduct(Product product)
+    {
+      return this.Update<Product>(product);
+    }
+    
+    /// <summary>
+    /// Save or update an existing Product instance.
+    /// </summary>
+    public virtual Product SaveOrUpdateProduct(Product product)
+    {
+      return this.SaveOrUpdate<Product>(product);
+    }
+
+    
+    
+    /// <summary>
     /// Get Pos by primary key.
     /// </summary>
     public virtual Pos LookupPosById(int id)
@@ -194,48 +291,6 @@ namespace GeneratorTest.Common.Domain.Repositories.NHibernate
     public virtual Pos SaveOrUpdatePos(Pos pos)
     {
       return this.SaveOrUpdate<Pos>(pos);
-    }
-
-    
-    
-    /// <summary>
-    /// Get Store by primary key.
-    /// </summary>
-    public virtual Store LookupStoreById(int id)
-    {
-      return this.LookupById<Store>(id);
-    }
-    
-    /// <summary>
-    /// Delete Store by primary key.
-    /// </summary>
-    public virtual Store DeleteStoreById(int id)
-    {
-      return this.DeleteById<Store>(id);
-    }
-    
-    /// <summary>
-    /// Save a new Store instance.
-    /// </summary>
-    public virtual Store SaveStore(Store store)
-    {
-      return this.Save<Store>(store);
-    }
-    
-    /// <summary>
-    /// Update an existing Store instance.
-    /// </summary>
-    public virtual Store UpdateStore(Store store)
-    {
-      return this.Update<Store>(store);
-    }
-    
-    /// <summary>
-    /// Save or update an existing Store instance.
-    /// </summary>
-    public virtual Store SaveOrUpdateStore(Store store)
-    {
-      return this.SaveOrUpdate<Store>(store);
     }
 
     

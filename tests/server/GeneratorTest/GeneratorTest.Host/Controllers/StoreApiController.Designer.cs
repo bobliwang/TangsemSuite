@@ -125,6 +125,14 @@ namespace GeneratorTest.Host.Controllers
 							
 			}
 			
+			if (filterModel.StorePhoto != null)
+			{
+							
+											filteredQry = filteredQry.Where(x => x.StorePhoto.Contains(filterModel.StorePhoto));
+										
+							
+			}
+			
 			if (filterModel.CreatedById != null)
 			{
 										

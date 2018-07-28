@@ -160,7 +160,8 @@ namespace Tangsem.Generator.Metadata
           return "number";
         }
 
-        if (typeof(string) == this.ClrType || typeof(DateTime) == this.ClrType)
+        var stringTypes = new[] { typeof(string), typeof(DateTime), typeof(Guid) };
+        if (stringTypes.Contains(this.ClrType))
         {
           return "string";
         }

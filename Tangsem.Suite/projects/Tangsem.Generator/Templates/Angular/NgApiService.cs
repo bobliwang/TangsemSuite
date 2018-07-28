@@ -114,7 +114,14 @@ namespace Tangsem.Generator.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("ById(id: number | string): Observable<models.");
+            this.Write("By");
+            
+            #line 42 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeyPropertyName));
+            
+            #line default
+            #line hidden
+            this.Write("(id: number | string): Observable<models.");
             
             #line 42 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgApiService.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.TsModelName));

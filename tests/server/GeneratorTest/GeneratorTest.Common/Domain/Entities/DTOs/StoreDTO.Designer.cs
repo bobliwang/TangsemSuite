@@ -28,6 +28,11 @@ namespace GeneratorTest.Common.Domain.Entities.DTOs
 		public virtual string StoreName { get; set; }
 		
 		/// <summary>
+		/// Property StorePhoto mapping to Store.StorePhoto
+		/// </summary>
+		public virtual string StorePhoto { get; set; }
+		
+		/// <summary>
 		/// Property CreatedById mapping to Store.CreatedById
 		/// </summary>
 		public virtual int? CreatedById { get; set; }

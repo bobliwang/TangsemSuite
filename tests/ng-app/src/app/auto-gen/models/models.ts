@@ -23,6 +23,114 @@ export interface SearchParams {
 
 
 
+export interface CustomerModel {
+
+     
+
+		customerId?: string;
+
+
+		customerName?: string;
+
+
+		storeId?: number;
+
+
+		createdById?: number;
+
+
+		modifiedById?: number;
+
+
+		createdTime?: string;
+
+
+		modifiedTime?: string;
+
+
+		active?: boolean;
+
+
+}
+
+export interface CustomerSearchParams extends CustomerModel, SearchParams  {
+}
+
+
+export interface StoreModel {
+
+     
+
+		id?: number;
+
+
+		storeName?: string;
+
+
+		storePhoto?: string;
+
+
+		createdById?: number;
+
+
+		createdTime?: string;
+
+
+		modifiedById?: number;
+
+
+		modifiedTime?: string;
+
+
+		active?: boolean;
+
+
+}
+
+export interface StoreSearchParams extends StoreModel, SearchParams  {
+}
+
+
+export interface OrderModel {
+
+     
+
+		id?: number;
+
+
+		customerName?: string;
+
+
+		productId?: number;
+
+
+		customerId?: string;
+
+
+		orderTotal?: number;
+
+
+		createdById?: number;
+
+
+		modifiedById?: number;
+
+
+		createdTime?: string;
+
+
+		modifiedTime?: string;
+
+
+		active?: boolean;
+
+
+}
+
+export interface OrderSearchParams extends OrderModel, SearchParams  {
+}
+
+
 export interface ProductModel {
 
      
@@ -64,43 +172,6 @@ export interface ProductSearchParams extends ProductModel, SearchParams  {
 }
 
 
-export interface OrderModel {
-
-     
-
-		id?: number;
-
-
-		customerName?: string;
-
-
-		productId?: number;
-
-
-		orderTotal?: number;
-
-
-		createdById?: number;
-
-
-		modifiedById?: number;
-
-
-		createdTime?: string;
-
-
-		modifiedTime?: string;
-
-
-		active?: boolean;
-
-
-}
-
-export interface OrderSearchParams extends OrderModel, SearchParams  {
-}
-
-
 export interface PosModel {
 
      
@@ -129,35 +200,4 @@ export interface PosModel {
 }
 
 export interface PosSearchParams extends PosModel, SearchParams  {
-}
-
-
-export interface StoreModel {
-
-     
-
-		id?: number;
-
-
-		storeName?: string;
-
-
-		createdById?: number;
-
-
-		createdTime?: string;
-
-
-		modifiedById?: number;
-
-
-		modifiedTime?: string;
-
-
-		active?: boolean;
-
-
-}
-
-export interface StoreSearchParams extends StoreModel, SearchParams  {
 }

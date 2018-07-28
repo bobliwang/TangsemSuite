@@ -16,6 +16,10 @@ namespace GeneratorTest.Common.Domain.ViewModels.SearchParams
 
 	
 	
+		public string StorePhoto { get; set; }
+
+	
+	
 		public int? CreatedById { get; set; }
 
 	

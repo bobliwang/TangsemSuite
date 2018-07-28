@@ -21,7 +21,7 @@ import { ExtendedRoute } from '../models/extended-route';
 export const routes: ExtendedRoute[] = [
 
 <# foreach (var tableMetadata in this.TableMetadatas) { #>
-	{ path: '<#= tableMetadata.EntityName.Lf() #>/:id/:action', component: <#= tableMetadata.EntityName #>EditorComponent, hideFromMenuItem: true },
+	{ path: '<#= tableMetadata.EntityName.Lf() #>/:<#= tableMetadata.PrimaryKeyPropertyName.Lf() #>/:action', component: <#= tableMetadata.EntityName #>EditorComponent, hideFromMenuItem: true },
 	{ path: '<#= tableMetadata.EntityName.Lf() #>/listing', component: <#= tableMetadata.EntityName #>ListingComponent },
 	{ path: '<#= tableMetadata.EntityName.Lf() #>/create', component: <#= tableMetadata.EntityName #>EditorComponent },
 

@@ -10,6 +10,7 @@ import * as models from '../../models/models';
 import { DialogsService } from '../../../services/dialogs.service';
 import { ResultCode } from '../../../components/dialog/dialog.models';
 
+import { CustomerDetailsDialog } from '../customer/customer-editor.component';
 import { ProductDetailsDialog } from '../product/product-editor.component';
 
 
@@ -22,7 +23,7 @@ export class OrderListingComponent {
 	public dataSource = [];
 
 	@Input()
-	public displayedColumns = [ 'id', 'customerName', 'productId', 'orderTotal', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', "actions" ];
+	public displayedColumns = [ 'id', 'customerName', 'productId', 'customerId', 'orderTotal', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', "actions" ];
 
 	public resultsLength = 0;
 	public isLoadingResults = true;
@@ -108,6 +109,17 @@ export class OrderListingComponent {
 		this.router.navigate(['order/create']);
 	}
 
+
+    
+    public showCustomerDetails(customerId: string) {
+        this.matDialog.open(CustomerDetailsDialog, {
+			width: '80vw',
+			data: {
+                entityId: customerId,
+                title: `Customer Details`
+            }
+		 });           
+    }
 
     
     public showProductDetails(id: number) {

@@ -1,0 +1,190 @@
+<div class="editor-ctn">
+
+
+    <!-- customerId: text - 0 -->
+    <div class="editor-row">
+            
+        <mat-form-field>
+            
+	        <input type="text" matInput #customerId="ngModel" readonly
+		        [(ngModel)]="model.customerId" placeholder="CustomerId"
+                  />
+
+            
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="customerId.invalid && (customerId.dirty || customerId.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="customerId.errors.required">
+                CustomerId is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- customerName: text - 50 -->
+    <div class="editor-row">
+            
+        <mat-form-field>
+                        <textarea matInput #customerName="ngModel" maxlength="50" 
+		        [(ngModel)]="model.customerName" placeholder="CustomerName" required></textarea>
+            
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="customerName.invalid && (customerName.dirty || customerName.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="customerName.errors.required">
+                CustomerName is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- storeId: number - 0 -->
+    <div class="editor-row">
+    
+        <mat-form-field>
+            <mat-select placeholder="Select Store" #storeId="ngModel"
+                [(ngModel)]="model.storeId" >
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let opt of storeOptions" [value]="opt.id">
+                    {{opt.storeName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    
+        <!-- Validation HERE -->
+        <div *ngIf="storeId.invalid && (storeId.dirty || storeId.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="storeId.errors.required">
+                StoreId is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- createdById: number - 0 -->
+    <div class="editor-row">
+            
+        <mat-form-field>
+            
+	        <input type="number" matInput #createdById="ngModel" 
+		        [(ngModel)]="model.createdById" placeholder="CreatedById"
+                  />
+
+            
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="createdById.invalid && (createdById.dirty || createdById.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="createdById.errors.required">
+                CreatedById is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- modifiedById: number - 0 -->
+    <div class="editor-row">
+            
+        <mat-form-field>
+            
+	        <input type="number" matInput #modifiedById="ngModel" 
+		        [(ngModel)]="model.modifiedById" placeholder="ModifiedById"
+                  />
+
+            
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="modifiedById.invalid && (modifiedById.dirty || modifiedById.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="modifiedById.errors.required">
+                ModifiedById is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- createdTime: datepicker - 0 -->
+    <div class="editor-row">
+                    <mat-form-field>
+	        <input matInput [matDatepicker]="pickerCreatedTime" placeholder="Choose CreatedTime" #createdTime="ngModel"
+                [(ngModel)]="model.createdTime" >
+	          <mat-datepicker-toggle matSuffix [for]="pickerCreatedTime"></mat-datepicker-toggle>
+	          <mat-datepicker #pickerCreatedTime></mat-datepicker>
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="createdTime.invalid && (createdTime.dirty || createdTime.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="createdTime.errors.required">
+                CreatedTime is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- modifiedTime: datepicker - 0 -->
+    <div class="editor-row">
+                    <mat-form-field>
+	        <input matInput [matDatepicker]="pickerModifiedTime" placeholder="Choose ModifiedTime" #modifiedTime="ngModel"
+                [(ngModel)]="model.modifiedTime" >
+	          <mat-datepicker-toggle matSuffix [for]="pickerModifiedTime"></mat-datepicker-toggle>
+	          <mat-datepicker #pickerModifiedTime></mat-datepicker>
+        </mat-form-field>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="modifiedTime.invalid && (modifiedTime.dirty || modifiedTime.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="modifiedTime.errors.required">
+                ModifiedTime is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- active: checkbox - 0 -->
+    <div class="editor-row">
+            	        <mat-checkbox [(ngModel)]="model.active" #active="ngModel">Active</mat-checkbox>
+        
+    
+        <!-- Validation HERE -->
+        <div *ngIf="active.invalid && (active.dirty || active.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="active.errors.required">
+                Active is required.
+            </div>
+        </div>
+    </div>
+
+
+
+	<div class="actions-bar" *ngIf="!isDialog && !hideActionBar">
+		<button mat-button (click)="save()">
+			Save
+		</button>
+
+		<button mat-button (click)="cancel()">
+			Cancel
+		</button>
+	</div>
+</div>

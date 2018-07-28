@@ -27,7 +27,7 @@
 		</button>
 
 		<!-- TABLE -->
-		<table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDisableClear matSortDirection="desc">
+		<table mat-table [dataSource]="dataSource" matSort matSortActive="<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>" matSortDisableClear matSortDirection="desc">
 
 		<# foreach(var col in this.TableMetadata.Columns) { #>
 
