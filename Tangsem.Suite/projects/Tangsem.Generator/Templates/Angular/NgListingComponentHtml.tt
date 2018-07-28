@@ -19,6 +19,10 @@
 
 	<div class="table-column">
 
+        <h3>
+            <#= this.TableMetadata.EntityName #>
+        </h3>
+    
 		<button mat-raised-button (click)="add()">
 			<mat-icon>
 				add
@@ -33,7 +37,7 @@
 
 			<!-- <#= col.PropertyName.Lf() #> column -->
 			<ng-container matColumnDef="<#= col.PropertyName.Lf() #>">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" <#= col.IsOutgoingRefKey ? "" : "mat-sort-header" #>>
 					<#= col.PropertyName #>
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">

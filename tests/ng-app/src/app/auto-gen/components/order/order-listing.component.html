@@ -11,6 +11,10 @@
 
 	<div class="table-column">
 
+        <h3>
+            Order
+        </h3>
+    
 		<button mat-raised-button (click)="add()">
 			<mat-icon>
 				add
@@ -24,7 +28,7 @@
 		
 			<!-- id column -->
 			<ng-container matColumnDef="id">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" mat-sort-header>
 					Id
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
@@ -44,7 +48,7 @@
 		
 			<!-- customerName column -->
 			<ng-container matColumnDef="customerName">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" mat-sort-header>
 					CustomerName
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
@@ -64,7 +68,7 @@
 		
 			<!-- productId column -->
 			<ng-container matColumnDef="productId">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" >
 					ProductId
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
@@ -92,7 +96,7 @@
 		
 			<!-- customerId column -->
 			<ng-container matColumnDef="customerId">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" >
 					CustomerId
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
@@ -120,7 +124,7 @@
 		
 			<!-- orderTotal column -->
 			<ng-container matColumnDef="orderTotal">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" mat-sort-header>
 					OrderTotal
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
@@ -140,7 +144,7 @@
 		
 			<!-- createdById column -->
 			<ng-container matColumnDef="createdById">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" mat-sort-header>
 					CreatedById
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
@@ -160,7 +164,7 @@
 		
 			<!-- modifiedById column -->
 			<ng-container matColumnDef="modifiedById">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" mat-sort-header>
 					ModifiedById
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
@@ -180,7 +184,7 @@
 		
 			<!-- createdTime column -->
 			<ng-container matColumnDef="createdTime">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" mat-sort-header>
 					CreatedTime
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
@@ -200,7 +204,7 @@
 		
 			<!-- modifiedTime column -->
 			<ng-container matColumnDef="modifiedTime">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" mat-sort-header>
 					ModifiedTime
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
@@ -220,7 +224,7 @@
 		
 			<!-- active column -->
 			<ng-container matColumnDef="active">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 5px">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" mat-sort-header>
 					Active
 				</th>
 				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
