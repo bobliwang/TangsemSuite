@@ -170,6 +170,10 @@ namespace Tangsem.EF.Domain
       return this.Update(entity);
     }
 
+    public virtual void Flush()
+    {
+    }
+
     /// <summary>
     /// Commit transaction to database.
     /// </summary>

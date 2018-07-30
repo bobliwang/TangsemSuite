@@ -97,6 +97,11 @@ namespace Tangsem.Data.Domain
     void BeginTransaction(IsolationLevel isolationLevel);
 
     /// <summary>
+    /// Write cached changes to database within transaction.
+    /// </summary>
+    void Flush();
+
+    /// <summary>
     /// Gets or sets current user id.
     /// </summary>
     int? CurrentUserId { get; set; }

@@ -224,6 +224,11 @@ namespace Tangsem.NHibernate.Domain
       }
     }
 
+    public void Flush()
+    {
+      this.CurrentSession.Flush();
+    }
+
     /// <summary>
     /// Gets or sets current user id.
     /// </summary>
