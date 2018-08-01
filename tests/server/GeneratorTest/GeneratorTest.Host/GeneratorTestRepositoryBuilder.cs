@@ -27,6 +27,12 @@ namespace GeneratorTest.Host
 
     public ISessionFactory CreateSessionFactory()
     {
+      return this.BuildFluentConfiguration().BuildSessionFactory();
+    }
+
+    public FluentConfiguration BuildFluentConfiguration()
+    {
+
       var config = new Configuration().LinqToHqlGeneratorsRegistry<ExtendedLinqToHqlGeneratorsRegistry>();
 
       return Fluently
@@ -36,8 +42,7 @@ namespace GeneratorTest.Host
           .MaxFetchDepth(3)
           .Dialect<MsSql2012DialectExt>())
         .Mappings(m =>
-          m.FluentMappings.AddFromAssemblyOf<Product>())
-        .BuildSessionFactory();
+          m.FluentMappings.AddFromAssemblyOf<Product>());
     }
 
     public RepositoryBase CreateRepository(IDataContext dataContext)
