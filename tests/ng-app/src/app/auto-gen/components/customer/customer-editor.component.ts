@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, Inject } from '@angular/core';
-import { MatPaginator, MatSort, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatPaginator, MatSort, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import * as models from '../../models/models';
 
 import { GeneratorTestRepositoryApiService } from '../../services/api.service';
@@ -174,7 +174,7 @@ export class CustomerEditorComponent implements OnInit {
     </h4>
     <div mat-dialog-content>
       <customer-editor
-        [customerId]="data.entityId" [subscribeToRoutingParams]="false" [isDialog]="true"></customer-editor>
+        [customerId]="data.customerId" [subscribeToRoutingParams]="false" [isDialog]="true"></customer-editor>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="close()">Close</button>      
@@ -188,7 +188,36 @@ export class CustomerDetailsDialog {
     @Inject(MAT_DIALOG_DATA) public data: { customerId: string, title?: string }) {
   }
 
-  close(): void {
+  public close(): void {
     this.dialogRef.close();
   }
+}
+
+
+@Component({
+	selector: 'customer-sheet',
+	template: `
+		<div class="flex-columns">
+			<div></div>
+			<button mat-button (click)="close($event)">
+				<mat-icon>close</mat-icon>
+			</button>
+		</div>
+		<div class="sheet-container">
+			<customer-editor
+				[subscribeToRoutingParams]="false"
+				[isDialog]="true"
+				[customerId]="data.customerId"
+				></customer-editor>
+		</div>
+	`,
+})
+export class CustomerSheetComponent {
+	constructor(private bottomSheetRef: MatBottomSheetRef<CustomerSheetComponent>,
+		@Inject(MAT_BOTTOM_SHEET_DATA) public data: { customerId: string, title?: string }) { }
+
+	public close(event: MouseEvent): void {
+		this.bottomSheetRef.dismiss();
+		event.preventDefault();
+	}
 }

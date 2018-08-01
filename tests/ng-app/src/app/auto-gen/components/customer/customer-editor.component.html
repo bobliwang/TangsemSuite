@@ -46,31 +46,6 @@
     </div>
 
 
-    <!-- storeId: number - 0 -->
-    <div class="editor-row">
-    
-        <mat-form-field>
-            <mat-select placeholder="Select Store" #storeId="ngModel"
-                [(ngModel)]="model.storeId" >
-                <mat-option value=""></mat-option>
-                <mat-option *ngFor="let opt of storeOptions" [value]="opt.id">
-                    {{opt.storeName}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-    
-        <!-- Validation HERE -->
-        <div *ngIf="storeId.invalid && (storeId.dirty || storeId.touched)"
-            class="alert alert-danger">
-
-            <div *ngIf="storeId.errors.required">
-                StoreId is required.
-            </div>
-        </div>
-    </div>
-
-
     <!-- createdById: number - 0 -->
     <div class="editor-row">
             
@@ -172,6 +147,31 @@
 
             <div *ngIf="active.errors.required">
                 Active is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- storeId: number - 0 -->
+    <div class="editor-row">
+    
+        <mat-form-field>
+            <mat-select placeholder="Select Store" #storeId="ngModel"
+                [(ngModel)]="model.storeId" >
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let opt of storeOptions" [value]="opt.id">
+                    {{opt.storeName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    
+        <!-- Validation HERE -->
+        <div *ngIf="storeId.invalid && (storeId.dirty || storeId.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="storeId.errors.required">
+                StoreId is required.
             </div>
         </div>
     </div>

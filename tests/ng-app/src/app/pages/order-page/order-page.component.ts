@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+
+import { MatBottomSheet } from '@angular/material';
+import { OrderModel } from '../../auto-gen/models/models';
+import { ProductSheetComponent } from '../../auto-gen/components/product/product-editor.component';
+
 
 @Component({
   selector: 'order-page',
@@ -7,9 +12,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bottomSheet: MatBottomSheet) { }
 
   ngOnInit() {
   }
-
 }
+

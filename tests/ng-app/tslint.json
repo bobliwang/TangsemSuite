@@ -22,7 +22,7 @@
     ],
     "import-spacing": true,
     "indent": [
-      true,
+      false,
       "spaces"
     ],
     "interface-over-type-literal": true,
@@ -69,7 +69,7 @@
     "no-string-literal": false,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
-    "no-trailing-whitespace": true,
+    "no-trailing-whitespace": false,
     "no-unnecessary-initializer": true,
     "no-unused-expression": true,
     "no-use-before-declare": true,
@@ -119,16 +119,16 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "",
       "kebab-case"
     ],
-    "no-output-on-prefix": true,
+    "no-output-on-prefix": false,
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
@@ -136,7 +136,7 @@
     "no-output-rename": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
-    "component-class-suffix": true,
+    "component-class-suffix": false,
     "directive-class-suffix": true
   }
 }

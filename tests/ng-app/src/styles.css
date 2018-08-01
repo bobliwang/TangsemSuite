@@ -8,6 +8,17 @@
     flex-wrap: wrap;
 }
 
+.flex-columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sheet-container {
+    font-size: 12px;
+    padding: 10px;
+}
+
 .filter-column {
     flex: 200px 0 0;
 }

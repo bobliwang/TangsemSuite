@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource, MatDialog, MatBottomSheet } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import { merge } from 'rxjs/observable/merge';
 
@@ -18,95 +18,99 @@ import { ResultCode } from '../../../components/dialog/dialog.models';
 })
 export class PosListingComponent {
 
-	public dataSource = [];
+  public dataSource = [];
 
 	@Input()
-	public displayedColumns = [ 'id', 'name', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', "actions" ];
+	public showLinkedEntityInBottomSheet = false;
 
-	public resultsLength = 0;
-	public isLoadingResults = true;
+  @Input()
+  public displayedColumns = [ 'id', 'name', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', "actions" ];
 
-	@ViewChild(MatPaginator)
-	public paginator: MatPaginator;
+  public resultsLength = 0;
+  public isLoadingResults = true;
 
-	@ViewChild(MatSort)
-	public sort: MatSort;
+  @ViewChild(MatPaginator)
+  public paginator: MatPaginator;
 
-	@Input()
-	public templates = {};
+  @ViewChild(MatSort)
+  public sort: MatSort;
 
-	constructor(
-		private router: Router,
-		private snackBar: MatSnackBar,
-		private matDialog: MatDialog,
-		private dialogs: DialogsService,
-		private repoApi: GeneratorTestRepositoryApiService) {
-	
-	}
+  @Input()
+  public templates = {};
 
-	@Input()
-	public filterModel: models.PosSearchParams;
+  constructor(
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private matDialog: MatDialog,
+		private matBottomSheet: MatBottomSheet,
+    private dialogs: DialogsService,
+    private repoApi: GeneratorTestRepositoryApiService) {
+  
+  }
 
-	public ngOnInit() {
-		
-		this.filterModel = this.filterModel || <models.PosSearchParams> {};
+  @Input()
+  public filterModel: models.PosSearchParams;
 
-		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
-		Observable.merge(this.sort.sortChange, this.paginator.page).subscribe(() => {
-			this.search();
-		});
-	}
-
-	public ngAfterViewInit() {
-		this.search();
-	}
-
-	public search() {
-
-		this.filterModel.pageIndex = this.paginator.pageIndex || 0;
-		this.filterModel.pageSize = this.paginator.pageSize || 100;
-		this.filterModel.sortFieldName = this.sort.active || '';
-		this.filterModel.direction = this.sort.direction || 'desc';
-
-
-		this.repoApi.getPosList(this.filterModel).map(data => {
-			// Flip flag to show that loading has finished.
-			this.isLoadingResults = false;
-			this.resultsLength = data.rowsCount;
-
-			return data.pagedData;
-		}).catch(() => {
-			this.isLoadingResults = false;
-
-			return Observable.of([]);
-		}).subscribe(pagedData => this.dataSource = pagedData);
-	}
-
-	public delete(rowData: models.PosModel) {
-		this.dialogs.confirm('', 'Do you want to delete?', ResultCode.Yes).subscribe(confirmed => {
-			if (!confirmed) {
-				return;
-			}
-
-			this.repoApi.deletePos(rowData.id).subscribe(() => {
-				
-				this.snackBar.open('Deleted successfully', null, { duration: 1000 });
-				this.search();
-			}, err => {
-				this.snackBar.open('Failed to delete', null, { duration: 3000 });
-			});
-		});
-	}
-
-	public edit(rowData: models.PosModel) {
-		this.router.navigate([`pos/${rowData.id}/edit`]);
-	}
-
-	public add() {
-		this.router.navigate(['pos/create']);
-	}
-
-
+  public ngOnInit() {
     
+    this.filterModel = this.filterModel || <models.PosSearchParams> {};
+
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+    Observable.merge(this.sort.sortChange, this.paginator.page).subscribe(() => {
+      this.search();
+    });
+  }
+
+  public ngAfterViewInit() {
+    this.search();
+  }
+
+  public search() {
+
+    this.filterModel.pageIndex = this.paginator.pageIndex || 0;
+    this.filterModel.pageSize = this.paginator.pageSize || 100;
+    this.filterModel.sortFieldName = this.sort.active || '';
+    this.filterModel.direction = this.sort.direction || 'desc';
+
+
+    this.repoApi.getPosList(this.filterModel).map(data => {
+      // Flip flag to show that loading has finished.
+      this.isLoadingResults = false;
+      this.resultsLength = data.rowsCount;
+
+      return data.pagedData;
+    }).catch(() => {
+      this.isLoadingResults = false;
+
+      return Observable.of([]);
+    }).subscribe(pagedData => this.dataSource = pagedData);
+  }
+
+  public delete(rowData: models.PosModel) {
+    this.dialogs.confirm('', 'Do you want to delete?', ResultCode.Yes).subscribe(confirmed => {
+      if (!confirmed) {
+        return;
+      }
+
+      this.repoApi.deletePos(rowData.id).subscribe(() => {
+        
+        this.snackBar.open('Deleted successfully', null, { duration: 1000 });
+        this.search();
+      }, err => {
+        this.snackBar.open('Failed to delete', null, { duration: 3000 });
+      });
+    });
+  }
+
+  public edit(rowData: models.PosModel) {
+    this.router.navigate([`pos/${rowData.id}/edit`]);
+  }
+
+  public add() {
+    this.router.navigate(['pos/create']);
+  }
+
+
+
 }

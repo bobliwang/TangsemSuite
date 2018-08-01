@@ -33,9 +33,6 @@ export interface CustomerModel {
 		customerName?: string;
 
 
-		storeId?: number;
-
-
 		createdById?: number;
 
 
@@ -49,6 +46,9 @@ export interface CustomerModel {
 
 
 		active?: boolean;
+
+
+		storeId?: number;
 
 
 }
@@ -101,12 +101,6 @@ export interface OrderModel {
 		customerName?: string;
 
 
-		productId?: number;
-
-
-		customerId?: string;
-
-
 		orderTotal?: number;
 
 
@@ -123,6 +117,12 @@ export interface OrderModel {
 
 
 		active?: boolean;
+
+
+		customerId?: string;
+
+
+		productId?: number;
 
 
 }
@@ -144,11 +144,7 @@ export interface ProductModel {
 		unitPrice?: number;
 
 
-	
-	/**
-	 * GeneratorTest.Common.Domain.ViewModels.ProductSpec[]
-	 */
-		specsJson?: any[];
+		specsJson?: string;
 
 
 		createdById?: number;

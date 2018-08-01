@@ -17,6 +17,7 @@ namespace Tangsem.Generator.Metadata.TypeMapping
       typeMapper["char"] = typeof(string);
       typeMapper["date"] = typeof(DateTime);
       typeMapper["datetime"] = typeof(DateTime);
+      typeMapper["datetime2"] = typeof(DateTime);
       typeMapper["decimal"] = typeof(decimal);
       typeMapper["varbinary"] = typeof(byte[]);
       typeMapper["float"] = typeof(double);

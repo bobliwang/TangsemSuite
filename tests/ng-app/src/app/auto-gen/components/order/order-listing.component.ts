@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource, MatDialog, MatBottomSheet } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import { merge } from 'rxjs/observable/merge';
 
@@ -10,8 +10,12 @@ import * as models from '../../models/models';
 import { DialogsService } from '../../../services/dialogs.service';
 import { ResultCode } from '../../../components/dialog/dialog.models';
 
-import { CustomerDetailsDialog } from '../customer/customer-editor.component';
-import { ProductDetailsDialog } from '../product/product-editor.component';
+import { CustomerDetailsDialog
+	, CustomerSheetComponent
+} from '../customer/customer-editor.component';
+import { ProductDetailsDialog
+	, ProductSheetComponent
+} from '../product/product-editor.component';
 
 
 @Component({
@@ -20,117 +24,135 @@ import { ProductDetailsDialog } from '../product/product-editor.component';
 })
 export class OrderListingComponent {
 
-	public dataSource = [];
+  public dataSource = [];
 
 	@Input()
-	public displayedColumns = [ 'id', 'customerName', 'productId', 'customerId', 'orderTotal', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', "actions" ];
+	public showLinkedEntityInBottomSheet = false;
 
-	public resultsLength = 0;
-	public isLoadingResults = true;
+  @Input()
+  public displayedColumns = [ 'id', 'customerName', 'orderTotal', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', 'customerId', 'productId', "actions" ];
 
-	@ViewChild(MatPaginator)
-	public paginator: MatPaginator;
+  public resultsLength = 0;
+  public isLoadingResults = true;
 
-	@ViewChild(MatSort)
-	public sort: MatSort;
+  @ViewChild(MatPaginator)
+  public paginator: MatPaginator;
 
-	@Input()
-	public templates = {};
+  @ViewChild(MatSort)
+  public sort: MatSort;
 
-	constructor(
-		private router: Router,
-		private snackBar: MatSnackBar,
-		private matDialog: MatDialog,
-		private dialogs: DialogsService,
-		private repoApi: GeneratorTestRepositoryApiService) {
-	
-	}
+  @Input()
+  public templates = {};
 
-	@Input()
-	public filterModel: models.OrderSearchParams;
+  constructor(
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private matDialog: MatDialog,
+		private matBottomSheet: MatBottomSheet,
+    private dialogs: DialogsService,
+    private repoApi: GeneratorTestRepositoryApiService) {
+  
+  }
 
-	public ngOnInit() {
-		
-		this.filterModel = this.filterModel || <models.OrderSearchParams> {};
+  @Input()
+  public filterModel: models.OrderSearchParams;
 
-		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+  public ngOnInit() {
+    
+    this.filterModel = this.filterModel || <models.OrderSearchParams> {};
 
-		Observable.merge(this.sort.sortChange, this.paginator.page).subscribe(() => {
-			this.search();
-		});
-	}
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-	public ngAfterViewInit() {
-		this.search();
-	}
+    Observable.merge(this.sort.sortChange, this.paginator.page).subscribe(() => {
+      this.search();
+    });
+  }
 
-	public search() {
+  public ngAfterViewInit() {
+    this.search();
+  }
 
-		this.filterModel.pageIndex = this.paginator.pageIndex || 0;
-		this.filterModel.pageSize = this.paginator.pageSize || 100;
-		this.filterModel.sortFieldName = this.sort.active || '';
-		this.filterModel.direction = this.sort.direction || 'desc';
+  public search() {
+
+    this.filterModel.pageIndex = this.paginator.pageIndex || 0;
+    this.filterModel.pageSize = this.paginator.pageSize || 100;
+    this.filterModel.sortFieldName = this.sort.active || '';
+    this.filterModel.direction = this.sort.direction || 'desc';
 
 
-		this.repoApi.getOrderList(this.filterModel).map(data => {
-			// Flip flag to show that loading has finished.
-			this.isLoadingResults = false;
-			this.resultsLength = data.rowsCount;
+    this.repoApi.getOrderList(this.filterModel).map(data => {
+      // Flip flag to show that loading has finished.
+      this.isLoadingResults = false;
+      this.resultsLength = data.rowsCount;
 
-			return data.pagedData;
-		}).catch(() => {
-			this.isLoadingResults = false;
+      return data.pagedData;
+    }).catch(() => {
+      this.isLoadingResults = false;
 
-			return Observable.of([]);
-		}).subscribe(pagedData => this.dataSource = pagedData);
-	}
+      return Observable.of([]);
+    }).subscribe(pagedData => this.dataSource = pagedData);
+  }
 
-	public delete(rowData: models.OrderModel) {
-		this.dialogs.confirm('', 'Do you want to delete?', ResultCode.Yes).subscribe(confirmed => {
-			if (!confirmed) {
-				return;
+  public delete(rowData: models.OrderModel) {
+    this.dialogs.confirm('', 'Do you want to delete?', ResultCode.Yes).subscribe(confirmed => {
+      if (!confirmed) {
+        return;
+      }
+
+      this.repoApi.deleteOrder(rowData.id).subscribe(() => {
+        
+        this.snackBar.open('Deleted successfully', null, { duration: 1000 });
+        this.search();
+      }, err => {
+        this.snackBar.open('Failed to delete', null, { duration: 3000 });
+      });
+    });
+  }
+
+  public edit(rowData: models.OrderModel) {
+    this.router.navigate([`order/${rowData.id}/edit`]);
+  }
+
+  public add() {
+    this.router.navigate(['order/create']);
+  }
+
+
+
+  public showCustomerDetails(customerId: string) {
+
+			const data = {
+				customerId,
+				title: `Customer Details`
+			};
+
+			if (this.showLinkedEntityInBottomSheet) {
+				this.matBottomSheet.open(CustomerSheetComponent, { data });
+			} else {
+				this.matDialog.open(CustomerDetailsDialog, {
+					width: '80vw',
+					data
+				});
 			}
-
-			this.repoApi.deleteOrder(rowData.id).subscribe(() => {
-				
-				this.snackBar.open('Deleted successfully', null, { duration: 1000 });
-				this.search();
-			}, err => {
-				this.snackBar.open('Failed to delete', null, { duration: 3000 });
-			});
-		});
-	}
-
-	public edit(rowData: models.OrderModel) {
-		this.router.navigate([`order/${rowData.id}/edit`]);
-	}
-
-	public add() {
-		this.router.navigate(['order/create']);
 	}
 
 
-    
-    public showCustomerDetails(customerId: string) {
-        this.matDialog.open(CustomerDetailsDialog, {
-			width: '80vw',
-			data: {
-                entityId: customerId,
-                title: `Customer Details`
-            }
-		 });           
-    }
+  public showProductDetails(id: number) {
 
-    
-    public showProductDetails(id: number) {
-        this.matDialog.open(ProductDetailsDialog, {
-			width: '80vw',
-			data: {
-                entityId: id,
-                title: `Product Details`
-            }
-		 });           
-    }
+			const data = {
+				id,
+				title: `Product Details`
+			};
 
-    
+			if (this.showLinkedEntityInBottomSheet) {
+				this.matBottomSheet.open(ProductSheetComponent, { data });
+			} else {
+				this.matDialog.open(ProductDetailsDialog, {
+					width: '80vw',
+					data
+				});
+			}
+	}
+
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource, MatDialog, MatBottomSheet } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import { merge } from 'rxjs/observable/merge';
 
@@ -10,7 +10,9 @@ import * as models from '../../models/models';
 import { DialogsService } from '../../../services/dialogs.service';
 import { ResultCode } from '../../../components/dialog/dialog.models';
 
-import { StoreDetailsDialog } from '../store/store-editor.component';
+import { StoreDetailsDialog
+	, StoreSheetComponent
+} from '../store/store-editor.component';
 
 
 @Component({
@@ -19,106 +21,117 @@ import { StoreDetailsDialog } from '../store/store-editor.component';
 })
 export class CustomerListingComponent {
 
-	public dataSource = [];
+  public dataSource = [];
 
 	@Input()
-	public displayedColumns = [ 'customerId', 'customerName', 'storeId', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', "actions" ];
+	public showLinkedEntityInBottomSheet = false;
 
-	public resultsLength = 0;
-	public isLoadingResults = true;
+  @Input()
+  public displayedColumns = [ 'customerId', 'customerName', 'createdById', 'modifiedById', 'createdTime', 'modifiedTime', 'active', 'storeId', "actions" ];
 
-	@ViewChild(MatPaginator)
-	public paginator: MatPaginator;
+  public resultsLength = 0;
+  public isLoadingResults = true;
 
-	@ViewChild(MatSort)
-	public sort: MatSort;
+  @ViewChild(MatPaginator)
+  public paginator: MatPaginator;
 
-	@Input()
-	public templates = {};
+  @ViewChild(MatSort)
+  public sort: MatSort;
 
-	constructor(
-		private router: Router,
-		private snackBar: MatSnackBar,
-		private matDialog: MatDialog,
-		private dialogs: DialogsService,
-		private repoApi: GeneratorTestRepositoryApiService) {
-	
-	}
+  @Input()
+  public templates = {};
 
-	@Input()
-	public filterModel: models.CustomerSearchParams;
+  constructor(
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private matDialog: MatDialog,
+		private matBottomSheet: MatBottomSheet,
+    private dialogs: DialogsService,
+    private repoApi: GeneratorTestRepositoryApiService) {
+  
+  }
 
-	public ngOnInit() {
-		
-		this.filterModel = this.filterModel || <models.CustomerSearchParams> {};
+  @Input()
+  public filterModel: models.CustomerSearchParams;
 
-		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+  public ngOnInit() {
+    
+    this.filterModel = this.filterModel || <models.CustomerSearchParams> {};
 
-		Observable.merge(this.sort.sortChange, this.paginator.page).subscribe(() => {
-			this.search();
-		});
-	}
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-	public ngAfterViewInit() {
-		this.search();
-	}
+    Observable.merge(this.sort.sortChange, this.paginator.page).subscribe(() => {
+      this.search();
+    });
+  }
 
-	public search() {
+  public ngAfterViewInit() {
+    this.search();
+  }
 
-		this.filterModel.pageIndex = this.paginator.pageIndex || 0;
-		this.filterModel.pageSize = this.paginator.pageSize || 100;
-		this.filterModel.sortFieldName = this.sort.active || '';
-		this.filterModel.direction = this.sort.direction || 'desc';
+  public search() {
+
+    this.filterModel.pageIndex = this.paginator.pageIndex || 0;
+    this.filterModel.pageSize = this.paginator.pageSize || 100;
+    this.filterModel.sortFieldName = this.sort.active || '';
+    this.filterModel.direction = this.sort.direction || 'desc';
 
 
-		this.repoApi.getCustomerList(this.filterModel).map(data => {
-			// Flip flag to show that loading has finished.
-			this.isLoadingResults = false;
-			this.resultsLength = data.rowsCount;
+    this.repoApi.getCustomerList(this.filterModel).map(data => {
+      // Flip flag to show that loading has finished.
+      this.isLoadingResults = false;
+      this.resultsLength = data.rowsCount;
 
-			return data.pagedData;
-		}).catch(() => {
-			this.isLoadingResults = false;
+      return data.pagedData;
+    }).catch(() => {
+      this.isLoadingResults = false;
 
-			return Observable.of([]);
-		}).subscribe(pagedData => this.dataSource = pagedData);
-	}
+      return Observable.of([]);
+    }).subscribe(pagedData => this.dataSource = pagedData);
+  }
 
-	public delete(rowData: models.CustomerModel) {
-		this.dialogs.confirm('', 'Do you want to delete?', ResultCode.Yes).subscribe(confirmed => {
-			if (!confirmed) {
-				return;
+  public delete(rowData: models.CustomerModel) {
+    this.dialogs.confirm('', 'Do you want to delete?', ResultCode.Yes).subscribe(confirmed => {
+      if (!confirmed) {
+        return;
+      }
+
+      this.repoApi.deleteCustomer(rowData.customerId).subscribe(() => {
+        
+        this.snackBar.open('Deleted successfully', null, { duration: 1000 });
+        this.search();
+      }, err => {
+        this.snackBar.open('Failed to delete', null, { duration: 3000 });
+      });
+    });
+  }
+
+  public edit(rowData: models.CustomerModel) {
+    this.router.navigate([`customer/${rowData.customerId}/edit`]);
+  }
+
+  public add() {
+    this.router.navigate(['customer/create']);
+  }
+
+
+
+  public showStoreDetails(id: number) {
+
+			const data = {
+				id,
+				title: `Store Details`
+			};
+
+			if (this.showLinkedEntityInBottomSheet) {
+				this.matBottomSheet.open(StoreSheetComponent, { data });
+			} else {
+				this.matDialog.open(StoreDetailsDialog, {
+					width: '80vw',
+					data
+				});
 			}
-
-			this.repoApi.deleteCustomer(rowData.customerId).subscribe(() => {
-				
-				this.snackBar.open('Deleted successfully', null, { duration: 1000 });
-				this.search();
-			}, err => {
-				this.snackBar.open('Failed to delete', null, { duration: 3000 });
-			});
-		});
-	}
-
-	public edit(rowData: models.CustomerModel) {
-		this.router.navigate([`customer/${rowData.customerId}/edit`]);
-	}
-
-	public add() {
-		this.router.navigate(['customer/create']);
 	}
 
 
-    
-    public showStoreDetails(id: number) {
-        this.matDialog.open(StoreDetailsDialog, {
-			width: '80vw',
-			data: {
-                entityId: id,
-                title: `Store Details`
-            }
-		 });           
-    }
-
-    
 }

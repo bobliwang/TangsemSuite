@@ -19,7 +19,7 @@ namespace Tangsem.Generator.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class NgListingComponent : NgListingComponentBase
     {
@@ -33,13 +33,13 @@ namespace Tangsem.Generator.Templates.Angular
             this.Write(@"
 import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource, MatDialog, MatBottomSheet } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import { merge } from 'rxjs/observable/merge';
 
 import { ");
             
-            #line 15 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 15 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
@@ -49,263 +49,279 @@ import { ");
                     "ice\';\r\nimport { ResultCode } from \'../../../components/dialog/dialog.models\';\r\n\r" +
                     "\n");
             
-            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 21 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
  foreach( var outgoingRef in this.TableMetadata.OutgoingReferences) { 
             
             #line default
             #line hidden
             this.Write("import { ");
             
-            #line 22 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 22 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("DetailsDialog } from \'../");
+            this.Write("DetailsDialog\r\n\t, ");
             
-            #line 22 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 23 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SheetComponent\r\n} from \'../");
+            
+            #line 24 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("/");
             
-            #line 22 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 24 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-editor.component\';\r\n");
             
-            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 25 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n\r\n@Component({\r\n  selector: \'");
             
-            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 29 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-listing\',\r\n  templateUrl: \'");
             
-            #line 28 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 30 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-listing.component.html\',\r\n})\r\nexport class ");
             
-            #line 30 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 32 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("ListingComponent {\r\n\r\n\tpublic dataSource = [];\r\n\r\n\t@Input()\r\n\tpublic displayedCol" +
-                    "umns = [ ");
+            this.Write("ListingComponent {\r\n\r\n  public dataSource = [];\r\n\r\n\t@Input()\r\n\tpublic showLinkedE" +
+                    "ntityInBottomSheet = false;\r\n\r\n  @Input()\r\n  public displayedColumns = [ ");
             
-            #line 35 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 40 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", this.TableMetadata.Columns.Select(col => $"'{col.PropertyName.Lf()}'"))));
             
             #line default
             #line hidden
             this.Write(@", ""actions"" ];
 
-	public resultsLength = 0;
-	public isLoadingResults = true;
+  public resultsLength = 0;
+  public isLoadingResults = true;
 
-	@ViewChild(MatPaginator)
-	public paginator: MatPaginator;
+  @ViewChild(MatPaginator)
+  public paginator: MatPaginator;
 
-	@ViewChild(MatSort)
-	public sort: MatSort;
+  @ViewChild(MatSort)
+  public sort: MatSort;
 
-	@Input()
-	public templates = {};
+  @Input()
+  public templates = {};
 
-	constructor(
-		private router: Router,
-		private snackBar: MatSnackBar,
-		private matDialog: MatDialog,
-		private dialogs: DialogsService,
-		private repoApi: ");
+  constructor(
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private matDialog: MatDialog,
+		private matBottomSheet: MatBottomSheet,
+    private dialogs: DialogsService,
+    private repoApi: ");
             
-            #line 54 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 60 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
             #line hidden
-            this.Write("ApiService) {\r\n\t\r\n\t}\r\n\r\n\t@Input()\r\n\tpublic filterModel: models.");
+            this.Write("ApiService) {\r\n  \r\n  }\r\n\r\n  @Input()\r\n  public filterModel: models.");
             
-            #line 59 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 65 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("SearchParams;\r\n\r\n\tpublic ngOnInit() {\r\n\t\t\r\n\t\tthis.filterModel = this.filterModel " +
-                    "|| <models.");
+            this.Write("SearchParams;\r\n\r\n  public ngOnInit() {\r\n    \r\n    this.filterModel = this.filterM" +
+                    "odel || <models.");
             
-            #line 63 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 69 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write(@"SearchParams> {};
 
-		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-		Observable.merge(this.sort.sortChange, this.paginator.page).subscribe(() => {
-			this.search();
-		});
-	}
+    Observable.merge(this.sort.sortChange, this.paginator.page).subscribe(() => {
+      this.search();
+    });
+  }
 
-	public ngAfterViewInit() {
-		this.search();
-	}
+  public ngAfterViewInit() {
+    this.search();
+  }
 
-	public search() {
+  public search() {
 
-		this.filterModel.pageIndex = this.paginator.pageIndex || 0;
-		this.filterModel.pageSize = this.paginator.pageSize || 100;
-		this.filterModel.sortFieldName = this.sort.active || '';
-		this.filterModel.direction = this.sort.direction || 'desc';
+    this.filterModel.pageIndex = this.paginator.pageIndex || 0;
+    this.filterModel.pageSize = this.paginator.pageSize || 100;
+    this.filterModel.sortFieldName = this.sort.active || '';
+    this.filterModel.direction = this.sort.direction || 'desc';
 
 
-		this.repoApi.get");
+    this.repoApi.get");
             
-            #line 84 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 90 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write(@"List(this.filterModel).map(data => {
-			// Flip flag to show that loading has finished.
-			this.isLoadingResults = false;
-			this.resultsLength = data.rowsCount;
+      // Flip flag to show that loading has finished.
+      this.isLoadingResults = false;
+      this.resultsLength = data.rowsCount;
 
-			return data.pagedData;
-		}).catch(() => {
-			this.isLoadingResults = false;
+      return data.pagedData;
+    }).catch(() => {
+      this.isLoadingResults = false;
 
-			return Observable.of([]);
-		}).subscribe(pagedData => this.dataSource = pagedData);
-	}
+      return Observable.of([]);
+    }).subscribe(pagedData => this.dataSource = pagedData);
+  }
 
-	public delete(rowData: models.");
+  public delete(rowData: models.");
             
-            #line 97 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 103 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.TsModelName));
             
             #line default
             #line hidden
-            this.Write(") {\r\n\t\tthis.dialogs.confirm(\'\', \'Do you want to delete?\', ResultCode.Yes).subscri" +
-                    "be(confirmed => {\r\n\t\t\tif (!confirmed) {\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\r\n\t\t\tthis.repoApi.de" +
-                    "lete");
+            this.Write(") {\r\n    this.dialogs.confirm(\'\', \'Do you want to delete?\', ResultCode.Yes).subsc" +
+                    "ribe(confirmed => {\r\n      if (!confirmed) {\r\n        return;\r\n      }\r\n\r\n      " +
+                    "this.repoApi.delete");
             
-            #line 103 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 109 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("(rowData.");
             
-            #line 103 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 109 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.PrimaryKeyPropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write(@").subscribe(() => {
-				
-				this.snackBar.open('Deleted successfully', null, { duration: 1000 });
-				this.search();
-			}, err => {
-				this.snackBar.open('Failed to delete', null, { duration: 3000 });
-			});
-		});
-	}
+        
+        this.snackBar.open('Deleted successfully', null, { duration: 1000 });
+        this.search();
+      }, err => {
+        this.snackBar.open('Failed to delete', null, { duration: 3000 });
+      });
+    });
+  }
 
-	public edit(rowData: models.");
+  public edit(rowData: models.");
             
-            #line 113 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 119 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.TsModelName));
             
             #line default
             #line hidden
-            this.Write(") {\r\n\t\tthis.router.navigate([`");
+            this.Write(") {\r\n    this.router.navigate([`");
             
-            #line 114 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 120 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("/${rowData.");
             
-            #line 114 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 120 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.PrimaryKeyPropertyName.Lf()));
             
             #line default
             #line hidden
-            this.Write("}/edit`]);\r\n\t}\r\n\r\n\tpublic add() {\r\n\t\tthis.router.navigate([\'");
+            this.Write("}/edit`]);\r\n  }\r\n\r\n  public add() {\r\n    this.router.navigate([\'");
             
-            #line 118 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 124 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
-            this.Write("/create\']);\r\n\t}\r\n\r\n\r\n    ");
+            this.Write("/create\']);\r\n  }\r\n\r\n\r\n");
             
-            #line 122 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 128 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
  foreach( var outgoingRef in this.TableMetadata.OutgoingReferences) { 
             
             #line default
             #line hidden
-            this.Write("\r\n    public show");
+            this.Write("\r\n  public show");
             
-            #line 124 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 130 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("Details(");
             
-            #line 124 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 130 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.PrimaryKeys[0].PropertyName.Lf()));
             
             #line default
             #line hidden
             this.Write(": ");
             
-            #line 124 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 130 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.PrimaryKeys[0].TsTypeAsString));
             
             #line default
             #line hidden
-            this.Write(") {\r\n        this.matDialog.open(");
+            this.Write(") {\r\n\r\n\t\t\tconst data = {\r\n\t\t\t\t");
             
-            #line 125 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("DetailsDialog, {\r\n\t\t\twidth: \'80vw\',\r\n\t\t\tdata: {\r\n                entityId: ");
-            
-            #line 128 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 133 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.PrimaryKeys[0].PropertyName.Lf()));
             
             #line default
             #line hidden
-            this.Write(",\r\n                title: `");
+            this.Write(",\r\n\t\t\t\ttitle: `");
             
-            #line 129 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 134 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentPropertyName));
             
             #line default
             #line hidden
-            this.Write(" Details`\r\n            }\r\n\t\t });           \r\n    }\r\n\r\n    ");
+            this.Write(" Details`\r\n\t\t\t};\r\n\r\n\t\t\tif (this.showLinkedEntityInBottomSheet) {\r\n\t\t\t\tthis.matBot" +
+                    "tomSheet.open(");
             
-            #line 134 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            #line 138 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SheetComponent, { data });\r\n\t\t\t} else {\r\n\t\t\t\tthis.matDialog.open(");
+            
+            #line 140 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(outgoingRef.ParentTableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("DetailsDialog, {\r\n\t\t\t\t\twidth: \'80vw\',\r\n\t\t\t\t\tdata\r\n\t\t\t\t});\r\n\t\t\t}\r\n\t}\r\n\r\n");
+            
+            #line 147 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgListingComponent.tt"
  } 
             
             #line default

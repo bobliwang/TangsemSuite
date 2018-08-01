@@ -21,20 +21,6 @@
 </mat-form-field>
 
 
-<!-- storeId: number -->
-
-
-    <mat-form-field>
-        <mat-select placeholder="Select Store"
-            [(ngModel)]="filterModel.storeId">
-            <mat-option value=""></mat-option>
-            <mat-option *ngFor="let opt of storeOptions" [value]="opt.id">
-                {{opt.storeName}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-
 <!-- createdById: number -->
 
 
@@ -79,6 +65,20 @@
 
 
 	<mat-checkbox [(ngModel)]="filterModel.active">Active</mat-checkbox>
+
+
+<!-- storeId: number -->
+
+
+    <mat-form-field>
+        <mat-select placeholder="Select Store"
+            [(ngModel)]="filterModel.storeId">
+            <mat-option value=""></mat-option>
+            <mat-option *ngFor="let opt of storeOptions" [value]="opt.id">
+                {{opt.storeName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
 
 

@@ -21,34 +21,6 @@
 </mat-form-field>
 
 
-<!-- productId: number -->
-
-
-    <mat-form-field>
-        <mat-select placeholder="Select Product"
-            [(ngModel)]="filterModel.productId">
-            <mat-option value=""></mat-option>
-            <mat-option *ngFor="let opt of productOptions" [value]="opt.id">
-                {{opt.name}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-
-<!-- customerId: text -->
-
-
-    <mat-form-field>
-        <mat-select placeholder="Select Customer"
-            [(ngModel)]="filterModel.customerId">
-            <mat-option value=""></mat-option>
-            <mat-option *ngFor="let opt of customerOptions" [value]="opt.customerId">
-                {{opt.customerName}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-
 <!-- orderTotal: number -->
 
 
@@ -103,6 +75,34 @@
 
 
 	<mat-checkbox [(ngModel)]="filterModel.active">Active</mat-checkbox>
+
+
+<!-- customerId: text -->
+
+
+    <mat-form-field>
+        <mat-select placeholder="Select Customer"
+            [(ngModel)]="filterModel.customerId">
+            <mat-option value=""></mat-option>
+            <mat-option *ngFor="let opt of customerOptions" [value]="opt.customerId">
+                {{opt.customerName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+<!-- productId: number -->
+
+
+    <mat-form-field>
+        <mat-select placeholder="Select Product"
+            [(ngModel)]="filterModel.productId">
+            <mat-option value=""></mat-option>
+            <mat-option *ngFor="let opt of productOptions" [value]="opt.id">
+                {{opt.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
 
 

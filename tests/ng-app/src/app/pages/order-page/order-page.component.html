@@ -1,4 +1,5 @@
 <order-listing
+  [showLinkedEntityInBottomSheet]="true"
   [templates]="{customerIdTemplate: customerIdTemplate, productIdTemplate: productIdTemplate}"
   [displayedColumns]="['id', 'customerName', 'productId', 'customerId', 'active', 'actions' ]"
 >
@@ -14,8 +15,5 @@
         [customerId]="rowData.customerId" [hideActionBar]="true"></customer-editor>
   </ng-template>
 
-  <ng-template #productIdTemplate let-rowData="rowData">
-    {{ rowData.productId }}
-</ng-template>
 
 </order-listing>

@@ -21,7 +21,7 @@ namespace Tangsem.Generator.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class NgModule : NgModuleBase
     {
@@ -45,7 +45,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 ");
             
-            #line 21 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 21 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
 
 	var matModules = new [] {
 		"MatSnackBarModule",
@@ -70,14 +70,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
             #line hidden
             this.Write("\r\nimport {\r\n\t");
             
-            #line 42 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 42 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", matModules)));
             
             #line default
             #line hidden
             this.Write("\r\n} from \'@angular/material\';\r\nimport { ");
             
-            #line 44 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 44 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
@@ -85,98 +85,105 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
             this.Write("ApiService } from \'./services/api.service\';\r\n\r\n/************ AUTO GEN COMPONENTS " +
                     "**************/\r\n");
             
-            #line 47 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 47 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
  foreach (var tableMetadata in this.TableMetadatas) { 
             
             #line default
             #line hidden
             this.Write("import { ");
             
-            #line 48 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 48 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("FilterComponent } from \'./components/");
             
-            #line 48 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 48 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("/");
             
-            #line 48 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 48 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-filter.component\';\r\nimport { ");
             
-            #line 49 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 49 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("ListingComponent } from \'./components/");
             
-            #line 49 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 49 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("/");
             
-            #line 49 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 49 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-listing.component\';\r\nimport { ");
             
-            #line 50 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 50 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("EditorComponent, ");
             
-            #line 50 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 50 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("DetailsDialog } from \'./components/");
+            this.Write("DetailsDialog, ");
             
-            #line 50 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 50 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SheetComponent } from \'./components/");
+            
+            #line 50 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("/");
             
-            #line 50 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 50 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName.Lf()));
             
             #line default
             #line hidden
             this.Write("-editor.component\';\r\n\r\n");
             
-            #line 52 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 52 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n\r\nimport { ");
             
-            #line 55 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 55 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
             #line hidden
             this.Write("RoutingModule } from \'./");
             
-            #line 55 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 55 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName.Lf()));
             
             #line default
@@ -184,133 +191,161 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
             this.Write("-routing.module\';\r\n\r\n@NgModule({\r\n\timports: [\r\n\t\tCommonModule,\r\n\t\tReactiveFormsMo" +
                     "dule,\r\n\t\tFormsModule,\r\n\t\tBrowserAnimationsModule,\r\n        ");
             
-            #line 63 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 63 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
             #line hidden
             this.Write("RoutingModule,\r\n\r\n\t\t");
             
-            #line 65 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 65 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", matModules)));
             
             #line default
             #line hidden
             this.Write(",\r\n\t],\r\n\tdeclarations: [\r\n\t\t");
             
-            #line 68 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 68 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
  foreach (var tableMetadata in this.TableMetadatas) { 
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 70 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 70 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("FilterComponent,\r\n\t\t");
             
-            #line 71 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 71 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("EditorComponent,\r\n\t\t");
             
-            #line 72 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 72 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("ListingComponent,\r\n        ");
+            this.Write("ListingComponent,\r\n    ");
             
-            #line 73 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 73 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("DetailsDialog,\r\n\r\n\t\t");
+            this.Write("DetailsDialog,\r\n    ");
             
-            #line 75 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 74 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SheetComponent,\r\n\r\n\t\t");
+            
+            #line 76 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n\t],\r\n\t\r\n\tproviders: [\r\n\t\t");
             
-            #line 80 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 81 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
             #line hidden
             this.Write("ApiService\r\n\t],\r\n\r\n    entryComponents: [\r\n        ");
             
-            #line 84 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 85 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
  foreach (var tableMetadata in this.TableMetadatas) { 
             
             #line default
             #line hidden
             this.Write("\r\n        ");
             
-            #line 86 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 87 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("DetailsDialog,\r\n\r\n\t\t");
+            this.Write("DetailsDialog,\r\n\t\t\t\t");
             
-            #line 88 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 88 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SheetComponent,\r\n\r\n\t\t");
+            
+            #line 90 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
  } 
             
             #line default
             #line hidden
             this.Write("    ],\r\n\r\n\texports: [\r\n\t\tBrowserAnimationsModule,\r\n\t\t");
             
-            #line 93 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 95 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", matModules)));
             
             #line default
             #line hidden
             this.Write(",\r\n\r\n\r\n\t\t");
             
-            #line 96 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 98 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
  foreach (var tableMetadata in this.TableMetadatas) { 
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 98 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 100 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("FilterComponent,\r\n\t\t");
             
-            #line 99 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 101 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("EditorComponent,\r\n\t\t");
             
-            #line 100 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 102 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
-            this.Write("ListingComponent,\r\n\r\n\t\t");
+            this.Write("ListingComponent,\r\n    ");
             
-            #line 102 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 103 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("DetailsDialog,\r\n    ");
+            
+            #line 104 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("SheetComponent,\r\n\r\n\t\t");
+            
+            #line 106 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t]\r\n\r\n})\r\nexport class ");
             
-            #line 106 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
+            #line 110 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgModule.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default

@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, Inject } from '@angular/core';
-import { MatPaginator, MatSort, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatPaginator, MatSort, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import * as models from '../../models/models';
 
 import { GeneratorTestRepositoryApiService } from '../../services/api.service';
@@ -183,7 +183,7 @@ export class OrderEditorComponent implements OnInit {
     </h4>
     <div mat-dialog-content>
       <order-editor
-        [id]="data.entityId" [subscribeToRoutingParams]="false" [isDialog]="true"></order-editor>
+        [id]="data.id" [subscribeToRoutingParams]="false" [isDialog]="true"></order-editor>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="close()">Close</button>      
@@ -197,7 +197,36 @@ export class OrderDetailsDialog {
     @Inject(MAT_DIALOG_DATA) public data: { id: number, title?: string }) {
   }
 
-  close(): void {
+  public close(): void {
     this.dialogRef.close();
   }
+}
+
+
+@Component({
+	selector: 'order-sheet',
+	template: `
+		<div class="flex-columns">
+			<div></div>
+			<button mat-button (click)="close($event)">
+				<mat-icon>close</mat-icon>
+			</button>
+		</div>
+		<div class="sheet-container">
+			<order-editor
+				[subscribeToRoutingParams]="false"
+				[isDialog]="true"
+				[id]="data.id"
+				></order-editor>
+		</div>
+	`,
+})
+export class OrderSheetComponent {
+	constructor(private bottomSheetRef: MatBottomSheetRef<OrderSheetComponent>,
+		@Inject(MAT_BOTTOM_SHEET_DATA) public data: { id: number, title?: string }) { }
+
+	public close(event: MouseEvent): void {
+		this.bottomSheetRef.dismiss();
+		event.preventDefault();
+	}
 }

@@ -57,17 +57,16 @@ routes.push(...[
 @NgModule({
   declarations: [
     AppComponent,
-    DialogComponent,    
+    DialogComponent,
     ProdSpecsComponent,
     ProductPageComponent,
-    OrderPageComponent
+    OrderPageComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     GeneratorTestRepositoryModule,
     RouterModule.forRoot(routes),
-    
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -118,6 +117,6 @@ routes.push(...[
 })
 export class AppModule {
   constructor(private apiService: GeneratorTestRepositoryApiService) {
-    this.apiService.setApiBaseUrl('http://localhost:5000')
+    this.apiService.setApiBaseUrl('http://localhost:5000');
   }
 }

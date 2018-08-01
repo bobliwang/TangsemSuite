@@ -8,7 +8,7 @@
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, Inject } from '@angular/core';
-import { MatPaginator, MatSort, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatPaginator, MatSort, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import * as models from '../../models/models';
 
 import { <#=Configuration.RepositoryName#>ApiService } from '../../services/api.service';
@@ -190,7 +190,7 @@ export class <#= this.TableMetadata.EntityName #>EditorComponent implements OnIn
     </h4>
     <div mat-dialog-content>
       <<#= this.TableMetadata.EntityName.Lf() #>-editor
-        [<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>]="data.entityId" [subscribeToRoutingParams]="false" [isDialog]="true"></<#= this.TableMetadata.EntityName.Lf() #>-editor>
+        [<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>]="data.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>" [subscribeToRoutingParams]="false" [isDialog]="true"></<#= this.TableMetadata.EntityName.Lf() #>-editor>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="close()">Close</button>      
@@ -204,7 +204,36 @@ export class <#= this.TableMetadata.EntityName #>DetailsDialog {
     @Inject(MAT_DIALOG_DATA) public data: { <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>: <#= this.TableMetadata.PrimaryKeys[0].TsTypeAsString #>, title?: string }) {
   }
 
-  close(): void {
+  public close(): void {
     this.dialogRef.close();
   }
+}
+
+
+@Component({
+	selector: '<#= this.TableMetadata.EntityName.Lf() #>-sheet',
+	template: `
+		<div class="flex-columns">
+			<div></div>
+			<button mat-button (click)="close($event)">
+				<mat-icon>close</mat-icon>
+			</button>
+		</div>
+		<div class="sheet-container">
+			<<#= this.TableMetadata.EntityName.Lf() #>-editor
+				[subscribeToRoutingParams]="false"
+				[isDialog]="true"
+				[<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>]="data.<#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>"
+				></<#= this.TableMetadata.EntityName.Lf() #>-editor>
+		</div>
+	`,
+})
+export class <#= this.TableMetadata.EntityName #>SheetComponent {
+	constructor(private bottomSheetRef: MatBottomSheetRef<<#= this.TableMetadata.EntityName #>SheetComponent>,
+		@Inject(MAT_BOTTOM_SHEET_DATA) public data: { <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>: <#= this.TableMetadata.PrimaryKeys[0].TsTypeAsString #>, title?: string }) { }
+
+	public close(event: MouseEvent): void {
+		this.bottomSheetRef.dismiss();
+		event.preventDefault();
+	}
 }

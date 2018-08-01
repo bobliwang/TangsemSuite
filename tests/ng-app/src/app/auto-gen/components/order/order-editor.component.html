@@ -46,56 +46,6 @@
     </div>
 
 
-    <!-- productId: number - 0 -->
-    <div class="editor-row">
-    
-        <mat-form-field>
-            <mat-select placeholder="Select Product" #productId="ngModel"
-                [(ngModel)]="model.productId" >
-                <mat-option value=""></mat-option>
-                <mat-option *ngFor="let opt of productOptions" [value]="opt.id">
-                    {{opt.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-    
-        <!-- Validation HERE -->
-        <div *ngIf="productId.invalid && (productId.dirty || productId.touched)"
-            class="alert alert-danger">
-
-            <div *ngIf="productId.errors.required">
-                ProductId is required.
-            </div>
-        </div>
-    </div>
-
-
-    <!-- customerId: text - 0 -->
-    <div class="editor-row">
-    
-        <mat-form-field>
-            <mat-select placeholder="Select Customer" #customerId="ngModel"
-                [(ngModel)]="model.customerId" >
-                <mat-option value=""></mat-option>
-                <mat-option *ngFor="let opt of customerOptions" [value]="opt.customerId">
-                    {{opt.customerName}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-    
-        <!-- Validation HERE -->
-        <div *ngIf="customerId.invalid && (customerId.dirty || customerId.touched)"
-            class="alert alert-danger">
-
-            <div *ngIf="customerId.errors.required">
-                CustomerId is required.
-            </div>
-        </div>
-    </div>
-
-
     <!-- orderTotal: number - 0 -->
     <div class="editor-row">
             
@@ -221,6 +171,56 @@
 
             <div *ngIf="active.errors.required">
                 Active is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- customerId: text - 0 -->
+    <div class="editor-row">
+    
+        <mat-form-field>
+            <mat-select placeholder="Select Customer" #customerId="ngModel"
+                [(ngModel)]="model.customerId" >
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let opt of customerOptions" [value]="opt.customerId">
+                    {{opt.customerName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    
+        <!-- Validation HERE -->
+        <div *ngIf="customerId.invalid && (customerId.dirty || customerId.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="customerId.errors.required">
+                CustomerId is required.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- productId: number - 0 -->
+    <div class="editor-row">
+    
+        <mat-form-field>
+            <mat-select placeholder="Select Product" #productId="ngModel"
+                [(ngModel)]="model.productId" >
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let opt of productOptions" [value]="opt.id">
+                    {{opt.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    
+        <!-- Validation HERE -->
+        <div *ngIf="productId.invalid && (productId.dirty || productId.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="productId.errors.required">
+                ProductId is required.
             </div>
         </div>
     </div>

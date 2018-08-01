@@ -17,23 +17,23 @@ import { GeneratorTestRepositoryApiService } from './services/api.service';
 /************ AUTO GEN COMPONENTS **************/
 import { CustomerFilterComponent } from './components/customer/customer-filter.component';
 import { CustomerListingComponent } from './components/customer/customer-listing.component';
-import { CustomerEditorComponent, CustomerDetailsDialog } from './components/customer/customer-editor.component';
+import { CustomerEditorComponent, CustomerDetailsDialog, CustomerSheetComponent } from './components/customer/customer-editor.component';
 
 import { StoreFilterComponent } from './components/store/store-filter.component';
 import { StoreListingComponent } from './components/store/store-listing.component';
-import { StoreEditorComponent, StoreDetailsDialog } from './components/store/store-editor.component';
+import { StoreEditorComponent, StoreDetailsDialog, StoreSheetComponent } from './components/store/store-editor.component';
 
 import { OrderFilterComponent } from './components/order/order-filter.component';
 import { OrderListingComponent } from './components/order/order-listing.component';
-import { OrderEditorComponent, OrderDetailsDialog } from './components/order/order-editor.component';
+import { OrderEditorComponent, OrderDetailsDialog, OrderSheetComponent } from './components/order/order-editor.component';
 
 import { ProductFilterComponent } from './components/product/product-filter.component';
 import { ProductListingComponent } from './components/product/product-listing.component';
-import { ProductEditorComponent, ProductDetailsDialog } from './components/product/product-editor.component';
+import { ProductEditorComponent, ProductDetailsDialog, ProductSheetComponent } from './components/product/product-editor.component';
 
 import { PosFilterComponent } from './components/pos/pos-filter.component';
 import { PosListingComponent } from './components/pos/pos-listing.component';
-import { PosEditorComponent, PosDetailsDialog } from './components/pos/pos-editor.component';
+import { PosEditorComponent, PosDetailsDialog, PosSheetComponent } from './components/pos/pos-editor.component';
 
 
 
@@ -54,31 +54,36 @@ import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-
 		CustomerFilterComponent,
 		CustomerEditorComponent,
 		CustomerListingComponent,
-        CustomerDetailsDialog,
+    CustomerDetailsDialog,
+    CustomerSheetComponent,
 
 		
 		StoreFilterComponent,
 		StoreEditorComponent,
 		StoreListingComponent,
-        StoreDetailsDialog,
+    StoreDetailsDialog,
+    StoreSheetComponent,
 
 		
 		OrderFilterComponent,
 		OrderEditorComponent,
 		OrderListingComponent,
-        OrderDetailsDialog,
+    OrderDetailsDialog,
+    OrderSheetComponent,
 
 		
 		ProductFilterComponent,
 		ProductEditorComponent,
 		ProductListingComponent,
-        ProductDetailsDialog,
+    ProductDetailsDialog,
+    ProductSheetComponent,
 
 		
 		PosFilterComponent,
 		PosEditorComponent,
 		PosListingComponent,
-        PosDetailsDialog,
+    PosDetailsDialog,
+    PosSheetComponent,
 
 		
 	],
@@ -90,18 +95,23 @@ import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-
     entryComponents: [
         
         CustomerDetailsDialog,
+				CustomerSheetComponent,
 
 		
         StoreDetailsDialog,
+				StoreSheetComponent,
 
 		
         OrderDetailsDialog,
+				OrderSheetComponent,
 
 		
         ProductDetailsDialog,
+				ProductSheetComponent,
 
 		
         PosDetailsDialog,
+				PosSheetComponent,
 
 		    ],
 
@@ -114,26 +124,36 @@ import { GeneratorTestRepositoryRoutingModule } from './generatorTestRepository-
 		CustomerFilterComponent,
 		CustomerEditorComponent,
 		CustomerListingComponent,
+    CustomerDetailsDialog,
+    CustomerSheetComponent,
 
 		
 		StoreFilterComponent,
 		StoreEditorComponent,
 		StoreListingComponent,
+    StoreDetailsDialog,
+    StoreSheetComponent,
 
 		
 		OrderFilterComponent,
 		OrderEditorComponent,
 		OrderListingComponent,
+    OrderDetailsDialog,
+    OrderSheetComponent,
 
 		
 		ProductFilterComponent,
 		ProductEditorComponent,
 		ProductListingComponent,
+    ProductDetailsDialog,
+    ProductSheetComponent,
 
 		
 		PosFilterComponent,
 		PosEditorComponent,
 		PosListingComponent,
+    PosDetailsDialog,
+    PosSheetComponent,
 
 			]
 
