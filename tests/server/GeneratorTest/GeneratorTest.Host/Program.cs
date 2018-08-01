@@ -8,8 +8,8 @@ namespace GeneratorTest.Host
   {
     public static void Main(string[] args)
     {
-      ////var connStr = @"Data Source=.\SQLExpress;Initial Catalog=test;Integrated Security=True";
-      ////RebuildDatabaseFromModels(connStr);
+      //var connStr = @"Data Source=.\SQLExpress;Initial Catalog=test;Integrated Security=True";
+      //RebuildDatabaseFromModels(connStr);
 
 
       BuildWebHost(args).Run();
