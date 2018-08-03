@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { GeneratorTestRepositoryModule } from './auto-gen/generatorTestRepository.module';
 import { GeneratorTestRepositoryApiService } from './auto-gen/services/api.service';
 import { RouterModule } from '@angular/router';
 import { routes } from './auto-gen/generatorTestRepository-routing.module';
-import {
+import {  
   MatAutocompleteModule,
   MatBadgeModule,
   MatBottomSheetModule,
@@ -48,6 +49,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { ProdSpecsComponent } from './components/prod-specs/prod-specs.component';
 import { OrderPageComponent } from './pages/order-page/order-page.component';
+import { SingleEntitySelectorComponent } from './components/single-entity-selector/single-entity-selector.component';
 
 routes.push(...[
   { path: 'my-product/listing', component: ProductPageComponent },
@@ -61,10 +63,12 @@ routes.push(...[
     ProdSpecsComponent,
     ProductPageComponent,
     OrderPageComponent,
+    SingleEntitySelectorComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     GeneratorTestRepositoryModule,
     RouterModule.forRoot(routes),
     MatAutocompleteModule,

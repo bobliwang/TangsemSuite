@@ -1,0 +1,19 @@
+<!-- Non-NgMaterial -->
+
+<select #select [ngModel]="value" (change)="updateValue($event)" *ngIf="!useNgMaterial" [class]="cssClass">
+  <option *ngFor="let opt of options$ | async" [value]="opt[valueField]">
+    {{opt[displayField]}}
+  </option>
+</select>
+
+
+<!-- NgMaterial -->
+
+<mat-form-field *ngIf="useNgMaterial">
+  <mat-select #matSelect [attr.placeholder]="placeholder" (selectionChange)="updateValue($event)"
+      [(ngModel)]="value">
+      <mat-option *ngFor="let opt of options$ | async" [value]="opt[valueField]">
+        {{opt[displayField]}}
+      </mat-option>
+  </mat-select>
+</mat-form-field>

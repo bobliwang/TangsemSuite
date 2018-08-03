@@ -12,9 +12,12 @@ import { ProductSheetComponent } from '../../auto-gen/components/product/product
 })
 export class OrderPageComponent implements OnInit {
 
+  public selectedCustomer = '';
+  
   constructor(private bottomSheet: MatBottomSheet) { }
 
   ngOnInit() {
   }
+
 }
 

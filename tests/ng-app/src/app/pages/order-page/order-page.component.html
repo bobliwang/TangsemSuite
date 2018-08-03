@@ -1,3 +1,21 @@
+
+<div>
+  <single-entity-selector
+  [useNgMaterial]="true"
+  [(ngModel)]="selectedCustomer"
+  endpoint="http://localhost:5000/_api/repo/Customer"
+  displayField="customerName"
+  valueField="customerId">
+
+</single-entity-selector>
+</div>
+
+
+<div>
+  Selected: {{ selectedCustomer}}
+</div>
+
+
 <order-listing
   [showLinkedEntityInBottomSheet]="true"
   [templates]="{customerIdTemplate: customerIdTemplate, productIdTemplate: productIdTemplate}"
