@@ -49,6 +49,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { ProdSpecsComponent } from './components/prod-specs/prod-specs.component';
 import { OrderPageComponent } from './pages/order-page/order-page.component';
+
+import { MultipleEntitySelectorComponent } from './components/multiple-entity-selector/multiple-entity-selector.component';
 import { SingleEntitySelectorComponent } from './components/single-entity-selector/single-entity-selector.component';
 
 routes.push(...[
@@ -64,6 +66,7 @@ routes.push(...[
     ProductPageComponent,
     OrderPageComponent,
     SingleEntitySelectorComponent,
+    MultipleEntitySelectorComponent,
   ],
   imports: [
     BrowserModule,

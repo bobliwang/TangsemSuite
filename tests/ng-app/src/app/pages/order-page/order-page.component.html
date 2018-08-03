@@ -1,36 +1,40 @@
+<div>
+  <single-entity-selector [useNgMaterial]="true" [(ngModel)]="selectedCustomer" endpoint="http://localhost:5000/_api/repo/Customer"
+    displayField="customerName" valueField="customerId">
+
+  </single-entity-selector>
+
+
+  <div (click)="log(selectedCustomer)">
+    Selected: {{ selectedCustomer}}
+  </div>
+
+</div>
 
 <div>
-  <single-entity-selector
-  [useNgMaterial]="true"
-  [(ngModel)]="selectedCustomer"
-  endpoint="http://localhost:5000/_api/repo/Customer"
-  displayField="customerName"
-  valueField="customerId">
+  <multiple-entity-selector [useNgMaterial]="true" [(ngModel)]="selectedCustomers" endpoint="http://localhost:5000/_api/repo/Customer"
+    displayField="customerName" valueField="customerId"></multiple-entity-selector>
 
-</single-entity-selector>
+
+  <div (click)="log(selectedCustomers)">
+    Selected Multiple: {{ selectedCustomers | json }}
+  </div>
 </div>
 
 
-<div>
-  Selected: {{ selectedCustomer}}
-</div>
 
 
-<order-listing
-  [showLinkedEntityInBottomSheet]="true"
-  [templates]="{customerIdTemplate: customerIdTemplate, productIdTemplate: productIdTemplate}"
-  [displayedColumns]="['id', 'customerName', 'productId', 'customerId', 'active', 'actions' ]"
->
+<order-listing [showLinkedEntityInBottomSheet]="true" [templates]="{customerIdTemplate: customerIdTemplate, productIdTemplate: productIdTemplate}"
+  [displayedColumns]="['id', 'customerName', 'productId', 'customerId', 'active', 'actions' ]">
 
   <ng-template #customerIdTemplate let-rowData="rowData">
-      
-      <a mat-button (click)="rowData._showCustomerDetails = !rowData._showCustomerDetails">
-        {{ rowData.customerId }}
-      </a>
 
-      <customer-editor *ngIf="rowData._showCustomerDetails"
-        [subscribeToRoutingParams]="false"
-        [customerId]="rowData.customerId" [hideActionBar]="true"></customer-editor>
+    <a mat-button (click)="rowData._showCustomerDetails = !rowData._showCustomerDetails">
+      {{ rowData.customerId }}
+    </a>
+
+    <customer-editor *ngIf="rowData._showCustomerDetails" [subscribeToRoutingParams]="false" [customerId]="rowData.customerId"
+      [hideActionBar]="true"></customer-editor>
   </ng-template>
 
 

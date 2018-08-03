@@ -1,23 +1,23 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, forwardRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
 import { MatSelect } from '@angular/material';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'single-entity-selector',
-  templateUrl: './single-entity-selector.component.html',
-  styleUrls: ['./single-entity-selector.component.css'],
+  selector: 'multiple-entity-selector',
+  templateUrl: './multiple-entity-selector.component.html',
+  styleUrls: ['./multiple-entity-selector.component.css'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SingleEntitySelectorComponent),
+    useExisting: forwardRef(() => MultipleEntitySelectorComponent),
     multi: true
   }]
 })
-export class SingleEntitySelectorComponent implements OnInit, ControlValueAccessor, OnChanges {
+export class MultipleEntitySelectorComponent implements OnInit, ControlValueAccessor {
 
   @Input()
-  public value: any;
+  public value: any[] = [];
 
   @Input()
   public endpoint = 'DEFAULT_URL';
@@ -41,7 +41,7 @@ export class SingleEntitySelectorComponent implements OnInit, ControlValueAccess
   public isDisabled = false;
 
   @Input()
-  public useNgMaterial = false;
+  public useNgMaterial = true;
 
   @Input()
   public cssClass = '';
@@ -58,11 +58,6 @@ export class SingleEntitySelectorComponent implements OnInit, ControlValueAccess
 
   constructor(private httpClient: HttpClient) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes', changes);  
-  }
-
-
   ngOnInit() {
     
     if (this.options$) {
@@ -78,9 +73,9 @@ export class SingleEntitySelectorComponent implements OnInit, ControlValueAccess
     }
 
     this.options$ = this.httpClient.request<{pagedData: any[]}>(this.method, this.endpoint, { params }).map(x => x.pagedData);
-    
   }
 
+  
   public updateValue($event) {
     console.log('updateValue', $event);
 
@@ -100,7 +95,7 @@ export class SingleEntitySelectorComponent implements OnInit, ControlValueAccess
     if (this.selectRef) {
       (this.selectRef.nativeElement as HTMLSelectElement).value = value;
     } else if (this.matSelect) {
-      this.matSelect.value = value;
+      this.matSelect.writeValue(value);
     }
     
   }
@@ -116,5 +111,4 @@ export class SingleEntitySelectorComponent implements OnInit, ControlValueAccess
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
-
 }
