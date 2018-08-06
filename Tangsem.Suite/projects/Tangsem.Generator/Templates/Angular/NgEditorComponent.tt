@@ -201,7 +201,7 @@ export class <#= this.TableMetadata.EntityName #>DetailsDialog {
 
   constructor(
     public dialogRef: MatDialogRef<<#= this.TableMetadata.EntityName #>DetailsDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: { <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>: <#= this.TableMetadata.PrimaryKeys[0].TsTypeAsString #>, title?: string }) {
+    @Inject(MAT_DIALOG_DATA) public data: { <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>: <#= this.TableMetadata.PrimaryKeyTsTypeAsString #>, title?: string }) {
   }
 
   public close(): void {
@@ -230,7 +230,7 @@ export class <#= this.TableMetadata.EntityName #>DetailsDialog {
 })
 export class <#= this.TableMetadata.EntityName #>SheetComponent {
 	constructor(private bottomSheetRef: MatBottomSheetRef<<#= this.TableMetadata.EntityName #>SheetComponent>,
-		@Inject(MAT_BOTTOM_SHEET_DATA) public data: { <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>: <#= this.TableMetadata.PrimaryKeys[0].TsTypeAsString #>, title?: string }) { }
+		@Inject(MAT_BOTTOM_SHEET_DATA) public data: { <#= this.TableMetadata.PrimaryKeyPropertyName.Lf() #>: <#= this.TableMetadata.PrimaryKeyTsTypeAsString #>, title?: string }) { }
 
 	public close(event: MouseEvent): void {
 		this.bottomSheetRef.dismiss();

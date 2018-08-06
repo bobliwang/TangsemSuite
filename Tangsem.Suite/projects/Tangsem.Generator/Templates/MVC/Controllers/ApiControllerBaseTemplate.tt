@@ -53,7 +53,7 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers.Base
 			return this.Ok(searchResult);
 		}
      
-		public virtual IActionResult Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id) {
+		public virtual IActionResult Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(<#= tableMetadata.PrimaryKeyCSharpTypeAsString #> id) {
 			var <#= tableMetadata.EntityName.Lf() #> = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
             if (<#= tableMetadata.EntityName.Lf() #> == null)
 			{
@@ -65,7 +65,7 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers.Base
 			return this.Ok(<#= tableMetadata.EntityName.Lf() #>Dto);
 		}
 
-		public virtual IActionResult Update<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
+		public virtual IActionResult Update<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeyCSharpTypeAsString #> id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
 			var entity = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
 
 			if (entity == null)
@@ -88,7 +88,7 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers.Base
 			return this.Ok();
 		}
 
-		public virtual IActionResult Delete<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, bool isHardDelete) {
+		public virtual IActionResult Delete<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeyCSharpTypeAsString #> id, bool isHardDelete) {
 			var entity = _repository.Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
 
 			if (entity == null)

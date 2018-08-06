@@ -19,7 +19,7 @@ namespace Tangsem.Generator.Templates.MVC.Controllers
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+    #line 1 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class ApiControllerTemplate : ApiControllerTemplateBase
     {
@@ -31,7 +31,7 @@ namespace Tangsem.Generator.Templates.MVC.Controllers
         {
             this.Write("\r\n");
             
-            #line 8 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 8 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
 
 	var tableMetadata = this.TableMetadata;
 
@@ -40,28 +40,28 @@ namespace Tangsem.Generator.Templates.MVC.Controllers
             #line hidden
             this.Write("\r\nusing System.Linq;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing AutoMapper;\r\nusing ");
             
-            #line 15 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 15 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 16 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 16 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.EntityNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 17 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 17 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.DTONamespace));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 18 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 18 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.DomainNamespace));
             
             #line default
@@ -69,49 +69,49 @@ namespace Tangsem.Generator.Templates.MVC.Controllers
             this.Write(".ViewModels.SearchParams;\r\n\r\nusing Tangsem.Data;\r\nusing Tangsem.NHibernate.Extens" +
                     "tions;\r\nusing ");
             
-            #line 22 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 22 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RootProjectName));
             
             #line default
             #line hidden
             this.Write(".Host.Filters;\r\nusing ");
             
-            #line 23 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 23 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RootProjectName));
             
             #line default
             #line hidden
             this.Write(".Host.Controllers.Base;\r\n\r\nnamespace ");
             
-            #line 25 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 25 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RootProjectName));
             
             #line default
             #line hidden
             this.Write(".Host.Controllers\r\n{\r\n\tpublic partial class ");
             
-            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 27 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("ApiController : ");
             
-            #line 27 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 27 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("ApiControllerBase\r\n\t{\t\r\n\t\tpublic ");
             
-            #line 29 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 29 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("ApiController(I");
             
-            #line 29 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 29 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Configuration.RepositoryName));
             
             #line default
@@ -119,182 +119,182 @@ namespace Tangsem.Generator.Templates.MVC.Controllers
             this.Write(" repository, IMapper mapper): base(repository, mapper) {\r\n\t\t}\r\n\r\n\t\t[HttpGet(\"_api" +
                     "/repo/");
             
-            #line 32 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 32 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("\")]\r\n\t\tpublic override IActionResult Get");
             
-            #line 33 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 33 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("List(");
             
-            #line 33 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 33 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("SearchParams filterModel) {\r\n            return base.Get");
             
-            #line 34 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 34 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("List(filterModel);\r\n\t\t}\r\n     \r\n\t\t[HttpGet(\"_api/repo/");
             
-            #line 37 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 37 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("/{id}\")]\r\n\t\tpublic override IActionResult Get");
             
-            #line 38 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 38 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("By");
             
-            #line 38 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 38 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeyPropertyName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 38 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeys[0].CSharpTypeAsString));
+            #line 38 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeyCSharpTypeAsString));
             
             #line default
             #line hidden
             this.Write(" id) {\r\n\t\t\treturn base.Get");
             
-            #line 39 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 39 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("By");
             
-            #line 39 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 39 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeyPropertyName));
             
             #line default
             #line hidden
             this.Write("(id);\r\n\t\t}\r\n\r\n\t\t[HttpPost(\"_api/repo/");
             
-            #line 42 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 42 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("/{id}\")]\r\n\t\t[TransactionFilter]\r\n\t\tpublic override IActionResult Update");
             
-            #line 44 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 44 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 44 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeys[0].CSharpTypeAsString));
+            #line 44 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeyCSharpTypeAsString));
             
             #line default
             #line hidden
             this.Write(" id, [FromBody] ");
             
-            #line 44 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 44 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("DTO model) {\r\n\t\t    return base.Update");
             
-            #line 45 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 45 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("(id, model);\r\n\t\t}\r\n     \r\n\t\t[HttpPost(\"_api/repo/");
             
-            #line 48 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 48 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("\")]\r\n\t\t[TransactionFilter]\r\n\t\tpublic override IActionResult Create");
             
-            #line 50 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 50 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("([FromBody] ");
             
-            #line 50 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 50 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("DTO model) {\r\n\t\t\treturn base.Create");
             
-            #line 51 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 51 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("(model);\r\n\t\t}\r\n\r\n\t\t[HttpPost(\"_api/repo/");
             
-            #line 54 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 54 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("/{id}/delete\")]\r\n\t\t[TransactionFilter]\r\n\t\tpublic override IActionResult Delete");
             
-            #line 56 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 56 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 56 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeys[0].CSharpTypeAsString));
+            #line 56 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.PrimaryKeyCSharpTypeAsString));
             
             #line default
             #line hidden
             this.Write(" id, bool isHardDelete) {\r\n            return base.Delete");
             
-            #line 57 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 57 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("(id, isHardDelete);\r\n\t\t}\r\n\r\n\t\tpublic override IQueryable<");
             
-            #line 60 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 60 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("> FilterBySearchParams(IQueryable<");
             
-            #line 60 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 60 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write("> qry, ");
             
-            #line 60 "C:\git\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
+            #line 60 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\MVC\Controllers\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tableMetadata.EntityName));
             
             #line default

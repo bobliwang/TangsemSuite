@@ -78,8 +78,61 @@ namespace Tangsem.Generator.Metadata
     {
       get
       {
+        if (this.IsView)
+        {
+          // Default to first column.
+          return this.GetIdColumnForView().PropertyName;
+        }
+
         return string.Join("And", this.PrimaryKeys.Select(pk => pk.PropertyName));
       }
+    }
+
+    public System.Type PrimaryKeyClrType
+    {
+      get
+      {
+        if (this.IsView)
+        {
+          // Default to first column.
+          return this.GetIdColumnForView().ClrType;
+        }
+
+        return this.PrimaryKeys[0].ClrType;
+      }
+    }
+
+    public string PrimaryKeyCSharpTypeAsString
+    {
+      get
+      {
+        if (this.IsView)
+        {
+          // Default to first column.
+          return this.GetIdColumnForView().CSharpTypeAsString;
+        }
+
+        return this.PrimaryKeys[0].CSharpTypeAsString;
+      }
+    }
+
+    public string PrimaryKeyTsTypeAsString
+    {
+      get
+      {
+        if (this.IsView)
+        {
+          // Default to first column.
+          return this.GetIdColumnForView().TsTypeAsString;
+        }
+
+        return this.PrimaryKeys[0].TsTypeAsString;
+      }
+    }
+
+    public ColumnMetadata GetIdColumnForView()
+    {
+      return this.Columns[0];
     }
 
     /// <summary>

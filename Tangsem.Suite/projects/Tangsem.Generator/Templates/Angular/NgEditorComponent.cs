@@ -489,7 +489,7 @@ import { ");
             this.Write(": ");
             
             #line 204 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.PrimaryKeys[0].TsTypeAsString));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.PrimaryKeyTsTypeAsString));
             
             #line default
             #line hidden
@@ -555,7 +555,7 @@ import { ");
             this.Write(": ");
             
             #line 233 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Angular\NgEditorComponent.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.PrimaryKeys[0].TsTypeAsString));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableMetadata.PrimaryKeyTsTypeAsString));
             
             #line default
             #line hidden

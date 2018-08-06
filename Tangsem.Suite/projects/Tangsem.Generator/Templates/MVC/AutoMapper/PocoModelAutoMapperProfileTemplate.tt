@@ -34,7 +34,7 @@ namespace <#= Configuration.DomainNamespace #>.Mappings.AutoMapper
 
         public virtual void SetupMappingToEntity(IMappingExpression<<#= this.TableMetadata.EntityName #>DTO, <#= this.TableMetadata.EntityName #>> mappingEntity)
 	    {
-            mappingEntity.ForMember(x => x.<#= this.TableMetadata.PrimaryKeyPropertyName #>, opts => opts.Condition(s => s.<#= this.TableMetadata.PrimaryKeyPropertyName #> != default(<#= this.TableMetadata.PrimaryKeys[0].ClrType #>)));
+            mappingEntity.ForMember(x => x.<#= this.TableMetadata.PrimaryKeyPropertyName #>, opts => opts.Condition(s => s.<#= this.TableMetadata.PrimaryKeyPropertyName #> != default(<#= this.TableMetadata.PrimaryKeyClrType #>)));
 
             <# if( this.TableMetadata.IsAuditableEntity) { #>
 

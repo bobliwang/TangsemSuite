@@ -35,13 +35,13 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers
 		}
      
 		[HttpGet("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
-		public override IActionResult Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id) {
+		public override IActionResult Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(<#= tableMetadata.PrimaryKeyCSharpTypeAsString #> id) {
 			return base.Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
 		}
 
 		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
 		[TransactionFilter]
-		public override IActionResult Update<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
+		public override IActionResult Update<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeyCSharpTypeAsString #> id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
 		    return base.Update<#=tableMetadata.EntityName#>(id, model);
 		}
      
@@ -53,7 +53,7 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers
 
 		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}/delete")]
 		[TransactionFilter]
-		public override IActionResult Delete<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> id, bool isHardDelete) {
+		public override IActionResult Delete<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeyCSharpTypeAsString #> id, bool isHardDelete) {
             return base.Delete<#=tableMetadata.EntityName#>(id, isHardDelete);
 		}
 
