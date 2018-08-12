@@ -11,9 +11,10 @@ using Tangsem.NHibernate.Extenstions;
 using Tangsem.NHibernate.Interceptors;
 using Tangsem.NHibernate.Service;
 
-namespace GeneratorTest.Host
+namespace GeneratorTest.Common.Domain.Repositories
 {
-  public class GeneratorTestRepositoryBuilder: IRepositoryProvider
+
+  public class GeneratorTestRepositoryBuilder : IRepositoryProvider
   {
 
     private readonly string _connectionString;
@@ -49,7 +50,7 @@ namespace GeneratorTest.Host
     public RepositoryBase CreateRepository(IDataContext dataContext)
     {
 
-      var ai = new AuditingInterceptor { DataContext = dataContext};
+      var ai = new AuditingInterceptor { DataContext = dataContext };
       var session = this.SessionFactory
         .WithOptions()
         .Interceptor(ai)

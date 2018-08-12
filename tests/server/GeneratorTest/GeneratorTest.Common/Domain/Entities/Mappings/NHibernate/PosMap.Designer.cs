@@ -66,6 +66,15 @@ namespace GeneratorTest.Common.Domain.Entities.Mappings.NHibernate
         
 			 
 			   
+			   // StoreId
+
+         
+         this.Map(x => x.StoreId).Column("StoreId")
+
+;
+        
+			 
+			   
 			   // CreatedById
 
          

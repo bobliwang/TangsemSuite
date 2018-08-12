@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+    <PropertyGroup>
+        <TargetFramework>net461</TargetFramework>
+    </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.2.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GeneratorTest.Common\GeneratorTest.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Tangsem.Common">
+      <HintPath>..\..\..\..\Tangsem.Suite\projects\Tangsem.NHibernate\bin\Debug\Tangsem.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Tangsem.Data">
+      <HintPath>..\..\..\..\Tangsem.Suite\projects\Tangsem.NHibernate\bin\Debug\Tangsem.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Tangsem.NHibernate">
+      <HintPath>..\..\..\..\Tangsem.Suite\projects\Tangsem.NHibernate\bin\Debug\Tangsem.NHibernate.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

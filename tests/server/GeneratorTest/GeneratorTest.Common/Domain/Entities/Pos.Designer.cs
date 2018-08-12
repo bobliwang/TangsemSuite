@@ -37,6 +37,16 @@ namespace GeneratorTest.Common.Domain.Entities
     public static readonly Expression<Func<Pos, object>> Expr_Name = x => x.Name;
     
     /// <summary>
+    /// The property name 'StoreId'. It matches the property to column 'StoreId'.
+    /// </summary>
+    public static readonly string Prop_StoreId = "StoreId";
+    
+    /// <summary>
+    /// The lamda expression for StoreId.
+    /// </summary>
+    public static readonly Expression<Func<Pos, object>> Expr_StoreId = x => x.StoreId;
+    
+    /// <summary>
     /// The property name 'CreatedById'. It matches the property to column 'CreatedById'.
     /// </summary>
     public static readonly string Prop_CreatedById = "CreatedById";
@@ -113,6 +123,12 @@ namespace GeneratorTest.Common.Domain.Entities
     public virtual string Name { get; set; }
     
     /// <summary>
+    /// Property StoreId mapping to Pos.StoreId
+    /// </summary>
+    [JsonProperty("storeId")]   
+    public virtual int? StoreId { get; set; }
+    
+    /// <summary>
     /// Property CreatedById mapping to Pos.CreatedById
     /// </summary>
     [JsonProperty("createdById")]   
@@ -154,6 +170,8 @@ namespace GeneratorTest.Common.Domain.Entities
       public static readonly int Id_MaxLenth = 0;
     
       public static readonly int Name_MaxLenth = 50;
+    
+      public static readonly int StoreId_MaxLenth = 0;
     
       public static readonly int CreatedById_MaxLenth = 0;
     

@@ -16,6 +16,10 @@ namespace GeneratorTest.Common.Domain.ViewModels.SearchParams
 
 	
 	
+		public int? StoreId { get; set; }
+
+	
+	
 		public int? CreatedById { get; set; }
 
 	

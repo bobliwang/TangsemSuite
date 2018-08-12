@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using GeneratorTest.Common.Domain.Repositories;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
