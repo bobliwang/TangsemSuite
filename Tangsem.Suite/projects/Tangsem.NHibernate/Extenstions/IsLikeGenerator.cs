@@ -23,4 +23,19 @@ namespace Tangsem.NHibernate.Extenstions
         visitor.Visit(arguments[1]).AsExpression());
     }
   }
+
+  ////public class IsJsonStringLikeGenerator : BaseHqlGeneratorForMethod
+  ////{
+  ////  public IsJsonStringLikeGenerator()
+  ////  {
+  ////    this.SupportedMethods = new[] { ReflectHelper.GetMethod(() => LinqFunctionExtensions.IsJsonStringLike(null, null)) };
+  ////  }
+
+  ////  public override HqlTreeNode BuildHql(MethodInfo method, Expression targetObject,
+  ////    ReadOnlyCollection<Expression> arguments, HqlTreeBuilder treeBuilder, IHqlExpressionVisitor visitor)
+  ////  {
+  ////    return treeBuilder.Like(visitor.Visit(arguments[0]).AsExpression(),
+  ////      visitor.Visit(arguments[1]).AsExpression());
+  ////  }
+  ////}
 }

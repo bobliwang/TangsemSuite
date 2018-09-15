@@ -9,6 +9,8 @@ namespace Tangsem.NHibernate.Extenstions
       this.Merge(new JsonArrayLengthGenerator());
 
       this.Merge(new IsLikeGenerator());
+      ////this.Merge(new IsJsonStringLikeGenerator());
+
       this.Merge(new IsNulOrEmptyGenerator());
       this.Merge(new IsNulOrWhitespaceGenerator());
 

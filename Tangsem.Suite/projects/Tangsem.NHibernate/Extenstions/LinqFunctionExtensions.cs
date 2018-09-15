@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
@@ -24,6 +25,15 @@ namespace Tangsem.NHibernate.Extenstions
 
       return Regex.IsMatch(source, pattern);
     }
+
+    ////public static bool IsJsonStringLike(this IEnumerable list, string pattern)
+    ////{
+    ////  pattern = Regex.Escape(pattern);
+    ////  pattern = pattern.Replace("%", ".*?").Replace("_", ".");
+    ////  pattern = pattern.Replace(@"\[", "[").Replace(@"\]", "]").Replace(@"\^", "^");
+
+    ////  return Regex.IsMatch(JsonConvert.SerializeObject(list), pattern);
+    ////}
 
     public static int JsonArrayLength(this object[] source)
     {

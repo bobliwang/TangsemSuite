@@ -12,9 +12,9 @@ namespace Tangsem.Generator.Console
   {
     static void Main(string[] args)
     {
-      var path = @"Test.xml";
+      //var path = @"Test.xml";
 
-      //var path = @"TMobility-Express.xml";
+      var path = @"TMobility-Express.xml";
 
       if (args != null && args.Length > 0)
       {
