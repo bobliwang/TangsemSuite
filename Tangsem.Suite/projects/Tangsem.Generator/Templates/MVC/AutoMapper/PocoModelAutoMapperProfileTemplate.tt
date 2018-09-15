@@ -85,17 +85,13 @@ namespace <#= Configuration.DomainNamespace #>.Mappings.AutoMapper
 
 	    public virtual void SetupMappingToDto(IMappingExpression<<#= this.TableMetadata.EntityName #>, <#= this.TableMetadata.EntityName #>DTO> mappingToDto)
 	    {
-
             <# foreach(var outgingRef in this.TableMetadata.OutgoingReferences) { #>
-	        mappingToDto.ForMember(x => x.<#= outgingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName #>, opts => opts.ResolveUsing((s, t) =>
-	        {
-                <# if (outgingRef.ColumnPairs[0].ChildColumnMetadata.Nullable) { #>
-	            return s.<#= outgingRef.ParentPropertyName #>?.<#= outgingRef.ParentTableMetadata.PrimaryKeyPropertyName #>;
-                <# } else { #>
-                return s.<#= outgingRef.ParentPropertyName #>.<#= outgingRef.ParentTableMetadata.PrimaryKeyPropertyName #>;
-                <# } #>
-	        }));
+	        mappingToDto.ForMember(x => x.<#= outgingRef.ColumnPairs[0].ChildColumnMetadata.PropertyName #>, opts => opts.ResolveUsing((s, t) => <# if (outgingRef.ColumnPairs[0].ChildColumnMetadata.Nullable) { #>s.<#= outgingRef.ParentPropertyName #>?.<#= outgingRef.ParentTableMetadata.PrimaryKeyPropertyName #><# } else { #>s.<#= outgingRef.ParentPropertyName #>.<#= outgingRef.ParentTableMetadata.PrimaryKeyPropertyName #><# } #>));
             <# } #>
+
+            this.SetupMappingToDtoExtra(mappingToDto);
         }
+
+        partial void SetupMappingToDtoExtra(IMappingExpression<<#= this.TableMetadata.EntityName #>, <#= this.TableMetadata.EntityName #>DTO> mappingToDto);
 	}
 }
