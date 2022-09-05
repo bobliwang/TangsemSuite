@@ -1,0 +1,57 @@
+﻿<#@ template language="C#"  inherits="Tangsem.Common.T4.T4TemplateBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#@ import namespace="Microsoft.OpenApi.Any" #>
+<#@ import namespace="Swashbuckle.AspNetCore.Swagger" #>
+<#@ import namespace="Tangsem.Common.Extensions" #>
+
+
+<#
+  var type = this.Type;
+
+  var isEnum = this.IsEnumOrNullableEnum(type);
+  
+  var classDesc = this.GetModelClassDescription();
+  var hasClassDesc = classDesc != null && !string.IsNullOrWhiteSpace(classDesc);
+
+  if (isEnum) {
+    var enumVals = this.GetEnumValues(type);
+#>
+/**
+ * <#= hasClassDesc ? classDesc : type.Name #>
+ * - Mapped from enum <#= type.FullName #>
+ */
+export enum <#= type.Name #> {
+<# foreach (var val in enumVals) { #>
+
+  <#= val.ToString() #> = <#= Convert.ToInt64(val) #>,
+<# }#>
+}
+<#
+  } else {
+#>
+/**
+ * <#= hasClassDesc ? classDesc : type.Name #>
+ * - Mapped from class <#= type.FullName #>
+ */
+export interface <#= type.Name #> {
+
+<# foreach (var prop in TypeUtils.GetProperties(type)) {
+    var propDesc = this.GetPropertyDescription(prop.Name);
+    var hasPropDesc = propDesc != null && !string.IsNullOrWhiteSpace(propDesc);
+#>
+
+    <# if (hasPropDesc) { #>
+
+    /**
+     * <#= propDesc #>
+     */<# } #>    
+    <#= prop.Name.LowerFirst() #>?: <#= TypeUtils.MapToTsType(prop.PropertyType) #>;
+
+<# }#>
+}
+
+<# }#>

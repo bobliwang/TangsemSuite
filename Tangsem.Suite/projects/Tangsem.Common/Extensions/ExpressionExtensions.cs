@@ -8,44 +8,73 @@ namespace Tangsem.Common.Extensions
 	{
 		public static MemberExpression GetMemberExpression<T>(this Expression<Func<T, object>> expression)
 		{
-			var lambda = expression as LambdaExpression;
-			if (lambda == null)
+      if (!(expression is LambdaExpression lambda))
 			{
 				throw new ArgumentNullException("T");
-			}
+      }
 
-			MemberExpression memberExpr = null;
-			if (lambda.Body.NodeType == ExpressionType.Convert)
-			{
-				var unaryExpr = lambda.Body as UnaryExpression;
-				if (unaryExpr == null)
-				{
-					throw new ArgumentNullException("The converter expression has to be unary.");
-				}
+      return GetMemberExpression(lambda);
+    }
 
-				memberExpr = unaryExpr.Operand as MemberExpression;
-			}
-			else if (lambda.Body.NodeType == ExpressionType.MemberAccess)
-			{
-				memberExpr = lambda.Body as MemberExpression;
-			}
+    public static PropertyInfo GetPropertyInfo<T>(this Expression<Func<T, object>> expression)
+    {
+      var memberExpr = expression.GetMemberExpression();
+      return (PropertyInfo)memberExpr.Member;
+    }
 
-			if (memberExpr == null)
-				throw new ArgumentException("Not a member expression.");
+    public static FieldInfo GetFieldInfo<T>(this Expression<Func<T, object>> expression)
+    {
+      var memberExpr = expression.GetMemberExpression();
+      return (FieldInfo)memberExpr.Member;
+    }
 
-			return memberExpr;
-		}
+    public static MemberExpression GetMemberExpression<T, TResult>(this Expression<Func<T, TResult>> expression)
+    {
+      if (!(expression is LambdaExpression lambda))
+      {
+        throw new ArgumentNullException("T");
+      }
 
-		public static PropertyInfo GetPropertyInfo<T>(this Expression<Func<T, object>> expression)
-		{
-			var memberExpr = expression.GetMemberExpression();
-			return (PropertyInfo) memberExpr.Member;
-		}
+      return GetMemberExpression(lambda);
+    }
 
-		public static FieldInfo GetFieldInfo<T>(this Expression<Func<T, object>> expression)
+    public static PropertyInfo GetPropertyInfo<T, TResult>(this Expression<Func<T, TResult>> expression)
+    {
+      var memberExpr = expression.GetMemberExpression();
+      return (PropertyInfo) memberExpr.Member;
+    }
+
+    public static FieldInfo GetFieldInfo<T, TResult>(this Expression<Func<T, TResult>> expression)
 		{
 			var memberExpr = expression.GetMemberExpression();
 			return (FieldInfo) memberExpr.Member;
 		}
-	}
+
+    private static MemberExpression GetMemberExpression(LambdaExpression lambda)
+    {
+      MemberExpression memberExpr = null;
+      switch (lambda.Body.NodeType)
+      {
+        case ExpressionType.Convert:
+          {
+            if (!(lambda.Body is UnaryExpression unaryExpr))
+            {
+              throw new ArgumentNullException("The converter expression has to be unary.");
+            }
+
+            memberExpr = unaryExpr.Operand as MemberExpression;
+            break;
+          }
+        case ExpressionType.MemberAccess:
+          memberExpr = lambda.Body as MemberExpression;
+          break;
+
+        default:
+          throw new NotSupportedException(
+            $"{lambda.Body.NodeType} is not any one of the supported (ExpressionType.Convert | ExpressionType.MemberAccess) types");
+      }
+
+      return memberExpr ?? throw new ArgumentException("Not a member expression.");
+    }
+  }
 }

@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    
+    <IncludeSymbols>true</IncludeSymbols>
+
+    <Company>Tangsem</Company>
+    <Authors>liwangdev@gmail.com</Authors>
+    <Version>1.3.55</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App"></FrameworkReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tangsem.Common\Tangsem.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SwaggerCodeGen\GenTemplates\ApiClientTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ApiClientTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="SwaggerCodeGen\GenTemplates\ApiClient_Method_Template.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ApiClient_Method_Template.cs</LastGenOutput>
+    </None>
+    <None Update="SwaggerCodeGen\GenTemplates\SingleTsModelTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SingleTsModelTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="SwaggerCodeGen\GenTemplates\TypeScriptModels.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TypeScriptModels.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SwaggerCodeGen\GenTemplates\ApiClientTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ApiClientTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="SwaggerCodeGen\GenTemplates\ApiClient_Method_Template.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ApiClient_Method_Template.tt</DependentUpon>
+    </Compile>
+    <Compile Update="SwaggerCodeGen\GenTemplates\SingleTsModelTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SingleTsModelTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="SwaggerCodeGen\GenTemplates\TypeScriptModels.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TypeScriptModels.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

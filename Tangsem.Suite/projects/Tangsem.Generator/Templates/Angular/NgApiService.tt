@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" #>
+﻿<#@ template language="C#" inherits="Tangsem.Common.T4.T4TemplateBase"#>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -7,10 +7,10 @@
 <#@ import namespace="Tangsem.Common.Extensions" #>
 <#@ import namespace="Tangsem.Generator.Templates" #>
 <#@ import namespace="Tangsem.Generator.Settings" #>
-
+// tslint:disable
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as models from '../models/models';
 
 @Injectable()

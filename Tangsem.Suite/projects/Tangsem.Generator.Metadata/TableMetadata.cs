@@ -156,7 +156,7 @@ namespace Tangsem.Generator.Metadata
     public List<ReferenceMetadata> IncomingReferences { get; set; }
 
     public List<UniqueKeyMetadata> Keys { get; set; }
-
+    
     public List<UniqueKeyMetadata> UniqueKeys
     {
       get
@@ -170,6 +170,14 @@ namespace Tangsem.Generator.Metadata
       get
       {
         return AuditingPropertyInfos.All(p => this.Columns.Any(c => c.PropertyName == p.Name));
+      }
+    }
+
+    public bool IsVersionedEntity
+    {
+      get
+      {
+        return this.Columns.Any(x => x.PropertyName == "RowVersion" && !x.Nullable);
       }
     }
 

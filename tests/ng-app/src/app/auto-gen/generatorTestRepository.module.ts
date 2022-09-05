@@ -1,7 +1,8 @@
+// tslint:disable
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as models from './models/models';
 
 import { CommonModule } from '@angular/common';

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Xml.Serialization;
-
+using Newtonsoft.Json;
 using Tangsem.Generator.Metadata.Builder;
 
 namespace Tangsem.Generator.Settings
@@ -15,17 +16,25 @@ namespace Tangsem.Generator.Settings
   {
     public static GeneratorConfiguration FromFile(string filePath)
     {
+      var instance = GeneratorConfiguration.ReadFile(filePath);
+      instance.Init();
+      instance.ConfigFilePath = filePath;
+
+      return instance;
+    }
+
+    private static GeneratorConfiguration ReadFile(string filePath)
+    {
+      var fileContents = File.ReadAllText(filePath);
+
+      if (filePath.EndsWith(".json", StringComparison.InvariantCultureIgnoreCase))
+      {
+        return JsonConvert.DeserializeObject<GeneratorConfiguration>(fileContents);
+      }
+
       var xmlSer = new XmlSerializer(typeof(GeneratorConfiguration));
 
-      using (var stream = File.OpenRead(filePath))
-      {
-        var instance = (GeneratorConfiguration)xmlSer.Deserialize(stream);
-        instance.Init();
-
-        instance.ConfigFilePath = filePath;
-
-        return instance;
-      }
+      return (GeneratorConfiguration)xmlSer.Deserialize(new StringReader(fileContents));
     }
 
     [XmlIgnore]
@@ -33,6 +42,9 @@ namespace Tangsem.Generator.Settings
 
     [XmlAttribute]
     public bool GenRelationship { get; set; }
+
+    [XmlAttribute]
+    public bool SupportAsync { get; set; }
 
     [XmlAttribute]
     public bool UseTimestampInOutputFolder { get; set; }
@@ -43,13 +55,7 @@ namespace Tangsem.Generator.Settings
     [XmlAttribute]
     public string ProjectName { get; set; }
 
-    public string RootProjectName
-    {
-      get
-      {
-        return this.ProjectName.Split('.')[0];
-      }
-    }
+    public string RootProjectName => this.ProjectName.Split('.')[0];
 
     /// <summary>
     /// Gets or sets OutputDir.
@@ -70,6 +76,12 @@ namespace Tangsem.Generator.Settings
     public string RepositoryName { get; set; }
 
     /// <summary>
+    /// Gets or sets RepositoryName.
+    /// </summary>
+    [XmlAttribute]
+    public string RepositoryBaseClassName { get; set; }
+
+    /// <summary>
     /// The MeatadataBuilder type name. Format: className[;assemblyName]
     /// </summary>
     [XmlAttribute]
@@ -83,6 +95,12 @@ namespace Tangsem.Generator.Settings
 
     [XmlAttribute]
     public string OrmFramework { get; set; }
+
+    [XmlAttribute]
+    public string TableNameOpenQuote { get; set; } = "[";
+
+    [XmlAttribute]
+    public string TableNameCloseQuote { get; set; } = "]";
 
     public OrmTypes OrmType
     {
@@ -98,10 +116,8 @@ namespace Tangsem.Generator.Settings
         {
           return OrmTypes.EntityFramework;
         }
-        else
-        {
-          return OrmTypes.NHibernate;
-        }
+
+        return OrmTypes.NHibernate;
       }
     }
 
@@ -117,205 +133,103 @@ namespace Tangsem.Generator.Settings
     /// <summary>
     /// Project dir path. This property is depending on OutputDir and ProjectName.
     /// </summary>
-    public string ProjectDirPath
-    {
-      get
-      {
-        return Path.Combine(this.OutputDir, this.ProjectName);
-      }
-    }
+    public string ProjectDirPath => Path.Combine(this.OutputDir, this.ProjectName);
 
     /// <summary>
     /// Gets EntitiesDirPath.
     /// </summary>
-    public string DomainDirPath
-    {
-      get
-      {
-        return Path.Combine(this.ProjectDirPath, this.DomainNamespace.Substring(this.ProjectName.Length + 1).Replace(".", @"\"));
-      }
-    }
+    public string DomainDirPath => Path.Combine(this.ProjectDirPath, this.DomainNamespace.Substring(this.ProjectName.Length + 1).Replace(".", @"\"));
 
     /// <summary>
     /// Gets EntitiesDirPath.
     /// </summary>
-    public string EntitiesDirPath
-    {
-      get
-      {
-        return Path.Combine(this.DomainDirPath, "Entities");
-      }
-    }
+    public string EntitiesDirPath => Path.Combine(this.DomainDirPath, "Entities");
 
     /// <summary>
     /// Gets Entity Mappings Dir Path.
     /// </summary>
-    public string MappingDirPath
-    {
-      get
-      {
-        return Path.Combine(this.EntitiesDirPath, "Mappings", this.OrmType.AsNamespacePart());
-      }
-    }
+    public string MappingDirPath => Path.Combine(this.EntitiesDirPath, "Mappings", this.OrmType.AsNamespacePart());
 
-    public string AutoMappingConfigsDirPath
-    {
-      get
-      {
-        return Path.Combine(this.EntitiesDirPath, "Mappings", "AutoMapper");
-      }
-    }
+    public string AutoMappingConfigsDirPath => Path.Combine(this.EntitiesDirPath, "Mappings", "AutoMapper");
 
     /// <summary>
     /// Gets DTODirPath.
     /// </summary>
-    public string DTODirPath
-    {
-      get
-      {
-        return Path.Combine(this.EntitiesDirPath, "DTOs");
-      }
-    }
+    public string DTODirPath => Path.Combine(this.EntitiesDirPath, "DTOs");
 
-    public string NgAppFolder
-    {
-      get
-      {
-        return Path.Combine(this.OutputDir, "ng-app");
-      }
-    }
+    public string NgAppFolder => Path.Combine(this.OutputDir, "ng-app");
 
     /// <summary>
     /// Gets DTODirPath.
     /// </summary>
-    public string NgModelsFolder
-    {
-      get
-      {
-        return Path.Combine(this.NgAppFolder, "models");
-      }
-    }
+    public string NgModelsFolder => Path.Combine(this.NgAppFolder, "models");
 
     /// <summary>
     /// Gets DTODirPath.
     /// </summary>
-    public string NgServicesFolder
-    {
-      get
-      {
-        return Path.Combine(this.NgAppFolder, "services");
-      }
-    }
+    public string NgServicesFolder => Path.Combine(this.NgAppFolder, "services");
 
     /// <summary>
     /// Gets DTODirPath.
     /// </summary>
-    public string NgComponentsFolder
-    {
-      get
-      {
-        return Path.Combine(this.NgAppFolder, "autogen-components");
-      }
-    }
+    public string NgComponentsFolder => Path.Combine(this.NgAppFolder, "autogen-components");
 
     /// <summary>
     /// Gets IRepositoriesDirPath.
     /// </summary>
-    public string IRepositoriesDirPath
-    {
-      get
-      {
-        return Path.Combine(this.DomainDirPath, "Repositories");
-      }
-    }
+    public string IRepositoriesDirPath => Path.Combine(this.DomainDirPath, "Repositories");
 
     /// <summary>
     /// Gets RepositoriesDirPath.
     /// </summary>
-    public string RepositoriesDirPath
-    {
-      get
-      {
-        return Path.Combine(this.DomainDirPath, "Repositories", this.OrmType.AsNamespacePart());
-      }
-    }
+    public string RepositoriesDirPath => Path.Combine(this.DomainDirPath, "Repositories", this.OrmType.AsNamespacePart());
 
     /// <summary>
     /// Gets ServicesDirPath.
     /// </summary>
-    public string ServicesDirPath
-    {
-      get
-      {
-        return Path.Combine(this.DomainDirPath, "Services");
-      }
-    }
+    public string ServicesDirPath => Path.Combine(this.DomainDirPath, "Services");
 
     /// <summary>
     /// Caculate the domain namespace.
     /// </summary>
-    public string DomainNamespace
-    {
-      get
-      {
-        return this.ProjectName + ".Domain";
-      }
-    }
+    public string DomainNamespace => this.ProjectName + ".Domain";
 
     /// <summary>
     /// Gets the entity namespace.
     /// </summary>
-    public string EntityNamespace
-    {
-      get
-      {
-        return this.DomainNamespace + ".Entities";
-      }
-    }
+    public string EntityNamespace => this.DomainNamespace + ".Entities";
 
     /// <summary>
     /// Gets the mapping namespace.
     /// </summary>
-    public string MappingNamespace
-    {
-      get
-      {
-        return this.EntityNamespace + ".Mappings." + this.OrmType.AsNamespacePart();
-      }
-    }
+    public string MappingNamespace => this.EntityNamespace + ".Mappings." + this.OrmType.AsNamespacePart();
 
     /// <summary>
     /// Gets the DTOs namespace.
     /// </summary>
-    public string DTONamespace
-    {
-      get
-      {
-        return this.EntityNamespace + ".DTOs";
-      }
-    }
+    public string DTONamespace => this.EntityNamespace + ".DTOs";
 
     /// <summary>
     /// Gets the Repository Namespace.
     /// </summary>
-    public string RepositoryNamespace
-    {
-      get
-      {
-        return this.DomainNamespace + ".Repositories";
-      }
-    }
+    public string RepositoryNamespace => this.DomainNamespace + ".Repositories";
 
     /// <summary>
     /// Gets or sets ServiceNamespace.
     /// </summary>
-    public string ServiceNamespace
-    {
-      get
-      {
-        return this.DomainNamespace + ".Services";
-      }
-    }
+    public string ServiceNamespace => this.DomainNamespace + ".Services";
+
+    public bool GenAutoMapper { get; set; }
+
+    public bool GenAspNetController { get; set; }
+
+    public bool GenNgApp { get; set; }
+
+    public bool GenStoredProc { get; set; } = true;
+
+    public bool IncludeTangsemIdentity { get; set; }
+
+    public bool UpdateSqlForModifiedColumnsOnly { get; set; }
 
     public void Init()
     {
@@ -340,7 +254,7 @@ namespace Tangsem.Generator.Settings
 
         if (this.UseTimestampInOutputFolder)
         {
-          this.OutputDir += $"_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}";
+          this.OutputDir += $"_{DateTime.Now:yyyyMMdd_HHmmss}";
         }
       }
 
@@ -354,16 +268,15 @@ namespace Tangsem.Generator.Settings
     /// <returns></returns>
     public Type GetMetadataBuilderType()
     {
-      var classAndAssemblyNames = this.MetadataBuilder.Split(new[] { ';' });
+      var classAndAssemblyNames = this.MetadataBuilder.Split(';');
 
       var assemblyName = classAndAssemblyNames.Length > 1
-                ? classAndAssemblyNames[1]
+                ? classAndAssemblyNames[1].Trim()
                 : null;
 
       var className = classAndAssemblyNames.Length > 0
-                ? classAndAssemblyNames[0]
+                ? classAndAssemblyNames[0].Trim()
                 : null;
-
 
       var ass = string.IsNullOrWhiteSpace(assemblyName) ? typeof(MetadataBuilder).Assembly : Assembly.Load(assemblyName);
       var type = string.IsNullOrWhiteSpace(className) ? typeof(SqlServer2008MetadataBuilder) : ass.GetType(className);

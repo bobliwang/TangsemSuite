@@ -1,87 +1,39 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A5DAFCC5-6AC6-4805-B7CA-A351084654CA}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tangsem.Common</RootNamespace>
-    <AssemblyName>Tangsem.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworks>net48;net6;netstandard2.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <IncludeSymbols>true</IncludeSymbols>
+    
+    <Company>Tangsem</Company>
+    <Authors>liwangdev@gmail.com</Authors>
+    <Version>1.3.55</Version>
+    <LanguageVersion>10.0</LanguageVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="DataAccess\Database.cs" />
-    <Compile Include="DataAccess\DataReaderExtension.cs" />
-    <Compile Include="DataAccess\DbConnectionExtension.cs" />
-    <Compile Include="DataAccess\Parameter.cs" />
-    <Compile Include="DataAccess\PropertyColumnAttribute.cs" />
-    <Compile Include="Entities\IAuditableEntity.cs" />
-    <Compile Include="Entities\AuditableEntity.cs" />
-    <Compile Include="Entities\AuditableEntityExtensions.cs" />
-    <Compile Include="Entities\Reos\IReosAuditableEntity.cs" />
-    <Compile Include="Entities\Reos\IReosIntegratedEntity.cs" />
-    <Compile Include="Entities\Reos\IReosReplicatedEntity.cs" />
-    <Compile Include="Extensions\DataTableExtensions.cs" />
-    <Compile Include="Extensions\Linq\ClassFactory.cs" />
-    <Compile Include="Extensions\Linq\DynamicClass.cs" />
-    <Compile Include="Extensions\Linq\DynamicExpression.cs" />
-    <Compile Include="Extensions\Linq\DynamicOrdering.cs" />
-    <Compile Include="Extensions\Linq\DynamicProperty.cs" />
-    <Compile Include="Extensions\Linq\DynamicQueryable.cs" />
-    <Compile Include="Extensions\ExpressionExtensions.cs" />
-    <Compile Include="Extensions\Linq\ExpressionParser.cs" />
-    <Compile Include="Extensions\Linq\ParseException.cs" />
-    <Compile Include="Extensions\Linq\Res.cs" />
-    <Compile Include="Extensions\Linq\Signature.cs" />
-    <Compile Include="Extensions\ObjectExtension.cs" />
-    <Compile Include="Extensions\StringExtension.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Update="ValueClasses\ValueClassToTsEnumTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ValueClassToTsEnumTemplate.cs</LastGenOutput>
+    </None>
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="packages.config" />
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+  <ItemGroup>
+    <Compile Update="ValueClasses\ValueClassToTsEnumTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ValueClassToTsEnumTemplate.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
 </Project>

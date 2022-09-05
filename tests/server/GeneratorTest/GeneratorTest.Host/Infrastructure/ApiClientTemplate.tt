@@ -1,0 +1,139 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+
+<#@ import namespace="Swashbuckle.AspNetCore.Swagger" #>
+<#@ import namespace="Microsoft.AspNetCore.Mvc.Controllers" #>
+<#@ import namespace="GeneratorTest.Host.Infrastructure" #>
+
+// tslint:disable
+import { Injectable, Inject, Optional } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import * as <#= this.ModelsModuleName #> from '<#= this.ModelsTsFilePath #>';
+
+/**
+ * Auto-Generated client code that should not be modified manually.
+ */
+@Injectable(<#= this.IsRootProvider ? @"{
+  providedIn: 'root'
+}" : string.Empty #>)
+export class <#= this.ApiClientClassName #> {
+
+  public constructor(
+    private httpClient: HttpClient,
+    @Optional()
+    @Inject('API_URL_BASE')
+    public apiUrlBase: string) {
+  }
+
+<#
+
+  foreach(var pathKvp in this.SwaggerDoc.Paths) {
+    var pathKey = pathKvp.Key;
+    var pathInfo = pathKvp.Value;
+    var operations = new Dictionary<string, Func<PathItem, Operation>>
+                       {
+                         ["get"] = pi => pi.Get,
+                         ["post"] = pi => pi.Post,
+                         ["put"] = pi => pi.Put
+                        }.Select(x => new KeyValuePair<string, Operation>(x.Key, x.Value(pathInfo))).Where(x => x.Value != null);
+
+    var apiDescriptions = this.GetApiDescriptions();
+
+    foreach(var opKvp in operations) {
+      var operation = opKvp.Value;
+
+      if (!operation.Tags.Any(x => "autogen".Equals(x, StringComparison.InvariantCultureIgnoreCase))) {
+        continue;
+      }
+        
+      var httpMethod = opKvp.Key;
+      var api = apiDescriptions.FirstOrDefault(x => opKvp.Key.Equals(x.HttpMethod, StringComparison.InvariantCultureIgnoreCase) && $"/{x.RelativePath}" == pathKey);
+      var actionDescriptor = api.ActionDescriptor as ControllerActionDescriptor;
+      var operationParameters = operation.Parameters ?? new IParameter[0];
+      var bodyParameters = operationParameters.Where(x => x is BodyParameter).Cast<BodyParameter>().ToList();
+      var nonBodyParameters = operationParameters.Where(x => x is NonBodyParameter).Cast<NonBodyParameter>().ToList();
+      var pathParams = nonBodyParameters.Where(x => pathKey.Contains("{" + x.Name + "}")).ToList();
+      var queryStringParams = nonBodyParameters.Where(x => !pathKey.Contains("{" + x.Name + "}")).ToList();
+        // TODO: we may need to support header params later.
+#>
+       
+  /**
+    * HTTP Method: <#= httpMethod #>, Path: <#= pathKey #>
+    * Action: <#= actionDescriptor.ActionName #>, Controller: <#= actionDescriptor.ControllerName #>
+    */
+  public <#= Generator.GetApiActonName(actionDescriptor, api) #>(<#= Generator.ApiCallParamStrings(queryStringParams, bodyParameters, pathParams, this.ModelsModuleName)#>): Observable<<#= Generator.GetResponseType(operation, this.ModelsModuleName) #>> {
+      <# if (pathParams.Any()) { #>
+
+      const url = this.url('<#= pathKey #>')
+      <# foreach(var p in pathParams) { #>
+          .replace('{<#= p.Name #>}', `${<#= Generator.LowerCaseFirst(p.Name) #>}`)
+      <# } #>;
+      <# } else { #>
+
+      const url = this.url('<#= pathKey #>');
+      <# } #>
+      <# if (queryStringParams.Any()) {#>
+
+      const params = this.getHttpParams(qryParams);
+      <#} #>
+      <#
+      var bodyParams = operationParameters.Where(p => p is BodyParameter);
+      if (bodyParams.Any()) { #>
+        
+      return this.httpClient.<#= httpMethod #><<#= Generator.GetResponseType(operation, this.ModelsModuleName) #>>(url, <#= string.Join(",", bodyParams.Select(p => $"{Generator.LowerCaseFirst(p.Name)}"))  #><#= queryStringParams.Any() ? ", { params }" : ""#>);
+      <# } else if (httpMethod == "post") { #>
+        
+      return this.httpClient.post<<#= Generator.GetResponseType(operation, this.ModelsModuleName) #>>(url, null);
+      <# } else { #>
+
+      return this.httpClient.<#= httpMethod #><<#= Generator.GetResponseType(operation, this.ModelsModuleName) #>>(url<#= queryStringParams.Any() ? ", { params }" : ""#>);
+      <# } #>
+
+  }
+  <# } #>
+<# } #>
+
+
+  
+  protected url(relativeUrl: string): string {
+      return this.apiUrlBase + relativeUrl;
+  }
+  
+  protected setParamValue(httpParams: HttpParams, key: string, val: any): HttpParams {
+      
+      if (Array.isArray(val)) {
+          return (val as any[]).reduce((hp, iterVal) => {
+            this.setParamValue(httpParams, key, iterVal);
+          }, httpParams);
+      }
+      
+      return httpParams.append(key,  this.convertToParamValString(val));
+  }
+
+  protected convertToParamValString(val: any): string {
+      if (val instanceof Date) {
+        return (val as Date).toISOString();
+      }
+
+      return `${val}`;
+  }
+
+  protected getHttpParams(qryParams: any) {
+      
+    const params = Object.keys(qryParams || {}).reduce((p, key) => {
+        if (qryParams[key] !== undefined) {
+          return this.setParamValue(p, key, qryParams[key]);
+        }
+
+        return p;
+      }, new HttpParams());
+
+    return params;
+  }
+
+}

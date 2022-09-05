@@ -16,14 +16,6 @@ namespace GeneratorTest.Common.Domain.ViewModels.SearchParams
 
 	
 	
-		public int? ProductId { get; set; }
-
-	
-	
-		public System.Guid? CustomerId { get; set; }
-
-	
-	
 		public decimal? OrderTotal { get; set; }
 
 	
@@ -45,6 +37,14 @@ namespace GeneratorTest.Common.Domain.ViewModels.SearchParams
 	
 	
 		public bool? Active { get; set; }
+
+	
+	
+		public System.Guid? CustomerId { get; set; }
+
+	
+	
+		public int? ProductId { get; set; }
 
 	
 	}

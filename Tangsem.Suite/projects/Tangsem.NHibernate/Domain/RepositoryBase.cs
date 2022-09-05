@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
+
 using NHibernate;
 using NHibernate.Linq;
 
@@ -37,7 +40,7 @@ namespace Tangsem.NHibernate.Domain
     }
 
     /// <summary>
-    /// Gets or sets the hiberante ISession object.
+    /// Gets or sets the hibernate ISession object.
     /// </summary>
     public ISession CurrentSession { get; set; }
 
@@ -45,6 +48,11 @@ namespace Tangsem.NHibernate.Domain
     /// Gets the database transaction.
     /// </summary>
     public ITransaction Transaction { get; protected set; }
+
+    /// <summary>
+    /// Is in active transaction.
+    /// </summary>
+    public bool IsInTransaction => this.Transaction?.IsActive == true;
 
     public void Dispose()
     {
@@ -78,6 +86,19 @@ namespace Tangsem.NHibernate.Domain
     }
 
     /// <summary>
+    /// Saves an entity.
+    /// </summary>
+    /// <typeparam name="T">The entity type.</typeparam>
+    /// <param name="entity">The entity.</param>
+    /// <returns>The saved entity.</returns>
+    public virtual async Task<T> SaveAsync<T>(T entity) where T : class
+    {
+      await this.CurrentSession.SaveAsync(entity);
+
+      return entity;
+    }
+
+    /// <summary>
     /// Saves or updates an entity.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
@@ -91,6 +112,19 @@ namespace Tangsem.NHibernate.Domain
     }
 
     /// <summary>
+    /// Saves or updates an entity.
+    /// </summary>
+    /// <typeparam name="T">The entity type.</typeparam>
+    /// <param name="entity">The entity.</param>
+    /// <returns>The saved or updated entity.</returns>
+    public virtual async Task<T> SaveOrUpdateAsync<T>(T entity) where T : class
+    {
+      await this.CurrentSession.SaveOrUpdateAsync(entity);
+
+      return entity;
+    }
+
+    /// <summary>
     /// Updates an entity.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
@@ -98,9 +132,20 @@ namespace Tangsem.NHibernate.Domain
     /// <returns>The updated entity.</returns>
     public virtual T Update<T>(T entity) where T : class
     {
-      ////this.OnEntityUpdating(entity);
-
       this.CurrentSession.Update(entity);
+
+      return entity;
+    }
+
+    /// <summary>
+    /// Updates an entity.
+    /// </summary>
+    /// <typeparam name="T">The entity type.</typeparam>
+    /// <param name="entity">The entity.</param>
+    /// <returns>The updated entity.</returns>
+    public virtual async Task<T> UpdateAsync<T>(T entity) where T : class
+    {
+      await this.CurrentSession.UpdateAsync(entity);
 
       return entity;
     }
@@ -119,6 +164,19 @@ namespace Tangsem.NHibernate.Domain
     }
 
     /// <summary>
+    /// Gets an entity by id.
+    /// </summary>
+    /// <typeparam name="T">The entity type.</typeparam>
+    /// <param name="id">The id value.</param>
+    /// <returns>The found entity. Returns null if nothing is found.</returns>
+    public virtual async Task<T> LookupByIdAsync<T>(object id) where T : class
+    {
+      var entity = await this.CurrentSession.GetAsync<T>(id);
+
+      return entity;
+    }
+
+    /// <summary>
     /// Deletes an entity and returns whether the operation is successful.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
@@ -126,6 +184,16 @@ namespace Tangsem.NHibernate.Domain
     public virtual void Delete<T>(T entity) where T : class
     {
       this.CurrentSession.Delete(entity);
+    }
+
+    /// <summary>
+    /// Deletes an entity and returns whether the operation is successful.
+    /// </summary>
+    /// <typeparam name="T">The entity type.</typeparam>
+    /// <param name="entity">The entity</param>
+    public virtual async Task DeleteAsync<T>(T entity) where T : class
+    {
+      await this.CurrentSession.DeleteAsync(entity);
     }
 
     /// <summary>
@@ -150,10 +218,31 @@ namespace Tangsem.NHibernate.Domain
     }
 
     /// <summary>
-    /// Virutal delete entity.
+    /// Deletes an entity by id.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    /// <param name="entity">The enitity object.</param>
+    /// <param name="id">The id value.</param>
+    /// <returns>The deleted entity if the operation is successful. Otherwise it returns null.</returns>
+    public virtual async Task<T> DeleteByIdAsync<T>(object id) where T : class
+    {
+      // find the entity first.
+      var entity = await this.LookupByIdAsync<T>(id);
+
+      if (entity != null)
+      {
+        // delete the entity once it's found.
+        await this.DeleteAsync(entity);
+      }
+
+      // return the deleted entity.
+      return entity;
+    }
+
+    /// <summary>
+    /// Virtual delete entity.
+    /// </summary>
+    /// <typeparam name="T">The entity type.</typeparam>
+    /// <param name="entity">The entity object.</param>
     /// <returns>The virtual deleted entity.</returns>
     public virtual T VirtualDelete<T>(T entity) where T : class, IAuditableEntity
     {
@@ -162,11 +251,32 @@ namespace Tangsem.NHibernate.Domain
     }
 
     /// <summary>
+    /// Virtual delete entity.
+    /// </summary>
+    /// <typeparam name="T">The entity type.</typeparam>
+    /// <param name="entity">The entity object.</param>
+    /// <returns>The virtual deleted entity.</returns>
+    public virtual async Task<T> VirtualDeleteAsync<T>(T entity) where T : class, IAuditableEntity
+    {
+      entity.Active = false;
+      return await this.UpdateAsync(entity);
+    }
+
+    /// <summary>
     /// Commit transaction to database.
     /// </summary>
     public virtual void Commit()
     {
       this.Transaction.Commit();
+      this.Transaction = null;
+    }
+
+    /// <summary>
+    /// Commit transaction to database.
+    /// </summary>
+    public virtual async Task CommitAsync()
+    {
+      await this.Transaction.CommitAsync();
       this.Transaction = null;
     }
 
@@ -180,53 +290,83 @@ namespace Tangsem.NHibernate.Domain
     }
 
     /// <summary>
+    /// Rollback transaction.
+    /// </summary>
+    public virtual async Task RollbackAsync()
+    {
+      await this.Transaction.RollbackAsync();
+      this.Transaction = null;
+    }
+    
+    /// <summary>
     /// Start a transaction.
     /// </summary>
-    public virtual void BeginTransaction()
+    public virtual IDisposable BeginTransaction()
     {
-      if (this.Transaction != null && this.Transaction.IsActive)
+      if (this.IsInTransaction)
       {
         throw new Exception("There is already an existing active transaction!");
       }
 
       this.Transaction = this.CurrentSession.BeginTransaction();
+
+      return new RepositoryTransactionWrapper(this, this.Transaction);
     }
 
     /// <summary>
     /// Start a transaction at isolationLevel.
     /// </summary>
     /// <param name="isolationLevel">The IsolationLevel.</param>
-    public void BeginTransaction(IsolationLevel isolationLevel)
+    public IDisposable BeginTransaction(IsolationLevel isolationLevel)
     {
-      if (this.Transaction != null && this.Transaction.IsActive)
+      if (this.IsInTransaction)
       {
         throw new Exception("There is already an existing active transaction!");
       }
 
       this.Transaction = this.CurrentSession.BeginTransaction(isolationLevel);
+
+      return new RepositoryTransactionWrapper(this, this.Transaction);
     }
 
+    /// <summary>
+    /// Refresh entity
+    /// </summary>
     public void Refresh<T>(T entity) where T : class
     {
       this.CurrentSession.Refresh(entity);
     }
 
+    /// <summary>
+    /// Refresh entity
+    /// </summary>
+    public async Task RefreshAsync<T>(T entity) where T : class
+    {
+      await this.CurrentSession.RefreshAsync(entity);
+    }
+
+    /// <summary>
+    /// Clear current session.
+    /// </summary>
     public void Clear()
     {
       this.CurrentSession.Clear();
     }
 
-    public bool IsInTransaction
-    {
-      get
-      {
-        return this.Transaction != null && this.Transaction.IsActive;
-      }
-    }
-
+    /// <summary>
+    /// Flush current session.
+    /// </summary>
     public void Flush()
     {
       this.CurrentSession.Flush();
+    }
+
+    /// <summary>
+    /// Flush current session.
+    /// </summary>
+    public async Task FlushAsync()
+    {
+      await this.CurrentSession.FlushAsync();
     }
 
     /// <summary>
@@ -236,29 +376,30 @@ namespace Tangsem.NHibernate.Domain
 
     protected virtual void Dispose(bool disposing)
     {
-      if (!_isDisposed)
+      if (!this._isDisposed)
       {
         if (disposing)
         {
-          if (this.Transaction != null)
+          try
           {
-            try
+            if (this.IsInTransaction)
             {
               this.Transaction.Rollback();
             }
-            catch { }
+          }
+          catch (Exception ex)
+          {
+            Trace.TraceError(ex.ToString());
           }
 
-          if (this.CurrentSession != null)
-          {
-            this.CurrentSession.Dispose();
-          }
+          this.CurrentSession?.Dispose();
         }
 
         // There are no unmanaged resources to release, but
         // if we add them, they need to be released here.
       }
-      _isDisposed = true;
+
+      this._isDisposed = true;
     }
   }
 }

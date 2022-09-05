@@ -17,7 +17,7 @@ namespace Tangsem.Generator.Metadata.Builder
 {
 	public abstract class MetadataBuilder
 	{
-		readonly Regex Regex = new Regex(@"@\s*(?<jsonAnnotation>\{(.|\r\n)*?\})");
+		private readonly Regex Regex = new Regex(@"@\s*(?<jsonAnnotation>\{(.|\r\n)*?\})");
 
 		private ITypeMapper _typeMapper;
 
@@ -35,6 +35,8 @@ namespace Tangsem.Generator.Metadata.Builder
 		public abstract string ColumnsSql { get; }
 
 		public abstract string KeysSql { get; }
+
+    public abstract string IndicesSql { get; }
 
 		public abstract string ReferencesSql { get; }
 
@@ -56,7 +58,7 @@ namespace Tangsem.Generator.Metadata.Builder
 		{
 			get
 			{
-				return _typeMapper ?? (_typeMapper = this.CreateTypeMapper());
+				return this._typeMapper ?? (this._typeMapper = this.CreateTypeMapper());
 			}
 		}
 
@@ -81,7 +83,7 @@ namespace Tangsem.Generator.Metadata.Builder
 				{
 					if (!string.IsNullOrWhiteSpace(rawRef.RawComment))
 					{
-						var matchedJson = Regex.Match(rawRef.RawComment);
+						var matchedJson = this.Regex.Match(rawRef.RawComment);
 
 						//matchedJson.Groups.OfType<CaptureCollection>().FirstOrDefault(x => x.Name)
 						var jsonAnnotation = matchedJson.Groups["jsonAnnotation"];
@@ -96,6 +98,12 @@ namespace Tangsem.Generator.Metadata.Builder
 
 				this.Cache.RawReferences.AddRange(rawRefs);
 				this.Cache.RawKeys.AddRange(db.ExecuteList<RawKey>(this.KeysSql, tableNameParam.AsList()));
+
+        if (!this.IndicesSql.IsNullOrEmpty())
+        {
+          this.Cache.RawIndices.AddRange(db.ExecuteList<RawIndex>(this.IndicesSql, tableNameParam.AsList()));
+				}
+
 				this.Cache.RawTables.AddRange(db.ExecuteList<RawTable>(this.TablesSql));
 			}
 
@@ -105,15 +113,9 @@ namespace Tangsem.Generator.Metadata.Builder
 			}
 		}
 
-		public TableMetadata this[string tableName]
-		{
-			get
-			{
-				return this.GetTableMetadata(tableName);
-			}
-		}
+		public TableMetadata this[string tableName] => this.GetTableMetadata(tableName);
 
-		public TableMetadata GetTableMetadata(string tableName)
+    public TableMetadata GetTableMetadata(string tableName)
 		{
 			if (this.CachedTableMetadata.ContainsKey(tableName))
 			{
@@ -146,7 +148,11 @@ namespace Tangsem.Generator.Metadata.Builder
 			tableMetadata.IncomingReferences = this.GetIncomingRefMetadatas(tableName, columnMetadatas);
 
 			// Unique Keys
-			tableMetadata.Keys = this.GetUniqkKeyMetadatas(tableName, columnMetadatas);
+			tableMetadata.Keys = this.GetUniqKeyMetadatas(tableName, columnMetadatas)
+                               .Concat(this.GetUniqIndicesMetadatas(tableName, columnMetadatas))
+                               .GroupBy(x => x.Name)
+                               .Select(x => x.FirstOrDefault())
+                               .ToList();
 
 			return tableMetadata;
 		}
@@ -158,9 +164,9 @@ namespace Tangsem.Generator.Metadata.Builder
 			  {
 				  var colMeta = new ColumnMetadata().FromRawColumn(rc);
 
-				  if (!string.IsNullOrWhiteSpace(rc.Description))
+				  if (!rc.Description.IsNullOrWhiteSpace())
 				  {
-					  var matchedJson = Regex.Match(rc.Description);
+					  var matchedJson = this.Regex.Match(rc.Description);
 
 					  //matchedJson.Groups.OfType<CaptureCollection>().FirstOrDefault(x => x.Name)
 					  var jsonAnnotation = matchedJson.Groups["jsonAnnotation"];
@@ -169,7 +175,9 @@ namespace Tangsem.Generator.Metadata.Builder
 					  {
 						  colMeta.ExtraColumnMeta = JsonConvert.DeserializeObject<ExtraColumnMeta>(jsonAnnotation.Value);
 					  }
-				  }
+
+            colMeta.Description = rc.Description;
+          }
 
 				  colMeta.ClrType = this.TypeMapper[rc.DataType];
 
@@ -254,7 +262,7 @@ namespace Tangsem.Generator.Metadata.Builder
 			).ToList();
 		}
 
-		private List<UniqueKeyMetadata> GetUniqkKeyMetadatas(string tableName, IEnumerable<ColumnMetadata> columnMetadatas)
+		private List<UniqueKeyMetadata> GetUniqKeyMetadatas(string tableName, IEnumerable<ColumnMetadata> columnMetadatas)
 		{
 			var rawUniqueKeys = this.Cache.RawKeys.Where(uk => uk.Table == tableName)
 										  .OrderBy(uk => uk.KeyName)
@@ -262,15 +270,33 @@ namespace Tangsem.Generator.Metadata.Builder
 
 			var ukGrps = rawUniqueKeys.GroupBy(uk => uk.KeyName);
 
-			return ukGrps.Select(
+			var entriesFromRawKeys = ukGrps.Select(
 			  grp =>
 			  new UniqueKeyMetadata
 			  {
 				  Name = grp.Key,
 				  Columns = columnMetadatas.Where(c => grp.Any(rk => rk.Column == c.ColumnName)).ToList()
-			  }
-			  ).ToList();
-		}
+			  }).ToList();
+
+      return entriesFromRawKeys;
+    }
+
+    private List<UniqueKeyMetadata> GetUniqIndicesMetadatas(string tableName, IEnumerable<ColumnMetadata> columnMetadatas)
+    {
+      var rawUniqueKeys = this.Cache.RawIndices.Where(x => x.TableName == tableName).OrderBy(x => x.IndexName).ToList();
+
+      var ukGrps = rawUniqueKeys.GroupBy(uk => uk.IndexName);
+
+      var entriesFromRawIndices = ukGrps.Select(
+        grp =>
+          new UniqueKeyMetadata
+            {
+              Name = grp.Key,
+              Columns = columnMetadatas.Where(c => grp.Any(rk => rk.ColumnName == c.ColumnName)).ToList()
+            }).ToList();
+
+			return entriesFromRawIndices;
+    }
 
 		private ReferenceMetadata FindReferenceMetadataInCachedTableMetadata(string referenceName)
 		{

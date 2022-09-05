@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<GeneratorConfiguration	
+            ProjectName="PhoenixTest.Common"
+            OutputDir=""
+            RepositoryName ="PhoenixTestRepository"
+            ConnectionString="Data Source=.;Initial Catalog=PhoenixMain;Integrated Security=True"
+            MetadataBuilder="Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder"
+            OpenOutputDirAfterGeneration="true"
+            OrmFramework="NHibernate"
+            UseTimestampInOutputFolder="false"
+            GenRelationship="true">
+    
+  <!-- MetadataBuilder: className[;assemblyName]  -->
+  <IgnoredTable>Sysdiagrams</IgnoredTable>
+
+    <!--<IncludeTable>WorkflowInfo</IncludeTable>
+    <IncludeTable>TaskInfo</IncludeTable>
+    <IncludeTable>TaskForm</IncludeTable>
+    <IncludeTable>ChangeTokenHistory</IncludeTable>
+    <IncludeTable>WebhookInfo</IncludeTable>-->
+
+    <!--<IncludeTable>Store</IncludeTable>-->
+
+</GeneratorConfiguration>

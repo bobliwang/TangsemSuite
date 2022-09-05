@@ -117,13 +117,6 @@ namespace GeneratorTest.Host.Controllers.Base
 							
 			}
 			
-			if (filterModel.StoreId != null)
-			{
-							// OutgoingReference
-				filteredQry = filteredQry.Where(x => x.Store.Id == filterModel.StoreId);
-			
-			}
-			
 			if (filterModel.CreatedById != null)
 			{
 										
@@ -157,6 +150,13 @@ namespace GeneratorTest.Host.Controllers.Base
 										
 				filteredQry = filteredQry.Where(x => x.Active == filterModel.Active);
 							
+			}
+			
+			if (filterModel.StoreId != null)
+			{
+							// OutgoingReference
+				filteredQry = filteredQry.Where(x => x.Store.Id == filterModel.StoreId);
+			
 			}
 			
 			return filteredQry;

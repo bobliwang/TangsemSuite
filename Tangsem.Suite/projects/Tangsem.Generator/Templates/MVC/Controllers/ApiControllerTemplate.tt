@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" #>
+﻿<#@ template language="C#" inherits="Tangsem.Common.T4.T4TemplateBase"#>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -21,6 +21,7 @@ using Tangsem.Data;
 using Tangsem.NHibernate.Extenstions;
 using <#= Configuration.RootProjectName #>.Host.Filters;
 using <#= Configuration.RootProjectName #>.Host.Controllers.Base;
+using <#= Configuration.RootProjectName #>.Host.Infrastructure;
 
 namespace <#= Configuration.RootProjectName #>.Host.Controllers
 {
@@ -30,35 +31,45 @@ namespace <#= Configuration.RootProjectName #>.Host.Controllers
 		}
 
 		[HttpGet("_api/repo/<#=tableMetadata.EntityName#>")]
+    [Produces("application/json", Type = typeof(SearchResultModel<<#=tableMetadata.EntityName#>DTO>))]
+    [AutoGenApiClient]
 		public override IActionResult Get<#=tableMetadata.EntityName#>List(<#=tableMetadata.EntityName#>SearchParams filterModel) {
             return base.Get<#=tableMetadata.EntityName#>List(filterModel);
 		}
      
 		[HttpGet("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
+    [Produces("application/json", Type = typeof(<#=tableMetadata.EntityName#>DTO))]
+    [AutoGenApiClient]
 		public override IActionResult Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(<#= tableMetadata.PrimaryKeyCSharpTypeAsString #> id) {
 			return base.Get<#=tableMetadata.EntityName#>By<#= tableMetadata.PrimaryKeyPropertyName #>(id);
 		}
 
 		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}")]
-		[TransactionFilter]
+    [Produces("application/json", Type = typeof(object))]
+    [AutoGenApiClient]
+    [TransactionFilter]
 		public override IActionResult Update<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeyCSharpTypeAsString #> id, [FromBody] <#=tableMetadata.EntityName#>DTO model) {
 		    return base.Update<#=tableMetadata.EntityName#>(id, model);
 		}
      
 		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>")]
-		[TransactionFilter]
+		[Produces("application/json", Type = typeof(object))]
+    [AutoGenApiClient]
+    [TransactionFilter]
 		public override IActionResult Create<#=tableMetadata.EntityName#>([FromBody] <#=tableMetadata.EntityName#>DTO model) {
 			return base.Create<#=tableMetadata.EntityName#>(model);
 		}
 
-		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}/delete")]
-		[TransactionFilter]
+		[HttpPost("_api/repo/<#=tableMetadata.EntityName#>/{id}/delete")]		
+    [Produces("application/json", Type = typeof(object))]
+    [AutoGenApiClient]
+    [TransactionFilter]
 		public override IActionResult Delete<#=tableMetadata.EntityName#>(<#= tableMetadata.PrimaryKeyCSharpTypeAsString #> id, bool isHardDelete) {
-            return base.Delete<#=tableMetadata.EntityName#>(id, isHardDelete);
+      return base.Delete<#=tableMetadata.EntityName#>(id, isHardDelete);
 		}
 
 		public override IQueryable<<#=tableMetadata.EntityName#>> FilterBySearchParams(IQueryable<<#=tableMetadata.EntityName#>> qry, <#=tableMetadata.EntityName#>SearchParams filterModel) {
-            return base.FilterBySearchParams(qry, filterModel);
+      return base.FilterBySearchParams(qry, filterModel);
 		}
 	}
 

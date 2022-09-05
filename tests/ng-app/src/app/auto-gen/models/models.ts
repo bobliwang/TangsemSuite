@@ -1,3 +1,4 @@
+// tslint:disable
 export type EditorMode = 'create' | 'view' | 'edit';
 
 export interface SearchResultModel<T> {
@@ -144,7 +145,11 @@ export interface ProductModel {
 		unitPrice?: number;
 
 
-		specsJson?: string;
+	
+	/**
+	 * GeneratorTest.Common.Domain.ViewModels.ProductSpec[]
+	 */
+		specsJson?: any[];
 
 
 		createdById?: number;
@@ -176,6 +181,9 @@ export interface PosModel {
 
 
 		name?: string;
+
+
+		storeId?: number;
 
 
 		createdById?: number;

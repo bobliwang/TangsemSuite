@@ -1,0 +1,201 @@
+﻿<#@ template language="C#" inherits="Tangsem.Common.T4.T4TemplateBase"#>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#@ import namespace="Tangsem.Common.Extensions" #>
+<#@ import namespace="Tangsem.Generator.Templates" #>
+<#@ import namespace="Tangsem.Generator.Settings" #>
+
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
+using Tangsem.Data.Domain;
+using Tangsem.<#= Configuration.OrmType.AsNamespacePart()#>.Domain;
+using <#=Configuration.EntityNamespace#>;
+
+using NHibernate.Linq;
+
+namespace <#=Configuration.RepositoryNamespace#>.<#=Configuration.OrmType.AsNamespacePart()#>
+{
+  /// <summary>
+  /// The <#= Configuration.RepositoryName #> class.
+  /// </summary>
+  public partial class <#= Configuration.RepositoryName #> : <#= Configuration.RepositoryBaseClassName ?? "RepositoryBase"#>, I<#= Configuration.RepositoryName #>
+  {
+    <# foreach (var tableMetadata in this.TableMetadatas) { #>
+  
+    /// <summary>
+    /// The IQueryable for <#= tableMetadata.EntityName.Pluralize()#>.
+    /// </summary>
+    public virtual IQueryable<<#= tableMetadata.EntityName#>> <#= tableMetadata.EntityName.Pluralize()#>
+    {
+      get
+      {
+        return this.GetEntities<<#= tableMetadata.EntityName #>>();
+      }
+    }
+    <# } #>
+    
+    
+    <# foreach (var tableMetadata in this.TableMetadatas.Where(x => !x.IsView)) { #>
+      
+    /// <summary>
+    /// Get <#= tableMetadata.EntityName #> by primary key.
+    /// </summary>
+    public virtual <#= tableMetadata.EntityName #> Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeys[0].PropertyName #>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> <#= tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()#>)
+    {
+      return this.LookupById<<#= tableMetadata.EntityName #>>(<#= tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()#>);
+    }
+    
+    /// <summary>
+    /// Get <#= tableMetadata.EntityName #> by primary key.
+    /// </summary>
+    public virtual async Task<<#= tableMetadata.EntityName #>> Lookup<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeys[0].PropertyName #>Async(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> <#= tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()#>)
+    {
+      return await this.LookupByIdAsync<<#= tableMetadata.EntityName #>>(<#= tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()#>);
+    }
+    
+    /// <summary>
+    /// Delete <#= tableMetadata.EntityName #> by primary key.
+    /// </summary>
+    public virtual <#= tableMetadata.EntityName #> Delete<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeys[0].PropertyName #>(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> <#= tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()#>)
+    {
+      return this.DeleteById<<#= tableMetadata.EntityName #>>(<#= tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()#>);
+    }
+    
+    /// <summary>
+    /// Delete <#= tableMetadata.EntityName #> by primary key.
+    /// </summary>
+    public virtual async Task<<#= tableMetadata.EntityName #>> Delete<#= tableMetadata.EntityName #>By<#= tableMetadata.PrimaryKeys[0].PropertyName #>Async(<#= tableMetadata.PrimaryKeys[0].CSharpTypeAsString #> <#= tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()#>)
+    {
+      return await this.DeleteByIdAsync<<#= tableMetadata.EntityName #>>(<#= tableMetadata.PrimaryKeys[0].PropertyName.LowerFirst()#>);
+    }
+    
+    /// <summary>
+    /// Save a new <#= tableMetadata.EntityName #> instance.
+    /// </summary>
+    public virtual <#= tableMetadata.EntityName #> Save<#= tableMetadata.EntityName #>(<#= tableMetadata.EntityName #> <#= tableMetadata.EntityName.LowerFirst() #>)
+    {
+      return this.Save<<#= tableMetadata.EntityName #>>(<#= tableMetadata.EntityName.LowerFirst() #>);
+    }
+    
+    /// <summary>
+    /// Save a new <#= tableMetadata.EntityName #> instance.
+    /// </summary>
+    public virtual async Task<<#= tableMetadata.EntityName #>> Save<#= tableMetadata.EntityName #>Async(<#= tableMetadata.EntityName #> <#= tableMetadata.EntityName.LowerFirst() #>)
+    {
+      return await this.SaveAsync<<#= tableMetadata.EntityName #>>(<#= tableMetadata.EntityName.LowerFirst() #>);
+    }
+    
+    /// <summary>
+    /// Update an existing <#= tableMetadata.EntityName #> instance.
+    /// </summary>
+    public virtual <#= tableMetadata.EntityName #> Update<#= tableMetadata.EntityName #>(<#= tableMetadata.EntityName #> <#= tableMetadata.EntityName.LowerFirst() #>)
+    {
+      return this.Update<<#= tableMetadata.EntityName #>>(<#= tableMetadata.EntityName.LowerFirst() #>);
+    }
+    
+    /// <summary>
+    /// Update an existing <#= tableMetadata.EntityName #> instance.
+    /// </summary>
+    public virtual async Task<<#= tableMetadata.EntityName #>> Update<#= tableMetadata.EntityName #>Async(<#= tableMetadata.EntityName #> <#= tableMetadata.EntityName.LowerFirst() #>)
+    {
+      return await this.UpdateAsync<<#= tableMetadata.EntityName #>>(<#= tableMetadata.EntityName.LowerFirst() #>);
+    }
+    
+    /// <summary>
+    /// Save or update an existing <#= tableMetadata.EntityName #> instance.
+    /// </summary>
+    public virtual <#= tableMetadata.EntityName #> SaveOrUpdate<#= tableMetadata.EntityName #>(<#= tableMetadata.EntityName #> <#= tableMetadata.EntityName.LowerFirst() #>)
+    {
+      return this.SaveOrUpdate<<#= tableMetadata.EntityName #>>(<#= tableMetadata.EntityName.LowerFirst() #>);
+    }
+    
+    /// <summary>
+    /// Save or update an existing <#= tableMetadata.EntityName #> instance.
+    /// </summary>
+    public virtual async Task<<#= tableMetadata.EntityName #>> SaveOrUpdate<#= tableMetadata.EntityName #>Async(<#= tableMetadata.EntityName #> <#= tableMetadata.EntityName.LowerFirst() #>)
+    {
+      return await this.SaveOrUpdateAsync<<#= tableMetadata.EntityName #>>(<#= tableMetadata.EntityName.LowerFirst() #>);
+    }
+    
+    <# foreach (var uniqueKey in tableMetadata.UniqueKeys.Where(x => !x.IsPrimaryKey)) {
+        var combinedKeyColumnNames = string.Join(", ", uniqueKey.Columns.Select(x => x.ColumnName));
+        var combinedArguments = string.Join(", ", uniqueKey.Columns.Select(x => x.CSharpTypeAsString + " " + x.PropertyName.LowerFirst()));
+        var combinedArgumentValues = string.Join(", ", uniqueKey.Columns.Select(x => x.PropertyName.LowerFirst()));
+        var whereCondExpr = string.Join(" && ", uniqueKey.Columns.Select(x => "x." + x.PropertyName + " == " + x.PropertyName.LowerFirst()));
+	  #>
+    #region <#= uniqueKey.Name#>
+    
+    /// <summary>
+    /// Lookup <#= tableMetadata.EntityName #> by <#= combinedKeyColumnNames #>
+    /// </summary>
+    public virtual <#= tableMetadata.EntityName #> Lookup<#= tableMetadata.EntityName #>By<#= combinedKeyColumnNames #>(<#= combinedArguments #>, System.Linq.Expressions.Expression<Func<<#= tableMetadata.EntityName #>, bool>> extraFilter = null)
+    {
+      var qry = this.<#= tableMetadata.EntityName.Pluralize() #>;
+      if (extraFilter != null)
+      {
+        qry = qry.Where(extraFilter);
+      }
+
+      return qry.FirstOrDefault(x => <#= whereCondExpr #>);
+    }
+    
+    /// <summary>
+    /// Lookup <#= tableMetadata.EntityName #> by <#= combinedKeyColumnNames #> async
+    /// </summary>
+    public async System.Threading.Tasks.Task<<#= tableMetadata.EntityName #>> Lookup<#= tableMetadata.EntityName #>By<#= combinedKeyColumnNames #>Async(<#= combinedArguments #>, System.Linq.Expressions.Expression<Func<<#= tableMetadata.EntityName #>, bool>> extraFilter = null)
+    {
+      var qry = this.<#= tableMetadata.EntityName.Pluralize() #>;
+      if (extraFilter != null)
+      {
+        qry = qry.Where(extraFilter);
+      }
+
+      return await qry.FirstOrDefaultAsync(x => <#= whereCondExpr #>);
+    }
+    
+    /// <summary>
+    /// Deletes <#= tableMetadata.EntityName #> by <#= combinedKeyColumnNames #>
+    /// </summary>
+    public <#= tableMetadata.EntityName #> Delete<#= tableMetadata.EntityName #>By<#= combinedKeyColumnNames #>(<#= combinedArguments #>)
+    {
+      var entity = this.Lookup<#= tableMetadata.EntityName #>By<#= combinedKeyColumnNames #>(<#= combinedArgumentValues #>);
+      if (entity != null)
+      {
+        this.Delete(entity);
+      }
+    
+      return entity;
+    }
+
+    /// <summary>
+    /// Deletes <#= tableMetadata.EntityName #> by <#= combinedKeyColumnNames #> async.
+    /// </summary>
+    public async System.Threading.Tasks.Task<<#= tableMetadata.EntityName #>> Delete<#= tableMetadata.EntityName #>By<#= combinedKeyColumnNames #>Async(<#= combinedArguments #>)
+    {
+      var entity = await this.Lookup<#= tableMetadata.EntityName #>By<#= combinedKeyColumnNames #>Async(<#= combinedArgumentValues #>);
+      if (entity != null)
+      {
+        await this.DeleteAsync(entity);
+      }
+      
+      return entity;
+    }
+
+    #endregion
+  <# } #>
+
+  
+
+  <# } #>
+  }
+}

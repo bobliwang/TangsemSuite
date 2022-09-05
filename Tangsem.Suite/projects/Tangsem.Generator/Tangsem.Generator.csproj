@@ -1,352 +1,233 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6CE102E0-7F36-434A-AEC0-541A20FD2548}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tangsem.Generator</RootNamespace>
-    <AssemblyName>Tangsem.Generator</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworks>net48;net6;netstandard2.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <IncludeSymbols>true</IncludeSymbols>
+    
+    <Company>Tangsem</Company>
+    <Authors>liwangdev@gmail.com</Authors>
+    <Version>1.3.55</Version>
+    <LangVersion>10</LangVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="RazorGenerator.Templating">
-      <HintPath>..\..\packages\RazorGenerator.Templating.1.2.1\lib\net40\RazorGenerator.Templating.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\Tangsem.Common\Tangsem.Common.csproj" />
+    <ProjectReference Include="..\Tangsem.Data\Tangsem.Data.csproj" />
+    <ProjectReference Include="..\Tangsem.Generator.Metadata.Postgres\Tangsem.Generator.Metadata.Postgres.csproj" />
+    <ProjectReference Include="..\Tangsem.Generator.Metadata\Tangsem.Generator.Metadata.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gen.cs" />
-    <Compile Include="Settings\GeneratorConfiguration.cs" />
-    <Compile Include="Settings\OrmTypeExtensions.cs" />
-    <Compile Include="Settings\OrmTypes.cs" />
-    <Compile Include="Templates\Angular\NgEditorComponent.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NgEditorComponent.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgRoutingModule.cs">
-      <DependentUpon>NgRoutingModule.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\Angular\NgModule.cs">
-      <DependentUpon>NgModule.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\Angular\NgApiService.ext.cs">
-      <DependentUpon>NgApiService.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgEditorComponent.ext.cs">
-      <DependentUpon>NgEditorComponent.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgEditorComponentHtml.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NgEditorComponentHtml.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgEditorComponentHtml.ext.cs">
-      <DependentUpon>NgEditorComponentHtml.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgFilterComponent.ext.cs">
-      <DependentUpon>NgFilterComponent.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgFilterComponentHtml.cs">
-      <DependentUpon>NgFilterComponentHtml.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\Angular\NgFilterComponent.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NgFilterComponent.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgFilterComponentHtml.ext.cs">
-      <DependentUpon>NgFilterComponentHtml.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgListingComponent.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NgListingComponent.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgListingComponent.ext.cs">
-      <DependentUpon>NgListingComponent.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgListingComponentHtml.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NgListingComponentHtml.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgListingComponentHtml.ext.cs">
-      <DependentUpon>NgListingComponentHtml.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgApiService.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NgApiService.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgModels.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NgModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgModels.ext.cs">
-      <DependentUpon>NgModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgModule.ext.cs">
-      <DependentUpon>NgModule.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Angular\NgRoutingModule.ext.cs">
-      <DependentUpon>NgRoutingModule.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Entities\EntityFxFluentTemplate.cs" />
-    <Compile Include="Templates\Entities\NHibernateFluentTemplate.cs" />
-    <Compile Include="Templates\Entities\Poco.Designer.Reos.generated.cs">
-      <DependentUpon>Poco.Designer.Reos.cshtml</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\Entities\Poco.DTO.Designer.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Poco.DTO.Designer.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Entities\Poco.EF.Fluent.Designer.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Poco.EF.Fluent.Designer.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Templates\Entities\Poco.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Poco.Designer.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Entities\Poco.NHibernate.Fluent.Designer.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Poco.NHibernate.Fluent.Designer.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Entities\PocoDTOTemplate.cs" />
-    <Compile Include="Templates\Entities\PocoReosTemplate.cs" />
-    <Compile Include="Templates\Entities\PocoTemplate.cs" />
-    <Compile Include="Templates\MultipleTableMetadataTemplate.cs" />
-    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.cs">
-      <DependentUpon>PocoModelAutoMapperConfigurationTemplate.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.ext.cs">
-      <DependentUpon>PocoModelAutoMapperConfigurationTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PocoModelAutoMapperProfileTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.ext.cs">
-      <DependentUpon>PocoModelAutoMapperProfileTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\MVC\Controllers\ApiControllerBaseTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ApiControllerBaseTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\MVC\Controllers\ApiControllerBaseTemplate.ext.cs">
-      <DependentUpon>ApiControllerBaseTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\MVC\Controllers\ApiControllerTemplate.cs">
-      <DependentUpon>ApiControllerTemplate.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\MVC\Controllers\ApiControllerTemplate.ext.cs">
-      <DependentUpon>ApiControllerTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\MVC\ViewModels\SearchParamTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SearchParamTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\MVC\ViewModels\SearchParamTemplate.ext.cs">
-      <DependentUpon>SearchParamTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Repositories\IRepository.Designer.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IRepository.Designer.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Repositories\RepositoryDesigners.cs" />
-    <Compile Include="Templates\Repositories\Repository.Designer.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Repository.Designer.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\SingleTableMetadataTemplate.cs" />
-    <Compile Include="Templates\StoredProc\StoredProc.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StoredProc.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\StoredProc\StoredProc.ext.cs">
-      <DependentUpon>StoredProc.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\TemplateBase.cs" />
+  <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="Templates\Entities\Poco.Designer.Reos.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Poco.Designer.Reos.generated.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Entities\Poco.EF.Fluent.Designer.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Poco.EF.Fluent.Designer.generated.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Entities\Poco.Designer.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Poco.generated.cs</LastGenOutput>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Templates\Entities\Poco.NHibernate.Fluent.Designer.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Poco.NHibernate.Fluent.Designer.generated.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Entities\Poco.DTO.Designer.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Poco.DTO.Designer.generated.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Repositories\IRepository.Designer.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>IRepository.Designer.generated.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Repositories\Repository.Designer.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Repository.Designer.generated.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Tangsem.Common\Tangsem.Common.csproj">
-      <Project>{A5DAFCC5-6AC6-4805-B7CA-A351084654CA}</Project>
-      <Name>Tangsem.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tangsem.Generator.Metadata\Tangsem.Generator.Metadata.csproj">
-      <Project>{BEE62F90-879F-40A3-A3C4-666373B2BF89}</Project>
-      <Name>Tangsem.Generator.Metadata</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Angular\NgRoutingModule.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>NgRoutingModule.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\Angular\NgModule.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>NgModule.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\Angular\NgApiService.tt">
+    <None Update="Templates\Angular\NgApiService.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NgApiService.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\Angular\NgEditorComponent.tt">
+    </None>
+    <None Update="Templates\Angular\NgEditorComponent.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NgEditorComponent.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\Angular\NgEditorComponentHtml.tt">
+    </None>
+    <None Update="Templates\Angular\NgEditorComponentHtml.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NgEditorComponentHtml.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\Angular\NgFilterComponentHtml.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>NgFilterComponentHtml.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\Angular\NgFilterComponent.tt">
+    </None>
+    <None Update="Templates\Angular\NgFilterComponent.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NgFilterComponent.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\Angular\NgListingComponent.tt">
+    </None>
+    <None Update="Templates\Angular\NgFilterComponentHtml.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgFilterComponentHtml.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\NgListingComponent.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NgListingComponent.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\Angular\NgListingComponentHtml.tt">
+    </None>
+    <None Update="Templates\Angular\NgListingComponentHtml.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NgListingComponentHtml.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\Angular\NgModels.tt">
+    </None>
+    <None Update="Templates\Angular\NgModels.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NgModels.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt">
+    </None>
+    <None Update="Templates\Angular\NgModule.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgModule.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\NgRoutingModule.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgRoutingModule.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Entities\PocoDTOTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PocoDTOTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Entities\PocoNHibernateFluentTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PocoNHibernateFluentTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Entities\PocoTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PocoTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Enums\EnumsTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumsTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>PocoModelAutoMapperConfigurationTemplate.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt">
+    </None>
+    <None Update="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>PocoModelAutoMapperProfileTemplate.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\MVC\Controllers\ApiControllerBaseTemplate.tt">
+    </None>
+    <None Update="Templates\MVC\Controllers\ApiControllerBaseTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ApiControllerBaseTemplate.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\MVC\Controllers\PlaceHolder.txt" />
-    <Content Include="Templates\MVC\Controllers\ApiControllerTemplate.tt">
+    </None>
+    <None Update="Templates\MVC\Controllers\ApiControllerTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ApiControllerTemplate.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\MVC\ViewModels\SearchParamTemplate.tt">
+    </None>
+    <None Update="Templates\MVC\ViewModels\SearchParamTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>SearchParamTemplate.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\MVC\Models\PlaceHolder.txt" />
-    <Content Include="Templates\MVC\Views\PlaceHolder.txt" />
-    <Content Include="Templates\StoredProc\StoredProc.tt">
+    </None>
+    <None Update="Templates\Repositories\RepositoryClassTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>RepositoryClassTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Repositories\RepositoryInterfaceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>RepositoryInterfaceTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\StoredProc\StoredProc.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>StoredProc.cs</LastGenOutput>
-    </Content>
+    </None>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Templates\Angular\NgApiService.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NgApiService.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\NgEditorComponent.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NgEditorComponent.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\NgEditorComponentHtml.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NgEditorComponentHtml.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\NgFilterComponent.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NgFilterComponent.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\NgFilterComponentHtml.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NgFilterComponentHtml.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\NgListingComponent.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NgListingComponent.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\NgListingComponentHtml.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NgListingComponentHtml.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\NgModels.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NgModels.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\NgModule.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NgModule.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\NgRoutingModule.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NgRoutingModule.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Entities\PocoDTOTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PocoDTOTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Entities\PocoNHibernateFluentTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PocoNHibernateFluentTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Entities\PocoTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PocoTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Enums\EnumsTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EnumsTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\MVC\AutoMapper\PocoModelAutoMapperConfigurationTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PocoModelAutoMapperConfigurationTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\MVC\AutoMapper\PocoModelAutoMapperProfileTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PocoModelAutoMapperProfileTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\MVC\Controllers\ApiControllerBaseTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ApiControllerBaseTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\MVC\Controllers\ApiControllerTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ApiControllerTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\MVC\ViewModels\SearchParamTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SearchParamTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Repositories\RepositoryClassTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RepositoryClassTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Repositories\RepositoryInterfaceTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RepositoryInterfaceTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\StoredProc\StoredProc.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StoredProc.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

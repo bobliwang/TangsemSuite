@@ -7,22 +7,12 @@ namespace Tangsem.Generator.Metadata.TypeMapping
   {
     private IDictionary<string, Type> _typeMapper = null;
 
-    public virtual IDictionary<string, Type> TypeMappingDictionary
-    {
-      get
-      {
-        return _typeMapper ?? (_typeMapper = this.InitMappings());
-      }
-    }
-
     protected abstract IDictionary<string, Type> InitMappings();
 
+    public virtual IDictionary<string, Type> TypeMappingDictionary
+      => _typeMapper ?? (_typeMapper = this.InitMappings());
+
     public virtual Type this[string dataType]
-    {
-      get
-      {
-        return this.TypeMappingDictionary[dataType];
-      }
-    }
+      => this.TypeMappingDictionary[dataType];
   }
 }

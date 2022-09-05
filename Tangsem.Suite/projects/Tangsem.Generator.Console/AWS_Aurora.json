@@ -1,0 +1,17 @@
+﻿{
+  "ProjectName": "SW.Phoenix.Server.Analytics",
+  "OutputDir": "",
+  "RepositoryName": "AnalyticsRepository",
+  "ConnectionString": "Host=vtcanalytics.cluster-ct1maokttyhl.ap-southeast-2.rds.amazonaws.com;Username=sa;Password=Abc123!!;Database=vt_analytics",
+  "MetadataBuilder": "Tangsem.Generator.Metadata.Postgres.PostgreSQL12MetadataBuilder; Tangsem.Generator.Metadata.Postgres",
+  "OpenOutputDirAfterGeneration": true,
+  "OrmFramework": "NHibernate",
+  "UseTimestampInOutputFolder": false,
+  "GenRelationship": true,
+  "GenAutoMapper": false,
+  "GenStoredProc": false,
+  "TableNameOpenQuote": "",
+  "TableNameCloseQuote": "",
+  "UpdateSqlForModifiedColumnsOnly": true,
+  "IgnoredTables": [ "Sysdiagrams" ]
+}

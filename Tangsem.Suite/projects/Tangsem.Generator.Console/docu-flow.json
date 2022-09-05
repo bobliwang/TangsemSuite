@@ -1,0 +1,35 @@
+﻿{
+  "ProjectName": "DocuFlow.Core",
+  "OutputDir": "C:\\git-temp\\docu-flow\\server\\",
+  "RepositoryName": "DocuFlowRepository",
+  "ConnectionString": "Data Source=.;Initial Catalog=docu-flow;Integrated Security=True",
+  "MetadataBuilder": "Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder",
+  "OpenOutputDirAfterGeneration": "true",
+  "OrmFramework": "NHibernate",
+  "UseTimestampInOutputFolder": "false",
+
+  "GenRelationship": "true",
+  "GenAutoMapper": true,
+  "GenAspNetController": true,
+  "GenNgApp": true,
+  "IncludeTangsemIdentity": true,
+
+  "RepositoryBaseClassName": "Tangsem.Identity.Domain.Repositories.NHibernate.IdentityRepository",
+  "UpdateSqlForModifiedColumnsOnly": true,
+  "IncludeTables": [
+
+  ],
+
+  "IgnoredTables": [
+    "Sysdiagrams",
+    "ApplicationUser",
+    "AspNetRole",
+    "AspNetRoleClaim",
+    "AspNetUser",
+    "AspNetUserClaim",
+    "AspNetUserLogin",
+    "AspNetUserRole",
+    "AspNetUserToken",
+    "MessageQueueLog"
+  ]
+}

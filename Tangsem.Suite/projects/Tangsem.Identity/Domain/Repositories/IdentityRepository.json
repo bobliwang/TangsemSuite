@@ -1,0 +1,26 @@
+{
+  "ProjectName": "Tangsem.Identity",
+  "OutputDir": "",
+  "RepositoryName": "IdentityRepository",
+  "ConnectionString": "Data Source=.\\SQLExpress;Initial Catalog=Tangsem-Identity;Integrated Security=True",
+  "MetadataBuilder": "Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder",
+  "OpenOutputDirAfterGeneration": "true",
+  "OrmFramework": "NHibernate",
+  "UseTimestampInOutputFolder": "false",
+  "GenRelationship": true,
+  "SupportAsync": true,
+  "GenAutoMapper": false,
+  "UpdateSqlForModifiedColumnsOnly": true,
+  "IncludeTables": [
+    "ApplicationUser",
+    "AspNetRole",
+    "AspNetRoleClaim",
+    "AspNetUser",
+    "AspNetUserClaim",
+    "AspNetUserLogin",
+    "AspNetUserRole",
+    "AspNetUserToken"
+  ],
+
+  "IgnoredTables": [ "Sysdiagrams" ]
+}

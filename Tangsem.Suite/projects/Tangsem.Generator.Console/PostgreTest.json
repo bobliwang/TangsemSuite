@@ -1,0 +1,17 @@
+﻿{
+  "ProjectName": "Tangsem.NHibernate.Tests.PostgreTest1",
+  "OutputDir": "",
+  "RepositoryName": "PostgreTest1Repository",
+  "ConnectionString": "Host=localhost;Username=postgres;Password=Abc123!;Database=test1",
+  "MetadataBuilder": "Tangsem.Generator.Metadata.Postgres.PostgreSQL12MetadataBuilder; Tangsem.Generator.Metadata.Postgres",
+  "OpenOutputDirAfterGeneration": "true",
+  "OrmFramework": "NHibernate",
+  "UseTimestampInOutputFolder": "false",
+  "GenRelationship": "true",
+  "GenAutoMapper": false,
+  "GenStoredProc": false,
+  "TableNameOpenQuote": "",
+  "TableNameCloseQuote": "",
+  "UpdateSqlForModifiedColumnsOnly": true,
+  "IgnoredTables": [ "Sysdiagrams" ]
+}

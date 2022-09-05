@@ -1,0 +1,14 @@
+{
+  "ProjectName": "GeneratorTest.Common",
+  "OutputDir": "",
+  "RepositoryName": "TestRepository",
+  "ConnectionString": "Data Source=.\\SQLExpress;Initial Catalog=test;Integrated Security=True",
+  "MetadataBuilder": "Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder",
+  "OpenOutputDirAfterGeneration": "true",
+  "OrmFramework": "NHibernate",
+  "UseTimestampInOutputFolder": "false",
+  "GenRelationship": "true",
+  "GenAutoMapper": true,
+  "UpdateSqlForModifiedColumnsOnly":  true, 
+  "IgnoredTables": [ "Sysdiagrams" ]
+}

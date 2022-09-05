@@ -1,0 +1,151 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1",
+        "title": "My API"
+    },
+    "paths": {
+        "/api/Values/properties/{postCode}": {
+            "get": {
+                "tags": [
+                    "Values"
+                ],
+                "operationId": "ApiValuesPropertiesByPostCodeGet",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "postCode",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Property"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Values/properties": {
+            "post": {
+                "tags": [
+                    "Values"
+                ],
+                "operationId": "ApiValuesPropertiesPost",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "propertyUpdatePayload",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PropertyUpdatePayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Property"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Property": {
+            "type": "object",
+            "properties": {
+                "propertyId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "propertyGuidId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "addressLine1": {
+                    "type": "string"
+                },
+                "suburb": {
+                    "type": "string"
+                },
+                "postCode": {
+                    "type": "string"
+                },
+                "propertyType": {
+                    "format": "int32",
+                    "description": "PropertyType.UnknownPropertyType = 0, PropertyType.Residential = 1, PropertyType.Business = 2",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "type": "integer"
+                },
+                "landlord": {
+                    "$ref": "#/definitions/Person"
+                },
+                "leaseStartDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "leased": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "Person": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "gender": {
+                    "format": "int32",
+                    "description": "Gender.Female = 0, Gender.Male = 1, Gender.BI = 2",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "type": "integer"
+                }
+            }
+        },
+        "PropertyUpdatePayload": {
+            "type": "object",
+            "properties": {
+                "property": {
+                    "$ref": "#/definitions/Property"
+                },
+                "extraInfo": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
