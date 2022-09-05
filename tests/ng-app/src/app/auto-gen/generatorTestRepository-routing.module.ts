@@ -1,3 +1,4 @@
+// tslint:disable
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomerListingComponent } from './components/customer/customer-listing.component';

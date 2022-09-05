@@ -1,0 +1,13 @@
+<p>
+  order-details works!
+  OrderId: {{orderId}}
+</p>
+
+
+<button mat-button routerLink="cust" routerLinkActive="active"
+#active1="routerLinkActive" [color]="active1.isActive ? 'accent' : undefined">Customer Info</button>
+|
+<button mat-button routerLink="prod" routerLinkActive="active"
+#active2="routerLinkActive" [color]="active2.isActive ? 'accent' : undefined">Products Info</button>
+
+<router-outlet></router-outlet>

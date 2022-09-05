@@ -1,0 +1,177 @@
+﻿<#@ template language="C#" inherits="Tangsem.Common.T4.T4TemplateBase"#>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+
+using FluentNHibernate.Mapping;
+using FluentNHibernate.MappingModel;
+
+using Tangsem.NHibernate.UserTypes;
+
+<#= Configuration.IncludeTangsemIdentity ? "using Tangsem.Identity.Domain.Entities;" : "" #>
+namespace <#= Configuration.MappingNamespace #>
+{
+  /// <summary>
+  /// The mapping configuration for <#= TableMetadata.EntityName #>.
+  /// </summary>
+  public partial class <#= TableMetadata.EntityName #>Map : ClassMap<<#= TableMetadata.EntityName #>>
+  {
+    /// <summary>
+    /// The default constructor.
+    /// </summary>
+    public <#= TableMetadata.EntityName #>Map()
+      : this(new AttributeStore(), new MappingProviderStore())
+    {
+    }
+
+    /// <summary>
+    /// The constructor.
+    /// </summary>
+    public <#= TableMetadata.EntityName #>Map(AttributeStore attributes, MappingProviderStore providers)
+      : base(attributes, providers)
+    {
+      this.Providers = providers;
+
+<# if (TableMetadata.Schema != "dbo") { #>
+      this.Schema("<#= TableMetadata.Schema #>");
+<# } #>
+
+      this.Table("<#= TableNameInMapping(TableMetadata.Name) #>");
+      
+<# if (TableMetadata.IsView) { #>
+      this.ReadOnly();
+<# } #>
+
+      // primary key mapping
+      this.MapId();
+      
+      // basic columns mapping
+      this.MapBasicColumns();
+      
+<# if (Configuration.GenRelationship) { #>
+      // outgoing references mapping
+      this.MapOutgoingReferences();
+      
+      // incoming references mapping
+      this.MapIncomingReferences();
+<# } #>
+
+<# if (Configuration.UpdateSqlForModifiedColumnsOnly) { #>
+      this.DynamicUpdate();
+<# } #>
+
+      this.CustomMappingConfig();
+    }
+
+    public MappingProviderStore Providers { get; private set; }
+
+    partial void CustomMappingConfig();
+    
+    /// <summary>
+    /// Map the Primary Key.
+    /// </summary>
+    private void MapId()
+    {
+      <# if (TableMetadata.PrimaryKeys.Any(x => x.IsAutoIncrement)) { #>
+      
+      this.Id(x => x.<#= TableMetadata.PrimaryKeys[0].PropertyName #>)
+        .Column("<#= TableMetadata.PrimaryKeys[0].ColumnName #>")
+        .GeneratedBy
+        .Native();
+      <# } else if (TableMetadata.PrimaryKeys.Count == 1) {#>
+      
+      this.Id(x => x.<#= TableMetadata.PrimaryKeys[0].PropertyName #>)
+          .Column("<#= TableMetadata.PrimaryKeys[0].ColumnName #>")
+          .GeneratedBy.Assigned();	
+      <# } else if (TableMetadata.IsView) { #>
+
+      // VIEW
+      this.Id(x => x.<#= TableMetadata.Columns[0].PropertyName #>)
+          .Column("<#= TableMetadata.Columns[0].ColumnName #>");	
+      <# } else { #>
+
+      this.CompositeId()
+        <# foreach (var col in this.TableMetadata.PrimaryKeys) { #>
+          .KeyProperty(x => x.<#= col.PropertyName #>, "<#= col.ColumnName #>")
+        <# }#>;
+      <# } #>
+      
+    }
+    
+    /// <summary>
+    /// Map the Basic Columns.
+    /// </summary>
+    private void MapBasicColumns()
+    {
+      <#
+      var colIndex = 0;
+      foreach (var col in TableMetadata.Columns.Where(c => (!c.IsOutgoingRefKey || !Configuration.GenRelationship ) && !c.IsPrimaryKey)) { #>
+         
+       // <#= col.ColumnName #>
+       <#    PushIndent("");
+          if (TableMetadata.IsView && colIndex == 0) {
+            colIndex ++;
+            continue;
+          }
+          
+          if (col.IsRowVersion) { #>
+
+      this.Version(x => x.<#= col.PropertyName #>).Generated.Always();
+       <# } else if(col.ExtraColumnMeta == null || string.IsNullOrWhiteSpace(col.ExtraColumnMeta.JsonType)) { #>
+
+      this.Map(x => x.<#= col.PropertyName #>).Column("<#= col.ColumnName #>")
+         <# if (col.ClrType == typeof(string) || col.ClrType == typeof(byte[])) { #> .Length(<#= col.ColumnSize > 0 ? col.ColumnSize.ToString() : "int.MaxValue" #>) <# } #>
+         <# if (!col.Nullable) { #>.Not.Nullable() <# } #>
+         <# if (col.ReadOnly) { #>.ReadOnly() <# } #>;
+       <# } else {#>
+
+      this.Map(x => x.<#= col.PropertyName #>).Column("<#= col.ColumnName #>").CustomType<JsonType<<#= col.ExtraColumnMeta.JsonType #>>>()
+         <#if (!col.Nullable) { #>.Not.Nullable() <# } #>
+         <#if (col.ReadOnly){ #>.ReadOnly() <# } #>;
+        <#}
+      }#>
+
+    }
+
+    <# if (Configuration.GenRelationship) { #>
+    
+    /// <summary>
+    /// Map the Outgoing References.
+    /// </summary>
+    private void MapOutgoingReferences()
+    {
+      <# foreach (var reference in this.TableMetadata.OutgoingReferences) { #>
+      
+      this.References<<#= reference.ParentTableMetadata.EntityName #>>(x => x.<#= reference.ParentPropertyName #>)
+                .Fetch.Join().Column("<#= reference.ColumnPairs[0].ChildColumnMetadata.ColumnName #>")
+      <# if (reference.ColumnPairs[0].ChildColumnMetadata.Nullable){ #>;<# }else{#>.Not.Nullable();<# }#>
+      <# } #>
+
+    }
+    
+    /// <summary>
+    /// Map the Incoming References.
+    /// </summary>
+    private void MapIncomingReferences()
+    {
+      <# foreach (var reference in this.TableMetadata.IncomingReferences) { #>
+      
+      this.HasMany<<#= reference.ChildTableMetadata.EntityName #>>(x => x.<#= reference.ChildListPropertyName #>)
+        .KeyColumn("<#= reference.ColumnPairs[0].ChildColumnMetadata.ColumnName #>")
+                .Inverse()
+                .LazyLoad()
+                .AsBag();
+      <# } #>
+
+    }
+    <# } #>
+
+  }
+}

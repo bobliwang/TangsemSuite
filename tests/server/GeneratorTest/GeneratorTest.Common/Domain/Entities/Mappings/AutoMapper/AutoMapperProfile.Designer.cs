@@ -6,10 +6,10 @@ namespace GeneratorTest.Common.Domain.Mappings.AutoMapper
 
     public interface IRepoProvider
     {
-        IGeneratorTestRepository Get();
+      IGeneratorTestRepository Get();
     }
 
-	public class GeneratorTestRepositoryAutoMapperConfiguration
+	public class TestRepositoryAutoMapperConfiguration
 	{
     
 		public MapperConfiguration Configure(IRepoProvider repoProvider)
@@ -17,11 +17,11 @@ namespace GeneratorTest.Common.Domain.Mappings.AutoMapper
 			var config = new MapperConfiguration(cfg => {
 			
 	
+				cfg.AddProfile(new OrderMappingProfile(repoProvider));
+	
 				cfg.AddProfile(new CustomerMappingProfile(repoProvider));
 	
 				cfg.AddProfile(new StoreMappingProfile(repoProvider));
-	
-				cfg.AddProfile(new OrderMappingProfile(repoProvider));
 	
 				cfg.AddProfile(new ProductMappingProfile(repoProvider));
 	

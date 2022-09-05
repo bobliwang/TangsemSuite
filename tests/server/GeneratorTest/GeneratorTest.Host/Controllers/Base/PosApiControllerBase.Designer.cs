@@ -117,6 +117,13 @@ namespace GeneratorTest.Host.Controllers.Base
 							
 			}
 			
+			if (filterModel.StoreId != null)
+			{
+										
+				filteredQry = filteredQry.Where(x => x.StoreId == filterModel.StoreId);
+							
+			}
+			
 			if (filterModel.CreatedById != null)
 			{
 										

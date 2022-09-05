@@ -5,8 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using RazorGenerator.Templating;
-
 using Tangsem.Generator.Metadata;
 using Tangsem.Generator.Metadata.Builder;
 using Tangsem.Generator.Settings;
@@ -35,7 +33,7 @@ namespace Tangsem.Generator
     /// <summary>
     /// The GeneratorConfiguration instance.
     /// </summary>
-    public GeneratorConfiguration GeneratorConfiguration { get; private set; }
+    public GeneratorConfiguration GeneratorConfiguration { get; }
 
     /// <summary>
     /// The metadata builder.
@@ -61,7 +59,7 @@ namespace Tangsem.Generator
                   .ToList();
 
 
-      var pairs = string.Join(",", tableMetadatas.Select(x => string.Format("[{0}:{1}]", x.Name, x.EntityName)));
+      var pairs = string.Join(",", tableMetadatas.Select(x => $"[{x.Name}:{x.EntityName}]"));
       this.Log("List of Metadata to generate code from", pairs);
 
       this.Log("Code generation based on single metadata", "Started..");
@@ -74,30 +72,46 @@ namespace Tangsem.Generator
 
       if (this.GeneratorConfiguration.OpenOutputDirAfterGeneration)
       {
-        this.Log("Openning Directory", this.GeneratorConfiguration.ProjectDirPath);
-        Process.Start(this.GeneratorConfiguration.ProjectDirPath);
+        try
+        {
+          this.Log("Openning Directory", this.GeneratorConfiguration.ProjectDirPath);
+          Process.Start(this.GeneratorConfiguration.ProjectDirPath);
+        }
+        catch
+        {
+          this.Log("Unable to open folder: " + this.GeneratorConfiguration.ProjectDirPath);
+        }
       }
     }
 
     private void GenerateForMultipleMetadataTemplates(List<TableMetadata> tableMetadatas)
     {
-      var templates = new ITemplateBase[]
+      var templates = new List<ITemplateBase>();
+
+      templates.Add(new RepositoryClassTemplate(this.GeneratorConfiguration, tableMetadatas));
+      templates.Add(new RepositoryInterfaceTemplate(this.GeneratorConfiguration, tableMetadatas));
+      
+      if (this.GeneratorConfiguration.GenAutoMapper)
       {
-        new RepositoryClassTemplate(this.GeneratorConfiguration, tableMetadatas),
-        new RepositoryInterfaceTemplate(this.GeneratorConfiguration, tableMetadatas),
+        templates.Add(new PocoModelAutoMapperConfigurationTemplate(this.GeneratorConfiguration, tableMetadatas));
+      }
 
-        new NgApiService (this.GeneratorConfiguration, tableMetadatas ),
-        new NgModels(this.GeneratorConfiguration, tableMetadatas ),
-        new PocoModelAutoMapperConfigurationTemplate(this.GeneratorConfiguration, tableMetadatas),
-        new NgModule(this.GeneratorConfiguration, tableMetadatas),
-        new NgRoutingModule(this.GeneratorConfiguration, tableMetadatas),
+      if (this.GeneratorConfiguration.GenNgApp)
+      {
+        templates.Add(new NgApiService(this.GeneratorConfiguration, tableMetadatas));
+        templates.Add(new NgModels(this.GeneratorConfiguration, tableMetadatas));
 
-        new StoredProc(this.GeneratorConfiguration, tableMetadatas)
-      };
+        templates.Add(new NgModule(this.GeneratorConfiguration, tableMetadatas));
+        templates.Add(new NgRoutingModule(this.GeneratorConfiguration, tableMetadatas));
+      }
 
-      this.ExecuteTemplates(templates);
+      if (this.GeneratorConfiguration.GenStoredProc)
+      {
+        templates.Add(new StoredProc(this.GeneratorConfiguration, tableMetadatas));
+      }
 
-
+      this.ExecuteTemplates(templates.ToArray());
+      
       this.SaveConfigFile();
     }
 
@@ -105,35 +119,53 @@ namespace Tangsem.Generator
     {
       foreach (var tableMetadata in tableMetadatas)
       {
-        var templates = new []
+        var templates = new List<ISingleTableMetadataTemplate>();
+
+        // Poco Entity
+        templates.Add(new PocoTemplate(this.GeneratorConfiguration, tableMetadata));
+
+        var mappingGen = new PocoNHibernateFluentTemplate(this.GeneratorConfiguration, tableMetadata)
+                           {
+                             TableNameInMapping = tblName =>
+                               {
+                                 var openQ = this.GeneratorConfiguration.TableNameOpenQuote;
+                                 var closeQ = this.GeneratorConfiguration.TableNameCloseQuote;
+
+                                 return $"{openQ}{tblName}{closeQ}";
+                               }
+                           };
+        // Entity Mapping
+        templates.Add(mappingGen);
+
+        // PocoDTO
+        templates.Add(new PocoDTOTemplate(this.GeneratorConfiguration, tableMetadata));
+
+        if (this.GeneratorConfiguration.GenAspNetController)
         {
-          // Poco Entity
-          new PocoTemplate(this.GeneratorConfiguration, tableMetadata),
+          templates.Add(new ApiControllerBaseTemplate(this.GeneratorConfiguration, tableMetadata));
+          templates.Add(new ApiControllerTemplate(this.GeneratorConfiguration, tableMetadata));
+          templates.Add(new SearchParamTemplate(this.GeneratorConfiguration, tableMetadata));
+        }
 
-          // Entity Mapping
-          this.GeneratorConfiguration.OrmType == OrmTypes.NHibernate ?
-            (ITemplateBase) new NHibernateFluentTemplate(this.GeneratorConfiguration, tableMetadata)
-            : new EntityFxFluentTemplate(this.GeneratorConfiguration, tableMetadata),
+        // ng listing
+        if (this.GeneratorConfiguration.GenNgApp)
+        {
+          templates.Add(new NgListingComponent(this.GeneratorConfiguration, tableMetadata));
+          templates.Add(new NgListingComponentHtml(this.GeneratorConfiguration, tableMetadata));
+          templates.Add(new NgFilterComponent(this.GeneratorConfiguration, tableMetadata));
+          templates.Add(new NgFilterComponentHtml(this.GeneratorConfiguration, tableMetadata));
 
-          // PocoDTO
-          new PocoDTOTemplate(this.GeneratorConfiguration, tableMetadata),
+          templates.Add(new NgEditorComponent(this.GeneratorConfiguration, tableMetadata));
+          templates.Add(new NgEditorComponentHtml(this.GeneratorConfiguration, tableMetadata));
+        }
 
-          new PocoModelAutoMapperProfileTemplate(this.GeneratorConfiguration, tableMetadata),
-          new ApiControllerBaseTemplate(this.GeneratorConfiguration, tableMetadata),
-          new ApiControllerTemplate(this.GeneratorConfiguration, tableMetadata),
-          new SearchParamTemplate(this.GeneratorConfiguration, tableMetadata),
+        // poco dto mapping.
+        if (this.GeneratorConfiguration.GenAutoMapper)
+        {
+          templates.Add(new PocoModelAutoMapperProfileTemplate(this.GeneratorConfiguration, tableMetadata));
+        }
 
-          // ng listing
-          new NgListingComponent(this.GeneratorConfiguration, tableMetadata),
-          new NgListingComponentHtml(this.GeneratorConfiguration, tableMetadata),
-          new NgFilterComponent(this.GeneratorConfiguration, tableMetadata),
-          new NgFilterComponentHtml(this.GeneratorConfiguration, tableMetadata),
-
-          new NgEditorComponent(this.GeneratorConfiguration, tableMetadata),
-          new NgEditorComponentHtml(this.GeneratorConfiguration, tableMetadata),
-        };
-
-        this.ExecuteTemplates(templates);
+        this.ExecuteTemplates(templates.ToArray());
       }
     }
 
@@ -158,8 +190,9 @@ namespace Tangsem.Generator
     private void SaveConfigFile()
     {
       // save the generator config xml too.
-      var configPath = $"{this.GeneratorConfiguration.IRepositoriesDirPath}/{this.GeneratorConfiguration.RepositoryName}.xml";
-      File.WriteAllText(configPath, File.ReadAllText(this.GeneratorConfiguration.ConfigFilePath));
+      var sourceConfigFileInfo = new FileInfo(this.GeneratorConfiguration.ConfigFilePath);
+      var configPath = $"{this.GeneratorConfiguration.IRepositoriesDirPath}/{this.GeneratorConfiguration.RepositoryName}{sourceConfigFileInfo.Extension}";
+      File.WriteAllText(configPath, File.ReadAllText(sourceConfigFileInfo.FullName));
       this.Log("Saved", configPath);
     }
 

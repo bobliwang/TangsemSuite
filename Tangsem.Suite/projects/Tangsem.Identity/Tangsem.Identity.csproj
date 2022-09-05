@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+
+    <Company>Tangsem</Company>
+    <Authors>liwangdev@gmail.com</Authors>
+    <Version>1.3.55</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="NHibernate" Version="5.2.7" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tangsem.Common\Tangsem.Common.csproj" />
+    <ProjectReference Include="..\Tangsem.Data\Tangsem.Data.csproj" />
+    <ProjectReference Include="..\Tangsem.NHibernate\Tangsem.NHibernate.csproj" />
+  </ItemGroup>
+
+</Project>

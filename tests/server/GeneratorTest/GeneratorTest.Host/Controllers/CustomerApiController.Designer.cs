@@ -10,6 +10,7 @@ using Tangsem.Data;
 using Tangsem.NHibernate.Extenstions;
 using GeneratorTest.Host.Filters;
 using GeneratorTest.Host.Controllers.Base;
+using GeneratorTest.Host.Infrastructure;
 
 namespace GeneratorTest.Host.Controllers
 {
@@ -19,35 +20,45 @@ namespace GeneratorTest.Host.Controllers
 		}
 
 		[HttpGet("_api/repo/Customer")]
+    [Produces("application/json", Type = typeof(SearchResultModel<CustomerDTO>))]
+    [AutoGenApiClient]
 		public override IActionResult GetCustomerList(CustomerSearchParams filterModel) {
             return base.GetCustomerList(filterModel);
 		}
      
 		[HttpGet("_api/repo/Customer/{id}")]
+    [Produces("application/json", Type = typeof(CustomerDTO))]
+    [AutoGenApiClient]
 		public override IActionResult GetCustomerByCustomerId(System.Guid id) {
 			return base.GetCustomerByCustomerId(id);
 		}
 
 		[HttpPost("_api/repo/Customer/{id}")]
-		[TransactionFilter]
+    [Produces("application/json", Type = typeof(object))]
+    [AutoGenApiClient]
+    [TransactionFilter]
 		public override IActionResult UpdateCustomer(System.Guid id, [FromBody] CustomerDTO model) {
 		    return base.UpdateCustomer(id, model);
 		}
      
 		[HttpPost("_api/repo/Customer")]
-		[TransactionFilter]
+		[Produces("application/json", Type = typeof(object))]
+    [AutoGenApiClient]
+    [TransactionFilter]
 		public override IActionResult CreateCustomer([FromBody] CustomerDTO model) {
 			return base.CreateCustomer(model);
 		}
 
-		[HttpPost("_api/repo/Customer/{id}/delete")]
-		[TransactionFilter]
+		[HttpPost("_api/repo/Customer/{id}/delete")]		
+    [Produces("application/json", Type = typeof(object))]
+    [AutoGenApiClient]
+    [TransactionFilter]
 		public override IActionResult DeleteCustomer(System.Guid id, bool isHardDelete) {
-            return base.DeleteCustomer(id, isHardDelete);
+      return base.DeleteCustomer(id, isHardDelete);
 		}
 
 		public override IQueryable<Customer> FilterBySearchParams(IQueryable<Customer> qry, CustomerSearchParams filterModel) {
-            return base.FilterBySearchParams(qry, filterModel);
+      return base.FilterBySearchParams(qry, filterModel);
 		}
 	}
 

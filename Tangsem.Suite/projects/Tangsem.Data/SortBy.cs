@@ -41,7 +41,27 @@ namespace Tangsem.Data
       return qry.OrderBy(sortByModel.SortFieldName + " " + sortByModel.Direction);
     }
 
+    /// <summary>
+    /// SkipAndTake with pageIndex and pageSize.
+    /// </summary>
+    public static IQueryable<T> SkipAndTake<T>(this IQueryable<T> qry, int? pageIndex, int? pageSize)
+    {
+      if (pageIndex != null && pageSize != null)
+      {
+        qry = qry.Skip(pageIndex.Value * pageSize.Value);
+      }
 
+      if (pageSize != null)
+      {
+        qry = qry.Take(pageSize.Value);
+      }
+
+      return qry;
+    }
+
+    /// <summary>
+    /// SkipAndTake with pageIndex and pageSize from SearchParamsBase.
+    /// </summary>
     public static IQueryable<T> SkipAndTake<T>(this IQueryable<T> qry, SearchParamsBase searchParam)
     {
       if (searchParam == null)
@@ -49,26 +69,7 @@ namespace Tangsem.Data
         return qry;
       }
 
-      if (searchParam.PageIndex != null && searchParam.PageSize != null)
-      {
-        qry = qry.Skip(searchParam.PageIndex.Value * searchParam.PageSize.Value);
-      }
-
-      if (searchParam.PageSize != null)
-      {
-        qry = qry.Take(searchParam.PageSize.Value);
-      }
-
-      return qry;
+      return qry.SkipAndTake(searchParam.PageIndex, searchParam.PageSize);
     }
   }
-
-  ////internal class Person
-  ////{
-  ////  public int Age { get; set; }
-
-  ////  public string Name { get; set; }
-
-  ////  public Person Parent { get; set; }
-  ////}
 }

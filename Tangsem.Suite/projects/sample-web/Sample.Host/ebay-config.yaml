@@ -1,0 +1,16 @@
+﻿name: ebay-config
+
+# OAuth Access Tokens - https://developer.ebay.com/api-docs/static/oauth-tokens.html
+
+# UPDATE the values in this file, before running the tests
+api.sandbox.ebay.com:
+    appid: LiWang9df-7fbd-49bc-8bc6-ae8bde0132a
+    certid: 96a58a84-5d19-4bda-8aac-422f7174b25d
+    devid: 7454f8a6-6676-48d9-95e1-3ddaa9ed4f3c
+    redirecturi: Li_Wang-LiWang9df-7fbd--ygqmira
+
+api.ebay.com:
+    appid: LiWang2d4-e6a0-471a-8a80-ef995ac488b
+    certid: 6bdd3587-f3cb-4e9e-be22-6bfc6806f3a9
+    devid: 96a58a84-5d19-4bda-8aac-422f7174b25d
+    redirecturi: Li_Wang-LiWang2d4-e6a0--ahcplnmri

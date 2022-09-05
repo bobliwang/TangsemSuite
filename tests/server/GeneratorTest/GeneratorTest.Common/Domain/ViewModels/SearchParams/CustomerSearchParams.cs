@@ -16,10 +16,6 @@ namespace GeneratorTest.Common.Domain.ViewModels.SearchParams
 
 	
 	
-		public int? StoreId { get; set; }
-
-	
-	
 		public int? CreatedById { get; set; }
 
 	
@@ -37,6 +33,14 @@ namespace GeneratorTest.Common.Domain.ViewModels.SearchParams
 	
 	
 		public bool? Active { get; set; }
+
+	
+	
+		public int? StoreId { get; set; }
+
+	
+	
+		public byte[] RowVersion { get; set; }
 
 	
 	}

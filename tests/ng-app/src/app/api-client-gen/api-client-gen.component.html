@@ -1,0 +1,48 @@
+<div style="padding: 10px;">
+  <!-- <textarea [(ngModel)]="generatedModelsCode" style="width: 50%; height: 400px;"></textarea> -->
+
+  <div style="display:flex; flex-direction: row; flex-wrap: wrap">
+
+    <div style="width: 50%; border: 2px solid #ccc;">
+      <strong>Models</strong>
+      <ngx-codemirror [(ngModel)]="generatedModelsCode" [options]="codeMirrorOptions"></ngx-codemirror>
+    </div>
+
+    <div style="width: 50%; border: 2px solid #ccc;">
+      <strong>ApiClient</strong>
+      <ngx-codemirror [(ngModel)]="generatedApiClientCode" [options]="codeMirrorOptions"></ngx-codemirror>
+    </div>
+
+    <div style="width: 50%; border: 2px solid #ccc;">
+      <strong>Swagger.json</strong>
+      <ngx-codemirror [(ngModel)]="swaggerContents" [options]="codeMirrorOptions"></ngx-codemirror>
+    </div>
+
+    <div style="width: 50%; border: 2px solid #ccc;">
+      <strong>API Test Response</strong>
+      <ngx-codemirror [(ngModel)]="apiResult" [options]="codeMirrorOptions"></ngx-codemirror>
+    </div>
+  </div>
+
+
+  <div style="display:flex; flex-direction: row;">
+
+    <button mat-stroked-button (click)="generate()">
+      Re-Generate
+    </button>
+
+    &nbsp;
+
+    <button mat-stroked-button (click)="testApiGetProperties()">
+      Test Api Get Properties
+    </button>
+
+    &nbsp;
+
+    <button mat-stroked-button (click)="testApiUpdateProperty()">
+      Test Api Update Property
+    </button>
+
+  </div>
+
+</div>

@@ -1,8 +1,9 @@
+// tslint:disable
 import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSort, MatSnackBar, MatPaginator, MatTableDataSource, MatDialog, MatBottomSheet } from '@angular/material';
-import { Observable } from 'rxjs/Rx';
-import { merge } from 'rxjs/observable/merge';
+import { merge, Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { GeneratorTestRepositoryApiService } from '../../services/api.service';
 import * as models from '../../models/models';
@@ -57,7 +58,7 @@ export class ProductListingComponent {
 
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    Observable.merge(this.sort.sortChange, this.paginator.page).subscribe(() => {
+    merge(this.sort.sortChange, this.paginator.page).subscribe(() => {
       this.search();
     });
   }
@@ -74,17 +75,20 @@ export class ProductListingComponent {
     this.filterModel.direction = this.sort.direction || 'desc';
 
 
-    this.repoApi.getProductList(this.filterModel).map(data => {
-      // Flip flag to show that loading has finished.
-      this.isLoadingResults = false;
-      this.resultsLength = data.rowsCount;
+    this.repoApi.getProductList(this.filterModel).pipe(
+      map(data => {
+        // Flip flag to show that loading has finished.
+        this.isLoadingResults = false;
+        this.resultsLength = data.rowsCount;
 
-      return data.pagedData;
-    }).catch(() => {
-      this.isLoadingResults = false;
+        return data.pagedData;
+      }),
+      catchError(() => {
+        this.isLoadingResults = false;
 
-      return Observable.of([]);
-    }).subscribe(pagedData => this.dataSource = pagedData);
+        return of([]);
+      })
+    ).subscribe(pagedData => this.dataSource = pagedData);
   }
 
   public delete(rowData: models.ProductModel) {

@@ -10,6 +10,7 @@ using Tangsem.Data;
 using Tangsem.NHibernate.Extenstions;
 using GeneratorTest.Host.Filters;
 using GeneratorTest.Host.Controllers.Base;
+using GeneratorTest.Host.Infrastructure;
 
 namespace GeneratorTest.Host.Controllers
 {
@@ -19,45 +20,45 @@ namespace GeneratorTest.Host.Controllers
 		}
 
 		[HttpGet("_api/repo/Order")]
+    [Produces("application/json", Type = typeof(SearchResultModel<OrderDTO>))]
+    [AutoGenApiClient]
 		public override IActionResult GetOrderList(OrderSearchParams filterModel) {
             return base.GetOrderList(filterModel);
 		}
      
 		[HttpGet("_api/repo/Order/{id}")]
+    [Produces("application/json", Type = typeof(OrderDTO))]
+    [AutoGenApiClient]
 		public override IActionResult GetOrderById(int id) {
 			return base.GetOrderById(id);
 		}
 
 		[HttpPost("_api/repo/Order/{id}")]
-		[TransactionFilter]
+    [Produces("application/json", Type = typeof(object))]
+    [AutoGenApiClient]
+    [TransactionFilter]
 		public override IActionResult UpdateOrder(int id, [FromBody] OrderDTO model) {
 		    return base.UpdateOrder(id, model);
 		}
      
 		[HttpPost("_api/repo/Order")]
-		[TransactionFilter]
+		[Produces("application/json", Type = typeof(object))]
+    [AutoGenApiClient]
+    [TransactionFilter]
 		public override IActionResult CreateOrder([FromBody] OrderDTO model) {
 			return base.CreateOrder(model);
 		}
 
-		[HttpPost("_api/repo/Order/{id}/delete")]
-		[TransactionFilter]
+		[HttpPost("_api/repo/Order/{id}/delete")]		
+    [Produces("application/json", Type = typeof(object))]
+    [AutoGenApiClient]
+    [TransactionFilter]
 		public override IActionResult DeleteOrder(int id, bool isHardDelete) {
-            return base.DeleteOrder(id, isHardDelete);
+      return base.DeleteOrder(id, isHardDelete);
 		}
 
 		public override IQueryable<Order> FilterBySearchParams(IQueryable<Order> qry, OrderSearchParams filterModel) {
-
-            qry = base.FilterBySearchParams(qry, filterModel);
-
-            if (!string.IsNullOrWhiteSpace(filterModel.CustomerIds))
-            {
-                var customerIds = filterModel.CustomerIds.Split(',').Select(x => System.Guid.Parse(x.Trim()));
-
-                qry = qry.Where(x => customerIds.Contains(x.Customer.CustomerId));
-            }
-
-		    return qry;
+      return base.FilterBySearchParams(qry, filterModel);
 		}
 	}
 

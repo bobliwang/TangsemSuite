@@ -24,7 +24,7 @@ namespace GeneratorTest.Common.Domain.Repositories
 
     public GeneratorTestRepositoryBuilder(string connectionString)
     {
-      _connectionString = connectionString;
+      this._connectionString = connectionString;
     }
 
     public ISessionFactory CreateSessionFactory()
@@ -39,7 +39,7 @@ namespace GeneratorTest.Common.Domain.Repositories
 
       return Fluently
         .Configure(config)
-        .Database(MsSqlConfiguration.MsSql2012.ConnectionString(_connectionString)
+        .Database(MsSqlConfiguration.MsSql2012.ConnectionString(this._connectionString)
           .ShowSql()
           .MaxFetchDepth(3)
           .Dialect<MsSql2012DialectExt>())
@@ -47,7 +47,7 @@ namespace GeneratorTest.Common.Domain.Repositories
           m.FluentMappings.AddFromAssemblyOf<Product>());
     }
 
-    public RepositoryBase CreateRepository(IDataContext dataContext)
+    public IRepository CreateRepository(IDataContext dataContext)
     {
 
       var ai = new AuditingInterceptor { DataContext = dataContext };
@@ -63,12 +63,12 @@ namespace GeneratorTest.Common.Domain.Repositories
     {
       get
       {
-        if (_sessionFactory == null)
+        if (this._sessionFactory == null)
         {
-          _sessionFactory = this.CreateSessionFactory();
+          this._sessionFactory = this.CreateSessionFactory();
         }
 
-        return _sessionFactory;
+        return this._sessionFactory;
       }
     }
   }

@@ -36,14 +36,33 @@ namespace Tangsem.Common.DataAccess
       return cmd.ExecuteReader();
     }
 
+    /// <summary>
+    /// Returns a data table.
+    /// </summary>
+    /// <param name="sql"> The sql string. </param>
+    /// <param name="parameters"> The parameters. </param>
+    /// <returns> The data table. </returns>
+    public DataTable ExecuteDataTable(string sql, IEnumerable<Parameter> parameters = null)
+    {
+      using (var dr = this.ExecuteReader(sql, parameters))
+      {
+        var dataTable = new DataTable();
+        dataTable.Load(dr);
+
+        return dataTable;
+      }
+    }
+
     public T ExecuteScalar<T>(string sql, IEnumerable<Parameter> parameters)
     {
-      var cmd = this.Connection.CreateCommand();
-      cmd.CommandText = sql;
+      using (var cmd = this.Connection.CreateCommand())
+      {
+        cmd.CommandText = sql;
 
-      AddParametersToCommand(cmd, parameters);
+        AddParametersToCommand(cmd, parameters);
 
-      return (T)cmd.ExecuteScalar();
+        return (T)cmd.ExecuteScalar();
+      }
     }
 
     private static void AddParametersToCommand(IDbCommand cmd, IEnumerable<Parameter> parameters)

@@ -37,25 +37,18 @@ namespace Tangsem.Generator.Metadata
     /// <summary>
     /// Gets the table name.
     /// </summary>
-    public string TableName
-    {
-      get
-      {
-        return this.TableMetadata.Name;
-      }
-    }
+    public string TableName => this.TableMetadata.Name;
 
-    
+
     /// <summary>
     /// Gets or sets a value indicating whether ReadOnly.
     /// </summary>
-    public bool ReadOnly
-    {
-      get
-      {
-        return this.ColumnName == "RowVersion" || this.IsComputed;
-      }
-    }
+    public bool ReadOnly => this.IsRowVersion || this.IsComputed;
+
+    /// <summary>
+    /// TODO: add data type check.
+    /// </summary>
+    public bool IsRowVersion => this.ColumnName == "RowVersion" && this.ClrType == typeof(byte[]);
 
     /// <summary>
     /// Gets or sets the table metadata.
@@ -116,9 +109,8 @@ namespace Tangsem.Generator.Metadata
     {
       get
       {
-        var provider = CodeDomProvider.CreateProvider("CSharp");
-        var typeOutput = provider.GetTypeOutput(new CodeTypeReference(this.ClrType));
-        
+        CSharpTypeNameProvider.PrimitiveTypeNameMap.TryGetValue(this.ClrType, out var typeOutput);
+
         if (this.Nullable && this.ClrType.IsValueType)
         {
           return typeOutput + "?";
@@ -132,8 +124,7 @@ namespace Tangsem.Generator.Metadata
     {
       get
       {
-        var provider = CodeDomProvider.CreateProvider("CSharp");
-        var typeOutput = provider.GetTypeOutput(new CodeTypeReference(this.ClrType));
+        CSharpTypeNameProvider.PrimitiveTypeNameMap.TryGetValue(this.ClrType, out var typeOutput);
 
         if (this.ClrType.IsValueType)
         {
@@ -170,33 +161,8 @@ namespace Tangsem.Generator.Metadata
       }
     }
 
-    /// <summary>
-    /// Gets or sets DataProviderDbType.
-    /// </summary>
-    public Enum DataProviderDbType { get; set; }
-
-    /// <summary>
-    /// Gets or sets DbType.
-    /// </summary>
-    public DbType DbType
-    {
-      get
-      {
-        var mapper = new DbTypeMapper();
-
-        if (this.DataProviderDbType is SqlDbType)
-        {
-          var dbType = mapper.FromSqlDbType((SqlDbType)this.DataProviderDbType);
-
-          return dbType;
-        }
-        else
-        {
-          throw new Exception(string.Format("DataProviderDbType {0} is not supported.", this.DataProviderDbType.GetType()));
-        }
-      }
-    }
-
+    public bool IsJsonDataType => this.ExtraColumnMeta != null && !string.IsNullOrWhiteSpace(this.ExtraColumnMeta.JsonType);
+    
     public ColumnMetadata FromRawColumn(RawColumn rc)
     {
       this.ColumnName = rc.ColumnName;
@@ -256,14 +222,22 @@ namespace Tangsem.Generator.Metadata
     {
       get
       {
-        return TableMetadata.AuditingPropertyInfos.ToList().Any(x => x.Name == this.PropertyName);
+        if (this.TableMetadata != null && this.TableMetadata.IsAuditableEntity)
+        {
+          return TableMetadata.AuditingPropertyInfos.ToList().Any(x => x.Name == this.PropertyName);
+        }
+
+        return false;
       }
     }
 
     public ExtraColumnMeta ExtraColumnMeta { get; set; }
 
+    public string Description { get; set; }
+
     public bool IsJsonType => this.ExtraColumnMeta != null && !string.IsNullOrWhiteSpace(this.ExtraColumnMeta.JsonType);
 
+    public bool IsGuidPrimaryKey => this.IsPrimaryKey && this.ClrType == typeof(Guid);
 
     public string JsonType => this.ExtraColumnMeta?.JsonType;
   }

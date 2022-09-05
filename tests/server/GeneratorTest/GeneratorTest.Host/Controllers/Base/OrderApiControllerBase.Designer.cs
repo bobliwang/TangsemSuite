@@ -117,20 +117,6 @@ namespace GeneratorTest.Host.Controllers.Base
 							
 			}
 			
-			if (filterModel.ProductId != null)
-			{
-							// OutgoingReference
-				filteredQry = filteredQry.Where(x => x.Product.Id == filterModel.ProductId);
-			
-			}
-			
-			if (filterModel.CustomerId != null)
-			{
-							// OutgoingReference
-				filteredQry = filteredQry.Where(x => x.Customer.CustomerId == filterModel.CustomerId);
-			
-			}
-			
 			if (filterModel.OrderTotal != null)
 			{
 										
@@ -171,6 +157,20 @@ namespace GeneratorTest.Host.Controllers.Base
 										
 				filteredQry = filteredQry.Where(x => x.Active == filterModel.Active);
 							
+			}
+			
+			if (filterModel.CustomerId != null)
+			{
+							// OutgoingReference
+				filteredQry = filteredQry.Where(x => x.Customer.CustomerId == filterModel.CustomerId);
+			
+			}
+			
+			if (filterModel.ProductId != null)
+			{
+							// OutgoingReference
+				filteredQry = filteredQry.Where(x => x.Product.Id == filterModel.ProductId);
+			
 			}
 			
 			return filteredQry;

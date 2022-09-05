@@ -18,6 +18,11 @@ namespace Tangsem.Common.Entities
 
     DateTime? ModifiedTime { get; set; }
 
-    bool? Active { get; set; }
+    bool Active { get; set; }
+  }
+
+  public interface IVersioned
+  {
+    byte[] RowVersion { get; set; }
   }
 }

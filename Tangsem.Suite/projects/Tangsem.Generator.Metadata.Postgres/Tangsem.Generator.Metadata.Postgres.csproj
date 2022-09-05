@@ -1,0 +1,29 @@
+﻿
+
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <IncludeSymbols>true</IncludeSymbols>
+    
+    <Company>Tangsem</Company>
+    <Authors>liwangdev@gmail.com</Authors>
+    <Version>0.1</Version>
+
+    <LangVersion>10.0</LangVersion>
+      
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tangsem.Generator.Metadata\Tangsem.Generator.Metadata.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="6.0.6" />
+  </ItemGroup>
+  
+  
+</Project>

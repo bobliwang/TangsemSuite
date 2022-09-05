@@ -9,6 +9,12 @@ namespace Tangsem.NHibernate.Service
   {
     ISessionFactory SessionFactory { get; }
 
-    RepositoryBase CreateRepository(IDataContext dataContext);
+    IRepository CreateRepository(IDataContext dataContext);
+  }
+
+  public interface IRepositoryProvider<out TRepository> : IRepositoryProvider
+    where TRepository: IRepository
+  {
+    new TRepository CreateRepository(IDataContext dataContext);
   }
 }

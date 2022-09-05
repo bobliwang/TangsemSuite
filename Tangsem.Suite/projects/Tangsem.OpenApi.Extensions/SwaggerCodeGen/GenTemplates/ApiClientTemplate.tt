@@ -1,0 +1,47 @@
+﻿<#@ template language="C#" inherits="Tangsem.Common.T4.T4TemplateBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#@ import namespace="Microsoft.OpenApi.Models" #>
+<#@ import namespace="Tangsem.OpenApi.Extensions.SwaggerCodeGen.Filters" #>
+
+<#@ import namespace="Swashbuckle.AspNetCore.Swagger" #>
+<#@ import namespace="Microsoft.AspNetCore.Mvc.Controllers" #>
+<#@ import namespace="Tangsem.OpenApi.Extensions.SwaggerCodeGen" #>
+<#@ import namespace="Tangsem.Common.Extensions" #>
+
+
+// tslint:disable
+import { Injectable, Inject, Optional } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { SearchResultModel } from '@docu-flow/common';
+import * as <#= this.ModelsModuleName #> from '@docu-flow/common';
+import { <#= ApiBaseUrlTokenName #> } from './api-injection-token';
+import { ApiClientBase } from './api-client-base';
+
+/**
+ * Auto-Generated client code that should not be modified manually.
+ */
+@Injectable(<#= this.IsRootProvider ? @"{
+  providedIn: 'root'
+}" : string.Empty #>)
+export class <#= this.ApiClientClassName #> extends ApiClientBase {
+  
+  public constructor(
+    private httpClient: HttpClient,
+    @Optional()
+    @Inject(<#= ApiBaseUrlTokenName #>)
+    apiUrlBase: string) {
+      super(apiUrlBase);
+  }
+
+<#=
+  this.GenerateApiClientMethods(methodGenParams =>
+                                  this.MethodTemplateFn != null
+                                                        ? this.MethodTemplateFn(methodGenParams)
+                                                        : new ApiClient_Method_Template { ApiClientMethodGenParams = methodGenParams }.TransformText()) #>
+
+}

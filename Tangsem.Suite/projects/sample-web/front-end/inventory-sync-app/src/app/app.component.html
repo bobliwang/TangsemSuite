@@ -1,0 +1,42 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+
+    <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="example-app-name">Inventory Sync</h1>
+        <h6 style="font-size: 12px; margin-left: 50px">by bobliwang@gmail.com</h6>
+    </mat-toolbar>
+
+
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56">
+            <mat-nav-list>
+
+                <mat-list-item>
+                    <button mat-button routerLink="admin" routerLinkActive="active" #active1="routerLinkActive"
+                        [color]="active1.isActive ? 'accent' : undefined">
+                        <mat-icon>check</mat-icon>
+                        Admin
+                    </button>
+                </mat-list-item>
+
+                <mat-list-item>
+                    <button mat-button routerLink="store-front" routerLinkActive="active" #active2="routerLinkActive"
+                        [color]="active2.isActive ? 'accent' : undefined">
+                        <mat-icon>save</mat-icon>
+                        Store Front
+                    </button>
+                </mat-list-item>
+
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <div style="padding: 10px;">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+</div>

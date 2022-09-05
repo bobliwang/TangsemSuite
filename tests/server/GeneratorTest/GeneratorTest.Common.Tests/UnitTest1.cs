@@ -70,7 +70,7 @@ namespace GeneratorTest.Common.Tests
 
     private IGeneratorTestRepository GetRepo()
     {
-      return _repositoryBuilder.CreateRepository(new MockDataContext()) as IGeneratorTestRepository;
+      return this._repositoryBuilder.CreateRepository(new MockDataContext()) as IGeneratorTestRepository;
     }
   }
 

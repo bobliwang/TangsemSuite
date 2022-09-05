@@ -1,0 +1,51 @@
+﻿<#@ template language="C#" inherits="Tangsem.Common.T4.T4TemplateBase"#>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
+
+using Newtonsoft.Json;
+using Tangsem.Common.JsonConverters;
+
+<#= Configuration.IncludeTangsemIdentity ? "using Tangsem.Identity.Domain.Entities;" : "" #>
+
+<# var dtoClassName = TableMetadata.EntityName + "DTO"; #>
+namespace <#= Configuration.DTONamespace #>
+{
+  public partial class <#= dtoClassName #>
+  {	
+    /// <summary>
+    /// The default constructor for <#= dtoClassName #> class.
+    /// </summary>
+    public <#= dtoClassName #>()
+    {
+    }
+
+    <# foreach (var col in TableMetadata.Columns.Where(c => c.ExtraColumnMeta == null || string.IsNullOrWhiteSpace(c.ExtraColumnMeta.JsonType))) { #>
+
+    /// <summary>
+    /// Property <#= col.PropertyName #> mapping to <#= TableMetadata.Name #>.<#= col.ColumnName #>
+    /// </summary>
+    <#= col.IsRowVersion ? @"[JsonConverter(typeof(ByteArrayConverter))]
+    " : "" #>public virtual <#= col.CSharpTypeAsString #> <#= col.PropertyName #> { get; set; }    
+    <# } #>
+
+    <# foreach (var col in TableMetadata.Columns.Where(c => c.ExtraColumnMeta != null && !string.IsNullOrWhiteSpace(c.ExtraColumnMeta.JsonType))) { #>
+    /// <summary>
+    /// Property <#= col.PropertyName #> mapping to <#= TableMetadata.Name #>.<#= col.ColumnName #>.
+    /// JSON Object!
+    /// </summary>
+    public virtual <#= col.ExtraColumnMeta.JsonType #> <#= col.PropertyName #> { get; set; }
+    
+    <# } #>
+
+  }
+}

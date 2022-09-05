@@ -1,0 +1,86 @@
+﻿<#@ template language="C#" inherits="Tangsem.Common.T4.T4TemplateBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#@ import namespace="Microsoft.OpenApi.Models" #>
+<#@ import namespace="Tangsem.OpenApi.Extensions.SwaggerCodeGen.Filters" #>
+
+<#@ import namespace="Swashbuckle.AspNetCore.Swagger" #>
+<#@ import namespace="Microsoft.AspNetCore.Mvc.Controllers" #>
+<#@ import namespace="Tangsem.OpenApi.Extensions.SwaggerCodeGen" #>
+<#@ import namespace="Tangsem.Common.Extensions" #>
+
+<#
+
+  var methodGenParams   = this.ApiClientMethodGenParams;
+
+  var api               = methodGenParams.Api;
+  var pathKey           = methodGenParams.PathKey;
+  var operation         = methodGenParams.Operation;
+  var httpMethod        = methodGenParams.HttpMethod;
+  var actionDescriptor  = methodGenParams.ActionDescriptor;
+  var nonBodyParameters = methodGenParams.NonBodyParameters;
+  var bodyParameters    = methodGenParams.BodyParameters;
+  var pathParams        = methodGenParams.PathParams;
+  var queryStringParams = methodGenParams.QueryStringParams;    
+  var isBlobResponse    = methodGenParams.IsBlobResponse;
+  var responseType      = methodGenParams.ResponseType;
+  var modelsModuleName = methodGenParams.ModelsModuleName;
+
+#>
+
+  /**
+   * <#= operation.Summary ?? actionDescriptor.ActionName #>
+   * - <#= pathKey #>, <#= httpMethod.ToUpper() #>
+   * - MVC: <#= actionDescriptor.ControllerName #>Controller.<#= actionDescriptor.ActionName #>
+   */
+  public <#= Generator.GetApiActionName(actionDescriptor, api) #>(<#= Generator.ApiCallParamStrings(queryStringParams, bodyParameters, pathParams, modelsModuleName)#>): Observable<<#= isBlobResponse ? "Blob" : responseType #>> {
+      <# if (pathParams.Any()) { #>
+
+    const url = this.url('<#= pathKey #>')
+      <# foreach(var p in pathParams) { #>
+          .replace('{<#= p.Name #>}', `${<#= Generator.LowerFirst(p.Name) #>}`)
+      <# } #>;
+      <# } else { #>
+
+    const url = this.url('<#= pathKey #>');
+      <# } #>
+      <# if (queryStringParams.Any()) {#>
+
+    const params = this.getHttpParams(qryParams);
+      <#}
+
+      
+      if (bodyParameters != null) {#>
+        <# if (isBlobResponse) { #>
+    
+    return this.httpClient.<#= httpMethod #>(url, <#= bodyParameters.GetBodyParamName()#><#= queryStringParams.Any() ? ", { params, responseType: 'blob' }" : ", { responseType: 'blob' }"#>);
+        <# } else { #>
+    
+    return this.httpClient.<#= httpMethod #><<#= responseType #>>(url, <#= bodyParameters.GetBodyParamName()#><#= queryStringParams.Any() ? ", { params }" : ""#>);
+    
+        <# } #>
+      <# } // END OF: if (bodyParameters != null)
+      
+      else if (httpMethod == "post") { #>
+        <# if (isBlobResponse) { #>
+    
+    return this.httpClient.post<<#= responseType #>>(url, null, { responseType: 'blob' });
+        <# } else { #>
+    
+    return this.httpClient.post<<#= responseType #>>(url, null<#= queryStringParams.Any() ? ", { params }" : ""#>);
+        <# } #>
+      <# } else { #>
+          
+        <# if (isBlobResponse) { #>
+
+    return this.httpClient.<#= httpMethod #>(url, { responseType: 'blob' }<#= queryStringParams.Any() ? ", { params }" : ""#>);
+        <# } else { #>
+
+    return this.httpClient.<#= httpMethod #><<#= responseType #>>(url<#= queryStringParams.Any() ? ", { params }" : ""#>);
+        <# } #>
+      <# } #>
+
+  }

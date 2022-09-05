@@ -1,0 +1,68 @@
+.flex-columns {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.toobox-cell {
+  width: 70px;
+  height: 70px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  justify-content: center;
+}
+
+.draggable-item {
+  cursor: move;
+}
+
+.drag-indicator {
+  cursor: pointer;
+  width: 40px;
+  border-right: 1px solid #ccc;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#rows-ctn {
+  padding-bottom: 100px;
+}
+
+.row-ctn {
+  min-height: 155px;
+  border: 1px solid #ccc;
+  margin: 5px 10px 15px 10px;
+  border-radius: 5px;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+.drop-here {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-cell {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.items-ctn {
+  flex-grow: 1;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-left: 20px;
+  padding-right: 20px;
+}

@@ -1,0 +1,116 @@
+﻿<#@ template language="C#" inherits="Tangsem.Common.T4.T4TemplateBase"#>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Tangsem.Common.Extensions" #>
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
+
+using Tangsem.Common.Entities;
+using Newtonsoft.Json;
+
+<#= Configuration.IncludeTangsemIdentity ? "using Tangsem.Identity.Domain.Entities;" : "" #>
+namespace <#= Configuration.EntityNamespace#>
+{
+  /// <summary>
+  /// This entity maps to '<#= TableMetadata.Name #>'.
+  /// </summary>
+  <#
+    var extends = new List<string>();
+    if (TableMetadata.IsAuditableEntity) {
+      extends.Add("AuditableEntity");
+    }
+    if (TableMetadata.IsVersionedEntity) {
+      extends.Add("IVersioned");
+    }
+  #>public partial class <#= TableMetadata.EntityName#><#= extends.Any() ? (" : " + extends.JoinWith(", ")) : ""  #>
+  {
+    /// <summary>
+    /// The default constructor for <#= TableMetadata.EntityName#> class.
+    /// </summary>
+    public <#= TableMetadata.EntityName#>()
+    {
+<# if (Configuration.GenRelationship) {      
+        foreach (var reference in this.TableMetadata.IncomingReferences) { #>
+      this.<#= reference.ChildListPropertyName #> = new List<<#= reference.ChildTableMetadata.EntityName #>>();
+<#      }
+   } #>
+    }
+  
+    <#
+    var nonOutgoingRefColumns = this.TableMetadata.Columns.Where(c => !this.IsOutgoingRef(c)).ToList();
+    foreach (var col in nonOutgoingRefColumns.Where(c => c.IsJsonDataType)) { #>
+    
+    /// <summary>
+    /// Property <#= col.PropertyName #> mapping to <#= TableMetadata.Name #>.<#= col.ColumnName #>.
+    /// JSON COLUMN!
+    /// </summary>
+    public virtual <#= col.ExtraColumnMeta.JsonType #> <#= col.PropertyName  #> { get; set; }
+   
+    <# } #>
+
+#region "Basic Columns"
+
+    <# foreach (var col in nonOutgoingRefColumns.Where(c => !c.IsJsonDataType && !c.IsAuditingingColumn)) { #>
+    
+    /// <summary>
+    /// Property <#=col.PropertyName  #> mapping to <#= TableMetadata.Name #>.<#= col.ColumnName #>.<#= string.IsNullOrWhiteSpace(col.Description) ? string.Empty : " " + col.Description.Trim() #>
+    /// </summary>
+    public virtual <#= col.CSharpTypeAsString #> <#= col.PropertyName #> { get; set; }<#= col.IsGuidPrimaryKey ? " = System.Guid.NewGuid();" : string.Empty #>
+    <# } #>
+
+#endregion
+    
+<# if (Configuration.GenRelationship && TableMetadata.OutgoingReferences.Any()) {#>
+    
+#region "Outgoing References"
+    <#foreach (var reference in TableMetadata.OutgoingReferences) { #>
+    /// <summary>
+    /// Gets or sets reference to <#= reference.ParentPropertyName #>. ReferenceName: <#= reference.Name #>.<#= string.Join(";", reference.ColumnPairs.Where(col => !string.IsNullOrWhiteSpace(col.ChildColumnMetadata.Description)).Select(col => " " + col.ChildColumnMetadata.Description.Trim())) #>
+    /// </summary>
+    public virtual <#= reference.ParentTableMetadata.EntityName #> <#= reference.ParentPropertyName #> { get; set; }
+
+    <#} #>
+
+#endregion
+<# } #>
+    
+<# if (Configuration.GenRelationship && this.TableMetadata.IncomingReferences.Any()) { #>
+#region "Incoming References"
+ <#   foreach (var reference in this.TableMetadata.IncomingReferences) {
+      var childObjParamName = reference.ChildTableMetadata.EntityName.LowerFirst();#>
+
+    /// <summary>
+    /// Field for the child list of Ref: <#= reference.Name #>.
+    /// </summary>
+    public virtual IList<<#= reference.ChildTableMetadata.EntityName #>> <#= reference.ChildListPropertyName #> { get; set; }
+    
+    /// <summary>
+    /// Add <#= reference.ChildTableMetadata.EntityName #> entity to <#= reference.ChildListPropertyName #>.
+    /// </summary>
+    /// <param name="<#= childObjParamName #>">
+    ///	The <#= reference.ChildTableMetadata.EntityName #> entity.
+    /// </param>
+    public virtual void AddTo<#= reference.ChildListPropertyName #>(<#= reference.ChildTableMetadata.EntityName #> <#= childObjParamName #>)
+    {
+      <#= childObjParamName #>.<#= reference.ParentPropertyName #> = this;
+      this.<#= reference.ChildListPropertyName #>.Add(<#= childObjParamName #>);
+    }
+  <# }#>
+
+#endregion
+<# } #>
+
+<# foreach (var col in TableMetadata.Columns) { #>
+    
+    public const int <#= col.PropertyName #>_MaxLenth = <#= col.ColumnSize #>;    
+<# } #>
+
+  }
+}

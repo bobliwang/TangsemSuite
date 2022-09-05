@@ -1,11 +1,11 @@
-﻿<#@ template language="C#" #>
+﻿<#@ template language="C#" inherits="Tangsem.Common.T4.T4TemplateBase"#>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 
 <#@ import namespace="Tangsem.Common.Extensions" #>
-
+// tslint:disable
 export type EditorMode = 'create' | 'view' | 'edit';
 
 export interface SearchResultModel<T> {

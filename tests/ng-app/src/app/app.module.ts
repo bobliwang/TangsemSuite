@@ -52,6 +52,15 @@ import { OrderPageComponent } from './pages/order-page/order-page.component';
 
 import { MultipleEntitySelectorComponent } from './components/multiple-entity-selector/multiple-entity-selector.component';
 import { SingleEntitySelectorComponent } from './components/single-entity-selector/single-entity-selector.component';
+import { ApiClientGenComponent } from './api-client-gen/api-client-gen.component';
+import { ApiClient } from './services/api-client/api-client';
+
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+
+routes.unshift(...[
+	{ path: '', redirectTo: 'app-api-client-gen', pathMatch: 'full', hideFromMenuItem: true },
+	{ path: 'app-api-client-gen', component: ApiClientGenComponent },
+]);
 
 routes.push(...[
   { path: 'my-product/listing', component: ProductPageComponent },
@@ -67,12 +76,14 @@ routes.push(...[
     OrderPageComponent,
     SingleEntitySelectorComponent,
     MultipleEntitySelectorComponent,
+    ApiClientGenComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     GeneratorTestRepositoryModule,
+    CodemirrorModule,
     RouterModule.forRoot(routes),
     MatAutocompleteModule,
     MatBadgeModule,
@@ -123,7 +134,10 @@ routes.push(...[
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private apiService: GeneratorTestRepositoryApiService) {
+  constructor(private apiService: GeneratorTestRepositoryApiService, private apiClient: ApiClient) {
     this.apiService.setApiBaseUrl('http://localhost:5000');
+    
+    
+    this.apiClient.apiUrlBase = 'http://localhost:5000';
   }
 }

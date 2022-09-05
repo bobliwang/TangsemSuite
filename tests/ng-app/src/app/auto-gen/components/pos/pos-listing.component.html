@@ -75,6 +75,26 @@
 				</td>
 			</ng-container>
 		
+			<!-- storeId column -->
+			<ng-container matColumnDef="storeId">
+				<th mat-header-cell *matHeaderCellDef style="padding: 5px" mat-sort-header>
+					StoreId
+				</th>
+				<td mat-cell *matCellDef="let rowData" style="padding: 5px">
+
+					
+					<ng-container *ngTemplateOutlet="templates.storeIdTemplate || defaultStoreIdTemplate; context: { rowData: rowData }"></ng-container>
+
+					<ng-template #defaultStoreIdTemplate>
+
+                                                {{ rowData.storeId }}
+                        
+					</ng-template>
+
+					
+				</td>
+			</ng-container>
+		
 			<!-- createdById column -->
 			<ng-container matColumnDef="createdById">
 				<th mat-header-cell *matHeaderCellDef style="padding: 5px" mat-sort-header>
