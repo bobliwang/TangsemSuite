@@ -1,12 +1,23 @@
+$ver = "1.4.6.19"
+$apiKey = "oy***jq"
 dotnet clean .\Tangsem.Suite.Core.sln
-dotnet build .\Tangsem.Suite.Core.sln --configuration=release
+dotnet build .\Tangsem.Suite.Core.sln --configuration=release /property:Version=$ver
 
-# API KEY: https://www.nuget.org/account/apikeys
-$nugetApiKey = "*******cfe"
-$ver = "1.3.2"
 
-$prjs = @("Tangsem.Common", "Tangsem.Data", "Tangsem.NHibernate", "Tangsem.Identity", "Tangsem.Web.Mvc")
+$prjs = @(
+  "Tangsem.Common",
+  "Tangsem.Data",
+  "Tangsem.NHibernate",
+  "Tangsem.NHibernate.Postgres",
+  "Tangsem.Identity",
+  "Tangsem.Web.Mvc",
+  "Tangsem.OpenApi.Extensions",
+
+  "Tangsem.Generator.Metadata",
+  "Tangsem.Generator.Metadata.Postgres",
+  "Tangsem.Generator")
+#$prjs = @("Tangsem.Generator")
 
 $prjs.ForEach({
-  dotnet nuget push .\projects\$_\bin\Release\$_.$ver.nupkg -s https://api.nuget.org/v3/index.json -k $nugetApiKey
+  dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key $apiKey .\projects\$_\bin\release\$_.$ver.symbols.nupkg --skip-duplicate
 })
