@@ -115,7 +115,7 @@ namespace <#= Configuration.MappingNamespace #>
       foreach (var col in TableMetadata.Columns.Where(c => (!c.IsOutgoingRefKey || !Configuration.GenRelationship ) && !c.IsPrimaryKey)) { #>
          
        // <#= col.ColumnName #>
-       <#    PushIndent("");
+       <#
           if (TableMetadata.IsView && colIndex == 0) {
             colIndex ++;
             continue;
@@ -127,11 +127,18 @@ namespace <#= Configuration.MappingNamespace #>
        <# } else if(col.ExtraColumnMeta == null || string.IsNullOrWhiteSpace(col.ExtraColumnMeta.JsonType)) { #>
 
       this.Map(x => x.<#= col.PropertyName #>).Column("<#= col.ColumnName #>")
-         <# if (col.ClrType == typeof(string) || col.ClrType == typeof(byte[])) { #> .Length(<#= col.ColumnSize > 0 ? col.ColumnSize.ToString() : "int.MaxValue" #>) <# } #>
-         <# if (!col.Nullable) { #>.Not.Nullable() <# } #>
-         <# if (col.ReadOnly) { #>.ReadOnly() <# } #>;
+         <# if (col.IsAutoIncrement) { #>
+         .Generated.Always()
+         <# }
+         if (col.ClrType == typeof(string) || col.ClrType == typeof(byte[])) { #>
+         .Length(<#= col.ColumnSize > 0 ? col.ColumnSize.ToString() : "int.MaxValue" #>)
+         <# }
+         if (!col.Nullable) { #>
+         .Not.Nullable()
+         <# }
+         if (col.ReadOnly) { #>.ReadOnly()
+         <# } #>;
        <# } else {#>
-
       this.Map(x => x.<#= col.PropertyName #>).Column("<#= col.ColumnName #>").CustomType<JsonType<<#= col.ExtraColumnMeta.JsonType #>>>()
          <#if (!col.Nullable) { #>.Not.Nullable() <# } #>
          <#if (col.ReadOnly){ #>.ReadOnly() <# } #>;

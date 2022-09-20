@@ -25,15 +25,17 @@ namespace Tangsem.Common.DataAccess
 
     public IDataReader ExecuteReader(string sql, IEnumerable<Parameter> parameters = null)
     {
-      var cmd = this.Connection.CreateCommand();
-      cmd.CommandText = sql;
-
-      if (parameters != null)
+      using (var cmd = this.Connection.CreateCommand())
       {
-        AddParametersToCommand(cmd, parameters);
-      }
+        cmd.CommandText = sql;
 
-      return cmd.ExecuteReader();
+        if (parameters != null)
+        {
+          AddParametersToCommand(cmd, parameters);
+        }
+
+        return cmd.ExecuteReader();
+      }
     }
 
     /// <summary>

@@ -17,6 +17,10 @@ using static Xunit.Assert;
 
 namespace Tangsem.NHibernate.Postgres.Tests
 {
+  using Npgsql;
+
+  using Tangsem.Common.DataAccess;
+
   /// <summary>
   /// Test cases for PostgreSQL.
   /// </summary>
@@ -25,6 +29,20 @@ namespace Tangsem.NHibernate.Postgres.Tests
     public Postgre_UnitTest1(ITestOutputHelper output)
       : base(output)
     {
+    }
+
+    [Fact]
+    public void ExecuteList_Test()
+    {
+      using var conn = new NpgsqlConnection(
+        "Host=vtcanalytics.cluster-ct1maokttyhl.ap-southeast-2.rds.amazonaws.com;Username=sa;Password=Abc123!!;Database=vt_analytics");
+
+      conn.Open();
+      var database = new Database(conn);
+
+      var result = database.ExecuteList<SessionsCountByMinuteBucket>("SELECT 1 as minute_bucket, 2 as session_count, 3 as session_count_pct");
+      result = database.ExecuteList<SessionsCountByMinuteBucket>("SELECT 1 as minute_bucket, 2 as session_count, 3 as session_count_pct");
+      result = database.ExecuteList<SessionsCountByMinuteBucket>("SELECT 1 as minute_bucket, 2 as session_count, 3 as session_count_pct");
     }
 
     [Fact]
@@ -113,5 +131,20 @@ namespace Tangsem.NHibernate.Postgres.Tests
         WriteLine($"Time used to commit: {sw.ElapsedMilliseconds}ms");
       }
     }
+  }
+
+  /// <summary>
+  /// The row data of the chart.
+  /// </summary>
+  public class SessionsCountByMinuteBucket
+  {
+    [PropertyColumn("minute_bucket")]
+    public int MinuteBucket { get; set; }
+
+    [PropertyColumn("session_count")]
+    public int SessionsCount { get; set; }
+
+    [PropertyColumn("session_count_pct")]
+    public int SessionsCountPct { get; set; }
   }
 }

@@ -1,5 +1,5 @@
-$ver = "1.4.6.19"
-$apiKey = "oy***jq"
+$ver = "1.4.6.20"
+$apiKey = "oy2ojt74qvxuvhhfa2wq6xh4ajq5o3cerovptirc2lejyu"
 dotnet clean .\Tangsem.Suite.Core.sln
 dotnet build .\Tangsem.Suite.Core.sln --configuration=release /property:Version=$ver
 

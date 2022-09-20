@@ -1,6 +1,6 @@
 ﻿{
   "ProjectName": "DocuFlow.Core",
-  "OutputDir": "C:\\git-temp\\docu-flow\\server\\",
+  "OutputDir": "C:\\temp\\docu-flow\\server\\",
   "RepositoryName": "DocuFlowRepository",
   "ConnectionString": "Data Source=.;Initial Catalog=docu-flow;Integrated Security=True",
   "MetadataBuilder": "Tangsem.Generator.Metadata.Builder.SqlServer2008MetadataBuilder",

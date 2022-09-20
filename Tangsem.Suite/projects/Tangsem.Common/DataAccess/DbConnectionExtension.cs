@@ -28,10 +28,6 @@ namespace Tangsem.Common.DataAccess
 
       return cmd.ExecuteReader();
     }
-
-
-
-
     
     public static T ExecuteScalar<T>(this IDbConnection conn, string sql)
     {

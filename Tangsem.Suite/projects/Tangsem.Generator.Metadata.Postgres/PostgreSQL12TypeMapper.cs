@@ -22,6 +22,7 @@ namespace Tangsem.Generator.Metadata.Postgres
       typeMapper["date"] = typeof(DateTime);
       typeMapper["timestamp"] = typeof(DateTime);
       typeMapper["timestamp without time zone"] = typeof(DateTime);
+      typeMapper["timestamp with time zone"] = typeof(DateTime);
 
       typeMapper["decimal"] = typeof(decimal);
       typeMapper["varbinary"] = typeof(byte[]);

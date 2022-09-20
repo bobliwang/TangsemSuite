@@ -293,7 +293,7 @@ namespace Tangsem.Generator.Templates.Entities
             this.Write("\r\n       ");
             
             #line 118 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
-    PushIndent("");
+
           if (TableMetadata.IsView && colIndex == 0) {
             colIndex ++;
             continue;
@@ -334,111 +334,107 @@ namespace Tangsem.Generator.Templates.Entities
             this.Write("\")\r\n         ");
             
             #line 130 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
- if (col.ClrType == typeof(string) || col.ClrType == typeof(byte[])) { 
+ if (col.IsAutoIncrement) { 
             
             #line default
             #line hidden
-            this.Write(" .Length(");
+            this.Write("         .Generated.Always()\r\n         ");
             
-            #line 130 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 132 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+ }
+         if (col.ClrType == typeof(string) || col.ClrType == typeof(byte[])) { 
+            
+            #line default
+            #line hidden
+            this.Write("         .Length(");
+            
+            #line 134 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.ColumnSize > 0 ? col.ColumnSize.ToString() : "int.MaxValue"));
             
             #line default
             #line hidden
-            this.Write(") ");
+            this.Write(")\r\n         ");
             
-            #line 130 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("         ");
-            
-            #line 131 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
- if (!col.Nullable) { 
+            #line 135 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+ }
+         if (!col.Nullable) { 
             
             #line default
             #line hidden
-            this.Write(".Not.Nullable() ");
+            this.Write("         .Not.Nullable()\r\n         ");
             
-            #line 131 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("         ");
-            
-            #line 132 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
- if (col.ReadOnly) { 
+            #line 138 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+ }
+         if (col.ReadOnly) { 
             
             #line default
             #line hidden
-            this.Write(".ReadOnly() ");
+            this.Write(".ReadOnly()\r\n         ");
             
-            #line 132 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 140 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write(";\r\n       ");
             
-            #line 133 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 141 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  } else {
             
             #line default
             #line hidden
-            this.Write("\r\n      this.Map(x => x.");
+            this.Write("      this.Map(x => x.");
             
-            #line 135 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 142 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.PropertyName));
             
             #line default
             #line hidden
             this.Write(").Column(\"");
             
-            #line 135 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 142 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.ColumnName));
             
             #line default
             #line hidden
             this.Write("\").CustomType<JsonType<");
             
-            #line 135 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 142 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.ExtraColumnMeta.JsonType));
             
             #line default
             #line hidden
             this.Write(">>()\r\n         ");
             
-            #line 136 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 143 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
 if (!col.Nullable) { 
             
             #line default
             #line hidden
             this.Write(".Not.Nullable() ");
             
-            #line 136 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 143 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("         ");
             
-            #line 137 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 144 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
 if (col.ReadOnly){ 
             
             #line default
             #line hidden
             this.Write(".ReadOnly() ");
             
-            #line 137 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 144 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write(";\r\n        ");
             
-            #line 138 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 145 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
 }
       }
             
@@ -446,7 +442,7 @@ if (col.ReadOnly){
             #line hidden
             this.Write("\r\n    }\r\n\r\n    ");
             
-            #line 143 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 150 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  if (Configuration.GenRelationship) { 
             
             #line default
@@ -454,56 +450,56 @@ if (col.ReadOnly){
             this.Write("    \r\n    /// <summary>\r\n    /// Map the Outgoing References.\r\n    /// </summary>" +
                     "\r\n    private void MapOutgoingReferences()\r\n    {\r\n      ");
             
-            #line 150 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 157 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  foreach (var reference in this.TableMetadata.OutgoingReferences) { 
             
             #line default
             #line hidden
             this.Write("      \r\n      this.References<");
             
-            #line 152 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 159 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(reference.ParentTableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write(">(x => x.");
             
-            #line 152 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 159 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(reference.ParentPropertyName));
             
             #line default
             #line hidden
             this.Write(")\r\n                .Fetch.Join().Column(\"");
             
-            #line 153 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 160 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName));
             
             #line default
             #line hidden
             this.Write("\")\r\n      ");
             
-            #line 154 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 161 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  if (reference.ColumnPairs[0].ChildColumnMetadata.Nullable){ 
             
             #line default
             #line hidden
             this.Write(";");
             
-            #line 154 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 161 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  }else{
             
             #line default
             #line hidden
             this.Write(".Not.Nullable();");
             
-            #line 154 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 161 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  }
             
             #line default
             #line hidden
             this.Write("      ");
             
-            #line 155 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 162 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  } 
             
             #line default
@@ -511,28 +507,28 @@ if (col.ReadOnly){
             this.Write("\r\n    }\r\n    \r\n    /// <summary>\r\n    /// Map the Incoming References.\r\n    /// <" +
                     "/summary>\r\n    private void MapIncomingReferences()\r\n    {\r\n      ");
             
-            #line 164 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 171 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  foreach (var reference in this.TableMetadata.IncomingReferences) { 
             
             #line default
             #line hidden
             this.Write("      \r\n      this.HasMany<");
             
-            #line 166 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 173 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(reference.ChildTableMetadata.EntityName));
             
             #line default
             #line hidden
             this.Write(">(x => x.");
             
-            #line 166 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 173 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(reference.ChildListPropertyName));
             
             #line default
             #line hidden
             this.Write(")\r\n        .KeyColumn(\"");
             
-            #line 167 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 174 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(reference.ColumnPairs[0].ChildColumnMetadata.ColumnName));
             
             #line default
@@ -540,14 +536,14 @@ if (col.ReadOnly){
             this.Write("\")\r\n                .Inverse()\r\n                .LazyLoad()\r\n                .AsB" +
                     "ag();\r\n      ");
             
-            #line 171 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 178 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n    }\r\n    ");
             
-            #line 174 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
+            #line 181 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  } 
             
             #line default
