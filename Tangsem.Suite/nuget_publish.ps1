@@ -1,4 +1,4 @@
-$ver = "1.4.6.20"
+$ver = "1.4.6.21"
 $apiKey = ""
 dotnet clean .\Tangsem.Suite.Core.sln
 dotnet build .\Tangsem.Suite.Core.sln --configuration=release /property:Version=$ver
@@ -19,5 +19,7 @@ $prjs = @(
 #$prjs = @("Tangsem.Generator")
 
 $prjs.ForEach({
-  dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key $apiKey .\projects\$_\bin\release\$_.$ver.symbols.nupkg --skip-duplicate
+  dotnet nuget push --source https://api.nuget.org/v3/index.json .\projects\$_\bin\release\$_.$ver.symbols.nupkg --skip-duplicate
 })
+
+
