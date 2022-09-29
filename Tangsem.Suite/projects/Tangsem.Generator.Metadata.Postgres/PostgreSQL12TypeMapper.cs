@@ -33,6 +33,8 @@ namespace Tangsem.Generator.Metadata.Postgres
       typeMapper["numeric"] = typeof(decimal);
       typeMapper["nvarchar"] = typeof(string);
       typeMapper["real"] = typeof(float);
+      typeMapper["double precision"] = typeof(double);
+
       typeMapper["smallint"] = typeof(int);
       typeMapper["text"] = typeof(string);
       typeMapper["tinyint"] = typeof(byte);
