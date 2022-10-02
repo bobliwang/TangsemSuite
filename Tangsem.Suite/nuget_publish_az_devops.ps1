@@ -1,4 +1,4 @@
-$ver = "1.5.0.1"
+$ver = "1.5.0.2"
 
 dotnet clean .\Tangsem.Suite.Core.sln
 dotnet build .\Tangsem.Suite.Core.sln --configuration=release /property:Version=$ver

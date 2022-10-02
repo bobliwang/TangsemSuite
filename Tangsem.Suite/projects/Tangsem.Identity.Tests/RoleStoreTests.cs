@@ -50,7 +50,7 @@ namespace Tangsem.Identity.Tests
         persCfg,
         assemblies,
 
-        cfg => cfg.ClassMappings.ToList().ForEach(cm =>
+        cfgHandler: cfg => cfg.ClassMappings.ToList().ForEach(cm =>
         {
           var oldName = cm.Table.Name;
 
@@ -60,7 +60,7 @@ namespace Tangsem.Identity.Tests
           cm.Table.Name = newName;
         }),
 
-        sql => new StringBuilder(";")
+        sqlConverter: sql => new StringBuilder(";")
                     .AppendLine()
                     .AppendLine(sql)
                     .ToString()

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
-using NHibernate.Dialect;
 using NHibernate.Tool.hbm2ddl;
 
 namespace Tangsem.NHibernate.SchemaExports
@@ -17,6 +16,8 @@ namespace Tangsem.NHibernate.SchemaExports
     public async Task<string> ExportSqlSchema<TThisConfiguration>(
       PersistenceConfiguration<TThisConfiguration> persistCfg,
       IEnumerable<Assembly> assemblies,
+      bool execute = false,
+      bool justDrop = false,
       Action<Configuration> cfgHandler = null,
       Func<string, string> sqlConverter = null
     ) where TThisConfiguration : PersistenceConfiguration<TThisConfiguration, ConnectionStringBuilder>
@@ -39,7 +40,7 @@ namespace Tangsem.NHibernate.SchemaExports
       {
         sql = (sqlConverter != null) ? sqlConverter(sql) : sql;
         sb.AppendLine(sql);
-      }, false, false);
+      }, execute, justDrop);
 
       return sb.ToString();
     }
