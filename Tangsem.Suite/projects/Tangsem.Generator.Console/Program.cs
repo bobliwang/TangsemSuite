@@ -15,9 +15,9 @@ namespace Tangsem.Generator.Console
       ////var path = @"TMobility-Express.xml";
 
       ////var path = "TestPhoenix.xml";
-      var path = "AWS_Aurora.json";
+      ////var path = "AWS_Aurora.json";
 
-      ////var path = "docu-flow.json";
+      var path = "docu-flow.json";
 
       if (args != null && args.Length > 0)
       {

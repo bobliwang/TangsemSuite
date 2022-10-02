@@ -123,6 +123,12 @@ namespace Tangsem.NHibernate
 
     public static string ExportSchema<T>(this T repoProvider, Assembly[] assemblies) where T : RepositoryProvider
     {
+      if (assemblies.Any())
+      {
+        repoProvider
+          .ConfigWithAssemblies(assemblies);
+      }
+
       var config = repoProvider
                     .ConfigWithAssemblies(assemblies)
                     .BuildConfiguration();

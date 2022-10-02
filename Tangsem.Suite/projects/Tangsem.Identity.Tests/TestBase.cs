@@ -10,13 +10,13 @@ namespace Tangsem.Identity.Tests
 {
   public class TestBase
   {
-    private readonly string connString = @"Data Source=.\SQLExpress;Initial Catalog=Tangsem-Identity;Integrated Security=True";
-
-    private readonly TangsemIdentityRepositoryProvider repoProvider;
-
     private readonly ITestOutputHelper output;
 
     protected string lastSql;
+
+    protected readonly string connString = @"Data Source=.\SQLExpress;Initial Catalog=Tangsem-Identity;Integrated Security=True";
+
+    protected readonly TangsemIdentityRepositoryProvider repoProvider;
 
     public TestBase(ITestOutputHelper output)
     {

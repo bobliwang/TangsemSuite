@@ -166,7 +166,7 @@ namespace Tangsem.Generator.Templates.Entities
     /// <summary>
     /// Map the Primary Key.
     /// </summary>
-    private void MapId()
+    protected virtual void MapId()
     {
       ");
             
@@ -274,7 +274,7 @@ namespace Tangsem.Generator.Templates.Entities
             #line default
             #line hidden
             this.Write("      \r\n    }\r\n    \r\n    /// <summary>\r\n    /// Map the Basic Columns.\r\n    /// <" +
-                    "/summary>\r\n    private void MapBasicColumns()\r\n    {\r\n      ");
+                    "/summary>\r\n    protected virtual void MapBasicColumns()\r\n    {\r\n      ");
             
             #line 113 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
 
@@ -448,7 +448,7 @@ if (col.ReadOnly){
             #line default
             #line hidden
             this.Write("    \r\n    /// <summary>\r\n    /// Map the Outgoing References.\r\n    /// </summary>" +
-                    "\r\n    private void MapOutgoingReferences()\r\n    {\r\n      ");
+                    "\r\n    protected virtual void MapOutgoingReferences()\r\n    {\r\n      ");
             
             #line 157 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  foreach (var reference in this.TableMetadata.OutgoingReferences) { 
@@ -505,7 +505,7 @@ if (col.ReadOnly){
             #line default
             #line hidden
             this.Write("\r\n    }\r\n    \r\n    /// <summary>\r\n    /// Map the Incoming References.\r\n    /// <" +
-                    "/summary>\r\n    private void MapIncomingReferences()\r\n    {\r\n      ");
+                    "/summary>\r\n    protected virtual void MapIncomingReferences()\r\n    {\r\n      ");
             
             #line 171 "C:\git-temp\tangsem.suite\Tangsem.Suite\projects\Tangsem.Generator\Templates\Entities\PocoNHibernateFluentTemplate.tt"
  foreach (var reference in this.TableMetadata.IncomingReferences) { 

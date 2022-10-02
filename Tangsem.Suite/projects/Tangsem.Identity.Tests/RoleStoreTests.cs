@@ -1,17 +1,29 @@
+using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.SqlCommand;
 using System;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
-
+using System.Threading.Tasks;
+using NHibernate.Cfg;
 using Tangsem.Common.Extensions;
 using Tangsem.Identity.Domain.Entities;
 using Tangsem.Identity.Stores;
+using Tangsem.NHibernate;
+using Tangsem.NHibernate.Dialects;
 using Tangsem.NHibernate.Extensions;
 using Tangsem.NHibernate.Interceptors;
 using Tangsem.NHibernate.Tests;
 using Xunit;
 using Xunit.Abstractions;
+using NHibernate.Tool.hbm2ddl;
+using System.Text;
+using NHibernate.Dialect;
+using Tangsem.NHibernate.SchemaExports;
+using Environment = NHibernate.Cfg.Environment;
 
 namespace Tangsem.Identity.Tests
 {
@@ -27,8 +39,38 @@ namespace Tangsem.Identity.Tests
     {
     }
 
+    [Fact(DisplayName = "Export SqlSchema for Sqlite")]
+    public async Task ExportSchema()
+    {
+      Assembly[] assemblies = { typeof(AspNetUser).Assembly };
+      var persCfg = SQLiteConfiguration.Standard.Dialect<SQLiteDialect>();
+
+      var s1 = new SQLiteDialect();
+      var sql = await new SchemaExporter().ExportSqlSchema(
+        persCfg,
+        assemblies,
+
+        cfg => cfg.ClassMappings.ToList().ForEach(cm =>
+        {
+          var oldName = cm.Table.Name;
+
+          s1.QuoteForTableName(oldName);
+          var newName = oldName.Replace("[", string.Empty).Replace("]", string.Empty);
+
+          cm.Table.Name = newName;
+        }),
+
+        sql => new StringBuilder(";")
+                    .AppendLine()
+                    .AppendLine(sql)
+                    .ToString()
+      );
+      
+      await File.WriteAllTextAsync("c:/temp/identity.sql", sql);
+    }
+
     [Fact(DisplayName = "RoleStore_TestJsonValue")]
-    public async System.Threading.Tasks.Task RoleStore_TestJsonValue()
+    public async Task RoleStore_TestJsonValue()
     {
       using (var repo = this.OpenRepository())
       using (repo.BeginTransaction())

@@ -77,7 +77,7 @@ namespace <#= Configuration.MappingNamespace #>
     /// <summary>
     /// Map the Primary Key.
     /// </summary>
-    private void MapId()
+    protected virtual void MapId()
     {
       <# if (TableMetadata.PrimaryKeys.Any(x => x.IsAutoIncrement)) { #>
       
@@ -108,7 +108,7 @@ namespace <#= Configuration.MappingNamespace #>
     /// <summary>
     /// Map the Basic Columns.
     /// </summary>
-    private void MapBasicColumns()
+    protected virtual void MapBasicColumns()
     {
       <#
       var colIndex = 0;
@@ -152,7 +152,7 @@ namespace <#= Configuration.MappingNamespace #>
     /// <summary>
     /// Map the Outgoing References.
     /// </summary>
-    private void MapOutgoingReferences()
+    protected virtual void MapOutgoingReferences()
     {
       <# foreach (var reference in this.TableMetadata.OutgoingReferences) { #>
       
@@ -166,7 +166,7 @@ namespace <#= Configuration.MappingNamespace #>
     /// <summary>
     /// Map the Incoming References.
     /// </summary>
-    private void MapIncomingReferences()
+    protected virtual void MapIncomingReferences()
     {
       <# foreach (var reference in this.TableMetadata.IncomingReferences) { #>
       
