@@ -29,3 +29,5 @@ _ReSharper*/
 Thumbs
 .vs
 tests/ng-app/node_modules
+/Tangsem.Suite/.idea/.idea.Tangsem.Suite.Core/.idea/workspace.xml
+/Tangsem.Suite/.idea/.idea.Tangsem.Suite.Core/.idea/projectSettingsUpdater.xml

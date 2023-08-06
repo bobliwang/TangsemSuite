@@ -22,6 +22,9 @@
     <None Update="AlphaCentauriForms.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="AWS_AITraining.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="AWS_Aurora.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -48,6 +51,9 @@
     </None>
     <None Update="PostgreTest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Run.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ShopeeAndQuickbook.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
